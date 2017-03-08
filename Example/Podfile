@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MSOSDK_Example' do
+  pod 'MSOSDK', :path => '../'
+
+  target 'MSOSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
