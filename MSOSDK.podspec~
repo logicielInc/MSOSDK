@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://https://github.com/logicielInc/MSOSDK'
+  s.homepage         = 'https://https://github.com/logicielInc/MSOSDK''
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'jsetting32' => 'jsetting32@yahoo.com' }

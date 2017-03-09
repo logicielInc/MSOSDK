@@ -1,0 +1,6 @@
+framework module MSOSDK {
+  umbrella header "MSOSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

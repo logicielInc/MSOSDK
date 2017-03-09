@@ -1,0 +1,39 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - GTMNSStringHTMLAdditions (0.2.1)
+  - MSOSDK (0.1.0):
+    - AFNetworking
+    - GTMNSStringHTMLAdditions
+    - SMXMLDocument
+  - SMXMLDocument (1.1)
+
+DEPENDENCIES:
+  - MSOSDK (from `../`)
+
+EXTERNAL SOURCES:
+  MSOSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  GTMNSStringHTMLAdditions: 4bfc402b1b17165360728083156cae0a74ecb308
+  MSOSDK: aa45b15921c3b8a151ca08a075824d1ba7ae8ec4
+  SMXMLDocument: e0d9fbf726a2a0921871b492966458acb3ad9689
+
+PODFILE CHECKSUM: 748173c3b2103088a2300a2d49eb887e1463cd16
+
+COCOAPODS: 1.2.0.beta.3

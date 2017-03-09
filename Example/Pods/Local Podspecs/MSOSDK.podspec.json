@@ -1,0 +1,34 @@
+{
+  "name": "MSOSDK",
+  "version": "0.1.0",
+  "summary": "A short description of MSOSDK.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://https://github.com/logicielInc/MSOSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "jsetting32": "jsetting32@yahoo.com"
+  },
+  "source": {
+    "git": "https://github.com/logicielInc/MSOSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "MSOSDK/Classes/**/*",
+  "dependencies": {
+    "AFNetworking": [
+
+    ],
+    "GTMNSStringHTMLAdditions": [
+
+    ],
+    "SMXMLDocument": [
+
+    ]
+  }
+}

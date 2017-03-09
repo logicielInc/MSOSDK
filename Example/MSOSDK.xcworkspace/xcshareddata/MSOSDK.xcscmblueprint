@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D45930B95F5AE9EE31F1273B266D4C83A4F223DD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4D91E05F1CA7F1B54E59E4BAB48E08B860E2F1B3" : 9223372036854775807,
+    "D45930B95F5AE9EE31F1273B266D4C83A4F223DD" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A0368A7B-ACC6-4724-BACA-D410F4BA01C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4D91E05F1CA7F1B54E59E4BAB48E08B860E2F1B3" : "",
+    "D45930B95F5AE9EE31F1273B266D4C83A4F223DD" : "MSOSDK\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MSOSDK",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/MSOSDK.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/logicielInc\/iMobileRep2.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4D91E05F1CA7F1B54E59E4BAB48E08B860E2F1B3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/logicielInc\/MSOSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D45930B95F5AE9EE31F1273B266D4C83A4F223DD"
+    }
+  ]
+}
