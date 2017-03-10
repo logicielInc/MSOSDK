@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>NSError(MSOSDKAdditions) Category Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/objc/Extension/NSError(MSOSDKAdditions)" class="dashAnchor"></a>
+    <a title="NSError(MSOSDKAdditions) Category Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MSOSDK Docs</a> (7% documented)</p>
+        <p class="header-right"><a href="https://github.com/logicielinc/MSOSDK"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MSOSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        NSError(MSOSDKAdditions) Category Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Categories.html">Categories</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Categories/NSError(MSOSDKAdditions).html">NSError(MSOSDKAdditions)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Categories/NSString(MSOSDKAdditions).html">NSString(MSOSDKAdditions)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Categories/NSURLRequest(MSOSDKAdditions).html">NSURLRequest(MSOSDKAdditions)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDK.html">MSOSDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserver.html">MSOSDKResponseNetserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverLogin.html">MSOSDKResponseNetserverLogin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverPing.html">MSOSDKResponseNetserverPing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverProductsCount.html">MSOSDKResponseNetserverProductsCount</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverQuery.html">MSOSDKResponseNetserverQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverQueryCustomerSalesOrders.html">MSOSDKResponseNetserverQueryCustomerSalesOrders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:objc(cs)MSOSDKResponseNetserverQueryCustomers">MSOSDKResponseNetserverQueryCustomers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverQueryImages.html">MSOSDKResponseNetserverQueryImages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:objc(cs)MSOSDKResponseNetserverQueryProducts">MSOSDKResponseNetserverQueryProducts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverQuerySalesOrder.html">MSOSDKResponseNetserverQuerySalesOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSaveCustomer.html">MSOSDKResponseNetserverSaveCustomer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSaveCustomerShippingAddress.html">MSOSDKResponseNetserverSaveCustomerShippingAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSaveImage.html">MSOSDKResponseNetserverSaveImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSettings.html">MSOSDKResponseNetserverSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSubmitSalesOrder.html">MSOSDKResponseNetserverSubmitSalesOrder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSync.html">MSOSDKResponseNetserverSync</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:objc(cs)MSOSDKResponseNetserverSyncCustomers">MSOSDKResponseNetserverSyncCustomers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSyncProducts.html">MSOSDKResponseNetserverSyncProducts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverSyncPurchaseHistory.html">MSOSDKResponseNetserverSyncPurchaseHistory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:objc(cs)MSOSDKResponseNetserverSyncSettings">MSOSDKResponseNetserverSyncSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseNetserverUpdateCustomer.html">MSOSDKResponseNetserverUpdateCustomer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebService.html">MSOSDKResponseWebService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceCatalog.html">MSOSDKResponseWebServiceCatalog</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceCredentials.html">MSOSDKResponseWebServiceCredentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceDownloadHistory.html">MSOSDKResponseWebServiceDownloadHistory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceFilesToDownload.html">MSOSDKResponseWebServiceFilesToDownload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServicePhotoDetails.html">MSOSDKResponseWebServicePhotoDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceRegister.html">MSOSDKResponseWebServiceRegister</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MSOSDKResponseWebServiceRequestData.html">MSOSDKResponseWebServiceRequestData</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@DoWork">DoWork</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@GetCustomersByCompany">GetCustomersByCompany</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@GetEventList">GetEventList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@LogicielIncUrl">LogicielIncUrl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@LogicielUrl">LogicielUrl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_CheckCatalogFileStatus">_CheckCatalogFileStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_UpdateDownloadInfo">_UpdateDownloadInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_UpdateUploadInfo">_UpdateUploadInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_UploadFile">_UploadFile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_iCheckMobileFileForDownloading">_iCheckMobileFileForDownloading</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_iCheckMobileMessage">_iCheckMobileMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_iCheckPDAHistoryForDownloading">_iCheckPDAHistoryForDownloading</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_msoNetserverBeginEscapedCommand">_msoNetserverBeginEscapedCommand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_msoNetserverEndEscapedCommand">_msoNetserverEndEscapedCommand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_msoNetserverLogoutCommand">_msoNetserverLogoutCommand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_msoNetserverPingCommand">_msoNetserverPingCommand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@_mso_password">_mso_password</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@iCheckMobileDevice">iCheckMobileDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@iCheckMobileUser">iCheckMobileUser</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@iCheckPDAMessage">iCheckPDAMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@iRegisterCode">iRegisterCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@iRegisterShortKey">iRegisterShortKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOLogicielHTTPURLKey">kMSOLogicielHTTPURLKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutAllImageSyncKey">kMSOTimeoutAllImageSyncKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutCatalogKey">kMSOTimeoutCatalogKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutCustomerSaveKey">kMSOTimeoutCustomerSaveKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutCustomerSearchKey">kMSOTimeoutCustomerSearchKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutCustomersSyncKey">kMSOTimeoutCustomersSyncKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutDataRequestKey">kMSOTimeoutDataRequestKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutDefaultKey">kMSOTimeoutDefaultKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutImageSyncKey">kMSOTimeoutImageSyncKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutPingKey">kMSOTimeoutPingKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutProductsSyncKey">kMSOTimeoutProductsSyncKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutPurchaseHistoryKey">kMSOTimeoutPurchaseHistoryKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutRegistrationKey">kMSOTimeoutRegistrationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutSalesOrderKey">kMSOTimeoutSalesOrderKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutScannerKey">kMSOTimeoutScannerKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kMSOTimeoutSettingsSyncKey">kMSOTimeoutSettingsSyncKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@logicielCustomerASMX">logicielCustomerASMX</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@logicielFTPServiceASMX">logicielFTPServiceASMX</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@logicielFTPWSEndpoint">logicielFTPWSEndpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@logicielUpdateEndpoint">logicielUpdateEndpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:MSOSDKMaster.h@stringEncoding">stringEncoding</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/kMSOProductSearchType.html">kMSOProductSearchType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/kMSOSDKResponseWebServiceStatus.html">kMSOSDKResponseWebServiceStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Type Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:MSOSDKMaster.h@T@MSOFailureBlock">MSOFailureBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:MSOSDKMaster.h@T@MSOHandlerBlock">MSOHandlerBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:MSOSDKMaster.h@T@MSOProgressBlock">MSOProgressBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:MSOSDKMaster.h@T@MSOSuccessBlock">MSOSuccessBlock</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>NSError(MSOSDKAdditions)</h1>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_login_credientials_invalid"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_login_credientials_invalid" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_login_credientials_invalid">+mso_internet_login_credientials_invalid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_invalid"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_invalid" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_invalid">+mso_internet_registration_key_invalid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_not_found"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_not_found" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_not_found">+mso_internet_registration_key_not_found</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_same_company_use"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_same_company_use" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_same_company_use">+mso_internet_registration_key_same_company_use</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_in_use"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_in_use" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_in_use">+mso_internet_registration_key_in_use</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_not_ready"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_not_ready" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_not_ready">+mso_internet_registration_key_not_ready</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_unlock_code_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_unlock_code_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_unlock_code_error">+mso_internet_registration_key_unlock_code_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_disabled_or_inuse"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_disabled_or_inuse" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_disabled_or_inuse">+mso_internet_registration_key_disabled_or_inuse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_request_data_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_request_data_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_request_data_error">+mso_internet_request_data_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_upload_processing_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_upload_processing_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_upload_processing_error">+mso_internet_upload_processing_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_catalog_no_content"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_catalog_no_content" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_catalog_no_content">+mso_internet_catalog_no_content</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_image_download_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_image_download_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_image_download_error">+mso_internet_image_download_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_image_download_error:"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_image_download_error:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_image_download_error:">+mso_internet_image_download_error:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_disabled"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_disabled" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_disabled">+mso_internet_registration_key_disabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_unregistered"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_unregistered" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_unregistered">+mso_internet_registration_key_unregistered</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_expired"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_expired" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_expired">+mso_internet_registration_key_expired</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_internet_registration_key_suspended"></a>
+                    <a name="//apple_ref/objc/Method/+mso_internet_registration_key_suspended" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_internet_registration_key_suspended">+mso_internet_registration_key_suspended</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_product_fetch_empty_result"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_product_fetch_empty_result" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_product_fetch_empty_result">+mso_netserver_product_fetch_empty_result</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_event_invalid"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_event_invalid" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_event_invalid">+mso_netserver_event_invalid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_event_invalid_with_eventName:eventId:"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_event_invalid_with_eventName:eventId:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_event_invalid_with_eventName:eventId:">+mso_netserver_event_invalid_with_eventName:eventId:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_method_request_error:"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_method_request_error:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_method_request_error:">+mso_netserver_method_request_error:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_sales_order_total_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_sales_order_total_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_sales_order_total_error">+mso_netserver_sales_order_total_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_out_of_memory_exception_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_out_of_memory_exception_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_out_of_memory_exception_error">+mso_netserver_out_of_memory_exception_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_unknown_format_error:"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_unknown_format_error:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_unknown_format_error:">+mso_netserver_unknown_format_error:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_image_not_found_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_image_not_found_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_image_not_found_error">+mso_netserver_image_not_found_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_customer_query_exceeded_limit_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_customer_query_exceeded_limit_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_customer_query_exceeded_limit_error">+mso_netserver_customer_query_exceeded_limit_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_customer_query_not_found_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_customer_query_not_found_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_customer_query_not_found_error">+mso_netserver_customer_query_not_found_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_order_retrieval_no_orders"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_order_retrieval_no_orders" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_order_retrieval_no_orders">+mso_netserver_order_retrieval_no_orders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_order_retrieval_order_not_found"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_order_retrieval_order_not_found" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_order_retrieval_order_not_found">+mso_netserver_order_retrieval_order_not_found</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSError(cm)mso_netserver_image_upload_error"></a>
+                    <a name="//apple_ref/objc/Method/+mso_netserver_image_upload_error" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSError(cm)mso_netserver_image_upload_error">+mso_netserver_image_upload_error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="http://logicielinc.com" target="_blank" rel="external">MSOSDK</a>. All rights reserved. (Last updated: 2017-03-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

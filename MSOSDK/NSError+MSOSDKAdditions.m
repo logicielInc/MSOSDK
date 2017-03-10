@@ -140,7 +140,14 @@
     return [NSError errorWithDomain:NSURLErrorDomain
                                code:204
                            userInfo:@{NSLocalizedDescriptionKey : @"Event Invalid",
-                                      NSLocalizedFailureReasonErrorKey : @"Please refresh your event as the current event in MSO does not match what is on the iPad"}];
+                                      NSLocalizedFailureReasonErrorKey : @"Please refresh your event since the current event in MSO does not match what is on the iPad"}];
+}
+
++ (instancetype)mso_netserver_event_invalid_with_eventName:(NSString *)eventName eventId:(NSString *)eventId {
+    return [NSError errorWithDomain:NSURLErrorDomain
+                               code:204
+                           userInfo:@{NSLocalizedDescriptionKey : @"Event Updated",
+                                      NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"Updated current event on the iPad to '%@ (%@)'.\nPlease log-in again.", eventName, eventId]}];
 }
 
 + (instancetype)mso_netserver_method_request_error:(NSString *)action {

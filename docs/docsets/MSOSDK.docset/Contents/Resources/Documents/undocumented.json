@@ -1,0 +1,2385 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 11,
+      "symbol": "MSOSDK(Netserver)",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.category",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 83,
+      "symbol": "MSOSDK.-_msoNetserverDownloadProducts:searchTerm:companyId:searchType:success:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 91,
+      "symbol": "MSOSDK.-_msoNetserverDownloadAllProducts:nextId:companyId:success:progress:failure:handler:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 99,
+      "symbol": "MSOSDK.-_msoNetserverDownloadAllProducts:nextId:companyId:success:failure:handler:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 117,
+      "symbol": "MSOSDK.-_msoNetserverDownloadCustomers:accountnumber:name:phone:city:state:zip:billing:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 129,
+      "symbol": "MSOSDK.-_msoNetserverSaveCustomer:customerName:contactName:address1:address2:city:state:zip:country:phone:fax:email:terms:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 146,
+      "symbol": "MSOSDK.-_msoNetserverSaveCustomerShippingAddress:accountNumber:mainstoreNumber:customerName:contactName:address1:address2:city:state:zip:country:phone:fax:email:terms:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 216,
+      "symbol": "MSOSDK.-_msoNetserverDownloadProductImage:success:progress:failure:handler:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 222,
+      "symbol": "MSOSDK.-_msoNetserverUploadImage:base64EncodedImage:identifier:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 229,
+      "symbol": "MSOSDK.-_msoDownloadLastPurchasePrice:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 242,
+      "symbol": "MSOSDK.-_msoNetserverRetrieveOrders:customerName:customerAccountNumber:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 259,
+      "symbol": "MSOSDK.-_msoNetserverSubmitOrder:orderNumber:orderString:update:imageNotes:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+Netserver.h",
+      "line": 278,
+      "symbol": "MSOSDK.-_msoNetserverDownloadPurchaseHistory:customerName:customerZip:success:progress:failure:handler:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 11,
+      "symbol": "MSOSDK(WebService)",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.category",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 122,
+      "symbol": "MSOSDK.-_msoWebServiceFetchAllPhotoReferences:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 127,
+      "symbol": "MSOSDK.-_msoWebServiceFetchPhotoFileStatus:pin:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 133,
+      "symbol": "MSOSDK.-_msoWebServiceDownloadPhoto:pin:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 153,
+      "symbol": "MSOSDK.-_msoWebServiceCheckForNumberOfFilesToDownload:pin:date:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 160,
+      "symbol": "MSOSDK.-_msoWebServiceCheckForFilesToDownload:pin:date:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 167,
+      "symbol": "MSOSDK.-_msoWebServiceCheckForFiles:pin:date:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 174,
+      "symbol": "MSOSDK.-_msoWebServiceUploadToFTP:pin:newfile:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 181,
+      "symbol": "MSOSDK.-_msoWebServiceUploadToFTPUpdate:username:companyname:filename:filesize:udid:updateDate:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 192,
+      "symbol": "MSOSDK.-_msoWebServiceSendDataRequest:pin:udid:companyname:criteria:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 201,
+      "symbol": "MSOSDK.-_msoWebServiceUpdateDownloadInfo:companyname:udid:pin:fileName:downloadDate:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 211,
+      "symbol": "MSOSDK.-_msoWebServiceCheckPDAHistoryForDownloading:pin:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDK+WebService.h",
+      "line": 218,
+      "symbol": "MSOSDK.-_msoWebServiceFetchCatalog:pin:success:progress:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 11,
+      "symbol": "kMSOTimeoutDefaultKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 13,
+      "symbol": "kMSOTimeoutAllImageSyncKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 14,
+      "symbol": "kMSOTimeoutCatalogKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 15,
+      "symbol": "kMSOTimeoutCustomerSaveKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 16,
+      "symbol": "kMSOTimeoutCustomersSyncKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 17,
+      "symbol": "kMSOTimeoutCustomerSearchKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 18,
+      "symbol": "kMSOTimeoutDataRequestKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 19,
+      "symbol": "kMSOTimeoutImageSyncKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 20,
+      "symbol": "kMSOTimeoutPingKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 21,
+      "symbol": "kMSOTimeoutProductsSyncKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 22,
+      "symbol": "kMSOTimeoutPurchaseHistoryKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 23,
+      "symbol": "kMSOTimeoutRegistrationKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 24,
+      "symbol": "kMSOTimeoutSalesOrderKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 25,
+      "symbol": "kMSOTimeoutScannerKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 26,
+      "symbol": "kMSOTimeoutSettingsSyncKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKConstants.h",
+      "line": 28,
+      "symbol": "kMSOLogicielHTTPURLKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 29,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeItemNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 30,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeDescription",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 31,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeColor",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 32,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeSize",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 33,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeProductInfo",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 34,
+      "symbol": "kMSOProductSearchType.kMSOProductSearchTypeUserDefined",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 62,
+      "symbol": "MSOHandlerBlock",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.typedef",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 67,
+      "symbol": "stringEncoding",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 69,
+      "symbol": "DoWork",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 71,
+      "symbol": "iRegisterCode",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 72,
+      "symbol": "_UploadFile",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 73,
+      "symbol": "_UpdateUploadInfo",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 74,
+      "symbol": "iRegisterShortKey",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 75,
+      "symbol": "iCheckMobileDevice",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 76,
+      "symbol": "iCheckMobileUser",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 77,
+      "symbol": "iCheckPDAMessage",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 78,
+      "symbol": "_CheckCatalogFileStatus",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 79,
+      "symbol": "GetCustomersByCompany",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 80,
+      "symbol": "_iCheckPDAHistoryForDownloading",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 81,
+      "symbol": "_UpdateDownloadInfo",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 82,
+      "symbol": "_iCheckMobileMessage",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 83,
+      "symbol": "_iCheckMobileFileForDownloading",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 84,
+      "symbol": "GetEventList",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 87,
+      "symbol": "LogicielIncUrl",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 88,
+      "symbol": "LogicielUrl",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 89,
+      "symbol": "logicielUpdateEndpoint",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 90,
+      "symbol": "logicielCustomerASMX",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 91,
+      "symbol": "logicielFTPWSEndpoint",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 92,
+      "symbol": "logicielFTPServiceASMX",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 93,
+      "symbol": "_mso_password",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 96,
+      "symbol": "_msoNetserverPingCommand",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 97,
+      "symbol": "_msoNetserverLogoutCommand",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 99,
+      "symbol": "_msoNetserverBeginEscapedCommand",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 100,
+      "symbol": "_msoNetserverEndEscapedCommand",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 102,
+      "symbol": "MSOSDK",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 103,
+      "symbol": "MSOSDK.requestsManager",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 104,
+      "symbol": "MSOSDK.operation",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 105,
+      "symbol": "MSOSDK.serviceUrl",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 128,
+      "symbol": "MSOSDK.+sanatizeData:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 129,
+      "symbol": "MSOSDK.+sanatizeImageData:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 130,
+      "symbol": "MSOSDK.+logicielCustomerURL",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 131,
+      "symbol": "MSOSDK.+logicielFTPServiceURL",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 133,
+      "symbol": "MSOSDK.+longDateFormatter",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 134,
+      "symbol": "MSOSDK.+mediumDateFormatter",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 136,
+      "symbol": "MSOSDK.+stringFromDate:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 137,
+      "symbol": "MSOSDK.+dateFromString:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 139,
+      "symbol": "MSOSDK.+validate:command:status:error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 144,
+      "symbol": "MSOSDK.+validateCredentials:command:status:error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 149,
+      "symbol": "MSOSDK.+validateResults:command:status:error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 154,
+      "symbol": "MSOSDK.+kMSOProductSearchType:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 156,
+      "symbol": "MSOSDK.+urlRequestImage:timeout:error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 160,
+      "symbol": "MSOSDK.+urlRequestWithParameters:keys:type:url:netserver:timeout:error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 168,
+      "symbol": "MSOSDK.-errorHandler:response:failure:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKMaster.h",
+      "line": 172,
+      "symbol": "MSOSDK.-dataTaskWithRequest:progress:completion:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 11,
+      "symbol": "MSOSDKResponseNetserver",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 12,
+      "symbol": "MSOSDKResponseNetserver.+msosdk_commandWithResponse:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 13,
+      "symbol": "MSOSDKResponseNetserver.command",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 14,
+      "symbol": "MSOSDKResponseNetserver.status",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 17,
+      "symbol": "MSOSDKResponseNetserverProductsCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 18,
+      "symbol": "MSOSDKResponseNetserverProductsCount.productCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 22,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 23,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer.objectsSavedCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 24,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer.mainstoreNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 25,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer.accountNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 26,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer.terms",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 27,
+      "symbol": "MSOSDKResponseNetserverSaveCustomer.something",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 30,
+      "symbol": "MSOSDKResponseNetserverUpdateCustomer",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 31,
+      "symbol": "MSOSDKResponseNetserverUpdateCustomer.objectsSavedCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 32,
+      "symbol": "MSOSDKResponseNetserverUpdateCustomer.message",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 35,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 36,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.customerName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 37,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.contactName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 38,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.address1",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 39,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.address2",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 40,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.city",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 41,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.state",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 42,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.zip",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 43,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.country",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 44,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.phone",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 45,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.fax",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 46,
+      "symbol": "MSOSDKResponseNetserverSaveCustomerShippingAddress.email",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 50,
+      "symbol": "MSOSDKResponseNetserverSync",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 51,
+      "symbol": "MSOSDKResponseNetserverSync.objectCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 52,
+      "symbol": "MSOSDKResponseNetserverSync.nextIndex",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 53,
+      "symbol": "MSOSDKResponseNetserverSync.data",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 56,
+      "symbol": "MSOSDKResponseNetserverSyncSettings",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 59,
+      "symbol": "MSOSDKResponseNetserverSyncCustomers",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 62,
+      "symbol": "MSOSDKResponseNetserverSyncProducts",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 63,
+      "symbol": "MSOSDKResponseNetserverSyncProducts.companyId",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 66,
+      "symbol": "MSOSDKResponseNetserverSyncPurchaseHistory",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 67,
+      "symbol": "MSOSDKResponseNetserverSyncPurchaseHistory.-appendCommand:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 68,
+      "symbol": "MSOSDKResponseNetserverSyncPurchaseHistory.nextId",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 69,
+      "symbol": "MSOSDKResponseNetserverSyncPurchaseHistory.detailLoop",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 72,
+      "symbol": "MSOSDKResponseNetserverQuery",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 73,
+      "symbol": "MSOSDKResponseNetserverQuery.-appendResponse:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 74,
+      "symbol": "MSOSDKResponseNetserverQuery.data",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 75,
+      "symbol": "MSOSDKResponseNetserverQuery.pages",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 78,
+      "symbol": "MSOSDKResponseNetserverQueryProducts",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 81,
+      "symbol": "MSOSDKResponseNetserverQueryCustomers",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 84,
+      "symbol": "MSOSDKResponseNetserverQueryCustomerSalesOrders",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 85,
+      "symbol": "MSOSDKResponseNetserverQueryCustomerSalesOrders.objectCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 86,
+      "symbol": "MSOSDKResponseNetserverQueryCustomerSalesOrders.data",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 89,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 90,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder.-mso_appendResponse:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 91,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder.itemSetRemaining",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 92,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder.objectCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 93,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder.data",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 94,
+      "symbol": "MSOSDKResponseNetserverQuerySalesOrder.itemSet",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 97,
+      "symbol": "MSOSDKResponseNetserverQueryImages",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 98,
+      "symbol": "MSOSDKResponseNetserverQueryImages.images",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 101,
+      "symbol": "MSOSDKResponseNetserverSaveImage",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 102,
+      "symbol": "MSOSDKResponseNetserverSaveImage.identifier",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 103,
+      "symbol": "MSOSDKResponseNetserverSaveImage.message",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 106,
+      "symbol": "MSOSDKResponseNetserverSubmitSalesOrder",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 107,
+      "symbol": "MSOSDKResponseNetserverSubmitSalesOrder.objectCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 108,
+      "symbol": "MSOSDKResponseNetserverSubmitSalesOrder.orderNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 109,
+      "symbol": "MSOSDKResponseNetserverSubmitSalesOrder.customerName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 110,
+      "symbol": "MSOSDKResponseNetserverSubmitSalesOrder.customerAccountNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 120,
+      "symbol": "MSOSDKResponseNetserverPing",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 121,
+      "symbol": "MSOSDKResponseNetserverPing.extendedCommand",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 122,
+      "symbol": "MSOSDKResponseNetserverPing.eventId",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 123,
+      "symbol": "MSOSDKResponseNetserverPing.eventName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 126,
+      "symbol": "MSOSDKResponseNetserverLogin",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 127,
+      "symbol": "MSOSDKResponseNetserverLogin.response",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 129,
+      "symbol": "MSOSDKResponseNetserverLogin.userId",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 130,
+      "symbol": "MSOSDKResponseNetserverLogin.message",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 131,
+      "symbol": "MSOSDKResponseNetserverLogin.priceLevelAllow1",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 132,
+      "symbol": "MSOSDKResponseNetserverLogin.priceLevelAllow2",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 133,
+      "symbol": "MSOSDKResponseNetserverLogin.priceLevelAllow3",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 134,
+      "symbol": "MSOSDKResponseNetserverLogin.priceLevelAllow4",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 135,
+      "symbol": "MSOSDKResponseNetserverLogin.priceLevelAllow5",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 136,
+      "symbol": "MSOSDKResponseNetserverLogin.allowUserDefinedPriceLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 139,
+      "symbol": "MSOSDKResponseNetserverSettings",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 141,
+      "symbol": "MSOSDKResponseNetserverSettings.response",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 143,
+      "symbol": "MSOSDKResponseNetserverSettings.companyPriceLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 144,
+      "symbol": "MSOSDKResponseNetserverSettings.multipleCompanies",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 145,
+      "symbol": "MSOSDKResponseNetserverSettings.allowCustomAssortment",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 147,
+      "symbol": "MSOSDKResponseNetserverSettings.eventName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 148,
+      "symbol": "MSOSDKResponseNetserverSettings.backupOrder",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 149,
+      "symbol": "MSOSDKResponseNetserverSettings.keepSubmittedOrderCopy",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 150,
+      "symbol": "MSOSDKResponseNetserverSettings.terms",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 151,
+      "symbol": "MSOSDKResponseNetserverSettings.shipTo",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 153,
+      "symbol": "MSOSDKResponseNetserverSettings.licenseInfo",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 154,
+      "symbol": "MSOSDKResponseNetserverSettings.bulkSellingDescription",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 157,
+      "symbol": "MSOSDKResponseNetserverSettings.lastPurchasePricePriority",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 162,
+      "symbol": "MSOSDKResponseNetserverSettings.messageCompanyPolicy",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 163,
+      "symbol": "MSOSDKResponseNetserverSettings.messageCustomerGreeting",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 164,
+      "symbol": "MSOSDKResponseNetserverSettings.messagePayment",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 183,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemDescription2",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 184,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemVendorName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 185,
+      "symbol": "MSOSDKResponseNetserverSettings.printManufacturerName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 186,
+      "symbol": "MSOSDKResponseNetserverSettings.printShowOrderTotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 187,
+      "symbol": "MSOSDKResponseNetserverSettings.printSortByItemNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 188,
+      "symbol": "MSOSDKResponseNetserverSettings.printMSRP",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 189,
+      "symbol": "MSOSDKResponseNetserverSettings.printPrice",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 190,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemColorSizeAbbreviation",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 191,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemWeight",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 192,
+      "symbol": "MSOSDKResponseNetserverSettings.printTotalWeight",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 193,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemVolume",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 194,
+      "symbol": "MSOSDKResponseNetserverSettings.printTotalVolume",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 195,
+      "symbol": "MSOSDKResponseNetserverSettings.printItemDiscountIfDiscounted",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 196,
+      "symbol": "MSOSDKResponseNetserverSettings.printIfBulkSellingShowQuantity",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 197,
+      "symbol": "MSOSDKResponseNetserverSettings.printIfBulkSellingShowPrice",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 200,
+      "symbol": "MSOSDKResponseNetserverSettings.printCustomerRep",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 204,
+      "symbol": "MSOSDKResponseNetserverSettings.salesTax",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 205,
+      "symbol": "MSOSDKResponseNetserverSettings.salesTaxForSampleSales",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 206,
+      "symbol": "MSOSDKResponseNetserverSettings.minimumOrderAmount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 207,
+      "symbol": "MSOSDKResponseNetserverSettings.orderDefaultTerms",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 208,
+      "symbol": "MSOSDKResponseNetserverSettings.orderDefaultShipVia",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 209,
+      "symbol": "MSOSDKResponseNetserverSettings.orderSortByItemNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 210,
+      "symbol": "MSOSDKResponseNetserverSettings.pricingStructure",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 212,
+      "symbol": "MSOSDKResponseNetserverSettings.discountRule",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 213,
+      "symbol": "MSOSDKResponseNetserverSettings.discountRuleSubtotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 215,
+      "symbol": "MSOSDKResponseNetserverSettings.discountRuleShippingChoice",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 216,
+      "symbol": "MSOSDKResponseNetserverSettings.discountRuleAllowShipping",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 219,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterPriceItemLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 220,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterPriceTotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 221,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterQuantityItemLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 222,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterQuantityTotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 223,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterWeightItemLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 224,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterWeightTotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 225,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterVolumeItemLevel",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 226,
+      "symbol": "MSOSDKResponseNetserverSettings.formatterVolumeTotal",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 228,
+      "symbol": "MSOSDKResponseNetserverSettings.itemSelectionAlert",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 229,
+      "symbol": "MSOSDKResponseNetserverSettings.recalculateSet",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 230,
+      "symbol": "MSOSDKResponseNetserverSettings.recalculatePriceTagAlong",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 231,
+      "symbol": "MSOSDKResponseNetserverSettings.alertIfOrderQuantityMoreThanOnHandQuantity",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 232,
+      "symbol": "MSOSDKResponseNetserverSettings.optionsIfOrderQuantityMoreThanOnHandQuantity",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 233,
+      "symbol": "MSOSDKResponseNetserverSettings.alertBelowMinimumPrice",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 234,
+      "symbol": "MSOSDKResponseNetserverSettings.applyCustomerDiscountAsOrderDiscount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 235,
+      "symbol": "MSOSDKResponseNetserverSettings.defaultQuantityToPreviousEntry",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 236,
+      "symbol": "MSOSDKResponseNetserverSettings.defaultShipDateToPreviousEntry",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 246,
+      "symbol": "MSOSDKResponseNetserverSettings.productPhotoSaveOption",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 248,
+      "symbol": "MSOSDKResponseNetserverSettings.scannerSetupReadCountryCode",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 249,
+      "symbol": "MSOSDKResponseNetserverSettings.scannerSetupReadSystemCodePrefix",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 250,
+      "symbol": "MSOSDKResponseNetserverSettings.scannerSetupReadChecksumDigit",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 252,
+      "symbol": "MSOSDKResponseNetserverSettings.scanSwipeBadgeMapping",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 262,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresPhone",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 263,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresEmail",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 264,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresShipDate",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 265,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresCancelDate",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 266,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresPONumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 267,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresBuyerName",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 268,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresFOB",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 269,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresWarehouse",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 270,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresCreditCard",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 271,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresPaymentTerms",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 272,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiredMinimumOrderAmountForMasterOrder",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 273,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiredMinimumOrderAmountForEachCompany",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 274,
+      "symbol": "MSOSDKResponseNetserverSettings.staticCreditCard",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 275,
+      "symbol": "MSOSDKResponseNetserverSettings.staticPaymentTerms",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 276,
+      "symbol": "MSOSDKResponseNetserverSettings.allowCustomTermsShipViaFOB",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 277,
+      "symbol": "MSOSDKResponseNetserverSettings.orderRequiresMinimumItemQuantity",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 278,
+      "symbol": "MSOSDKResponseNetserverSettings.salesManagerPrivilegeInTradeshow",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 279,
+      "symbol": "MSOSDKResponseNetserverSettings.userDefinedProductLine",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 280,
+      "symbol": "MSOSDKResponseNetserverSettings.userDefinedCategory",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseNetserver.h",
+      "line": 281,
+      "symbol": "MSOSDKResponseNetserverSettings.userDefinedSeason",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 13,
+      "symbol": "kMSOSDKResponseWebServiceStatus",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 13,
+      "symbol": "kMSOSDKResponseWebServiceStatus",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.typedef",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 14,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusNotFound",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 15,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusUnregistered",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 16,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusExpired",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 17,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusDisabled",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 18,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusSuspended",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 19,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusInvalid",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 20,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusSuccess",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 21,
+      "symbol": "kMSOSDKResponseWebServiceStatus.kMSOSDKResponseWebServiceStatusUnknown",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.enumcase",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 25,
+      "symbol": "MSOSDKResponseWebService",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 26,
+      "symbol": "MSOSDKResponseWebService.+msosdk_commandWithResponse:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 27,
+      "symbol": "MSOSDKResponseWebService.command",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 28,
+      "symbol": "MSOSDKResponseWebService.+status:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 29,
+      "symbol": "MSOSDKResponseWebService.+errorFromStatus:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 32,
+      "symbol": "MSOSDKResponseWebServiceCredentials",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 33,
+      "symbol": "MSOSDKResponseWebServiceCredentials.status",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 34,
+      "symbol": "MSOSDKResponseWebServiceCredentials.dateCreated",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 37,
+      "symbol": "MSOSDKResponseWebServiceRegister",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 38,
+      "symbol": "MSOSDKResponseWebServiceRegister.rep",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 39,
+      "symbol": "MSOSDKResponseWebServiceRegister.key",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 40,
+      "symbol": "MSOSDKResponseWebServiceRegister.pin",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 41,
+      "symbol": "MSOSDKResponseWebServiceRegister.code",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 42,
+      "symbol": "MSOSDKResponseWebServiceRegister.type",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 43,
+      "symbol": "MSOSDKResponseWebServiceRegister.company",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 44,
+      "symbol": "MSOSDKResponseWebServiceRegister.cds",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 47,
+      "symbol": "MSOSDKResponseWebServiceRequestData",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 48,
+      "symbol": "MSOSDKResponseWebServiceRequestData.status",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 51,
+      "symbol": "MSOSDKResponseWebServiceFilesToDownload",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 52,
+      "symbol": "MSOSDKResponseWebServiceFilesToDownload.files",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 53,
+      "symbol": "MSOSDKResponseWebServiceFilesToDownload.dateUpdated",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 56,
+      "symbol": "MSOSDKResponseWebServiceDownloadHistory",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 57,
+      "symbol": "MSOSDKResponseWebServiceDownloadHistory.resultCount",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 58,
+      "symbol": "MSOSDKResponseWebServiceDownloadHistory.list",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 61,
+      "symbol": "MSOSDKResponseWebServiceCatalog",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 62,
+      "symbol": "MSOSDKResponseWebServiceCatalog.filename",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 63,
+      "symbol": "MSOSDKResponseWebServiceCatalog.dateUpdated",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 64,
+      "symbol": "MSOSDKResponseWebServiceCatalog.filesize",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 67,
+      "symbol": "MSOSDKResponseWebServicePhotoDetails",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 68,
+      "symbol": "MSOSDKResponseWebServicePhotoDetails.filename",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 69,
+      "symbol": "MSOSDKResponseWebServicePhotoDetails.dateUploaded",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 70,
+      "symbol": "MSOSDKResponseWebServicePhotoDetails.id",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.property",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/MSOSDKResponseWebService.h",
+      "line": 71,
+      "symbol": "MSOSDKResponseWebServicePhotoDetails.+detailsWithValue:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 11,
+      "symbol": "NSError(MSOSDKAdditions)",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.category",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 13,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_login_credientials_invalid",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 14,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_invalid",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 15,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_not_found",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 17,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_same_company_use",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 18,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_in_use",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 19,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_not_ready",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 20,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_unlock_code_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 21,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_disabled_or_inuse",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 22,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_request_data_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 23,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_upload_processing_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 24,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_catalog_no_content",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 25,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_image_download_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 26,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_image_download_error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 27,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_disabled",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 28,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_unregistered",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 29,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_expired",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 30,
+      "symbol": "NSError(MSOSDKAdditions).+mso_internet_registration_key_suspended",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 32,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_product_fetch_empty_result",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 33,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_event_invalid",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 34,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_event_invalid_with_eventName:eventId:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 35,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_method_request_error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 36,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_sales_order_total_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 37,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_out_of_memory_exception_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 38,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_unknown_format_error:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 39,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_image_not_found_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 40,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_customer_query_exceeded_limit_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 41,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_customer_query_not_found_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 42,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_order_retrieval_no_orders",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 43,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_order_retrieval_order_not_found",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSError+MSOSDKAdditions.h",
+      "line": 44,
+      "symbol": "NSError(MSOSDKAdditions).+mso_netserver_image_upload_error",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSString+MSOSDKAdditions.h",
+      "line": 12,
+      "symbol": "NSString(MSOSDKAdditions)",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.category",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSString+MSOSDKAdditions.h",
+      "line": 14,
+      "symbol": "NSString(MSOSDKAdditions).-mso_build_command:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSString+MSOSDKAdditions.h",
+      "line": 15,
+      "symbol": "NSString(MSOSDKAdditions).-mso_stringBetweenString:andString:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSString+MSOSDKAdditions.h",
+      "line": 16,
+      "symbol": "NSString(MSOSDKAdditions).-mso_escape",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSString+MSOSDKAdditions.h",
+      "line": 17,
+      "symbol": "NSString(MSOSDKAdditions).-mso_unescape",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSURLRequest+MSOSDKAdditions.h",
+      "line": 11,
+      "symbol": "NSURLRequest(MSOSDKAdditions)",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.category",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK/MSOSDK/NSURLRequest+MSOSDKAdditions.h",
+      "line": 13,
+      "symbol": "NSURLRequest(MSOSDKAdditions).-printRequestWithBenchmark:headerMessage:",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/jsetting32/Documents/Projects/iMobileRep2/MSOSDK"
+}

@@ -11,6 +11,7 @@
 extern NSInteger const kMSOTimeoutDefaultKey;
 
 extern NSInteger const kMSOTimeoutAllImageSyncKey;
+extern NSInteger const kMSOTimeoutCatalogKey;
 extern NSInteger const kMSOTimeoutCustomerSaveKey;
 extern NSInteger const kMSOTimeoutCustomersSyncKey;
 extern NSInteger const kMSOTimeoutCustomerSearchKey;

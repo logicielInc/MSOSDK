@@ -6,7 +6,7 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import "MSOSDK.h"
+#import "MSOSDKMaster.h"
 
 @interface MSOSDK (Netserver)
 
@@ -94,14 +94,14 @@
                                                            success:(_Nullable MSOSuccessBlock)success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                           handler:(_Nullable MSOHandlerBlock)handler;
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(nullable NSString *)username
                                                             nextId:(nullable NSString *)nextId
                                                          companyId:(nullable NSString *)companyId
                                                            success:(_Nullable MSOSuccessBlock)success
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                           handler:(_Nullable MSOHandlerBlock)handler;
 
 ///---------------------
 /// @name Customers
@@ -112,7 +112,7 @@
                                                             success:(_Nullable MSOSuccessBlock)success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure
-                                                            handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                            handler:(_Nullable MSOHandlerBlock)handler;
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadCustomers:(nullable NSString *)username
                                                    accountnumber:(nullable NSString *)accountNumber
@@ -202,7 +202,7 @@
                                                            success:(_Nullable MSOSuccessBlock)success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                           handler:(_Nullable MSOHandlerBlock)handler;
 
 ///---------------------
 /// @name Image
@@ -217,7 +217,8 @@
                                                             success:(_Nullable MSOSuccessBlock)success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure
-                                                            handler:(_Nullable MSONetserverImageBlock)handler;
+                                                            handler:(_Nullable MSOHandlerBlock)handler;
+
 - (nonnull NSURLSessionDataTask *)_msoNetserverUploadImage:(nullable NSString *)username
                                         base64EncodedImage:(nullable NSString *)base64EncodedImage
                                                 identifier:(nullable NSString *)identifier
@@ -272,7 +273,7 @@
                                                                   success:(_Nullable MSOSuccessBlock)success
                                                                  progress:(_Nullable MSOProgressBlock)progress
                                                                   failure:(_Nullable MSOFailureBlock)failure
-                                                                  handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                                  handler:(_Nullable MSOHandlerBlock)handler;
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadPurchaseHistory:(nullable NSString *)username
                                                           customerName:(nullable NSString *)customerName
@@ -280,7 +281,7 @@
                                                                success:(_Nullable MSOSuccessBlock)success
                                                               progress:(_Nullable MSOProgressBlock)progress
                                                                failure:(_Nullable MSOFailureBlock)failure
-                                                               handler:(_Nullable MSONetserverSyncBlock)handler;
+                                                               handler:(_Nullable MSOHandlerBlock)handler;
 
 
 @end

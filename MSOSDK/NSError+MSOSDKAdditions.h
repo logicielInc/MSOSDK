@@ -31,6 +31,7 @@
             
 + (nonnull instancetype)mso_netserver_product_fetch_empty_result;
 + (nonnull instancetype)mso_netserver_event_invalid;
++ (nonnull instancetype)mso_netserver_event_invalid_with_eventName:(nullable NSString *)eventName eventId:(nullable NSString *)eventId;
 + (nonnull instancetype)mso_netserver_method_request_error:(nullable NSString *)action;
 + (nonnull instancetype)mso_netserver_sales_order_total_error;
 + (nonnull instancetype)mso_netserver_out_of_memory_exception_error;

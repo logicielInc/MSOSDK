@@ -6,7 +6,7 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import "MSOSDK.h"
+#import "MSOSDKMaster.h"
 
 @interface MSOSDK (WebService) <GRRequestsManagerDelegate>
 

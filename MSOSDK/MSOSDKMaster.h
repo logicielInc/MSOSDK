@@ -6,11 +6,7 @@
 //  Copyright © 2016 John Setting. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
-#import <SMXMLDocument/SMXMLDocument.h>
-
-#import "MSOSDK.h"
 
 #import "MSOSDKConstants.h"
 #import "GRRequestsManager.h"
@@ -63,19 +59,9 @@ typedef void (^ MSOSuccessBlock)(NSURLResponse * _Nonnull response, id _Nullable
  */
 typedef void (^ MSOFailureBlock)(NSURLResponse * _Nonnull response, NSError * _Nonnull error);
 
-typedef void (^ MSONetserverSyncBlock)
+typedef void (^ MSOHandlerBlock)
 (NSURLResponse * _Nonnull response,
-__kindof MSOSDKResponseNetserverSync * _Nonnull responseObject,
-NSError * __autoreleasing _Nullable * _Nullable error);
-
-typedef void (^ MSONetserverQueryBlock)
-(NSURLResponse * _Nonnull response,
-__kindof MSOSDKResponseNetserverQuery * _Nonnull responseObject,
-NSError * __autoreleasing _Nullable * _Nullable error);
-
-typedef void (^ MSONetserverImageBlock)
-(NSURLResponse * _Nonnull response,
-NSString * _Nonnull responseObject,
+id _Nonnull responseObject,
 NSError * __autoreleasing _Nullable * _Nullable error);
 
 static NSStringEncoding stringEncoding = NSUTF8StringEncoding;

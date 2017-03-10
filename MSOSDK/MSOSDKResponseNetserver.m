@@ -325,6 +325,8 @@
 - (instancetype)initWithCommand:(NSArray *)command {
     self = [super initWithCommand:command];
     if (self) {
+        _response = [command componentsJoinedByString:@"^"];
+        
         _userId = [command mso_safeObjectAtIndex:2];
         _message = [command mso_safeObjectAtIndex:3];
     }
@@ -339,56 +341,71 @@
     self = [super initWithCommand:command];
     if (self) {
         
+        _response = [command componentsJoinedByString:@"^"];
+        
+        if ([_response hasPrefix:@"Invalid Event."]) {
+            
+            self.status = [_response mso_stringBetweenString:@"[" andString:@"]"];
+
+            NSUInteger position = [_response rangeOfString:@"]"].location + 2;
+            NSUInteger length = [_response length] - position;
+            NSRange range = NSMakeRange(position, length);
+
+            self.command = [_response substringWithRange:range];
+            
+            return self;
+        }
+        
         // Start at index 2: 0 = Command, 1 = Status
-        self.keyboardControl                                = @([[command mso_safeObjectAtIndex:2] integerValue]);
+        _keyboardControl                                = @([[command mso_safeObjectAtIndex:2] integerValue]);
         NSString *scannerSetup                              = [command mso_safeObjectAtIndex:3];
         // 4 (TCP WLAN)
-        self.productPhotoSaveOption                         = @([[command mso_safeObjectAtIndex:5] integerValue]);
+        _productPhotoSaveOption                         = @([[command mso_safeObjectAtIndex:5] integerValue]);
         NSString *displayFormat                             = [command mso_safeObjectAtIndex:6];
         // 7 (Dummy)
         // 8 (PDA Prefix ?)
-        self.minimumOrderAmount                             = @([[command mso_safeObjectAtIndex:9] doubleValue]);
-        self.multipleCompanies                              = @([[command mso_safeObjectAtIndex:10] boolValue]);
-        self.recalculateSet                                 = @([[command mso_safeObjectAtIndex:11] boolValue]);
-        self.recalculatePriceTagAlong                       = @([[command mso_safeObjectAtIndex:12] boolValue]);
-        self.itemSelectionAlert                             = @([[command mso_safeObjectAtIndex:13] integerValue]);
-        self.pricingStructure                               = [command mso_safeObjectAtIndex:14];
-        self.discountRule                                   = @([[command mso_safeObjectAtIndex:15] integerValue]);
-        self.discountRuleSubtotal                           = @([[command mso_safeObjectAtIndex:16] integerValue]);
-        self.discountRuleAllowShipping                      = @([[command mso_safeObjectAtIndex:17] boolValue]);
+        _minimumOrderAmount                             = @([[command mso_safeObjectAtIndex:9] doubleValue]);
+        _multipleCompanies                              = @([[command mso_safeObjectAtIndex:10] boolValue]);
+        _recalculateSet                                 = @([[command mso_safeObjectAtIndex:11] boolValue]);
+        _recalculatePriceTagAlong                       = @([[command mso_safeObjectAtIndex:12] boolValue]);
+        _itemSelectionAlert                             = @([[command mso_safeObjectAtIndex:13] integerValue]);
+        _pricingStructure                               = [command mso_safeObjectAtIndex:14];
+        _discountRule                                   = @([[command mso_safeObjectAtIndex:15] integerValue]);
+        _discountRuleSubtotal                           = @([[command mso_safeObjectAtIndex:16] integerValue]);
+        _discountRuleAllowShipping                      = @([[command mso_safeObjectAtIndex:17] boolValue]);
         // 18 (WLAN Submit)
-        self.eventName                                      = [command mso_safeObjectAtIndex:19];
-        self.alertIfOrderQuantityMoreThanOnHandQuantity     = @([[command mso_safeObjectAtIndex:20] boolValue]);
-        self.applyCustomerDiscountAsOrderDiscount           = [command mso_safeObjectAtIndex:21];
-        self.backupOrder                                    = [command mso_safeObjectAtIndex:22];
-        self.keepSubmittedOrderCopy                         = [command mso_safeObjectAtIndex:23];
+        _eventName                                      = [command mso_safeObjectAtIndex:19];
+        _alertIfOrderQuantityMoreThanOnHandQuantity     = @([[command mso_safeObjectAtIndex:20] boolValue]);
+        _applyCustomerDiscountAsOrderDiscount           = [command mso_safeObjectAtIndex:21];
+        _backupOrder                                    = [command mso_safeObjectAtIndex:22];
+        _keepSubmittedOrderCopy                         = [command mso_safeObjectAtIndex:23];
         // 24 999 (Dummy)
-        self.orderDefaultShipVia                            = [command mso_safeObjectAtIndex:25];
-        self.orderDefaultTerms                              = [command mso_safeObjectAtIndex:26];
+        _orderDefaultShipVia                            = [command mso_safeObjectAtIndex:25];
+        _orderDefaultTerms                              = [command mso_safeObjectAtIndex:26];
         NSString *autoDefaultQuantityShipDate               = [command mso_safeObjectAtIndex:27];
-        self.alertBelowMinimumPrice                         = @([[command mso_safeObjectAtIndex:28] boolValue]);
-        self.orderSortByItemNumber                          = @([[command mso_safeObjectAtIndex:29] boolValue]);
+        _alertBelowMinimumPrice                         = @([[command mso_safeObjectAtIndex:28] boolValue]);
+        _orderSortByItemNumber                          = @([[command mso_safeObjectAtIndex:29] boolValue]);
         NSString *salesOrderRequirements                    = [command mso_safeObjectAtIndex:30];
-        self.salesTax                                       = [command mso_safeObjectAtIndex:31];
-        self.scanSwipeBadgeMapping                          = @([[command mso_safeObjectAtIndex:32] boolValue]);
+        _salesTax                                       = [command mso_safeObjectAtIndex:31];
+        _scanSwipeBadgeMapping                          = @([[command mso_safeObjectAtIndex:32] boolValue]);
         // 33
         // 34
         // 35
-        self.orderRequiresMinimumItemQuantity               = @([[command mso_safeObjectAtIndex:36] boolValue]);
-        self.allowCustomAssortment                          = @([[command mso_safeObjectAtIndex:37] boolValue]);
-        self.optionsIfOrderQuantityMoreThanOnHandQuantity   = @([[command mso_safeObjectAtIndex:38] integerValue]);
-        self.lastPurchasePricePriority                      = @([[command mso_safeObjectAtIndex:39] boolValue]);
+        _orderRequiresMinimumItemQuantity               = @([[command mso_safeObjectAtIndex:36] boolValue]);
+        _allowCustomAssortment                          = @([[command mso_safeObjectAtIndex:37] boolValue]);
+        _optionsIfOrderQuantityMoreThanOnHandQuantity   = @([[command mso_safeObjectAtIndex:38] integerValue]);
+        _lastPurchasePricePriority                      = @([[command mso_safeObjectAtIndex:39] boolValue]);
         NSString *eventDefaultTitles                        = [command mso_safeObjectAtIndex:40];
-        self.salesManagerPrivilegeInTradeshow               = @([[command mso_safeObjectAtIndex:41] boolValue]);
-        self.salesTaxForSampleSales                         = [command mso_safeObjectAtIndex:42];
-        self.discountRuleShippingChoice                     = [command mso_safeObjectAtIndex:43];
-        self.companyPriceLevel                              = [command mso_safeObjectAtIndex:44];
+        _salesManagerPrivilegeInTradeshow               = @([[command mso_safeObjectAtIndex:41] boolValue]);
+        _salesTaxForSampleSales                         = [command mso_safeObjectAtIndex:42];
+        _discountRuleShippingChoice                     = [command mso_safeObjectAtIndex:43];
+        _companyPriceLevel                              = [command mso_safeObjectAtIndex:44];
         // 45-53 (Blanks)
 //        NSString *licenseInfo                               = [command mso_safeObjectAtIndex:54];
         NSString *printOut                                  = [command mso_safeObjectAtIndex:55];
-        self.messageCompanyPolicy                           = [command mso_safeObjectAtIndex:56];
-        self.messageCustomerGreeting                        = [command mso_safeObjectAtIndex:57];
-        self.messagePayment                                 = [command mso_safeObjectAtIndex:58];
+        _messageCompanyPolicy                           = [command mso_safeObjectAtIndex:56];
+        _messageCustomerGreeting                        = [command mso_safeObjectAtIndex:57];
+        _messagePayment                                 = [command mso_safeObjectAtIndex:58];
         
         [self parseAutoDefaultQuantityShipDate:autoDefaultQuantityShipDate];
         [self parseScannerSetup:scannerSetup];
@@ -403,53 +420,53 @@
 - (void)parseAutoDefaultQuantityShipDate:(NSString *)autoDefaultQuantityShipDate {
     
     if ([autoDefaultQuantityShipDate isEqualToString:@"1"]) {
-        self.defaultQuantityToPreviousEntry = @1;
-        self.defaultShipDateToPreviousEntry = @0;
+        _defaultQuantityToPreviousEntry = @1;
+        _defaultShipDateToPreviousEntry = @0;
         return;
     }
     
     if ([autoDefaultQuantityShipDate isEqualToString:@"2"]) {
-        self.defaultQuantityToPreviousEntry = @0;
-        self.defaultShipDateToPreviousEntry = @1;
+        _defaultQuantityToPreviousEntry = @0;
+        _defaultShipDateToPreviousEntry = @1;
         return;
     }
     
     if ([autoDefaultQuantityShipDate isEqualToString:@"3"]) {
-        self.defaultQuantityToPreviousEntry = @1;
-        self.defaultShipDateToPreviousEntry = @1;
+        _defaultQuantityToPreviousEntry = @1;
+        _defaultShipDateToPreviousEntry = @1;
         return;
     }
     
-    self.defaultQuantityToPreviousEntry = @0;
-    self.defaultShipDateToPreviousEntry = @0;
+    _defaultQuantityToPreviousEntry = @0;
+    _defaultShipDateToPreviousEntry = @0;
 }
 
 - (void)parseDisplayFormat:(NSString *)displayFormat {
     NSArray *displayFormatParameters = [displayFormat componentsSeparatedByString:@"|"];
     
     NSString *priceItemLevel = [displayFormatParameters mso_safeObjectAtIndex:0];
-    self.formatterPriceItemLevel = [self returnParsedFormatter:priceItemLevel];
+    _formatterPriceItemLevel = [self returnParsedFormatter:priceItemLevel];
     
     NSString *priceTotal = [displayFormatParameters mso_safeObjectAtIndex:1];
-    self.formatterPriceTotal = [self returnParsedFormatter:priceTotal];
+    _formatterPriceTotal = [self returnParsedFormatter:priceTotal];
     
     NSString *quantityItemLevel = [displayFormatParameters mso_safeObjectAtIndex:2];
-    self.formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel];
+    _formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel];
     
     NSString *quantityTotal = [displayFormatParameters mso_safeObjectAtIndex:3];
-    self.formatterQuantityTotal = [self returnParsedFormatter:quantityTotal];
+    _formatterQuantityTotal = [self returnParsedFormatter:quantityTotal];
     
     NSString *weightItemLevel = [displayFormatParameters mso_safeObjectAtIndex:4];
-    self.formatterWeightItemLevel = [self returnParsedFormatter:weightItemLevel];
+    _formatterWeightItemLevel = [self returnParsedFormatter:weightItemLevel];
     
     NSString *weightTotal = [displayFormatParameters mso_safeObjectAtIndex:5];
-    self.formatterWeightTotal = [self returnParsedFormatter:weightTotal];
+    _formatterWeightTotal = [self returnParsedFormatter:weightTotal];
     
     NSString *volumeItemLevel = [displayFormatParameters mso_safeObjectAtIndex:6];
-    self.formatterVolumeItemLevel = [self returnParsedFormatter:volumeItemLevel];
+    _formatterVolumeItemLevel = [self returnParsedFormatter:volumeItemLevel];
     
     NSString *volumeTotal = [displayFormatParameters mso_safeObjectAtIndex:7];
-    self.formatterVolumeTotal = [self returnParsedFormatter:volumeTotal];
+    _formatterVolumeTotal = [self returnParsedFormatter:volumeTotal];
     
 }
 
@@ -469,9 +486,9 @@
     
     NSArray *scannerSetupParameters = [scannerSetup componentsSeparatedByString:@","];
     
-    self.scannerSetupReadCountryCode = @([[scannerSetupParameters mso_safeObjectAtIndex:0] doubleValue]);
-    self.scannerSetupReadSystemCodePrefix = @([[scannerSetupParameters mso_safeObjectAtIndex:1] doubleValue]);
-    self.scannerSetupReadChecksumDigit = @([[scannerSetupParameters mso_safeObjectAtIndex:2] doubleValue]);
+    _scannerSetupReadCountryCode = @([[scannerSetupParameters mso_safeObjectAtIndex:0] doubleValue]);
+    _scannerSetupReadSystemCodePrefix = @([[scannerSetupParameters mso_safeObjectAtIndex:1] doubleValue]);
+    _scannerSetupReadChecksumDigit = @([[scannerSetupParameters mso_safeObjectAtIndex:2] doubleValue]);
 }
 
 - (void)parsePrintOut:(NSString *)printOut {
@@ -479,64 +496,64 @@
     
     NSString *showQuantityPriceWhenSellingBulk = [printOutParameters mso_safeObjectAtIndex:0];
     if ([showQuantityPriceWhenSellingBulk isEqualToString:@"B"]) {
-        self.printIfBulkSellingShowPrice = @1;
-        self.printIfBulkSellingShowQuantity = @0;
+        _printIfBulkSellingShowPrice = @1;
+        _printIfBulkSellingShowQuantity = @0;
     } else if ([showQuantityPriceWhenSellingBulk isEqualToString:@"C"]) {
-        self.printIfBulkSellingShowPrice = @0;
-        self.printIfBulkSellingShowQuantity = @1;
+        _printIfBulkSellingShowPrice = @0;
+        _printIfBulkSellingShowQuantity = @1;
     } else {
-        self.printIfBulkSellingShowPrice = @0;
-        self.printIfBulkSellingShowQuantity = @0;
+        _printIfBulkSellingShowPrice = @0;
+        _printIfBulkSellingShowQuantity = @0;
     }
     
-    self.printCustomerRep       = @([[printOutParameters mso_safeObjectAtIndex:1] boolValue]);
-    self.printUPC               = @([[printOutParameters mso_safeObjectAtIndex:3] boolValue]);
-    self.printItemDescription2  = @([[printOutParameters mso_safeObjectAtIndex:2] boolValue]);
-    self.printItemVendorName    = @([[printOutParameters mso_safeObjectAtIndex:9] boolValue]);
-    self.printManufacturerName  = @([[printOutParameters mso_safeObjectAtIndex:10] boolValue]);
-    self.printShowOrderTotal    = @(![[printOutParameters mso_safeObjectAtIndex:6] boolValue]);
+    _printCustomerRep       = @([[printOutParameters mso_safeObjectAtIndex:1] boolValue]);
+    _printUPC               = @([[printOutParameters mso_safeObjectAtIndex:3] boolValue]);
+    _printItemDescription2  = @([[printOutParameters mso_safeObjectAtIndex:2] boolValue]);
+    _printItemVendorName    = @([[printOutParameters mso_safeObjectAtIndex:9] boolValue]);
+    _printManufacturerName  = @([[printOutParameters mso_safeObjectAtIndex:10] boolValue]);
+    _printShowOrderTotal    = @(![[printOutParameters mso_safeObjectAtIndex:6] boolValue]);
     
-    self.printMSRP                          = @([[printOutParameters mso_safeObjectAtIndex:11] boolValue]);
-    self.printPrice                         = @([[printOutParameters mso_safeObjectAtIndex:12] boolValue]);
-    self.printItemColorSizeAbbreviation     = @([[printOutParameters mso_safeObjectAtIndex:13] boolValue]);
-    self.printItemWeight                    = @([[printOutParameters mso_safeObjectAtIndex:14] boolValue]);
-    self.printTotalWeight                   = @([[printOutParameters mso_safeObjectAtIndex:4] boolValue]);
-    self.printItemVolume                    = @([[printOutParameters mso_safeObjectAtIndex:15] boolValue]);
-    self.printTotalVolume                   = @([[printOutParameters mso_safeObjectAtIndex:5] boolValue]);
+    _printMSRP                          = @([[printOutParameters mso_safeObjectAtIndex:11] boolValue]);
+    _printPrice                         = @([[printOutParameters mso_safeObjectAtIndex:12] boolValue]);
+    _printItemColorSizeAbbreviation     = @([[printOutParameters mso_safeObjectAtIndex:13] boolValue]);
+    _printItemWeight                    = @([[printOutParameters mso_safeObjectAtIndex:14] boolValue]);
+    _printTotalWeight                   = @([[printOutParameters mso_safeObjectAtIndex:4] boolValue]);
+    _printItemVolume                    = @([[printOutParameters mso_safeObjectAtIndex:15] boolValue]);
+    _printTotalVolume                   = @([[printOutParameters mso_safeObjectAtIndex:5] boolValue]);
     
-    self.printItemDiscountIfDiscounted      = @([[printOutParameters mso_safeObjectAtIndex:7] boolValue]);
+    _printItemDiscountIfDiscounted      = @([[printOutParameters mso_safeObjectAtIndex:7] boolValue]);
     
-    self.printSortByItemNumber              = @([[printOutParameters mso_safeObjectAtIndex:8] boolValue]);
+    _printSortByItemNumber              = @([[printOutParameters mso_safeObjectAtIndex:8] boolValue]);
 }
 
 - (void)parsePDAConfigurationII:(NSString *)salesOrderRequirements eventDefaultTitles:(NSString *)eventDefaultTitles {
     NSArray *salesOrderRequirementsParameters = [salesOrderRequirements componentsSeparatedByString:@"|"];
     
-    self.orderRequiresAddress       = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:0] boolValue]);
-    self.orderRequiresPhone         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:1] boolValue]);
-    self.orderRequiresEmail         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:2] boolValue]);
-    self.orderRequiresShipDate      = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:3] boolValue]);
-    self.orderRequiresCancelDate    = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:4] boolValue]);
-    self.orderRequiresPONumber      = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:5] boolValue]);
+    _orderRequiresAddress       = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:0] boolValue]);
+    _orderRequiresPhone         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:1] boolValue]);
+    _orderRequiresEmail         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:2] boolValue]);
+    _orderRequiresShipDate      = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:3] boolValue]);
+    _orderRequiresCancelDate    = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:4] boolValue]);
+    _orderRequiresPONumber      = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:5] boolValue]);
     
-    self.orderRequiresBuyerName     = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:6] boolValue]);
-    self.orderRequiresFOB           = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:7] boolValue]);
-    self.orderRequiresWarehouse     = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:8] boolValue]);
-    self.orderRequiresCreditCard    = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:9] boolValue]);
-    self.orderRequiresPaymentTerms  = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:10] boolValue]);
+    _orderRequiresBuyerName     = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:6] boolValue]);
+    _orderRequiresFOB           = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:7] boolValue]);
+    _orderRequiresWarehouse     = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:8] boolValue]);
+    _orderRequiresCreditCard    = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:9] boolValue]);
+    _orderRequiresPaymentTerms  = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:10] boolValue]);
     
-    self.staticCreditCard           = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:11] boolValue]);
-    self.staticPaymentTerms         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:12] boolValue]);
+    _staticCreditCard           = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:11] boolValue]);
+    _staticPaymentTerms         = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:12] boolValue]);
     
-    self.orderRequiredMinimumOrderAmountForMasterOrder = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:13] boolValue]);
-    self.allowCustomTermsShipViaFOB                    = @(![[salesOrderRequirementsParameters mso_safeObjectAtIndex:14] boolValue]);
-    self.orderRequiredMinimumOrderAmountForEachCompany = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:15] boolValue]);
+    _orderRequiredMinimumOrderAmountForMasterOrder = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:13] boolValue]);
+    _allowCustomTermsShipViaFOB                    = @(![[salesOrderRequirementsParameters mso_safeObjectAtIndex:14] boolValue]);
+    _orderRequiredMinimumOrderAmountForEachCompany = @([[salesOrderRequirementsParameters mso_safeObjectAtIndex:15] boolValue]);
     
     NSArray *eventDefaultTitlesParameters = [eventDefaultTitles componentsSeparatedByString:@"|"];
     
-    self.userDefinedProductLine = [eventDefaultTitlesParameters mso_safeObjectAtIndex:0];
-    self.userDefinedCategory = [eventDefaultTitlesParameters mso_safeObjectAtIndex:1];
-    self.userDefinedSeason = [eventDefaultTitlesParameters mso_safeObjectAtIndex:2];
+    _userDefinedProductLine = [eventDefaultTitlesParameters mso_safeObjectAtIndex:0];
+    _userDefinedCategory = [eventDefaultTitlesParameters mso_safeObjectAtIndex:1];
+    _userDefinedSeason = [eventDefaultTitlesParameters mso_safeObjectAtIndex:2];
 }
 
 @end

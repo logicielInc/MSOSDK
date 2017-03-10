@@ -15,20 +15,74 @@
     "git": "https://github.com/logicielInc/MSOSDK.git",
     "tag": "0.1.0"
   },
+  "requires_arc": true,
+  "public_header_files": "MSOSDK/MSOSDK.h",
+  "source_files": "MSOSDK/MSOSDK.h",
   "platforms": {
     "ios": "8.0"
   },
-  "requires_arc": true,
-  "source_files": "MSOSDK/Classes/**/*",
-  "dependencies": {
-    "AFNetworking": [
+  "subspecs": [
+    {
+      "name": "External",
+      "source_files": "External/*",
+      "public_header_files": "External/*"
+    },
+    {
+      "name": "Categories",
+      "dependencies": {
+        "GTMNSStringHTMLAdditions": [
 
-    ],
-    "GTMNSStringHTMLAdditions": [
+        ]
+      },
+      "source_files": "MSOSDK/*+MSOSDKAdditions.{h,m}",
+      "public_header_files": "MSOSDK/*+MSOSDKAdditions.{h,m}"
+    },
+    {
+      "name": "Objects",
+      "dependencies": {
+        "SMXMLDocument": [
 
-    ],
-    "SMXMLDocument": [
+        ]
+      },
+      "source_files": "MSOSDK/MSOSDKResponse*.{h,m}",
+      "public_header_files": "MSOSDK/MSOSDKResponse*.{h,m}"
+    },
+    {
+      "name": "Master",
+      "dependencies": {
+        "MSOSDK/Categories": [
 
-    ]
-  }
+        ],
+        "AFNetworking": [
+
+        ],
+        "MSOSDK/External": [
+
+        ]
+      },
+      "source_files": "MSOSDK/MSOSDKMaster.{h,m}",
+      "public_header_files": "MSOSDK/MSOSDKMaster.{h,m}"
+    },
+    {
+      "name": "Constants",
+      "source_files": "MSOSDK/MSOSDKConstants.{h,m}",
+      "public_header_files": "MSOSDK/MSOSDKConstants.{h,m}"
+    },
+    {
+      "name": "Networking",
+      "dependencies": {
+        "MSOSDK/Objects": [
+
+        ],
+        "MSOSDK/Master": [
+
+        ],
+        "MSOSDK/External": [
+
+        ]
+      },
+      "source_files": "MSOSDK/MSOSDK+*",
+      "public_header_files": "MSOSDK/MSOSDK+*"
+    }
+  ]
 }

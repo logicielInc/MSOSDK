@@ -124,6 +124,8 @@
 @end
 
 @interface MSOSDKResponseNetserverLogin : MSOSDKResponseNetserver
+@property (strong, nonatomic, nullable) NSString *response;
+
 @property (strong, nonatomic, nullable) NSString *userId;
 @property (strong, nonatomic, nullable) NSString *message;
 @property (strong, nonatomic, nullable) NSNumber *priceLevelAllow1;
@@ -135,6 +137,8 @@
 @end
 
 @interface MSOSDKResponseNetserverSettings : MSOSDKResponseNetserver
+
+@property (strong, nonatomic, nullable) NSString *response;
 
 @property (strong, nonatomic, nullable) NSNumber *companyPriceLevel;
 @property (strong, nonatomic, nullable) NSNumber *multipleCompanies;

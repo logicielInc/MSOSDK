@@ -7,6 +7,8 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
+#import "MSOSDKResponseWebService.h"
+
 #import "MSOSDK+WebService.h"
 
 #import <SMXMLDocument/SMXMLDocument.h>
@@ -1325,7 +1327,7 @@ static MSOFailureBlock gr_failure_block;
                              type:_CheckCatalogFileStatus
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey
+                             timeout:kMSOTimeoutCatalogKey
                              error:&error];
     
     NSURLSessionDataTask *task =

@@ -6,6 +6,8 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
+#import "MSOSDKResponseNetserver.h"
+
 #import "MSOSDK+Netserver.h"
 
 #import "NSString+MSOSDKAdditions.h"
@@ -97,7 +99,7 @@
          MSOSDKResponseNetserverLogin *msosdk_command = [MSOSDKResponseNetserverLogin msosdk_commandWithResponse:commandArray];
          commandArray = nil;
          
-         BOOL validate = [MSOSDK validate:msosdk_command.message
+         BOOL validate = [MSOSDK validate:msosdk_command.response
                                  command:msosdk_command.command
                                   status:msosdk_command.status error:&error];
          if (!validate) {
@@ -151,6 +153,14 @@
          command = nil;
          MSOSDKResponseNetserverSettings *msosdk_command = [MSOSDKResponseNetserverSettings msosdk_commandWithResponse:commandArray];
          commandArray = nil;
+         
+         BOOL validate = [MSOSDK validate:msosdk_command.response
+                                  command:msosdk_command.command
+                                   status:msosdk_command.status error:&error];
+         if (!validate) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -240,7 +250,7 @@
          
          NSArray *components = [command componentsSeparatedByString:@"^"];
          MSOSDKResponseNetserverProductsCount *mso_response = [MSOSDKResponseNetserverProductsCount msosdk_commandWithResponse:components];
-         validate = [MSOSDK validate:nil command:mso_response.command status:mso_response.status error:&error];
+         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
              [self errorHandler:error response:response failure:failure];
              return;
@@ -264,7 +274,7 @@
                                                    success:(MSOSuccessBlock)success
                                                   progress:(MSOProgressBlock)progress
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSONetserverSyncBlock)handler {
+                                                   handler:(MSOHandlerBlock)handler {
     
     NSURLSessionDataTask *task =
     [self
@@ -282,7 +292,7 @@
           companyId:companyId
           success:success
           failure:failure
-          handler:^(NSURLResponse * _Nonnull response, __kindof MSOSDKResponseNetserverSync * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
+          handler:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
               
               if (handler) {
                   handler(response, responseObject, error);
@@ -319,7 +329,7 @@
                                                  companyId:(NSString *)companyId
                                                    success:(MSOSuccessBlock)success
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSONetserverSyncBlock)handler {
+                                                   handler:(MSOHandlerBlock)handler {
     
     nextId = nextId ?: @"";
     companyId = companyId ?: @"";
@@ -568,11 +578,11 @@
 #pragma mark - Customers
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(NSString *)username
                                                      nextId:(NSString *)nextId
-                                                    success:(MSOSuccessBlock _Nullable)success
-                                                   progress:(MSOProgressBlock _Nullable)progress
-                                                    failure:(MSOFailureBlock _Nullable)failure
-                                                    handler:(MSONetserverSyncBlock _Nullable)handler {
-    
+                                                    success:(MSOSuccessBlock)success
+                                                   progress:(MSOProgressBlock)progress
+                                                    failure:(MSOFailureBlock)failure
+                                                    handler:(MSOHandlerBlock)handler {
+
     nextId = nextId ?: @"";
     
     NSError *error = nil;
@@ -815,7 +825,7 @@
          
          NSArray *parameters = [command componentsSeparatedByString:@"^"];
          MSOSDKResponseNetserverSaveCustomer *mso_response = [MSOSDKResponseNetserverSaveCustomer msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:nil command:mso_response.command status:mso_response.status error:&error];
+         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
              [self errorHandler:error response:response failure:failure];
              return;
@@ -917,7 +927,7 @@
          
          NSArray *parameters = [command componentsSeparatedByString:@"^"];
          MSOSDKResponseNetserverSaveCustomerShippingAddress *mso_response = [MSOSDKResponseNetserverSaveCustomerShippingAddress msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:nil command:mso_response.command status:mso_response.status error:&error];
+         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
              [self errorHandler:error response:response failure:failure];
              return;
@@ -1077,7 +1087,7 @@
                                                    success:(MSOSuccessBlock)success
                                                   progress:(MSOProgressBlock)progress
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSONetserverSyncBlock _Nullable)handler {
+                                                   handler:(MSOHandlerBlock)handler {
     
     nextId = nextId ?: @"";
     
@@ -1223,7 +1233,7 @@
                                                     success:(MSOSuccessBlock)success
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure
-                                                    handler:(MSONetserverImageBlock)handler {
+                                                    handler:(MSOHandlerBlock)handler {
     
     NSError *error = nil;
     
@@ -1584,7 +1594,7 @@
          NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
          
          MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:nil command:mso_response.command status:mso_response.status error:&error];
+         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
              [self errorHandler:error response:response failure:failure];
              return;
@@ -1680,7 +1690,7 @@
          NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
          
          MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:nil command:mso_response.command status:mso_response.status error:&error];
+         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
              [self errorHandler:error response:response failure:failure];
              return;
@@ -1703,8 +1713,17 @@
                                                           success:(MSOSuccessBlock)success
                                                          progress:(MSOProgressBlock)progress
                                                           failure:(MSOFailureBlock)failure
-                                                          handler:(MSONetserverSyncBlock)handler {
-    return [self msoDownloadPurchaseHistory:username customerName:nil customerZip:nil nextId:nil success:success progress:progress failure:failure handler:handler];
+                                                          handler:(MSOHandlerBlock)handler {
+    
+    return [self
+            msoDownloadPurchaseHistory:username
+            customerName:nil
+            customerZip:nil
+            nextId:nil
+            success:success
+            progress:progress
+            failure:failure
+            handler:handler];
 }
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadPurchaseHistory:(NSString *)username
@@ -1713,8 +1732,16 @@
                                                        success:(MSOSuccessBlock)success
                                                       progress:(MSOProgressBlock)progress
                                                        failure:(MSOFailureBlock)failure
-                                                       handler:(MSONetserverSyncBlock)handler {
-    return [self msoDownloadPurchaseHistory:username customerName:customerName customerZip:customerZip nextId:nil success:success progress:progress failure:failure handler:handler];
+                                                       handler:(MSOHandlerBlock)handler {
+    return [self
+            msoDownloadPurchaseHistory:username
+            customerName:customerName
+            customerZip:customerZip
+            nextId:nil
+            success:success
+            progress:progress
+            failure:failure
+            handler:handler];
 }
 
 - (NSURLSessionDataTask *)msoDownloadPurchaseHistory:(NSString *)username
@@ -1724,7 +1751,7 @@
                                              success:(MSOSuccessBlock)success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure
-                                             handler:(MSONetserverSyncBlock)handler {
+                                             handler:(MSOHandlerBlock)handler {
     
     username = username ?: @"";
     customerName = customerName ?: @"";
@@ -1830,7 +1857,7 @@
                                                     success:(MSOSuccessBlock)success
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure
-                                                    handler:(MSONetserverSyncBlock)handler {
+                                                    handler:(MSOHandlerBlock)handler {
     
     __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = *mso_respons;
     

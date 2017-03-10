@@ -179,8 +179,14 @@ static NSString * eventId;
         *error = [NSError mso_internet_login_credientials_invalid];
         return NO;
     }
+    
     if ([data hasPrefix:@"Invalid Event:"]) {
         *error = [NSError mso_netserver_event_invalid];
+        return NO;
+    }
+    
+    if ([data hasPrefix:@"Invalid Event."]) {
+        *error = [NSError mso_netserver_event_invalid_with_eventName:command eventId:status];
         return NO;
     }
     
