@@ -10,17 +10,7 @@
 
 #import <SMXMLDocument/SMXMLDocument.h>
 
-typedef NS_ENUM(NSInteger, kMSOSDKResponseWebServiceStatus) {
-    kMSOSDKResponseWebServiceStatusNotFound = 0,
-    kMSOSDKResponseWebServiceStatusUnregistered = 1,
-    kMSOSDKResponseWebServiceStatusExpired = 2,
-    kMSOSDKResponseWebServiceStatusDisabled = 3,
-    kMSOSDKResponseWebServiceStatusSuspended = 4,
-    kMSOSDKResponseWebServiceStatusInvalid = 5,
-    kMSOSDKResponseWebServiceStatusSuccess = 6,
-    kMSOSDKResponseWebServiceStatusUnknown = -1,
-};
-
+#import "MSOSDKConstants.h"
 
 @interface MSOSDKResponseWebService : NSObject
 + (nullable instancetype)msosdk_commandWithResponse:(nullable id)response;

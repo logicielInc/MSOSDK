@@ -8,9 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ `MSOSDKResponseNetserver` adopts `NSObject` and is the general response object that all Netserver response objects adopt.
+ */
 @interface MSOSDKResponseNetserver : NSObject
+
+- (nullable instancetype)init NS_UNAVAILABLE;
+
+/**
+ The general initializer for an `MSOSDKResponseNetserver` object.
+
+ @param response A `^` seperated response. Some responses contain `^` in the XML so this may be bad practice
+ @return `MSOSDKResponseNetserver` object
+ */
 + (nullable instancetype)msosdk_commandWithResponse:(nullable NSArray *)response;
+
+/**
+ The command of the request made (e.g _P001). If there are multiple pages to further append to this request, the command will result in _X001. Which means there are more requests to be made to complete the xml response
+ */
 @property (strong, nonatomic, nullable) NSString *command;
+
+/**
+ The status either results in NO, OK, or nil
+ */
 @property (strong, nonatomic, nullable) NSString *status;
 @end
 
@@ -225,6 +245,10 @@
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeItemLevel;
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeTotal;
 
+
+/**
+ @brief MSO will return back 3 results: 0 = Append, 1 = Retrieve, 2 = Choice
+ */
 @property (strong, nonatomic, nullable) NSNumber *itemSelectionAlert;
 @property (strong, nonatomic, nullable) NSNumber *recalculateSet;
 @property (strong, nonatomic, nullable) NSNumber *recalculatePriceTagAlong;

@@ -24,7 +24,7 @@
                              urlRequestWithParameters:@{@"str" : [@"_S001" mso_build_command:@[@"",
                                                                                                 @"WLAN Connection?"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPingKey
@@ -75,10 +75,10 @@
                                                                                                 username,
                                                                                                 password]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
-                             timeout:kMSOTimeoutDefaultKey
+                             timeout:kMSOTimeoutLoginKey
                              error:&error];
     
     NSURLSessionDataTask *task =
@@ -130,10 +130,10 @@
                              urlRequestWithParameters:@{@"str" : [@"_S002" mso_build_command:@[username,
                                                                                                 @"Initial iPad Settings?"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
-                             timeout:kMSOTimeoutPingKey
+                             timeout:kMSOTimeoutLoginKey
                              error:&error];
     
     NSURLSessionDataTask *task =
@@ -181,7 +181,7 @@
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@{@"str" : [@"" mso_build_command:nil]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPingKey
@@ -223,7 +223,7 @@
                                                                                                @"Product Total?",
                                                                                                @""]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutProductsSyncKey
@@ -341,7 +341,7 @@
                                                                                                 companyId,
                                                                                                 nextId]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutProductsSyncKey
@@ -443,7 +443,7 @@
                                                                                                 @"0",
                                                                                                 type]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutProductsSyncKey
@@ -516,7 +516,7 @@
                              urlRequestWithParameters:@{@"str" : [mso_response.command mso_build_command:@[username,
                                                                                                             mso_response.pages]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutProductsSyncKey
@@ -591,7 +591,7 @@
                                                                                                 @"Customer List?[iPad]",
                                                                                                 nextId]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutCustomersSyncKey
@@ -702,7 +702,7 @@
                                                                                                 zip,
                                                                                                 @"Search Customer"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutCustomerSearchKey
@@ -798,7 +798,7 @@
                                                                                                 email,
                                                                                                 @""]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutImageSyncKey
@@ -900,7 +900,7 @@
                                                                                                 mainstoreNumber
                                                                                                 ]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutImageSyncKey
@@ -1037,7 +1037,7 @@
                                                                                                 accountNumber,
                                                                                                 com]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutCustomerSaveKey
@@ -1097,7 +1097,7 @@
                                                                                                 @"Group Settings?[iPad]",
                                                                                                 nextId]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutSettingsSyncKey
@@ -1190,7 +1190,7 @@
                                                                                                 @"All Photo?[iPad]",
                                                                                                 @""]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutAllImageSyncKey
@@ -1241,7 +1241,7 @@
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@{@"str" : [cmd mso_build_command:nil]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutImageSyncKey
@@ -1320,7 +1320,7 @@
                                                                                                 orderNumber,
                                                                                                 @"Restore Submitted Order (check in-use)"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPurchaseHistoryKey
@@ -1400,7 +1400,7 @@
                                                                                                 orderNumber,
                                                                                                 @"Get More Order Data"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPurchaseHistoryKey
@@ -1481,7 +1481,7 @@
                                                                                                 customerAccountNumber,
                                                                                                 @"Search Submitted Order"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutSalesOrderKey
@@ -1566,7 +1566,7 @@
                                                                                                 @"Pre-Send Image Data",
                                                                                                 [imageNotes firstObject]]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutSalesOrderKey
@@ -1662,7 +1662,7 @@
                                                                                                 commandString,
                                                                                                 orderString]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutSalesOrderKey
@@ -1766,7 +1766,7 @@
                                                                                                 nextId,
                                                                                                 @"Sales Order History"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPurchaseHistoryKey
@@ -1867,7 +1867,7 @@
                                                                                                 [NSString stringWithFormat:@"%li", (long)mso_response.detailLoop],
                                                                                                 @"Get More History Data"]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutPurchaseHistoryKey
@@ -1959,7 +1959,7 @@
                                                                                                  @"Submit Product Photo",
                                                                                                  base64EncodedImage]]}
                              keys:@[@"str"]
-                             type:DoWork
+                             type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
                              timeout:kMSOTimeoutImageSyncKey

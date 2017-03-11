@@ -228,7 +228,7 @@
         NSString* lastUpdate   = [response objectAtIndex:1];
         NSString* filesize     = [[response objectAtIndex:2] stringByReplacingOccurrencesOfString:@"]" withString:@""];
         
-        self.command = _CheckCatalogFileStatus;
+        self.command = mso_soap_function_checkCatalogFileStatus;
         _filename = filename;
         _filesize = @([filesize longLongValue]);
         _dateUpdated = [MSOSDK dateFromString:lastUpdate];

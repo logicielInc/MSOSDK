@@ -103,8 +103,8 @@ static NSString * eventId;
     static NSURL *url = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        url = [NSURL URLWithString:LogicielIncUrl];
-        url = [url URLByAppendingPathComponent:[logicielUpdateEndpoint stringByAppendingPathComponent:logicielCustomerASMX]];
+        url = [NSURL URLWithString:mso_endpoint_logicielIncUrl];
+        url = [url URLByAppendingPathComponent:[mso_endpoint_logicielUpdateEndpoint stringByAppendingPathComponent:mso_endpoint_logicielCustomerASMX]];
     });
     return url;
 }
@@ -113,8 +113,8 @@ static NSString * eventId;
     static NSURL *url = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        url = [NSURL URLWithString:LogicielIncUrl];
-        url = [url URLByAppendingPathComponent:[logicielFTPWSEndpoint stringByAppendingPathComponent:logicielFTPServiceASMX]];
+        url = [NSURL URLWithString:mso_endpoint_logicielIncUrl];
+        url = [url URLByAppendingPathComponent:[mso_endpoint_logicielFTPWSEndpoint stringByAppendingPathComponent:mso_endpoint_logicielFTPServiceASMX]];
     });
     return url;
 }
@@ -326,7 +326,7 @@ static NSString * eventId;
         sorted = [sorted arrayByAddingObjectsFromArray:keys];
     }
 
-    NSString *action = netserver ? LogicielIncUrl : LogicielUrl;
+    NSString *action = netserver ? mso_endpoint_logicielIncUrl : mso_endpoint_logicielUrl;
     NSURL *actionURL = [NSURL URLWithString:action];
     actionURL = [actionURL URLByAppendingPathComponent:type];
     

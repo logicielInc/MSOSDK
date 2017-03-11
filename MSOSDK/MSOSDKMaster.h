@@ -16,92 +16,24 @@
 #import "NSURLRequest+MSOSDKAdditions.h"
 
 /**
- enums that define a product search type. This is only applied to Netserver Product Requests
-
- - kMSOProductSearchTypeItemNumber: Search By Item #
- - kMSOProductSearchTypeDescription: Search By Description
- - kMSOProductSearchTypeColor: Search By Color
- - kMSOProductSearchTypeSize: Search By Size
- - kMSOProductSearchTypeProductInfo: Search By Product Info (product line | category | season) for all companies
- - kMSOProductSearchTypeUserDefined: Search By User Defined Fields, (e.g N| = new item, S| = special item, H| hot item)
+ `MSOSDK` adopts `NSObject` and is the master object for all Logiciel web operations
  */
-typedef NS_ENUM(NSInteger, kMSOProductSearchType) {
-    kMSOProductSearchTypeItemNumber = 0,
-    kMSOProductSearchTypeDescription = 1,
-    kMSOProductSearchTypeColor = 2,
-    kMSOProductSearchTypeSize = 3,
-    kMSOProductSearchTypeProductInfo = 4,
-    kMSOProductSearchTypeUserDefined = 5,
-};
-
-
-/**
- A progress block used within blocks to signal progression of a methods action
-
- @param progress An NSProgress object
- */
-typedef void (^ MSOProgressBlock)(NSProgress * _Nonnull progress);
-
-
-/**
- A success block used to signal a method has successfully finished with no errors
-
- @param response The URLResponse of the block
- @param responseObject A nullable object. It will only be null if there is a handler within the block to process that data
- */
-typedef void (^ MSOSuccessBlock)(NSURLResponse * _Nonnull response, id _Nullable responseObject);
-
-/**
- A failure block used to signal a method has failed with an error
-
- @param response The URLResponse of the block
- @param error A nonnull error object
- */
-typedef void (^ MSOFailureBlock)(NSURLResponse * _Nonnull response, NSError * _Nonnull error);
-
-typedef void (^ MSOHandlerBlock)
-(NSURLResponse * _Nonnull response,
-id _Nonnull responseObject,
-NSError * __autoreleasing _Nullable * _Nullable error);
-
-static NSStringEncoding stringEncoding = NSUTF8StringEncoding;
-
-static NSString * _Nonnull const DoWork = @"IServiceLibrary/DoWork";
-
-static NSString * _Nonnull const iRegisterCode = @"iRegisterCode";
-static NSString * _Nonnull const _UploadFile = @"_UploadFile";
-static NSString * _Nonnull const _UpdateUploadInfo = @"_UpdateUploadInfo";
-static NSString * _Nonnull const iRegisterShortKey = @"iRegisterShortKey";
-static NSString * _Nonnull const iCheckMobileDevice = @"iCheckMobileDevice";
-static NSString * _Nonnull const iCheckMobileUser = @"iCheckMobileUser";
-static NSString * _Nonnull const iCheckPDAMessage = @"_iCheckPDAMessage";
-static NSString * _Nonnull const _CheckCatalogFileStatus = @"_CheckCatalogFileStatus";
-static NSString * _Nonnull const GetCustomersByCompany = @"GetCustomersByCompany";
-static NSString * _Nonnull const _iCheckPDAHistoryForDownloading = @"_iCheckPDAHistoryForDownloading";
-static NSString * _Nonnull const _UpdateDownloadInfo = @"_UpdateDownloadInfo";
-static NSString * _Nonnull const _iCheckMobileMessage = @"_iCheckMobileMessage";
-static NSString * _Nonnull const _iCheckMobileFileForDownloading = @"_iCheckMobileFileForDownloading";
-static NSString * _Nonnull const GetEventList = @"GetEventList";
-
-#pragma mark - Endpoints
-static NSString * _Nonnull const LogicielIncUrl = @"http://logicielinc.com";
-static NSString * _Nonnull const LogicielUrl = @"http://logiciel.com";
-static NSString * _Nonnull const logicielUpdateEndpoint = @"logicielupdatews";
-static NSString * _Nonnull const logicielCustomerASMX = @"logicielcustomer.asmx";
-static NSString * _Nonnull const logicielFTPWSEndpoint = @"logiciel_ftp_ws";
-static NSString * _Nonnull const logicielFTPServiceASMX = @"FTPService.asmx";
-static NSString * _Nonnull const _mso_password = @"logic99";
-
-#pragma mark - Static Commands
-static NSString * _Nonnull const _msoNetserverPingCommand = @"<*!BEGIN!*><~~>_S001^^WLAN Connection?<*!END!*>";
-static NSString * _Nonnull const _msoNetserverLogoutCommand = @"<*!BEGIN!*><~~><*!END!*>";
-
-static NSString * _Nonnull const _msoNetserverBeginEscapedCommand = @"&amp;lt;*!BEGIN!*&amp;gt;";
-static NSString * _Nonnull const _msoNetserverEndEscapedCommand = @"&amp;lt;*!END!*&amp;gt;";
-
 @interface MSOSDK : NSObject
+
+/**
+ A `GRRequestsManager` object that is used for fetching all file listings within an FTP directory for fetching all photo image references.
+ */
 @property (strong, nonatomic, nullable, readwrite) GRRequestsManager *requestsManager;
+
+
+/**
+ A shared `AFHTTPSessionManager` object that handles all requests
+ */
 @property (strong, nonatomic, nullable, readonly) AFHTTPSessionManager *operation;
+
+/**
+ The Netserver `NSURL` object that is used for all Netserver requests.
+ */
 @property (strong, nonatomic, nonnull, readonly) NSURL *serviceUrl;
 
 
@@ -124,6 +56,7 @@ static NSString * _Nonnull const _msoNetserverEndEscapedCommand = @"&amp;lt;*!EN
                    msoDeviceName:(nullable NSString *)msoDeviceName
               msoDeviceIpAddress:(nullable NSString *)msoDeviceIpAddress
                       msoEventId:(nullable NSString *)msoEventId;
+
 
 + (nonnull NSString *)sanatizeData:(nonnull NSData *)responseObject;
 + (nonnull NSString *)sanatizeImageData:(nonnull NSData *)responseObject;

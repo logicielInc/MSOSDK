@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
+/**
+ Description
+ */
 @interface NSError (MSOSDKAdditions)
 
 + (nonnull instancetype)mso_internet_login_credientials_invalid;

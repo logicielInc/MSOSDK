@@ -42,8 +42,14 @@ end
     ss.public_header_files = 'MSOSDK/*+MSOSDKAdditions.{h,m}'
   end
 
+s.subspec 'Constants' do |ss|
+ss.source_files = 'MSOSDK/MSOSDKConstants.{h,m}'
+ss.public_header_files = 'MSOSDK/MSOSDKConstants.{h,m}'
+end
+
   s.subspec 'Objects' do |ss|
     ss.dependency 'SMXMLDocument'
+ss.dependency 'MSOSDK/Constants'
 
     ss.source_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
     ss.public_header_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
@@ -60,10 +66,6 @@ end
 
 
 
-s.subspec 'Constants' do |ss|
-ss.source_files = 'MSOSDK/MSOSDKConstants.{h,m}'
-ss.public_header_files = 'MSOSDK/MSOSDKConstants.{h,m}'
-end
 
 
 s.subspec 'Networking' do |ss|

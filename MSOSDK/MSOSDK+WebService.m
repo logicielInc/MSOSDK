@@ -45,17 +45,17 @@
     [parameters setObject:@""           forKey:@"userPassword"];
     [parameters setObject:appversion    forKey:@"appVersion"];
     [parameters setObject:@"0"          forKey:@"iType"];
-    [parameters setObject:_mso_password forKey:@"password"];
+    [parameters setObject:mso_password forKey:@"password"];
     
     NSError *error = nil;
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:parameters
                              keys:@[@"accessKey", @"deviceID", @"companyName", @"pin", @"userAccount", @"userPassword", @"appVersion", @"iType", @"password"]
-                             type:user ? iCheckMobileUser : iCheckMobileDevice
+                             type:user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey
+                             timeout:kMSOTimeoutLoginKey
                              error:&error];
     
     parameters = nil;
@@ -84,7 +84,7 @@
          data = nil;
          MSOSDKResponseWebServiceCredentials *mso_response = [MSOSDKResponseWebServiceCredentials msosdk_commandWithResponse:components];
          components = nil;
-         mso_response.command = user ? iCheckMobileUser : iCheckMobileDevice;
+         mso_response.command = user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice;
          
          error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
          
@@ -134,14 +134,14 @@
     [parameters setObject:password        forKey:@"userPassword"];
     [parameters setObject:appversion      forKey:@"appVersion"];
     [parameters setObject:@"1"            forKey:@"iType"];
-    [parameters setObject:_mso_password   forKey:@"password"];
+    [parameters setObject:mso_password   forKey:@"password"];
     
     NSError *error = nil;
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:parameters
                              keys:@[@"accessKey", @"deviceID", @"companyName", @"pin", @"userAccount", @"userPassword", @"appVersion", @"iType", @"password"]
-                             type:iCheckMobileDevice
+                             type:mso_soap_function_iCheckMobileDevice
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -166,7 +166,7 @@
          data = nil;
          MSOSDKResponseWebServiceCredentials *mso_response = [MSOSDKResponseWebServiceCredentials msosdk_commandWithResponse:components];
          components = nil;
-         mso_response.command = iCheckMobileDevice;
+         mso_response.command = mso_soap_function_iCheckMobileDevice;
          
          error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
          
@@ -206,14 +206,14 @@
     [parameters setObject:username      forKey:@"userName"];
     [parameters setObject:email         forKey:@"userEmail"];
     [parameters setObject:appversion    forKey:@"appVersion"];
-    [parameters setObject:_mso_password forKey:@"password"];
+    [parameters setObject:mso_password forKey:@"password"];
     
     NSError *error = nil;
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:parameters
                              keys:@[@"accessKey", @"deviceID", @"userName", @"userEmail", @"appVersion", @"password"]
-                             type:iRegisterShortKey
+                             type:mso_soap_function_iRegisterShortKey
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutRegistrationKey
@@ -332,14 +332,14 @@
     [parameters setObject:udid          forKey:@"deviceID"];
     [parameters setObject:cds           forKey:@"full_CDS"];
     [parameters setObject:appversion    forKey:@"appVersion"];
-    [parameters setObject:_mso_password forKey:@"password"];
+    [parameters setObject:mso_password forKey:@"password"];
     
     NSError *error = nil;
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:parameters
                              keys:@[@"accessKey", @"deviceID", @"full_CDS", @"appVersion", @"password"]
-                             type:iRegisterCode
+                             type:mso_soap_function_iRegisterCode
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutRegistrationKey
@@ -609,14 +609,14 @@ static MSOFailureBlock gr_failure_block;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:pin           forKey:@"PIN"];
-    [parameters setObject:_mso_password forKey:@"password"];
+    [parameters setObject:mso_password forKey:@"password"];
     
     NSError *error = nil;
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:parameters
                              keys:@[@"PIN", @"password"]
-                             type:GetEventList
+                             type:mso_soap_function_getEventList
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -684,7 +684,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sUserID", @"iCheckType", @"sLastViewDate"]
-                             type:_iCheckMobileMessage
+                             type:mso_soap_function_iCheckMobileMessage
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -739,7 +739,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sUserID", @"iCheckType", @"sLastViewDate"]
-                             type:_iCheckMobileFileForDownloading
+                             type:mso_soap_function_iCheckMobileFileForDownloading
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -767,7 +767,7 @@ static MSOFailureBlock gr_failure_block;
          
          
          MSOSDKResponseWebServiceFilesToDownload *mso_response = [MSOSDKResponseWebServiceFilesToDownload msosdk_commandWithResponse:document];
-         mso_response.command = _iCheckMobileFileForDownloading;
+         mso_response.command = mso_soap_function_iCheckMobileFileForDownloading;
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -800,7 +800,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sUserID", @"iCheckType", @"lastViewDate"]
-                             type:iCheckPDAMessage
+                             type:mso_soap_function_iCheckPDAMessage
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -884,7 +884,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@{@"allInfo" : command}
                              keys:@[@"allInfo"]
-                             type:_UpdateDownloadInfo
+                             type:mso_soap_function_updateDownloadInfo
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDataRequestKey
@@ -916,7 +916,7 @@ static MSOFailureBlock gr_failure_block;
          
          MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData msosdk_commandWithResponse:nil];
          mso_response.status = @([formattedStatus integerValue]);
-         mso_response.command = _UpdateDownloadInfo;
+         mso_response.command = mso_soap_function_updateDownloadInfo;
          
          if (![mso_response.status isEqualToNumber:@2]) {
              error = [NSError mso_internet_request_data_error];
@@ -953,7 +953,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sUserID", @"iCheckType"]
-                             type:_iCheckPDAHistoryForDownloading
+                             type:mso_soap_function_iCheckPDAHistoryForDownloading
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -1065,7 +1065,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sFileName", @"bytesBuff", @"contentLenth", @"newFile"]
-                             type:_UploadFile
+                             type:mso_soap_function_uploadFile
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutSalesOrderKey
@@ -1165,7 +1165,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@{@"allInfo" : info}
                              keys:@[@"allInfo"]
-                             type:_UpdateUploadInfo
+                             type:mso_soap_function_updateUploadInfo
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey
@@ -1258,7 +1258,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@{@"allInfo" : command}
                              keys:@[@"allInfo"]
-                             type:_UpdateUploadInfo
+                             type:mso_soap_function_updateUploadInfo
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDataRequestKey
@@ -1290,7 +1290,7 @@ static MSOFailureBlock gr_failure_block;
          
          MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData msosdk_commandWithResponse:nil];
          mso_response.status = @([formattedStatus integerValue]);
-         mso_response.command = _UpdateUploadInfo;
+         mso_response.command = mso_soap_function_updateUploadInfo;
          
          if (![mso_response.status isEqualToNumber:@2]) {
              error = [NSError mso_internet_request_data_error];
@@ -1324,7 +1324,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"sPIN", @"sCatalogNo"]
-                             type:_CheckCatalogFileStatus
+                             type:mso_soap_function_checkCatalogFileStatus
                              url:[MSOSDK logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutCatalogKey
@@ -1401,14 +1401,14 @@ static MSOFailureBlock gr_failure_block;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:companyName     forKey:@"companyName"];
     [dict setObject:pin             forKey:@"pin"];
-    [dict setObject:_mso_password   forKey:@"password"];
+    [dict setObject:mso_password   forKey:@"password"];
     [dict setObject:@"1"            forKey:@"logicielApplication"];
     
     NSError *error = nil;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:dict
                              keys:@[@"companyName", @"pin", @"password", @"logicielApplication"]
-                             type:GetCustomersByCompany
+                             type:mso_soap_function_getCustomersByCompany
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey

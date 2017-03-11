@@ -20,7 +20,7 @@
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the redirect response, and a `MSOSDKResponseNetserverPing` object.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
  @return `NSURLSessionDataTask`
- @see MSOSDKResponseNetserverPing
+ @see `MSOSDKResponseNetserverPing`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverPing:(_Nullable MSOSuccessBlock)success
                                             failure:(_Nullable MSOFailureBlock)failure;
@@ -37,7 +37,7 @@
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the redirect response, and a `MSOSDKResponseNetserverLogin` object.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
  @return `NSURLSessionDataTask`
- @see MSOSDKResponseNetserverLogin
+ @see `MSOSDKResponseNetserverLogin`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverLogin:(nullable NSString *)username
                                             password:(nullable NSString *)password
@@ -50,7 +50,7 @@
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the redirect response, and a `MSOSDKResponseNetserverLogin` object.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
  @return `NSURLSessionDataTask`
- @see MSOSDKResponseNetserverLogin
+ @see `MSOSDKResponseNetserverLogin`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverLogout:(_Nullable MSOSuccessBlock)success
                                               failure:(_Nullable MSOFailureBlock)failure;
@@ -65,7 +65,7 @@
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the redirect response, and a `MSOSDKResponseNetserverSettings` object.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
  @return `NSURLSessionDataTask`
- @see MSOSDKResponseNetserverSettings
+ @see `MSOSDKResponseNetserverSettings`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchInitialSettings:(nullable NSString *)username
                                                             success:(_Nullable MSOSuccessBlock)success
@@ -75,11 +75,31 @@
 /// @name Products
 ///---------------------
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadNumberOfProducts:(nullable NSString *)username
                                                                 success:(_Nullable MSOSuccessBlock)success
                                                                progress:(_Nullable MSOProgressBlock)progress
                                                                 failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param searchTerm <#searchTerm description#>
+ @param companyId <#companyId description#>
+ @param searchType <#searchType description#>
+ @param success <#success description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProducts:(nullable NSString *)username
                                                      searchTerm:(nullable NSString *)searchTerm
                                                       companyId:(nullable NSString *)companyId
@@ -88,6 +108,18 @@
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param nextId <#nextId description#>
+ @param companyId <#companyId description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(nullable NSString *)username
                                                             nextId:(nullable NSString *)nextId
                                                          companyId:(nullable NSString *)companyId
@@ -96,6 +128,17 @@
                                                            failure:(_Nullable MSOFailureBlock)failure
                                                            handler:(_Nullable MSOHandlerBlock)handler;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param nextId <#nextId description#>
+ @param companyId <#companyId description#>
+ @param success <#success description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(nullable NSString *)username
                                                             nextId:(nullable NSString *)nextId
                                                          companyId:(nullable NSString *)companyId
@@ -107,6 +150,17 @@
 /// @name Customers
 ///---------------------
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param nextId <#nextId description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(nullable NSString *)username
                                                              nextId:(nullable NSString *)nextId
                                                             success:(_Nullable MSOSuccessBlock)success
@@ -114,6 +168,22 @@
                                                             failure:(_Nullable MSOFailureBlock)failure
                                                             handler:(_Nullable MSOHandlerBlock)handler;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param accountNumber <#accountNumber description#>
+ @param name <#name description#>
+ @param phone <#phone description#>
+ @param city <#city description#>
+ @param state <#state description#>
+ @param zip <#zip description#>
+ @param billing <#billing description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadCustomers:(nullable NSString *)username
                                                    accountnumber:(nullable NSString *)accountNumber
                                                             name:(nullable NSString *)name
@@ -126,6 +196,27 @@
                                                         progress:(_Nullable MSOProgressBlock)progress
                                                          failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param customerName <#customerName description#>
+ @param contactName <#contactName description#>
+ @param address1 <#address1 description#>
+ @param address2 <#address2 description#>
+ @param city <#city description#>
+ @param state <#state description#>
+ @param zip <#zip description#>
+ @param country <#country description#>
+ @param phone <#phone description#>
+ @param fax <#fax description#>
+ @param email <#email description#>
+ @param terms <#terms description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverSaveCustomer:(nullable NSString *)username
                                                customerName:(nullable NSString *)customerName
                                                 contactName:(nullable NSString *)contactName
@@ -143,6 +234,29 @@
                                                    progress:(_Nullable MSOProgressBlock)progress
                                                     failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param accountNumber <#accountNumber description#>
+ @param mainstoreNumber <#mainstoreNumber description#>
+ @param customerName <#customerName description#>
+ @param contactName <#contactName description#>
+ @param address1 <#address1 description#>
+ @param address2 <#address2 description#>
+ @param city <#city description#>
+ @param state <#state description#>
+ @param zip <#zip description#>
+ @param country <#country description#>
+ @param phone <#phone description#>
+ @param fax <#fax description#>
+ @param email <#email description#>
+ @param terms <#terms description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverSaveCustomerShippingAddress:(nullable NSString *)username
                                                              accountNumber:(nullable NSString *)accountNumber
                                                            mainstoreNumber:(nullable NSString *)mainstoreNumber
@@ -163,13 +277,33 @@
                                                                    failure:(_Nullable MSOFailureBlock)failure;
 
 /**
- 
- @warning When updating a ship to address, you need to ensure that the billing flag is set to NO,
+ A block that updates a customer's address. When updating a ship to address, you need to ensure that the billing flag is set to NO,
  as well as the account number being appended with -XXX (where XXX is the ship to store id).
  If the ship to store is not appended, the result will be updating the bill to address / default ship to
- 
- @param name The the NAME field in a shipping address (Billing = NO) or CUSTOMER NAME (Billing = YES)
- 
+
+ @param username The user id of the current rep updating the customer
+ @param companyName The customer address Company Name
+ @param accountNumber The customer address ID to update
+ @param name The name of the customer's address. If this is a billing address, the Customer Name field will be updated. If shipping, the Name field will be updated.
+ @param contactName The contact name of the customer's address.
+ @param address1 The primary street address of the customer's address.
+ @param address2 The second street address of the customer's address.
+ @param city The city of the customer's address.
+ @param state The state of the customer's address.
+ @param zip The zip code of the customer's address.
+ @param country The country of the customer's address.
+ @param phone The phone number of the customer's address. No special format is necessary
+ @param fax The fax number of the customer's address. No special format is necessary
+ @param email The email address of the customer's address.
+ @param terms The terms of the customer to update. If this is a shipping address, this field is ignored.
+ @param rep The rep name of the customer to update. If this is a shipping address, this field is ignored.
+ @param discount The discount of the customer to update. If this is a shipping address, this field is ignored
+ @param priceLevel The price level of the customer to update. If this is a shipping address, this field is ignored
+ @param billing A boolean value signaling the web service that the passed in customer address is either billing (1) or shipping (0)
+ @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the data task, and the response object created by the client response serializer.
+ @param progress A block object to be executed when the download progress is updated. Note this block is called on the session queue, not the main queue.
+ @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
+ @return `NSURLSessionDataTask`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverUpdateCustomerAddress:(nullable NSString *)username
                                                          companyName:(nullable NSString *)companyName
@@ -197,6 +331,18 @@
 ///---------------------
 /// @name Settings
 ///---------------------
+
+/**
+ <#Description#>
+
+ @param userId <#userId description#>
+ @param nextId <#nextId description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllSettings:(nullable NSString *)userId
                                                             nextId:(nullable NSString *)nextId
                                                            success:(_Nullable MSOSuccessBlock)success
@@ -208,17 +354,47 @@
 /// @name Image
 ///---------------------
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchAllImageReferences:(nullable NSString *)username
                                                                success:(_Nullable MSOSuccessBlock)success
                                                               progress:(_Nullable MSOProgressBlock)progress
                                                                failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param identifier <#identifier description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProductImage:(nullable NSString *)identifier
                                                             success:(_Nullable MSOSuccessBlock)success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure
                                                             handler:(_Nullable MSOHandlerBlock)handler;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param base64EncodedImage <#base64EncodedImage description#>
+ @param identifier <#identifier description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverUploadImage:(nullable NSString *)username
                                         base64EncodedImage:(nullable NSString *)base64EncodedImage
                                                 identifier:(nullable NSString *)identifier
@@ -233,12 +409,33 @@
 ///---------------------
 /// @name Order Retrieval
 ///---------------------
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param orderNumber <#orderNumber description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverRetrieveOrder:(nullable NSString *)username
                                                  orderNumber:(nullable NSString *)orderNumber
                                                      success:(_Nullable MSOSuccessBlock)success
                                                     progress:(_Nullable MSOProgressBlock)progress
                                                      failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param customerName <#customerName description#>
+ @param customerAccountNumber <#customerAccountNumber description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverRetrieveOrders:(nullable NSString *)username
                                                  customerName:(nullable NSString *)customerName
                                         customerAccountNumber:(nullable NSString *)customerAccountNumber
@@ -249,6 +446,18 @@
 ///---------------------
 /// @name Order Submission
 ///---------------------
+
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param orderNumber <#orderNumber description#>
+ @param imageNotes <#imageNotes description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverSubmitImageNotes:(nullable NSString *)username
                                                     orderNumber:(nullable NSString *)orderNumber
                                                      imageNotes:(nullable NSArray<NSString *> *)imageNotes
@@ -256,6 +465,19 @@
                                                        progress:(_Nullable MSOProgressBlock)progress
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param orderNumber <#orderNumber description#>
+ @param orderString <#orderString description#>
+ @param update <#update description#>
+ @param imageNotes <#imageNotes description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverSubmitOrder:(nullable NSString *)username
                                                orderNumber:(nullable NSString *)orderNumber
                                                orderString:(nullable NSString *)orderString
@@ -269,12 +491,35 @@
 ///---------------------
 /// @name Order History
 ///---------------------
+
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllPurchaseHistory:(nullable NSString *)username
                                                                   success:(_Nullable MSOSuccessBlock)success
                                                                  progress:(_Nullable MSOProgressBlock)progress
                                                                   failure:(_Nullable MSOFailureBlock)failure
                                                                   handler:(_Nullable MSOHandlerBlock)handler;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ @param customerName <#customerName description#>
+ @param customerZip <#customerZip description#>
+ @param success <#success description#>
+ @param progress <#progress description#>
+ @param failure <#failure description#>
+ @param handler <#handler description#>
+ @return <#return value description#>
+ */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadPurchaseHistory:(nullable NSString *)username
                                                           customerName:(nullable NSString *)customerName
                                                            customerZip:(nullable NSString *)customerZip
