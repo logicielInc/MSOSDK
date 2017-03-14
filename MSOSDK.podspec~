@@ -21,25 +21,63 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://https://github.com/logicielInc/MSOSDK''
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://https://github.com/logicielInc/MSOSDK'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'jsetting32' => 'jsetting32@yahoo.com' }
   s.source           = { :git => 'https://github.com/logicielInc/MSOSDK.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '8.0'
   s.requires_arc = true
 
-  s.source_files = 'MSOSDK/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'MSOSDK' => ['MSOSDK/Assets/*.png']
-  # }
+  s.public_header_files = 'MSOSDK/MSOSDK.h'
+  s.source_files = 'MSOSDK/MSOSDK.h'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'AFNetworking'
-  s.dependency 'GTMNSStringHTMLAdditions'
-  s.dependency 'SMXMLDocument'  
+s.subspec 'External' do |ss|
+ss.source_files = 'External/*'
+ss.public_header_files = 'External/*'
+end
+
+  s.subspec 'Categories' do |ss|
+    ss.dependency 'GTMNSStringHTMLAdditions'
+
+    ss.source_files = 'MSOSDK/*+MSOSDKAdditions.{h,m}'
+    ss.public_header_files = 'MSOSDK/*+MSOSDKAdditions.{h,m}'
+  end
+
+s.subspec 'Constants' do |ss|
+ss.source_files = 'MSOSDK/MSOSDKConstants.{h,m}'
+ss.public_header_files = 'MSOSDK/MSOSDKConstants.{h,m}'
+end
+
+  s.subspec 'Objects' do |ss|
+    ss.dependency 'SMXMLDocument'
+ss.dependency 'MSOSDK/Constants'
+
+    ss.source_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
+    ss.public_header_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
+  end
+
+  s.subspec 'Master' do |ss|
+    ss.dependency 'MSOSDK/Categories'
+    ss.dependency 'AFNetworking'
+    ss.dependency 'MSOSDK/External'
+
+    ss.source_files = 'MSOSDK/MSOSDKMaster.{h,m}'
+    ss.public_header_files = 'MSOSDK/MSOSDKMaster.{h,m}'
+  end
+
+
+
+
+
+s.subspec 'Networking' do |ss|
+ss.dependency 'MSOSDK/Objects'
+    ss.dependency 'MSOSDK/Master'
+ss.dependency 'MSOSDK/External'
+
+
+ss.source_files = 'MSOSDK/MSOSDK+*'
+ss.public_header_files = 'MSOSDK/MSOSDK+*'
+end
+
+  s.ios.deployment_target = '8.0'
+
 end

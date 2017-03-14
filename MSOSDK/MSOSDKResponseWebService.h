@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <SMXMLDocument/SMXMLDocument.h>
-
 #import "MSOSDKConstants.h"
 
 @interface MSOSDKResponseWebService : NSObject
@@ -39,13 +37,13 @@
 @end
 
 @interface MSOSDKResponseWebServiceFilesToDownload : MSOSDKResponseWebService
-@property (strong, nonatomic, nullable) NSArray *files;
+@property (strong, nonatomic, nullable) NSArray <NSString *> *files;
 @property (strong, nonatomic, nullable) NSDate *dateUpdated;
 @end
 
 @interface MSOSDKResponseWebServiceDownloadHistory : MSOSDKResponseWebService
 @property (strong, nonatomic, nullable) NSNumber *resultCount;
-@property (strong, nonatomic, nullable) SMXMLElement *list;
+@property (strong, nonatomic, nullable) NSString *data;
 @end
 
 @interface MSOSDKResponseWebServiceCatalog : MSOSDKResponseWebService;

@@ -765,9 +765,26 @@ static MSOFailureBlock gr_failure_block;
              return;
          }
          
-         
-         MSOSDKResponseWebServiceFilesToDownload *mso_response = [MSOSDKResponseWebServiceFilesToDownload msosdk_commandWithResponse:document];
+         MSOSDKResponseWebServiceFilesToDownload *mso_response = [MSOSDKResponseWebServiceFilesToDownload new];
          mso_response.command = mso_soap_function_iCheckMobileFileForDownloading;
+
+         
+         NSArray <SMXMLElement *> *element = document.children;
+         SMXMLElement *parent = [element firstObject];
+         SMXMLElement *child = [parent descendantWithPath:@"_iCheckMobileFileForDownloadingResponse"];
+         SMXMLElement *filesToDownload = [child descendantWithPath:@"_iCheckMobileFileForDownloadingResult"];
+         NSArray <SMXMLElement *> *files = [filesToDownload children];
+         SMXMLElement *updatedDate = [child descendantWithPath:@"sLastUpdateDate"];
+         NSString *updatedDateFormatted = updatedDate.value;
+         mso_response.files = [NSArray array];
+         
+         for (SMXMLElement *file in files) {
+             NSString *value = file.value;
+             mso_response.files = [mso_response.files arrayByAddingObject:value];
+         }
+         
+         NSDate *dateFormatted = [MSOSDK dateFromString:updatedDateFormatted];
+         mso_response.dateUpdated = dateFormatted;
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -914,7 +931,7 @@ static MSOFailureBlock gr_failure_block;
          SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateDownloadInfoResponse._UpdateDownloadInfoResult"];
          NSString *formattedStatus = statusResponseFormatted.value;
          
-         MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData msosdk_commandWithResponse:nil];
+         MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData new];
          mso_response.status = @([formattedStatus integerValue]);
          mso_response.command = mso_soap_function_updateDownloadInfo;
          
@@ -970,19 +987,9 @@ static MSOFailureBlock gr_failure_block;
              return;
          }
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         
-         MSOSDKResponseWebServiceDownloadHistory *mso_response = [MSOSDKResponseWebServiceDownloadHistory msosdk_commandWithResponse:document];
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, mso_response);
+                 success(response, responseObject);
              });
          }
          

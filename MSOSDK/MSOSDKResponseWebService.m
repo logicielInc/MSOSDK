@@ -165,56 +165,10 @@
 
 @implementation MSOSDKResponseWebServiceFilesToDownload
 
-- (instancetype)initWithResponse:(SMXMLDocument *)response {
-    self = [super initWithResponse:response];
-    if (self) {
-
-        NSArray <SMXMLElement *> *element = response.children;
-        SMXMLElement *parent = [element firstObject];
-        SMXMLElement *child = [parent descendantWithPath:@"_iCheckMobileFileForDownloadingResponse"];
-        SMXMLElement *filesToDownload = [child descendantWithPath:@"_iCheckMobileFileForDownloadingResult"];
-        NSArray <SMXMLElement *> *files = [filesToDownload children];
-        SMXMLElement *updatedDate = [child descendantWithPath:@"sLastUpdateDate"];
-        NSString *updatedDateFormatted = updatedDate.value;
-        _files = [NSArray array];
-        
-        for (SMXMLElement *file in files) {
-            NSString *value = file.value;
-            _files = [_files arrayByAddingObject:value];
-        }
-        
-        NSDate *dateFormatted = [MSOSDK dateFromString:updatedDateFormatted];
-        _dateUpdated = dateFormatted;
-
-        
-    }
-    return self;
-}
-
 
 @end
 
 @implementation MSOSDKResponseWebServiceDownloadHistory
-
-- (instancetype)initWithResponse:(SMXMLDocument *)response {
-    self = [super initWithResponse:response];
-    if (self) {
-        
-        SMXMLElement *result = [response descendantWithPath:@"Body._iCheckPDAHistoryForDownloadingResponse._iCheckPDAHistoryForDownloadingResult"];
-        SMXMLElement *list = [response descendantWithPath:@"Body._iCheckPDAHistoryForDownloadingResponse.lstQuery"];
-
-        _resultCount = @([result.value integerValue]);
-        
-        // If there are no results, no need to parse any further
-        if ([_resultCount integerValue] == 0) {
-            return self;
-        }
-        
-        _list = list;
-        
-    }
-    return self;
-}
 
 @end
 
