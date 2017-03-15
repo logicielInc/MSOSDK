@@ -8,10 +8,6 @@
 
 #import "MSOTestCase.h"
 
-#import <MSOSDK/MSOSDK.h>
-
-#import "MSOSDK+WebService.h"
-
 @interface MSOSDKWebServiceTests : MSOTestCase
 
 @end
@@ -20,14 +16,11 @@
 
 - (void)setUp {
     [super setUp];
-    
-    [MSOSDK setMSONetserverIPAddress:@"192.168.1.100"
-                       msoDeviceName:@"MSOTests"
-                  msoDeviceIpAddress:@"72.242.241.52"
-                          msoEventId:@"1301H"];
+    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
@@ -67,7 +60,7 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response.command isEqualToString:iCheckMobileDevice]);
+    XCTAssertTrue([mso_response.command isEqualToString:mso_soap_function_iCheckMobileDevice]);
     XCTAssertTrue(mso_response.status == kMSOSDKResponseWebServiceStatusSuccess);
 }
 
@@ -713,40 +706,6 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    
-}
-
-- (void)test_msoWebServiceFetchCustomers {
-    
-    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
-    
-    MSOSDK *sdk = [MSOSDK sharedSession];
-    
-    __block NSArray *mso_response = nil;
-    __block NSError *err = nil;
-    
-    NSURLSessionDataTask *task =
-    [sdk
-     _msoWebServiceFetchCustomersByCompanyName:@"Testing 1"
-     pin:@"20010101"
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-         
-         mso_response = responseObject;
-         [expectation fulfill];
-
-     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-         
-         err = error;
-         [expectation fulfill];
-
-     }];
-    [task resume];
-    
-    [self waitForExpectationsWithCommonTimeout];
-    
-    XCTAssertNil(err);
-    XCTAssertNotNil(mso_response);
-
     
 }
 

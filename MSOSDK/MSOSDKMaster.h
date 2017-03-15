@@ -15,6 +15,13 @@
 #import "NSError+MSOSDKAdditions.h"
 #import "NSURLRequest+MSOSDKAdditions.h"
 
+@interface MSOSoapParameter : NSObject
+
++ (nullable instancetype)parameterWithObject:(nullable id)object forKey:(nonnull NSString *)key;
+- (nonnull NSString *)xml;
+
+@end
+
 /**
  `MSOSDK` adopts `NSObject` and is the master object for all Logiciel web operations
  */
@@ -90,13 +97,11 @@
                                   timeout:(NSTimeInterval)timeout
                                     error:(NSError * __autoreleasing _Nullable * _Nullable)error;
 
-+ (nonnull NSURLRequest *)urlRequestWithParameters:(nullable NSDictionary *)parameters
-                                              keys:(nullable NSArray *)keys
-                                              type:(nullable NSString *)type
-                                               url:(nullable NSURL *)url
-                                         netserver:(BOOL)netserver
-                                           timeout:(NSTimeInterval)timeout
-                                             error:(NSError * __autoreleasing _Nullable * _Nullable)error;
++ (nullable NSURLRequest *)urlRequestWithParameters:(nullable NSArray <MSOSoapParameter *> *)parameters
+                                               type:(nullable NSString *)type
+                                                url:(nullable NSURL *)url
+                                          netserver:(BOOL)netserver
+                                            timeout:(NSTimeInterval)timeout;
 
 - (void)errorHandler:(nullable NSError *)error
             response:(nullable NSURLResponse *)response

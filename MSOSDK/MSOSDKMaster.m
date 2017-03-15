@@ -13,6 +13,62 @@ static NSString * deviceName;
 static NSString * deviceIPAddress;
 static NSString * eventId;
 
+@interface MSOSoapParameter ()
+@property (strong, nonatomic, nullable) id object;
+@property (strong, nonatomic, nullable) NSString *key;
+@end
+
+@implementation MSOSoapParameter
+
++ (instancetype)parameterWithObject:(id)object forKey:(NSString *)key {
+    return [[MSOSoapParameter alloc] initWithObject:object forKey:key];
+}
+
+- (instancetype)initWithObject:(id)object forKey:(NSString *)key {
+    
+    self = [super init];
+    
+    if (self) {
+        _object = object;
+        _key = key;
+    }
+    
+    return self;
+}
+
+- (NSString *)xml {
+    
+    if (!self.object) {
+
+        return [NSString stringWithFormat:@"<%@ xsi:nil=\"true\"/>", self.key];
+    
+    } else {
+    
+        return [MSOSoapParameter serialize:self.object withKey:self.key];
+    
+    }
+}
+
++ (NSString *)serialize:(id)object withKey:(NSString *)key {
+ 
+    return [NSString stringWithFormat:@"<%@>%@</%@>", key, [MSOSoapParameter serialize:object], key];
+    
+}
+
++ (NSString *)serialize:(id)object {
+    
+    if ([object isKindOfClass:[NSDate class]]) {
+        return [[MSOSDK longDateFormatter] stringFromDate:object];
+    } else if ([object isKindOfClass:[NSData class]]) {
+        return [object base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn | NSDataBase64EncodingEndLineWithLineFeed];
+    } else {
+        return object;
+    }
+    
+}
+
+@end
+
 @interface MSOSDK ()
 @property (strong, nonatomic, nullable, readwrite) AFHTTPSessionManager *operation;
 @end
@@ -120,15 +176,16 @@ static NSString * eventId;
 }
 
 + (NSDateFormatter *)longDateFormatter {
-    static NSDateFormatter *dateFormatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dateFormatter = [[NSDateFormatter alloc] init];
-        //    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-        //    [dateFormatter setLocale:enUSPOSIXLocale];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+        formatter = [[NSDateFormatter alloc] init];
+        NSLocale* enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [formatter setLocale: enUS];
+        [formatter setLenient: YES];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     });
-    return dateFormatter;
+    return formatter;
 }
 
 + (NSDateFormatter *)mediumDateFormatter {
@@ -161,12 +218,12 @@ static NSString * eventId;
         return validity;
     }
     
-    validity = [MSOSDK validateResults:data command:command status:status error:error];
+    validity = [MSOSDK validateCredentials:data command:command status:status error:error];
     if (!validity) {
         return validity;
     }
-    
-    validity = [MSOSDK validateCredentials:data command:command status:status error:error];
+
+    validity = [MSOSDK validateResults:data command:command status:status error:error];
     if (!validity) {
         return validity;
     }
@@ -175,7 +232,10 @@ static NSString * eventId;
 }
 
 + (BOOL)validateCredentials:(NSString *)data command:(NSString *)command status:(NSString *)status error:(NSError **)error {
-    if ([data hasPrefix:@"Invalid Login:"]) {
+   
+    if ([data hasPrefix:@"Invalid Login:"] ||
+        [data hasSuffix:@"Invalid ID/Password or Access Level."]) {
+        
         *error = [NSError mso_internet_login_credientials_invalid];
         return NO;
     }
@@ -187,11 +247,6 @@ static NSString * eventId;
     
     if ([data hasPrefix:@"Invalid Event."]) {
         *error = [NSError mso_netserver_event_invalid_with_eventName:command eventId:status];
-        return NO;
-    }
-    
-    if ([status isEqualToString:@"NO"]) {
-        *error = [NSError mso_netserver_method_request_error:command];
         return NO;
     }
     
@@ -295,14 +350,12 @@ static NSString * eventId;
     return request;
 }
 
-+ (NSURLRequest *)urlRequestWithParameters:(NSDictionary *)parameters
-                                      keys:(NSArray *)keys
++ (NSURLRequest *)urlRequestWithParameters:(NSArray <MSOSoapParameter *> *)parameters
                                       type:(NSString *)type
                                        url:(NSURL *)url
                                  netserver:(BOOL)netserver
-                                   timeout:(NSTimeInterval)timeout
-                                     error:(NSError **)error {
-    
+                                   timeout:(NSTimeInterval)timeout {
+
     NSString *format = @" must be set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress\
     msoDeviceName:(NSString *)msoDeviceName\
     msoDeviceIpAddress:(NSString *)msoDeviceIpAddress\
@@ -315,22 +368,23 @@ static NSString * eventId;
     NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#", deviceName, deviceIPAddress, eventId];
     client = [client mso_build_command:nil];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:client forKey:@"client"];
-    [dict addEntriesFromDictionary:parameters];
+    MSOSoapParameter *parameterClient = [MSOSoapParameter parameterWithObject:client forKey:@"client"];
+    NSMutableArray *parameterArray = [NSMutableArray arrayWithCapacity:[parameters count] + 1];
+    [parameterArray addObject:parameterClient.xml];
     
-    NSDictionary *d = netserver ? dict : parameters;
-    NSArray *sorted = keys;
-    if (netserver) {
-        sorted = [NSArray arrayWithObject:@"client"];
-        sorted = [sorted arrayByAddingObjectsFromArray:keys];
-    }
-
     NSString *action = netserver ? mso_endpoint_logicielIncUrl : mso_endpoint_logicielUrl;
     NSURL *actionURL = [NSURL URLWithString:action];
     actionURL = [actionURL URLByAppendingPathComponent:type];
     
-    NSString *soapMessage = [MSOSDK buildRequestFromDictionary:d sortedKeys:sorted type:type netserverRequest:netserver];
+    NSString *namespace = netserver ? @"http://logicielinc.com" : @"http://logiciel.com/";
+    
+    for (MSOSoapParameter *soapParameter in parameters) {
+        [parameterArray addObject:soapParameter.xml];
+    }
+    
+    NSString *parametersString = [parameterArray componentsJoinedByString:@"\n"];
+    
+    NSString *soapMessage = [MSOSDK createEnvelope:[type lastPathComponent] forNamespace:namespace forParameters:parametersString];
     
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setTimeoutInterval:timeout];
@@ -338,7 +392,13 @@ static NSString * eventId;
     [requestSerializer setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[soapMessage length]] forHTTPHeaderField:@"Content-Length"];
     [requestSerializer setValue:[actionURL absoluteString] forHTTPHeaderField:@"SOAPAction"];
     
-    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[url absoluteString] parameters:nil error:error];
+    NSError *error = nil;
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[url absoluteString] parameters:nil error:&error];
+   
+    if (!request) {
+        NSLog(@"%@", [error description]);
+        return nil;
+    }
     
     [request setHTTPBody:[soapMessage dataUsingEncoding:stringEncoding]];
   
@@ -356,23 +416,17 @@ static NSString * eventId;
     }
 }
 
-+ (NSString *)buildRequestFromDictionary:(NSDictionary *)dict sortedKeys:(NSArray *)sortedKeys type:(NSString *)type netserverRequest:(BOOL)netserverRequest {
-    
++ (NSString*) createEnvelope: (NSString*) method forNamespace: (NSString*) ns forParameters: (NSString*) params
+{
     NSMutableString *hcSoap = [NSMutableString string];
-    [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"];
-    [hcSoap appendFormat:@"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"%@\">\n", netserverRequest ? @"http://logicielinc.com" : @"http://logiciel.com/"];
+    [hcSoap appendString: @"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
+    [hcSoap appendFormat: @"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"%@\">", ns];
     [hcSoap appendString:@"<soap:Body>\n"];
-    [hcSoap appendFormat:@"<%@>\n", [[type componentsSeparatedByString:@"/"] lastObject]];
-    
-    for (NSString *key in sortedKeys) {
-        [hcSoap appendFormat:@"<%@>%@</%@>\n", key, [dict objectForKey:key], key];
-    }
-        
-    [hcSoap appendFormat:@"</%@>\n", [[type componentsSeparatedByString:@"/"] lastObject]];
+    [hcSoap appendFormat:@"<%@>\n%@\n</%@>\n", method, [params stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
     [hcSoap appendString:@"</soap:Body>\n"];
     [hcSoap appendString:@"</soap:Envelope>\n"];
-    
     return hcSoap;
+
 }
 
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request progress:(MSOProgressBlock)progress completion:(void (^)(NSURLResponse *, id, NSError *))completion {

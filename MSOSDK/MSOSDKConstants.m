@@ -11,7 +11,7 @@
 NSInteger const kMSOTimeoutDefaultKey           = 5;
 
 
-NSInteger const kMSOTimeoutAllImageSyncKey      = 15;
+NSInteger const kMSOTimeoutAllImageSyncKey      = 30;
 NSInteger const kMSOTimeoutCatalogKey           = 15;
 NSInteger const kMSOTimeoutCustomerSaveKey      = 10;
 NSInteger const kMSOTimeoutCustomersSyncKey     = 20;

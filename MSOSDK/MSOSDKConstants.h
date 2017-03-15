@@ -26,7 +26,7 @@ extern NSInteger const kMSOTimeoutSalesOrderKey;
 extern NSInteger const kMSOTimeoutScannerKey;
 extern NSInteger const kMSOTimeoutSettingsSyncKey;
 
-extern NSString * const kMSOLogicielHTTPURLKey;
+extern NSString * _Nonnull const kMSOLogicielHTTPURLKey;
 
 static NSStringEncoding stringEncoding = NSUTF8StringEncoding;
 
@@ -46,6 +46,7 @@ static NSString * _Nonnull const mso_soap_function_updateDownloadInfo           
 static NSString * _Nonnull const mso_soap_function_iCheckMobileMessage              = @"_iCheckMobileMessage";
 static NSString * _Nonnull const mso_soap_function_iCheckMobileFileForDownloading   = @"_iCheckMobileFileForDownloading";
 static NSString * _Nonnull const mso_soap_function_getEventList                     = @"GetEventList";
+static NSString * _Nonnull const mso_soap_function_checkPhotoFileStatus             = @"_CheckPhotoFileStatus";
 
 #pragma mark - Endpoints
 static NSString * _Nonnull const mso_endpoint_logicielIncUrl                        = @"http://logicielinc.com";

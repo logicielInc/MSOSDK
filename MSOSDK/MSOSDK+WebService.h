@@ -204,6 +204,7 @@
                                                                pin:(nullable NSString *)pin
                                                           fileName:(nullable NSString *)fileName
                                                       downloadDate:(nullable NSDate *)downloadDate
+                                                          filesize:(unsigned long long)filesize
                                                            success:(_Nullable MSOSuccessBlock)success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure;

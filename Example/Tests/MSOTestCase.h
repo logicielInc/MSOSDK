@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <SMXMLDocument/SMXMLDocument.h>
+#import "MSOSDK.h"
 
 @interface MSOTestCase : XCTestCase
 

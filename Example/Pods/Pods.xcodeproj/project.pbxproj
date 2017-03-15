@@ -15,7 +15,6 @@
 		0EF61883A94B1EBF8B0040DF0E42FC2C /* GRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5125AE8FF6EED6E335BF98135B119749 /* GRStreamInfo.m */; };
 		140F458AB7312414FC423FEED70A3733 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209DDEEE3A9F7AC84CDAC2568C24776 /* UIActivityIndicatorView+AFNetworking.m */; };
 		14A03C18D3827335A9A90986C8A5C7C3 /* GRListingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D37BEFEF632F14E3628C060525724E /* GRListingRequest.m */; };
-		1D6404DBBA4FD084730D1C9B2F096D12 /* Pods-MSOSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D60DF23384D255F6003D1E4C9E53FBA5 /* Pods-MSOSDK_Tests-dummy.m */; };
 		1E2A6D057E20BE8F5ED3E594F7B8C286 /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AE4EFA108E7E562FDE2B9BC60FEB091 /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23EFB184AD12FB1014FFC765CE0D710A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2320ECCAFD50F9FE111E4049D6B1BF50 /* Security.framework */; };
 		25C4315DEBADAD35456FBAF75B0F5396 /* MSOSDKResponseNetserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BCBD80AA856CEB9556A672C4DD70B /* MSOSDKResponseNetserver.m */; };
@@ -33,6 +32,7 @@
 		4A4CC8F397788907408F3F1EC83207CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1308E4BAAB227E676D33858B94AEE2A /* Foundation.framework */; };
 		4F985F473E004850E662987DB0B845C8 /* MSOSDK+WebService.h in Headers */ = {isa = PBXBuildFile; fileRef = A592AF3E02BBF97F1B8DD1A82A71E8FA /* MSOSDK+WebService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51047C1945103943F70BEADE83725630 /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D3AD052D75AF736DD459E0E07074B19 /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		525B85248478E6FC308E655B5D7B4D7F /* Pods-MSOSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D60DF23384D255F6003D1E4C9E53FBA5 /* Pods-MSOSDK_Tests-dummy.m */; };
 		5A1D34D104D42B1EE399E23BCD7935A0 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EF5C7329123C79EF8FDC6DE6E6E2DF /* AFURLResponseSerialization.m */; };
 		5B5F55807A31A6FBCBBC26C659385483 /* NSArray+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5794D015C975E9FD0CA65E1AFA230D57 /* NSArray+MSOSDKAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C07B329082A8E78A80C316B5BF2C9EA /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = D9601BE0E0160F2B0755F4F50385EFF0 /* SMXMLDocument.m */; };
@@ -49,6 +49,7 @@
 		6CA8B159C42DDDA5AD373B9626D62CA5 /* GRQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ADAC67BBF97842CE6145B4B76FB1A21 /* GRQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		711C22E979C27CB52BDDE292FB8CAD02 /* GRCreateDirectoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E0C2BCB28945175D3B7F03E480DC9A /* GRCreateDirectoryRequest.m */; };
 		72BE65E696A388D4CC0D75BE461FEF1B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472C7D611B90A427D8F61499B540C28 /* MobileCoreServices.framework */; };
+		78C388B4B104A56F37E9589B075E368C /* Pods-MSOSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10BF66933F0E5C10F0F60E3F5BD7AFF3 /* Pods-MSOSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A112C0F21A62CB6F1AA8D917A6EEA6C /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A327315620C74EF7333FDED79604B569 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B1233CFC5A7397F7B595EDBAB6C29A0 /* GRDeleteRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 176B6AC39BBBC6410062BFC2B16DE276 /* GRDeleteRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7CE16B1BF75DF396768A0A3CFD968DB1 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DD21E39E6ABDBE3BAE8DA2109AE370CE /* UIWebView+AFNetworking.m */; };
@@ -56,7 +57,6 @@
 		870ED4F84674C01B4B42B039DBB55BA9 /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = EE64EF2141983C337A7A5EF7D7CA5DCD /* GTMNSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		896922A7F532D044A56ADC9A479E4802 /* MSOSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B6C202D9A641F2EBC6EC54F23F0A9F5 /* MSOSDKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A703C7B92C107AB87ADFAC0D8B1B5BE /* MSOSDKResponseNetserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 81472F92B7CBAD7A0BE1C0BF02287ABC /* MSOSDKResponseNetserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8CC8ACF26B47C23CECEBE8A3C6DC81DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1308E4BAAB227E676D33858B94AEE2A /* Foundation.framework */; };
 		8CE5FEC2303964BE873E126721493FC6 /* GRError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A60D9EE7BE1100A16B100D87157BD1E /* GRError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D706EB51EE3D76708B20E39657BFFB3 /* GRStreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A9D13F19272836E7B0FCFF62379ACDC /* GRStreamInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9264BD69AFA8EE74F0D7F0EBD74F762F /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B77801ECB766C6A3784941BD718FB54 /* UIImage+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -89,7 +89,6 @@
 		D4E80BD7EAAB83200183110578A80591 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D61ACB0235B27CED0B31139FBF3AF7B9 /* AFURLSessionManager.m */; };
 		D5052970AF9B4704C1A8C728D4412742 /* MSOSDKMaster.h in Headers */ = {isa = PBXBuildFile; fileRef = E09F67EA41EE76C88EA8930E2E619964 /* MSOSDKMaster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6667A66113C400E7BF5338774495697 /* SMXMLDocument-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3D2CD1A37382C65BE04CB817D0A73C9 /* SMXMLDocument-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D994213B91D36AA986C1AC1D475515B0 /* Pods-MSOSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10BF66933F0E5C10F0F60E3F5BD7AFF3 /* Pods-MSOSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAB917D4F15D05ED954E3718CDE9613B /* GRDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B079B6FE1DCF479D1B4819AF39F2FF /* GRDeleteRequest.m */; };
 		DD887A93A200A87A51B3D00BD1B80D20 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D653FEBECBF51C2269E7275B7D66A5C /* AFNetworkReachabilityManager.m */; };
 		DDA53D91E2AD4A44ADBF4D83468B9C0F /* MSOSDKMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C933412927331C4FC7BD1465D4E0CD /* MSOSDKMaster.m */; };
@@ -103,6 +102,7 @@
 		EAF16633DB3C992CF975BE4A2932D41C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E341CCB77E3A6D5AA0D3D0D2EB6B61 /* AFHTTPSessionManager.m */; };
 		EEEA0332EA8F341A271D1C8ED864601A /* GRCreateDirectoryRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 51B5BAD2654ED797D90BBB0645E517D9 /* GRCreateDirectoryRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F011AAA21F6474E6B9D9AE583CD30CC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1308E4BAAB227E676D33858B94AEE2A /* Foundation.framework */; };
+		F03E92C968C3CBBEBDBC64296E66AE97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1308E4BAAB227E676D33858B94AEE2A /* Foundation.framework */; };
 		F1CAA2EBDDFF558DEF98684F2479A7AF /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 257B04263DED441A499DC5D333C57320 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F29FC4D1433D3289F4D1D825F73BC846 /* GRRequestsManagerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 07306B9C5258808D92111A26F63F130E /* GRRequestsManagerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2D899C7AA0D7FC20160091BB9D31CF3 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE50C662137E34D6DF0D7388FF6D708 /* UIImageView+AFNetworking.m */; };
@@ -129,6 +129,13 @@
 			remoteGlobalIDString = CF671F7E57B92905F1CC91D036D6B4A7;
 			remoteInfo = AFNetworking;
 		};
+		2E0CD60B6F1F3E8463708DEDFB575458 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A3F896AE72861277EE50C8422589041;
+			remoteInfo = GTMNSStringHTMLAdditions;
+		};
 		33D59C9E5336663696946517CD3461E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -136,12 +143,33 @@
 			remoteGlobalIDString = 8A3F896AE72861277EE50C8422589041;
 			remoteInfo = GTMNSStringHTMLAdditions;
 		};
+		3AC1BEC98E11EA054D4A8DD86BDC4722 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA3798F8A1BB0AA9A3F0E504DB2001AA;
+			remoteInfo = MSOSDK;
+		};
+		3D66561A0D02DE877EF0311917043E26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C55EDA885A125221248FB257DF239D20;
+			remoteInfo = SMXMLDocument;
+		};
 		4EECC0BED22678681C514946A8D21FA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C55EDA885A125221248FB257DF239D20;
 			remoteInfo = SMXMLDocument;
+		};
+		AAB1B9820C2C03A49A60D8005BABCDC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF671F7E57B92905F1CC91D036D6B4A7;
+			remoteInfo = AFNetworking;
 		};
 		B0F50C474A9D7842EC000B4D19B9D618 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -356,11 +384,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7338B832F6B00F20C70182ED4FEA6660 /* Frameworks */ = {
+		D563A9241AA875E232866A3893103C89 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC8ACF26B47C23CECEBE8A3C6DC81DE /* Foundation.framework in Frameworks */,
+				F03E92C968C3CBBEBDBC64296E66AE97 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,6 +832,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		2C4072CFABF8B16F00B2E32AF48202C0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78C388B4B104A56F37E9589B075E368C /* Pods-MSOSDK_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BA47D3A981E7E40B73C35EC753D2D17 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,14 +923,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE8E0E870D2E1B5A6F6785AEEC60A0E5 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D994213B91D36AA986C1AC1D475515B0 /* Pods-MSOSDK_Tests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -917,23 +945,6 @@
 			name = "Pods-MSOSDK_Example";
 			productName = "Pods-MSOSDK_Example";
 			productReference = B23D6AA692C8E08751E61A483A18BABD /* Pods_MSOSDK_Example.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		2B575AF9FE130F2ED9539332282D8B3F /* Pods-MSOSDK_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B98BD42824E235E751B05CFF6B6E53BD /* Build configuration list for PBXNativeTarget "Pods-MSOSDK_Tests" */;
-			buildPhases = (
-				1308582032AD0E6FBF84C806B7B06947 /* Sources */,
-				7338B832F6B00F20C70182ED4FEA6660 /* Frameworks */,
-				CE8E0E870D2E1B5A6F6785AEEC60A0E5 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-MSOSDK_Tests";
-			productName = "Pods-MSOSDK_Tests";
-			productReference = 7B063C329D6856FB2C6D521AFA93EF30 /* Pods_MSOSDK_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8A3F896AE72861277EE50C8422589041 /* GTMNSStringHTMLAdditions */ = {
@@ -1007,6 +1018,27 @@
 			productReference = 481E70169C162222F65EE638A1A25B74 /* MSOSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E273EEBE14E8F1BBEF1EF380DFE04305 /* Pods-MSOSDK_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04F73321330A9E0D778E36B9DEB5BCAC /* Build configuration list for PBXNativeTarget "Pods-MSOSDK_Tests" */;
+			buildPhases = (
+				8C3F47ABDA2BF9E2A5DCB8CBACA40693 /* Sources */,
+				D563A9241AA875E232866A3893103C89 /* Frameworks */,
+				2C4072CFABF8B16F00B2E32AF48202C0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAD21AB9161507618F7D12D118085A8B /* PBXTargetDependency */,
+				38FFC0FE1D3575BE4873EF22FF9B787B /* PBXTargetDependency */,
+				7E2A7D77BFA90A30EE76E91CF59BDFFE /* PBXTargetDependency */,
+				AAF4A2EF7B0A48F498720FA13A2A7227 /* PBXTargetDependency */,
+			);
+			name = "Pods-MSOSDK_Tests";
+			productName = "Pods-MSOSDK_Tests";
+			productReference = 7B063C329D6856FB2C6D521AFA93EF30 /* Pods_MSOSDK_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1032,21 +1064,13 @@
 				8A3F896AE72861277EE50C8422589041 /* GTMNSStringHTMLAdditions */,
 				DA3798F8A1BB0AA9A3F0E504DB2001AA /* MSOSDK */,
 				0C0EB689B3905229CC5C8343C9611289 /* Pods-MSOSDK_Example */,
-				2B575AF9FE130F2ED9539332282D8B3F /* Pods-MSOSDK_Tests */,
+				E273EEBE14E8F1BBEF1EF380DFE04305 /* Pods-MSOSDK_Tests */,
 				C55EDA885A125221248FB257DF239D20 /* SMXMLDocument */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1308582032AD0E6FBF84C806B7B06947 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D6404DBBA4FD084730D1C9B2F096D12 /* Pods-MSOSDK_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		173CFBC46F12625FE150821F80952E4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1116,6 +1140,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C3F47ABDA2BF9E2A5DCB8CBACA40693 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				525B85248478E6FC308E655B5D7B4D7F /* Pods-MSOSDK_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE6C8F75322CE6285B2ADFF9AC305516 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1127,6 +1159,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		38FFC0FE1D3575BE4873EF22FF9B787B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GTMNSStringHTMLAdditions;
+			target = 8A3F896AE72861277EE50C8422589041 /* GTMNSStringHTMLAdditions */;
+			targetProxy = 2E0CD60B6F1F3E8463708DEDFB575458 /* PBXContainerItemProxy */;
+		};
 		421A0E4C2CCCC9C1EFB3056071EA2621 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SMXMLDocument;
@@ -1145,6 +1183,18 @@
 			target = C55EDA885A125221248FB257DF239D20 /* SMXMLDocument */;
 			targetProxy = 0D6E2307176AEEEB61A8C1A36251BCC9 /* PBXContainerItemProxy */;
 		};
+		7E2A7D77BFA90A30EE76E91CF59BDFFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MSOSDK;
+			target = DA3798F8A1BB0AA9A3F0E504DB2001AA /* MSOSDK */;
+			targetProxy = 3AC1BEC98E11EA054D4A8DD86BDC4722 /* PBXContainerItemProxy */;
+		};
+		AAF4A2EF7B0A48F498720FA13A2A7227 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SMXMLDocument;
+			target = C55EDA885A125221248FB257DF239D20 /* SMXMLDocument */;
+			targetProxy = 3D66561A0D02DE877EF0311917043E26 /* PBXContainerItemProxy */;
+		};
 		BA7598727E8C62F41E0D911468F48244 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AFNetworking;
@@ -1156,6 +1206,12 @@
 			name = AFNetworking;
 			target = CF671F7E57B92905F1CC91D036D6B4A7 /* AFNetworking */;
 			targetProxy = F66C08926C901BC27507F1D0C46F0FD4 /* PBXContainerItemProxy */;
+		};
+		CAD21AB9161507618F7D12D118085A8B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = CF671F7E57B92905F1CC91D036D6B4A7 /* AFNetworking */;
+			targetProxy = AAB1B9820C2C03A49A60D8005BABCDC8 /* PBXContainerItemProxy */;
 		};
 		E0DA82163761CFD8BE81954CC322BE33 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1265,7 +1321,7 @@
 			};
 			name = Release;
 		};
-		5133C230F3A39CE725712A45296C8A90 /* Debug */ = {
+		473BE1AECE02A2151D556C52E5013042 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 05E5281033624A9CEE7D97E66A8467F8 /* Pods-MSOSDK_Tests.debug.xcconfig */;
 			buildSettings = {
@@ -1543,7 +1599,7 @@
 			};
 			name = Debug;
 		};
-		C8CC32CA63A52662E19D76A3FA27C6AB /* Release */ = {
+		C68D1C619D31C699722A292CB2843739 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EDA244903CFC29C736490259E47B2E9F /* Pods-MSOSDK_Tests.release.xcconfig */;
 			buildSettings = {
@@ -1647,6 +1703,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04F73321330A9E0D778E36B9DEB5BCAC /* Build configuration list for PBXNativeTarget "Pods-MSOSDK_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				473BE1AECE02A2151D556C52E5013042 /* Debug */,
+				C68D1C619D31C699722A292CB2843739 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1679,15 +1744,6 @@
 			buildConfigurations = (
 				E9F961E8111D81788B2D9FF4E90FEF9C /* Debug */,
 				A22AF653FD0FD1D6532A147240FF5642 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B98BD42824E235E751B05CFF6B6E53BD /* Build configuration list for PBXNativeTarget "Pods-MSOSDK_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5133C230F3A39CE725712A45296C8A90 /* Debug */,
-				C8CC32CA63A52662E19D76A3FA27C6AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

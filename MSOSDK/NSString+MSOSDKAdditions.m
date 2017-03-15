@@ -24,6 +24,7 @@ static NSString * const MSOSDK_end_command = @"<*!END!*>";
     }
     
     NSString *formatted = [NSString _mso_build_command:params];
+//    NSString *escaped = formatted;
     NSString *escaped = [formatted mso_escape];
     
     return escaped;
@@ -37,7 +38,7 @@ static NSString * const MSOSDK_end_command = @"<*!END!*>";
 - (NSString *)mso_unescape {
 //    NSString *unescaped = [self gtm_stringByUnescapingFromHTML];
     //NSString *unescaped = [self htmlEntityDecode];
-    return [self gtm_stringByUnescapingFromHTML];
+    return [[self gtm_stringByUnescapingFromHTML] gtm_stringByUnescapingFromHTML];
 }
 
 + (instancetype)_mso_build_command:(NSString *)internal {

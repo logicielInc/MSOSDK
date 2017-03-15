@@ -8,8 +8,6 @@
 
 #import "MSOTestCase.h"
 
-#import "MSOSDK+Netserver.h"
-
 @interface MSOSDKNetserverTests : MSOTestCase
 
 @end
@@ -19,10 +17,11 @@
 - (void)setUp {
     [super setUp];
     
-    [MSOSDK setMSONetserverIPAddress:@"192.168.1.100"
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
                           msoEventId:@"1301H"];
+
 }
 
 - (void)tearDown {
@@ -70,7 +69,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverLogin:@"john"
-     password:nil
+     password:@""
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
         
         command = responseObject;
@@ -231,7 +230,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadAllSettings:@"Johnasd"
-     nextId:nil
+     nextId:@""
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
         
         [expectation fulfill];
@@ -244,8 +243,8 @@
     } handler:^(NSURLResponse * _Nonnull response, __kindof MSOSDKResponseNetserverSync * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
         
         mso_response = responseObject;
-        SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                       error:error];
+        NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+        SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:error];
         XCTAssertNotNil(doc);
         err = *error;
         
@@ -310,7 +309,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadAllCustomers:@"Johndsad"
-     nextId:nil
+     nextId:@""
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
         
         [expectation fulfill];
@@ -323,8 +322,9 @@
     } handler:^(NSURLResponse * _Nonnull response, __kindof MSOSDKResponseNetserverSync * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
         
         mso_response = responseObject;
-        SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                       error:error];
+        
+        NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+        SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:error];
         XCTAssertNotNil(doc);
         err = *error;
         
@@ -352,11 +352,11 @@
     [sdk
      _msoNetserverDownloadCustomers:@"John"
      accountnumber:@"BAC"
-     name:nil
-     phone:nil
-     city:nil
-     state:nil
-     zip:nil
+     name:@""
+     phone:@""
+     city:@""
+     state:@""
+     zip:@""
      billing:YES
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
 
@@ -376,9 +376,10 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
+    XCTAssertNil(err);
 }
 
 - (void)test_msoNetserverDownloadCustomers_fail_exceededlimit {
@@ -394,11 +395,11 @@
     [sdk
      _msoNetserverDownloadCustomers:@"John"
      accountnumber:@"B"
-     name:nil
-     phone:nil
-     city:nil
-     state:nil
-     zip:nil
+     name:@""
+     phone:@""
+     city:@""
+     state:@""
+     zip:@""
      billing:YES
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -533,9 +534,10 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
+    XCTAssertNil(err);
 }
 
 
@@ -572,10 +574,10 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
-    
+    XCTAssertNil(err);
 }
 
 
@@ -653,7 +655,7 @@
     
 }
 
-- (void)test_msoNetserverFetchAllProductReferences {
+- (void)test_msoNetserverFetchAllProductImageReferences {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -1273,7 +1275,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverRetrieveOrders:@"john"
-     customerName:nil
+     customerName:@""
      customerAccountNumber:@"SOL14741"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -1293,9 +1295,10 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
+    XCTAssertNil(err);
 
 }
 
@@ -1311,7 +1314,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverRetrieveOrders:@"john"
-     customerName:nil
+     customerName:@""
      customerAccountNumber:@"SOL141741"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -1366,9 +1369,10 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
+    XCTAssertNil(err);
 }
 
 - (void)test_msoNetserverRetrieveSalesOrder_fail_not_found {
@@ -1438,14 +1442,13 @@
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
     
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                   error:&err];
+    NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
     XCTAssertNil(err);
 
-    doc = [SMXMLDocument documentWithData:[mso_response.itemSet dataUsingEncoding:NSUTF8StringEncoding]
-                                    error:&err];
-    
+    data = [mso_response.itemSet dataUsingEncoding:NSUTF8StringEncoding];
+    doc = [SMXMLDocument documentWithData:data error:&err];
     XCTAssertNotNil(doc);
     XCTAssertNil(err);
     
@@ -1508,8 +1511,8 @@
      } handler:^(NSURLResponse * _Nonnull response, __kindof MSOSDKResponseNetserverSync * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
        
          mso_response = responseObject;
-         SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                        error:&err];
+         NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+         SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:error];
          XCTAssertNotNil(doc);
          XCTAssertNil(err);
          
@@ -1536,7 +1539,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadPurchaseHistory:@"john"
-     customerName:nil
+     customerName:@""
      customerZip:@"90210"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -1550,8 +1553,8 @@
      } handler:^(NSURLResponse * _Nonnull response, __kindof MSOSDKResponseNetserverSync * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
          
          mso_response = responseObject;
-         SMXMLDocument *doc = [SMXMLDocument documentWithData:[mso_response.data dataUsingEncoding:NSUTF8StringEncoding]
-                                                        error:&err];
+         NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+         SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:error];
          XCTAssertNotNil(doc);
          XCTAssertNil(err);
          
@@ -1587,7 +1590,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverSubmitOrder:@"john"
-     orderNumber:nil
+     orderNumber:@""
      orderString:content
      update:NO
      imageNotes:NO

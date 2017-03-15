@@ -17,4 +17,6 @@
     #import "MSOSDK+Netserver.h"
     #import "MSOSDK+WebService.h"
 
+    #import "MSOSDKConstants.h"
+
 #endif /* MSOSDK_h */

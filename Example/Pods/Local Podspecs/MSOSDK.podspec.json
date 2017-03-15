@@ -38,9 +38,14 @@
       "public_header_files": "MSOSDK/*+MSOSDKAdditions.{h,m}"
     },
     {
+      "name": "Constants",
+      "source_files": "MSOSDK/MSOSDKConstants.{h,m}",
+      "public_header_files": "MSOSDK/MSOSDKConstants.{h,m}"
+    },
+    {
       "name": "Objects",
       "dependencies": {
-        "SMXMLDocument": [
+        "MSOSDK/Constants": [
 
         ]
       },
@@ -64,11 +69,6 @@
       "public_header_files": "MSOSDK/MSOSDKMaster.{h,m}"
     },
     {
-      "name": "Constants",
-      "source_files": "MSOSDK/MSOSDKConstants.{h,m}",
-      "public_header_files": "MSOSDK/MSOSDKConstants.{h,m}"
-    },
-    {
       "name": "Networking",
       "dependencies": {
         "MSOSDK/Objects": [
@@ -78,6 +78,9 @@
 
         ],
         "MSOSDK/External": [
+
+        ],
+        "SMXMLDocument": [
 
         ]
       },
