@@ -34,12 +34,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -54,7 +49,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -82,12 +77,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -110,7 +100,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -135,12 +125,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -163,7 +148,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -187,7 +172,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          if (error) {
              [self errorHandler:error response:response failure:failure];
@@ -200,12 +185,45 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
 
 #pragma mark - Products
+- (NSURLSessionDataTask *)_msoNetserverFetchItemList:(NSString *)username
+                                            itemList:(NSArray<NSString *> *)itemList
+                                             success:(MSOSuccessBlock)success
+                                            progress:(MSOProgressBlock)progress
+                                             failure:(MSOFailureBlock)failure {
+ 
+    /*
+    [Utility doworkWithCommand:[NSString stringWithFormat:@"<*!BEGIN!*><~~>_P005^%@^1^Item List^%@<*!END!*>", username, [productList componentsJoinedByString:@"^"]]
+                   withTimeout:kiMRTimeoutProductsSyncKey
+                  resetTimeout:kiMRTimeoutDefaultKey
+                     didFinish:^(id value) {
+                         if ([value containsString:@"P005^OK"]) {
+                             NSString* xmlString = [[value componentsSeparatedByString:@"^"] objectAtIndex:3];
+                             [Product updateSetOfProducts:xmlString];
+                             if (completionBlock) {
+                                 completionBlock(YES, nil);
+                             }
+                             return;
+                         }
+                         
+                         if (completionBlock) {
+                             completionBlock(NO, [Utility returnErrorObject:value withTitle:@"Unable To Update Item List"]);
+                         }
+                     } didError:^(id error) {
+                         if (completionBlock) {
+                             completionBlock(NO, [Utility returnErrorObject:error withTitle:@"Unable To Update Item List"]);
+                         }
+                         return;
+                     }];
+    */
+    
+}
+
 - (NSURLSessionDataTask *)_msoNetserverDownloadNumberOfProducts:(NSString *)username
                                                         success:(MSOSuccessBlock)success
                                                        progress:(MSOProgressBlock)progress
@@ -227,12 +245,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -256,7 +269,7 @@
                  success(response, mso_response);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
     
@@ -342,12 +355,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -409,7 +417,7 @@
              return;
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -441,12 +449,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -486,7 +489,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -514,12 +517,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -556,13 +554,63 @@
          }
          
          
-     }];
+     } failure:failure];
     
     return task;
 }
 
 
 #pragma mark - Customers
+- (NSURLSessionDataTask *)_msoNetserverSaveCustomerMappingScheme:(NSString *)username
+                                                   mappingScheme:(NSString *)mappingScheme
+                                                         success:(MSOSuccessBlock)success
+                                                        progress:(MSOProgressBlock)progress
+                                                         failure:(MSOFailureBlock)failure {
+    
+    /*
+    [Utility doworkWithCommand:[Utility buildCommand:@"_C006" params:@[username, @"Auto-Mapping", mappingString]]
+                   withTimeout:kiMRTimeoutMappingKey
+                  resetTimeout:kiMRTimeoutDefaultKey
+                     didFinish:^(id value) {
+                         
+                         if (completion) {
+                             completion(value, nil);
+                         }
+                         
+                     } didError:^(id error) {
+                         
+                         if (completion) {
+                             completion(nil, nil);
+                         }
+                         
+                     }];
+     */
+
+}
+
+- (NSURLSessionDataTask *)_msoNetserverUpdateCustomerMappingScheme:(NSString *)username
+                                                     mappingScheme:(NSString *)mappingScheme
+                                                 mappingSchemeData:(NSString *)mappingSchemeData
+                                                           success:(MSOSuccessBlock)success
+                                                          progress:(MSOProgressBlock)progress
+                                                           failure:(MSOFailureBlock)failure {
+
+    /*
+    [Utility doworkWithCommand:[Utility buildCommand:@"_C007" params:@[username, @"Save-Mapping", mappingString, data]]
+                   withTimeout:kiMRTimeoutMappingKey
+                  resetTimeout:kiMRTimeoutDefaultKey
+                     didFinish:^(id value) {
+                         if (completion) {
+                             completion(value, nil);
+                         }
+                     } didError:^(id error) {
+                         if (completion) {
+                             completion(nil, nil);
+                         }
+                     }];
+    */
+}
+
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(NSString *)username
                                                      nextId:(NSString *)nextId
                                                     success:(MSOSuccessBlock)success
@@ -587,12 +635,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -651,7 +694,7 @@
              return;
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -691,12 +734,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -721,7 +759,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -773,12 +811,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -804,7 +837,7 @@
          }
          
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -859,12 +892,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -890,7 +918,7 @@
          }
          
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -996,12 +1024,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1024,7 +1047,7 @@
                  success(response, mso_response);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1054,12 +1077,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1119,7 +1137,7 @@
              return;
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1146,12 +1164,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1170,7 +1183,7 @@
                  success(response, mso_response);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1194,12 +1207,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeImageData:responseObject];
          
@@ -1231,7 +1239,7 @@
              }
              
          }
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1272,12 +1280,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1322,7 +1325,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1352,12 +1355,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1400,7 +1398,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1429,12 +1427,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1459,7 +1452,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1516,12 +1509,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1564,7 +1552,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1612,12 +1600,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1642,7 +1625,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1711,12 +1694,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1780,7 +1758,7 @@
                  success(response, nil);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1812,12 +1790,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1873,7 +1846,7 @@
          }
          
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1905,12 +1878,7 @@
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
@@ -1935,7 +1903,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }

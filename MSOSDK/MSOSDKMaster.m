@@ -12,6 +12,9 @@ static NSString * netserverIpAddress;
 static NSString * deviceName;
 static NSString * deviceIPAddress;
 static NSString * eventId;
+static NSString * msoPassword;
+static NSString * authUsername;
+static NSString * authPassword;
 
 @interface MSOSoapParameter ()
 @property (strong, nonatomic, nullable) id object;
@@ -61,6 +64,10 @@ static NSString * eventId;
         return [[MSOSDK longDateFormatter] stringFromDate:object];
     } else if ([object isKindOfClass:[NSData class]]) {
         return [object base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn | NSDataBase64EncodingEndLineWithLineFeed];
+    } else if ([object isKindOfClass:[UIImage class]]) {
+        NSData *data = UIImagePNGRepresentation(object);
+        NSString *dataFormatted = [data base64EncodedStringWithOptions:kNilOptions];
+        return dataFormatted;
     } else {
         return object;
     }
@@ -71,6 +78,7 @@ static NSString * eventId;
 
 @interface MSOSDK ()
 @property (strong, nonatomic, nullable, readwrite) AFHTTPSessionManager *operation;
+
 @end
 
 @implementation MSOSDK
@@ -91,15 +99,49 @@ static NSString * eventId;
     return eventId;
 }
 
++ (NSString *)_msoPassword {
+    return msoPassword;
+}
+
++ (NSString *)_authUsername {
+    return authUsername;
+}
+
++ (NSString *)_authPassword {
+    return authPassword;
+}
+
 + (void)setMSONetserverIpAddress:(NSString *)msoNetserverIPAddress
                    msoDeviceName:(NSString *)msoDeviceName
               msoDeviceIpAddress:(NSString *)msoDeviceIpAddress
-                      msoEventId:(NSString *)msoEventId {
-    
+                      msoEventId:(NSString *)msoEventId
+                     msoPassword:(NSString *)ftpPassword {
+
+    [MSOSDK
+     setMSONetserverIpAddress:msoNetserverIPAddress
+     msoDeviceName:msoDeviceName
+     msoDeviceIpAddress:msoDeviceIpAddress
+     msoEventId:msoEventId
+     msoPassword:msoPassword
+     authUsername:nil
+     authPassword:nil];
+}
+
++ (void)setMSONetserverIpAddress:(NSString *)msoNetserverIPAddress
+                   msoDeviceName:(NSString *)msoDeviceName
+              msoDeviceIpAddress:(NSString *)msoDeviceIpAddress
+                      msoEventId:(NSString *)msoEventId
+                     msoPassword:(NSString *)ftpPassword
+                    authUsername:(NSString *)username
+                    authPassword:(NSString *)password {
+
     netserverIpAddress = msoNetserverIPAddress;
     deviceName = msoDeviceName;
     deviceIPAddress = msoDeviceIpAddress;
     eventId = msoEventId;
+    msoPassword = ftpPassword;
+    authUsername = username;
+    authPassword = password;
 }
 
 + (instancetype)sharedSession {
@@ -117,6 +159,31 @@ static NSString * eventId;
 
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _operation = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+        [_operation setTaskDidReceiveAuthenticationChallengeBlock:
+         ^NSURLSessionAuthChallengeDisposition(NSURLSession * _Nonnull session,
+                                               NSURLSessionTask * _Nonnull task,
+                                               NSURLAuthenticationChallenge * _Nonnull challenge,
+                                               NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) {
+            
+             NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+             
+             id<NSURLAuthenticationChallengeSender> sender = [challenge sender];
+             
+             if ([challenge previousFailureCount] == 0) {
+                 NSURLCredential *newCredential = [NSURLCredential
+                                                   credentialWithUser:authUsername
+                                                   password:authPassword
+                                                   persistence:NSURLCredentialPersistenceNone];
+                 [sender
+                  useCredential:newCredential
+                  forAuthenticationChallenge:challenge];
+                 return NSURLSessionAuthChallengeUseCredential;
+             } else {
+                 [sender cancelAuthenticationChallenge:challenge];
+                 return NSURLSessionAuthChallengeCancelAuthenticationChallenge;
+             }
+            
+        }];
         
         AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
         _operation.responseSerializer = responseSerializer;
@@ -131,8 +198,8 @@ static NSString * eventId;
 }
 
 - (NSURL *)serviceUrl {
-    NSAssert(netserverIpAddress, @"There must be a netserver IP Address set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress");
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", netserverIpAddress];
+    NSAssert([MSOSDK _msoNetserverIpAddress], @"There must be a netserver IP Address set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress");
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", [MSOSDK _msoNetserverIpAddress]];
     NSURL *url = [NSURL URLWithString:urlString];
     return url;
 }
@@ -356,16 +423,20 @@ static NSString * eventId;
                                  netserver:(BOOL)netserver
                                    timeout:(NSTimeInterval)timeout {
 
-    NSString *format = @" must be set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress\
-    msoDeviceName:(NSString *)msoDeviceName\
-    msoDeviceIpAddress:(NSString *)msoDeviceIpAddress\
+    NSString *format = @" must be set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress \
+    msoDeviceName:(NSString *)msoDeviceName \
+    msoDeviceIpAddress:(NSString *)msoDeviceIpAddress \
     msoEventId:(NSString *)msoEventId";
     
     NSAssert(deviceName, [NSStringFromSelector(@selector(_msoDeviceName)) stringByAppendingString:format]);
     NSAssert(deviceIPAddress, [NSStringFromSelector(@selector(_msoDeviceIpAddress)) stringByAppendingString:format]);
     NSAssert(eventId, [NSStringFromSelector(@selector(_msoEventId)) stringByAppendingString:format]);
 
-    NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#", deviceName, deviceIPAddress, eventId];
+    NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#",
+                        [MSOSDK _msoDeviceName],
+                        [MSOSDK _msoDeviceIpAddress],
+                        [MSOSDK _msoEventId]];
+    
     client = [client mso_build_command:nil];
     
     MSOSoapParameter *parameterClient = [MSOSoapParameter parameterWithObject:client forKey:@"client"];
@@ -416,21 +487,41 @@ static NSString * eventId;
     }
 }
 
-+ (NSString*) createEnvelope: (NSString*) method forNamespace: (NSString*) ns forParameters: (NSString*) params
-{
++ (NSString *)createEnvelope:(NSString *)method forNamespace:(NSString *)namespace forParameters:(NSString *)parameters {
     NSMutableString *hcSoap = [NSMutableString string];
-    [hcSoap appendString: @"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
-    [hcSoap appendFormat: @"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"%@\">", ns];
+    [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
+    [hcSoap appendFormat:@"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"%@\">", namespace];
     [hcSoap appendString:@"<soap:Body>\n"];
-    [hcSoap appendFormat:@"<%@>\n%@\n</%@>\n", method, [params stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
+    [hcSoap appendFormat:@"<%@>\n%@\n</%@>\n", method, [parameters stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
     [hcSoap appendString:@"</soap:Body>\n"];
     [hcSoap appendString:@"</soap:Envelope>\n"];
     return hcSoap;
 
 }
 
-- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request progress:(MSOProgressBlock)progress completion:(void (^)(NSURLResponse *, id, NSError *))completion {
-    return [self.operation dataTaskWithRequest:request uploadProgress:nil downloadProgress:progress completionHandler:completion];
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                                     progress:(MSOProgressBlock)progress
+                                      success:(void (^)(NSURLResponse *, id, NSError *))success
+                                      failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    NSURLSessionDataTask *task =
+    [self.operation
+     dataTaskWithRequest:request
+     uploadProgress:nil
+     downloadProgress:progress
+     completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+         
+         if (error) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         if (success) {
+             success(response, responseObject, nil);
+         }
+         
+     }];;
+    return task;
 }
 
 @end

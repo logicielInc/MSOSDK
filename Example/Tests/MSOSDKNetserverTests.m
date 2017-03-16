@@ -20,8 +20,8 @@
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
-                          msoEventId:@"1301H"];
-
+                          msoEventId:@"1301H"
+                         msoPassword:@"logic99"];
 }
 
 - (void)tearDown {

@@ -43,6 +43,11 @@
  */
 @property (strong, nonatomic, nonnull, readonly) NSURL *serviceUrl;
 
++ (nullable NSString *)_msoNetserverIpAddress;
++ (nullable NSString *)_msoDeviceName;
++ (nullable NSString *)_msoDeviceIpAddress;
++ (nullable NSString *)_msoEventId;
++ (nullable NSString *)_msoPassword;
 
 /**
  Returns an `MSOSDK` object that uses the same `AFHTTPSessionManager` across all requests. This object is instantiated once and only once
@@ -62,7 +67,15 @@
 + (void)setMSONetserverIpAddress:(nullable NSString *)msoNetserverIpAddress
                    msoDeviceName:(nullable NSString *)msoDeviceName
               msoDeviceIpAddress:(nullable NSString *)msoDeviceIpAddress
-                      msoEventId:(nullable NSString *)msoEventId;
+                      msoEventId:(nullable NSString *)msoEventId
+                     msoPassword:(nullable NSString *)msoPassword;
++ (void)setMSONetserverIpAddress:(nullable NSString *)msoNetserverIpAddress
+                   msoDeviceName:(nullable NSString *)msoDeviceName
+              msoDeviceIpAddress:(nullable NSString *)msoDeviceIpAddress
+                      msoEventId:(nullable NSString *)msoEventId
+                     msoPassword:(nullable NSString *)msoPassword
+                    authUsername:(nullable NSString *)authUsername
+                    authPassword:(nullable NSString *)authPassword;
 
 
 + (nonnull NSString *)sanatizeData:(nonnull NSData *)responseObject;
@@ -109,7 +122,8 @@
 
 - (nonnull NSURLSessionDataTask *)dataTaskWithRequest:(nonnull NSURLRequest *)request
                                              progress:(_Nullable MSOProgressBlock)progress
-                                           completion:(void (^_Nullable)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completion;
+                                              success:(void (^_Nullable)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))success
+                                              failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
 
 
 @end

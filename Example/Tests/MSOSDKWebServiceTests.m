@@ -16,11 +16,17 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
+                       msoDeviceName:@"MSOTests"
+                  msoDeviceIpAddress:@"72.242.241.52"
+                          msoEventId:@"1301H"
+                         msoPassword:@"logic99"];
+
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     [super tearDown];
 }
 
@@ -36,7 +42,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoWebServiceForgotPassword:@"John"
-     password:nil
+     password:@""
      accesskey:@"A0010012745NODHIV3WU"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
      pin:@"20010101"

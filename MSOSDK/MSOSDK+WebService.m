@@ -29,15 +29,15 @@
                                          success:(MSOSuccessBlock)success
                                          failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey      forKey:@"accessKey"];
-    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid           forKey:@"deviceID"];
-    MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname    forKey:@"companyName"];
-    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin            forKey:@"pin"];
-    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username       forKey:@"userAccount"];
-    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@""            forKey:@"userPassword"];
-    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion     forKey:@"appVersion"];
-    MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"0"           forKey:@"iType"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
+    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
+    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
+    MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname              forKey:@"companyName"];
+    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
+    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username                 forKey:@"userAccount"];
+    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@""                      forKey:@"userPassword"];
+    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
+    MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"0"                     forKey:@"iType"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterAccessKey,
@@ -58,12 +58,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -93,7 +88,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -111,15 +106,15 @@
                                                success:(MSOSuccessBlock)success
                                                failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey      forKey:@"accessKey"];
-    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid           forKey:@"deviceID"];
-    MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname    forKey:@"companyName"];
-    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin            forKey:@"pin"];
-    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username       forKey:@"userAccount"];
-    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:password       forKey:@"userPassword"];
-    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion     forKey:@"appVersion"];
-    MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"1"           forKey:@"iType"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
+    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
+    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
+    MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname              forKey:@"companyName"];
+    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
+    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username                 forKey:@"userAccount"];
+    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:password                 forKey:@"userPassword"];
+    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
+    MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"1"                     forKey:@"iType"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
         
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterAccessKey,
@@ -140,11 +135,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -167,7 +158,7 @@
                  success(response, mso_response);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -181,12 +172,12 @@
                                             success:(MSOSuccessBlock)success
                                             failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey      forKey:@"accessKey"];
-    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid           forKey:@"deviceID"];
-    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username       forKey:@"userName"];
-    MSOSoapParameter *parameterEmail       = [MSOSoapParameter parameterWithObject:email          forKey:@"userEmail"];
-    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion     forKey:@"appVersion"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
+    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
+    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
+    MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username                 forKey:@"userName"];
+    MSOSoapParameter *parameterEmail       = [MSOSoapParameter parameterWithObject:email                    forKey:@"userEmail"];
+    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
         
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterAccessKey,
@@ -204,12 +195,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -284,7 +270,7 @@
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -303,11 +289,11 @@
                                              success:(MSOSuccessBlock)success
                                              failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey      forKey:@"accessKey"];
-    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid           forKey:@"deviceID"];
-    MSOSoapParameter *parameterCDs         = [MSOSoapParameter parameterWithObject:cds            forKey:@"full_CDS"];
-    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion     forKey:@"appVersion"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
+    MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
+    MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
+    MSOSoapParameter *parameterCDs         = [MSOSoapParameter parameterWithObject:cds                      forKey:@"full_CDS"];
+    MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterAccessKey,
@@ -324,12 +310,7 @@
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -386,7 +367,7 @@
              return;
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -476,12 +457,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -523,7 +499,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -549,12 +525,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          UIImage *image = [UIImage imageWithData:responseObject];
          
@@ -569,7 +540,7 @@ static MSOFailureBlock gr_failure_block;
                  success(response, image);
              });
          }
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -580,8 +551,8 @@ static MSOFailureBlock gr_failure_block;
                                                  progress:(MSOProgressBlock)progress
                                                   failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin            forKey:@"PIN"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
+    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterPin,
@@ -596,12 +567,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -627,7 +593,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -660,12 +626,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -679,8 +640,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-         
-     }];
+     } failure:failure];
     
     return task;
     
@@ -713,12 +673,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -755,7 +710,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -789,12 +744,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          //NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          
@@ -804,7 +754,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -859,12 +809,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -895,7 +840,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -923,7 +868,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          if (error) {
              [self errorHandler:error response:response failure:failure];
@@ -936,7 +881,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1024,12 +969,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:progress
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -1062,7 +1002,7 @@ static MSOFailureBlock gr_failure_block;
             });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     
@@ -1122,13 +1062,8 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
-         
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1156,7 +1091,7 @@ static MSOFailureBlock gr_failure_block;
          error = [NSError mso_internet_upload_processing_error];
          [self errorHandler:error response:response failure:failure];
          
-     }];
+     } failure:failure];
 
     return task;
 }
@@ -1215,12 +1150,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -1251,7 +1181,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 }
@@ -1279,12 +1209,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -1329,7 +1254,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
 
@@ -1342,10 +1267,10 @@ static MSOFailureBlock gr_failure_block;
                                                             failure:(MSOFailureBlock)failure
 {
         
-    MSOSoapParameter *parameterCompanyName         = [MSOSoapParameter parameterWithObject:companyName    forKey:@"companyName"];
-    MSOSoapParameter *parameterPin                 = [MSOSoapParameter parameterWithObject:pin            forKey:@"pin"];
-    MSOSoapParameter *parameterMSOPassword         = [MSOSoapParameter parameterWithObject:mso_password   forKey:@"password"];
-    MSOSoapParameter *parameterLogicielApplication = [MSOSoapParameter parameterWithObject:@"1"           forKey:@"logicielApplication"];
+    MSOSoapParameter *parameterCompanyName         = [MSOSoapParameter parameterWithObject:companyName              forKey:@"companyName"];
+    MSOSoapParameter *parameterPin                 = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
+    MSOSoapParameter *parameterMSOPassword         = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
+    MSOSoapParameter *parameterLogicielApplication = [MSOSoapParameter parameterWithObject:@"1"                     forKey:@"logicielApplication"];
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameterCompanyName,
@@ -1362,13 +1287,8 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskWithRequest:request
      progress:nil
-     completion:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
-         
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                  
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1385,7 +1305,7 @@ static MSOFailureBlock gr_failure_block;
              });
          }
          
-     }];
+     } failure:failure];
     
     return task;
     

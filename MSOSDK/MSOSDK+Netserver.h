@@ -75,6 +75,12 @@
 /// @name Products
 ///---------------------
 
+- (nonnull NSURLSessionDataTask *)_msoNetserverFetchItemList:(nullable NSString *)username
+                                                    itemList:(nullable NSArray <NSString *> *)itemList
+                                                     success:(_Nullable MSOSuccessBlock)success
+                                                    progress:(_Nullable MSOProgressBlock)progress
+                                                     failure:(_Nullable MSOFailureBlock)failure;
+
 /**
  <#Description#>
 
@@ -149,6 +155,20 @@
 ///---------------------
 /// @name Customers
 ///---------------------
+
+- (nonnull NSURLSessionDataTask *)_msoNetserverSaveCustomerMappingScheme:(nullable NSString *)username
+                                                           mappingScheme:(nullable NSString *)mappingScheme
+                                                                 success:(_Nullable MSOSuccessBlock)success
+                                                                progress:(_Nullable MSOProgressBlock)progress
+                                                                 failure:(_Nullable MSOFailureBlock)failure;
+
+- (nonnull NSURLSessionDataTask *)_msoNetserverUpdateCustomerMappingScheme:(nullable NSString *)username
+                                                             mappingScheme:(nullable NSString *)mappingScheme
+                                                         mappingSchemeData:(nullable NSString *)mappingSchemeData
+                                                                   success:(_Nullable MSOSuccessBlock)success
+                                                                  progress:(_Nullable MSOProgressBlock)progress
+                                                                   failure:(_Nullable MSOFailureBlock)failure;
+
 
 /**
  <#Description#>

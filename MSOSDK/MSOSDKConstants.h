@@ -55,7 +55,6 @@ static NSString * _Nonnull const mso_endpoint_logicielUpdateEndpoint            
 static NSString * _Nonnull const mso_endpoint_logicielCustomerASMX                  = @"logicielcustomer.asmx";
 static NSString * _Nonnull const mso_endpoint_logicielFTPWSEndpoint                 = @"logiciel_ftp_ws";
 static NSString * _Nonnull const mso_endpoint_logicielFTPServiceASMX                = @"FTPService.asmx";
-static NSString * _Nonnull const mso_password                                       = @"logic99";
 
 #pragma mark - Static Commands
 static NSString * _Nonnull const _msoNetserverPingCommand = @"<*!BEGIN!*><~~>_S001^^WLAN Connection?<*!END!*>";

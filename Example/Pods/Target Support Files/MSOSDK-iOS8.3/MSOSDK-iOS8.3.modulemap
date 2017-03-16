@@ -1,5 +1,5 @@
 framework module MSOSDK {
-  umbrella header "MSOSDK-umbrella.h"
+  umbrella header "MSOSDK-iOS8.3-umbrella.h"
 
   export *
   module * { export * }
