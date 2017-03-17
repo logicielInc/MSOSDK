@@ -122,7 +122,7 @@ static NSString * authPassword;
      msoDeviceName:msoDeviceName
      msoDeviceIpAddress:msoDeviceIpAddress
      msoEventId:msoEventId
-     msoPassword:msoPassword
+     msoPassword:ftpPassword
      authUsername:nil
      authPassword:nil];
 }
@@ -432,16 +432,19 @@ static NSString * authPassword;
     NSAssert(deviceIPAddress, [NSStringFromSelector(@selector(_msoDeviceIpAddress)) stringByAppendingString:format]);
     NSAssert(eventId, [NSStringFromSelector(@selector(_msoEventId)) stringByAppendingString:format]);
 
-    NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#",
-                        [MSOSDK _msoDeviceName],
-                        [MSOSDK _msoDeviceIpAddress],
-                        [MSOSDK _msoEventId]];
-    
-    client = [client mso_build_command:nil];
-    
-    MSOSoapParameter *parameterClient = [MSOSoapParameter parameterWithObject:client forKey:@"client"];
     NSMutableArray *parameterArray = [NSMutableArray arrayWithCapacity:[parameters count] + 1];
-    [parameterArray addObject:parameterClient.xml];
+
+    if (netserver) {
+        NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#",
+                            [MSOSDK _msoDeviceName],
+                            [MSOSDK _msoDeviceIpAddress],
+                            [MSOSDK _msoEventId]];
+        
+        client = [client mso_build_command:nil];
+        
+        MSOSoapParameter *parameterClient = [MSOSoapParameter parameterWithObject:client forKey:@"client"];
+        [parameterArray addObject:parameterClient.xml];
+    }
     
     NSString *action = netserver ? mso_endpoint_logicielIncUrl : mso_endpoint_logicielUrl;
     NSURL *actionURL = [NSURL URLWithString:action];
@@ -489,10 +492,10 @@ static NSString * authPassword;
 
 + (NSString *)createEnvelope:(NSString *)method forNamespace:(NSString *)namespace forParameters:(NSString *)parameters {
     NSMutableString *hcSoap = [NSMutableString string];
-    [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
-    [hcSoap appendFormat:@"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"%@\">", namespace];
+    [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"];
+    [hcSoap appendString:@"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"];
     [hcSoap appendString:@"<soap:Body>\n"];
-    [hcSoap appendFormat:@"<%@>\n%@\n</%@>\n", method, [parameters stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
+    [hcSoap appendFormat:@"<%@ xmlns=\"%@\">\n%@\n</%@>\n", method, namespace, [parameters stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
     [hcSoap appendString:@"</soap:Body>\n"];
     [hcSoap appendString:@"</soap:Envelope>\n"];
     return hcSoap;

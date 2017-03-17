@@ -947,26 +947,6 @@
                                                     progress:(MSOProgressBlock)progress
                                                      failure:(MSOFailureBlock)failure {
     
-    username = username ?: @"";
-    companyName = companyName ?: @"";
-    accountNumber = accountNumber ?: @"";
-    name = name ?: @"";
-    contactName = contactName ?: @"";
-    address1 = address1 ?: @"";
-    address2 = address2 ?: @"";
-    city = city ?: @"";
-    state = state ?: @"";
-    zip = zip ?: @"";
-    country = country ?: @"";
-    phone = phone ?: @"";
-    fax = fax ?: @"";
-    email = email ?: @"";
-    terms = terms ?: @"";
-    rep = rep ?: @"";
-    discount = discount ?: @0;
-    priceLevel = priceLevel ?: @1;
-    
-    
     NSMutableArray *components = [NSMutableArray arrayWithObject:@"CB3=1"];
     
     if (billing) {
@@ -1464,10 +1444,6 @@
                                                 success:(MSOSuccessBlock)success
                                                progress:(MSOProgressBlock)progress
                                                 failure:(MSOFailureBlock)failure {
-    
-    username = username ?: @"";
-    orderNumber = orderNumber ?: @"New Order";
-    imageNotes = imageNotes ?: @[];
     
     if ([imageNotes count] == 0) {
         if (success) {

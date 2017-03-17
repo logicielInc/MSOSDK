@@ -553,7 +553,7 @@
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceDownloadEventList:@"20010101"
+     _msoWebServiceDownloadEventList:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
 
          mso_response = responseObject;
