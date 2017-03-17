@@ -143,10 +143,10 @@
  
  @response NSArray of NSString objects (filenames of .zip files)
  */
-- (nonnull NSURLSessionDataTask *)_msoWebServiceDownloadEventList:(nullable NSString *)pin
-                                                          success:(_Nullable MSOSuccessBlock)success
-                                                         progress:(_Nullable MSOProgressBlock)progress
-                                                          failure:(_Nullable MSOFailureBlock)failure;
+- (void)_msoWebServiceDownloadEventList:(nullable NSString *)pin
+                                success:(_Nullable MSOSuccessBlock)success
+                               progress:(_Nullable MSOProgressBlock)progress
+                                failure:(_Nullable MSOFailureBlock)failure;
 
 
 #pragma mark Check For Files

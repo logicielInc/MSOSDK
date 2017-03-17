@@ -400,38 +400,6 @@ static MSOFailureBlock gr_failure_block;
     gr_failure_block = [failure copy];
 }
 
-- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didCompletePercent:(float)percent forRequest:(id<GRRequestProtocol>)request {
-    
-    if (gr_progress_block) {
-        NSProgress *progress = [NSProgress progressWithTotalUnitCount:100];
-        [progress setCompletedUnitCount:percent * 100];
-        gr_progress_block(progress);
-    }
-    
-}
-
-- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didFailRequest:(id<GRRequestProtocol>)request withError:(NSError *)error {
-    
-    if (gr_failure_block) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            gr_failure_block([[NSURLResponse alloc] init], error);
-        });
-    }
-    
-}
-
-- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didCompleteListingRequest:(id<GRRequestProtocol>)request listing:(NSArray *)listing {
-
-    if (gr_success_block) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            gr_success_block([[NSURLResponse alloc] init], listing);
-        });
-    }
-
-}
-
-
-
 - (NSURLSessionDataTask *)_msoWebServiceFetchPhotoFileStatus:(NSString *)itemNo
                                                          pin:(NSString *)pin
                                                      success:(MSOSuccessBlock)success
@@ -546,11 +514,28 @@ static MSOFailureBlock gr_failure_block;
 }
 
 #pragma mark - Event
-- (NSURLSessionDataTask *)_msoWebServiceDownloadEventList:(NSString *)pin
-                                                  success:(MSOSuccessBlock)success
-                                                 progress:(MSOProgressBlock)progress
-                                                  failure:(MSOFailureBlock)failure {
+- (void)_msoWebServiceDownloadEventList:(NSString *)pin
+                                success:(MSOSuccessBlock)success
+                               progress:(MSOProgressBlock)progress
+                                failure:(MSOFailureBlock)failure {
     
+    NSString *hostname = @"ftp://ftp.logicielinc.com";
+    NSString *username = @"manager";
+    NSString *password = @"Log-8910";
+    NSString *eventListPath = [NSString stringWithFormat:@"/PUBLIC/Customer_Auto_FTP/%@/Events/", pin];
+    
+    self.requestsManager = [[GRRequestsManager alloc] initWithHostname:hostname
+                                                                  user:username
+                                                              password:password];
+    self.requestsManager.delegate = self;
+    id <GRRequestProtocol> request = [self.requestsManager addRequestForListDirectoryAtPath:eventListPath];
+    [request setUuid:[NSString stringWithFormat:@"eventRequest"]];
+    [request start];
+    gr_success_block = [success copy];
+    gr_progress_block = [progress copy];
+    gr_failure_block = [failure copy];
+    
+    /*
     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
@@ -594,8 +579,9 @@ static MSOFailureBlock gr_failure_block;
          }
          
      } failure:failure];
+    */
     
-    return task;
+    //return task;
 }
 
 #pragma mark Check For Files
@@ -1308,6 +1294,54 @@ static MSOFailureBlock gr_failure_block;
      } failure:failure];
     
     return task;
+    
+}
+
+#pragma mark <GRRequestsManagerProtocol>
+- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didCompletePercent:(float)percent forRequest:(id<GRRequestProtocol>)request {
+    
+    if (gr_progress_block) {
+        NSProgress *progress = [NSProgress progressWithTotalUnitCount:100];
+        [progress setCompletedUnitCount:percent * 100];
+        gr_progress_block(progress);
+    }
+    
+}
+
+- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didFailRequest:(id<GRRequestProtocol>)request withError:(NSError *)error {
+    
+    if (gr_failure_block) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            gr_failure_block([[NSURLResponse alloc] init], error);
+        });
+    }
+    
+}
+
+- (void)requestsManager:(id<GRRequestsManagerProtocol>)requestsManager didCompleteListingRequest:(id<GRRequestProtocol>)request listing:(NSArray *)listing {
+    
+    if (gr_success_block) {
+        
+        if ([[request uuid] isEqualToString:@"eventRequest"]) {
+            
+            NSArray *newListing = [NSArray array];
+            for (NSString *item in listing) {
+                if (![item containsString:@"_Photos"] && [[item pathExtension] isEqualToString:@"zip"]) {
+                    newListing = [newListing arrayByAddingObject:item];
+                }
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                gr_success_block([[NSURLResponse alloc] init], newListing);
+            });
+            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                gr_success_block([[NSURLResponse alloc] init], listing);
+            });
+        }
+        
+    }
     
 }
 

@@ -551,7 +551,6 @@
     __block NSArray *mso_response = nil;
     __block NSError *err = nil;
     
-    NSURLSessionDataTask *task =
     [sdk
      _msoWebServiceDownloadEventList:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -565,8 +564,6 @@
          [expectation fulfill];
     
      }];
-    
-    [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
     
