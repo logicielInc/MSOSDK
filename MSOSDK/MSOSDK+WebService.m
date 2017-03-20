@@ -34,7 +34,7 @@
     MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname              forKey:@"companyName"];
     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username                 forKey:@"userAccount"];
-    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@""                      forKey:@"userPassword"];
+    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@"football33"                      forKey:@"userPassword"];
     MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
     MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"0"                     forKey:@"iType"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
@@ -129,7 +129,7 @@
                              type:mso_soap_function_iCheckMobileDevice
                              url:[MSOSDK logicielCustomerURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutForgotPassword];
     
     NSURLSessionDataTask *task =
     [self
@@ -446,6 +446,7 @@ static MSOFailureBlock gr_failure_block;
          NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES [cd] %@", string];
          
          if (photos) {
+             
              for (SMXMLElement *photo in photos) {
                  
                  NSString *value = photo.value;
@@ -459,6 +460,7 @@ static MSOFailureBlock gr_failure_block;
                  [photoDetails addObject:photoDetail];
                  
              }
+             
          }
          
          if (success) {

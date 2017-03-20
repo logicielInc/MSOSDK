@@ -16,6 +16,7 @@ extern NSInteger const kMSOTimeoutCustomerSaveKey;
 extern NSInteger const kMSOTimeoutCustomersSyncKey;
 extern NSInteger const kMSOTimeoutCustomerSearchKey;
 extern NSInteger const kMSOTimeoutDataRequestKey;
+extern NSInteger const kMSOTimeoutForgotPassword;
 extern NSInteger const kMSOTimeoutImageSyncKey;
 extern NSInteger const kMSOTimeoutLoginKey;
 extern NSInteger const kMSOTimeoutPingKey;
@@ -50,7 +51,7 @@ static NSString * _Nonnull const mso_soap_function_checkPhotoFileStatus         
 
 #pragma mark - Endpoints
 static NSString * _Nonnull const mso_endpoint_logicielIncUrl                        = @"http://logicielinc.com";
-static NSString * _Nonnull const mso_endpoint_logicielUrl                           = @"http://logiciel.com";
+static NSString * _Nonnull const mso_endpoint_logicielUrl                           = @"http://logiciel.com/";
 static NSString * _Nonnull const mso_endpoint_logicielUpdateEndpoint                = @"logicielupdatews";
 static NSString * _Nonnull const mso_endpoint_logicielCustomerASMX                  = @"logicielcustomer.asmx";
 static NSString * _Nonnull const mso_endpoint_logicielFTPWSEndpoint                 = @"logiciel_ftp_ws";

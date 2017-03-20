@@ -198,8 +198,9 @@ static NSString * authPassword;
 }
 
 - (NSURL *)serviceUrl {
-    NSAssert([MSOSDK _msoNetserverIpAddress], @"There must be a netserver IP Address set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress");
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", [MSOSDK _msoNetserverIpAddress]];
+    NSString *ip = [MSOSDK _msoNetserverIpAddress];
+    NSAssert(ip, @"There must be a netserver IP Address set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress");
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", ip];
     NSURL *url = [NSURL URLWithString:urlString];
     return url;
 }
@@ -423,34 +424,44 @@ static NSString * authPassword;
                                  netserver:(BOOL)netserver
                                    timeout:(NSTimeInterval)timeout {
 
-    NSString *format = @" must be set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress \
-    msoDeviceName:(NSString *)msoDeviceName \
-    msoDeviceIpAddress:(NSString *)msoDeviceIpAddress \
-    msoEventId:(NSString *)msoEventId";
     
-    NSAssert(deviceName, [NSStringFromSelector(@selector(_msoDeviceName)) stringByAppendingString:format]);
-    NSAssert(deviceIPAddress, [NSStringFromSelector(@selector(_msoDeviceIpAddress)) stringByAppendingString:format]);
-    NSAssert(eventId, [NSStringFromSelector(@selector(_msoEventId)) stringByAppendingString:format]);
-
+    
     NSMutableArray *parameterArray = [NSMutableArray arrayWithCapacity:[parameters count] + 1];
 
+    NSString *namespace;
+
     if (netserver) {
+
+        NSString *_deviceName = [MSOSDK _msoDeviceName];
+        NSString *_deviceIPAddress = [MSOSDK _msoDeviceIpAddress];
+        NSString *_eventId = [MSOSDK _msoEventId];
+        
+        NSString *format = @" must be set. Use + (void)setMSONetserverIPAddress:(NSString *)msoNetserverIPAddress \
+        msoDeviceName:(NSString *)msoDeviceName \
+        msoDeviceIpAddress:(NSString *)msoDeviceIpAddress \
+        msoEventId:(NSString *)msoEventId";
+        
+        NSAssert(_deviceName, [NSStringFromSelector(@selector(_msoDeviceName)) stringByAppendingString:format]);
+        NSAssert(_deviceIPAddress, [NSStringFromSelector(@selector(_msoDeviceIpAddress)) stringByAppendingString:format]);
+        NSAssert(_eventId, [NSStringFromSelector(@selector(_msoEventId)) stringByAppendingString:format]);
+        
         NSString *client = [NSString stringWithFormat:@"%@ [%@]{SQL05^%@}#iPad#",
-                            [MSOSDK _msoDeviceName],
-                            [MSOSDK _msoDeviceIpAddress],
-                            [MSOSDK _msoEventId]];
+                            _deviceName,
+                            _deviceIPAddress,
+                            _eventId];
         
         client = [client mso_build_command:nil];
         
         MSOSoapParameter *parameterClient = [MSOSoapParameter parameterWithObject:client forKey:@"client"];
         [parameterArray addObject:parameterClient.xml];
+        
+        namespace = mso_endpoint_logicielIncUrl;
+    } else {
+        namespace = mso_endpoint_logicielUrl;
     }
     
-    NSString *action = netserver ? mso_endpoint_logicielIncUrl : mso_endpoint_logicielUrl;
-    NSURL *actionURL = [NSURL URLWithString:action];
+    NSURL *actionURL = [NSURL URLWithString:namespace];
     actionURL = [actionURL URLByAppendingPathComponent:type];
-    
-    NSString *namespace = netserver ? @"http://logicielinc.com" : @"http://logiciel.com/";
     
     for (MSOSoapParameter *soapParameter in parameters) {
         [parameterArray addObject:soapParameter.xml];
@@ -469,6 +480,12 @@ static NSString * authPassword;
     NSError *error = nil;
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[url absoluteString] parameters:nil error:&error];
    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
+//    [request setValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[soapMessage length]] forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:[actionURL absoluteString] forHTTPHeaderField:@"SOAPAction"];
+//    [request setHTTPMethod:@"POST"];
+    
     if (!request) {
         NSLog(@"%@", [error description]);
         return nil;
@@ -495,7 +512,9 @@ static NSString * authPassword;
     [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"];
     [hcSoap appendString:@"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"];
     [hcSoap appendString:@"<soap:Body>\n"];
-    [hcSoap appendFormat:@"<%@ xmlns=\"%@\">\n%@\n</%@>\n", method, namespace, [parameters stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"], method];
+    [hcSoap appendFormat:@"<%@ xmlns=\"%@\">\n",  method, namespace];
+    [hcSoap appendFormat:@"%@\n", [parameters stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"]];
+    [hcSoap appendFormat:@"</%@>\n", method];
     [hcSoap appendString:@"</soap:Body>\n"];
     [hcSoap appendString:@"</soap:Envelope>\n"];
     return hcSoap;

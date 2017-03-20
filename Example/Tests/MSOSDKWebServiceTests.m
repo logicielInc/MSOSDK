@@ -119,6 +119,25 @@
     
     NSURLSessionDataTask *task =
     [sdk
+     _msoWebServiceValidity:@"john2"
+     accesskey:@"A0020010138LA4YUKQS3"
+     udid:@"7D7DE0A1-AAB2-4F14-AD8C-7C2A34FE2F20"
+     pin:@"20150731"
+     companyname:@"Acme Inc"
+     appversion:@"1.5.64.16302"
+     user:YES
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    /*
+    [sdk
      _msoWebServiceValidity:@"John"
      accesskey:@"A0010012745NODHIV3WU"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -136,7 +155,7 @@
          [expectation fulfill];
      
      }];
-    
+    */
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
