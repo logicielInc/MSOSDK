@@ -76,10 +76,12 @@
 ///---------------------
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchItemList:(nullable NSString *)username
+                                                   companyId:(nullable NSString *)companyId
                                                     itemList:(nullable NSArray <NSString *> *)itemList
                                                      success:(_Nullable MSOSuccessBlock)success
                                                     progress:(_Nullable MSOProgressBlock)progress
-                                                     failure:(_Nullable MSOFailureBlock)failure;
+                                                     failure:(_Nullable MSOFailureBlock)failure
+                                                     handler:(_Nullable MSOHandlerBlock)handler;
 
 /**
  <#Description#>

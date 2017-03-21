@@ -406,10 +406,6 @@ static MSOFailureBlock gr_failure_block;
                                                     progress:(MSOProgressBlock)progress
                                                      failure:(MSOFailureBlock)failure {
     
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:itemNo    forKey:@"sItemNo"];
-    [parameters setObject:pin       forKey:@"sPIN"];
-    
     MSOSoapParameter *parameterItemNo  = [MSOSoapParameter parameterWithObject:itemNo forKey:@"sItemNo"];
     MSOSoapParameter *parameterPin     = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
     
@@ -426,6 +422,12 @@ static MSOFailureBlock gr_failure_block;
      dataTaskWithRequest:request
      progress:progress
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+
+         /*
+         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
+         responseObject = nil;
+         data = [data mso_stringBetweenString:@"<_CheckPhotoFileStatusResult>" andString:@"</_CheckPhotoFileStatusResult>"];
+         */
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -434,11 +436,11 @@ static MSOFailureBlock gr_failure_block;
              [self errorHandler:error response:response failure:failure];
              return;
          }
-         
+
          NSArray <SMXMLElement *> *element = document.children;
          SMXMLElement *parentPhotos = [element firstObject];
          SMXMLElement *potentialPhotos = [parentPhotos descendantWithPath:@"_CheckPhotoFileStatusResponse._CheckPhotoFileStatusResult"];
-         NSArray <SMXMLElement *> *photos = [potentialPhotos children];
+         NSArray <NSString *> *photos = [[potentialPhotos children] valueForKey:@"value"];
          
          NSMutableArray <MSOSDKResponseWebServicePhotoDetails *> * photoDetails = [NSMutableArray array];
          
@@ -447,10 +449,9 @@ static MSOFailureBlock gr_failure_block;
          
          if (photos) {
              
-             for (SMXMLElement *photo in photos) {
+             for (NSString *photo in photos) {
                  
-                 NSString *value = photo.value;
-                 MSOSDKResponseWebServicePhotoDetails *photoDetail = [MSOSDKResponseWebServicePhotoDetails detailsWithValue:value];
+                 MSOSDKResponseWebServicePhotoDetails *photoDetail = [MSOSDKResponseWebServicePhotoDetails detailsWithValue:photo];
                  
                  if (![predicate evaluateWithObject:photoDetail.filename]) {
                      photoDetail = nil;
@@ -581,6 +582,7 @@ static MSOFailureBlock gr_failure_block;
          }
          
      } failure:failure];
+    [task resume];
     */
     
     //return task;

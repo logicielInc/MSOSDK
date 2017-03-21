@@ -24,7 +24,7 @@ NSInteger const kMSOTimeoutProductsSyncKey          = 10;
 NSInteger const kMSOTimeoutPurchaseHistoryKey       = 20;
 NSInteger const kMSOTimeoutRetrieveSalesOrderKey    = 30;
 NSInteger const kMSOTimeoutRegistrationKey          = 10;
-NSInteger const kMSOTimeoutSalesOrderKey            = 10;
+NSInteger const kMSOTimeoutSalesOrderKey            = 30;
 NSInteger const kMSOTimeoutScannerKey               = kMSOTimeoutDefaultKey;
 NSInteger const kMSOTimeoutSettingsSyncKey          = 20;
 

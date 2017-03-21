@@ -1,6 +1,0 @@
-framework module MSOSDK {
-  umbrella header "MSOSDK-iOS9.3-umbrella.h"
-
-  export *
-  module * { export * }
-}

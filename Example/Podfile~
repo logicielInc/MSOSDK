@@ -1,0 +1,15 @@
+use_frameworks!
+
+def reusepods
+    pod 'MSOSDK', :path => '../'
+end
+
+target 'MSOSDK_Example' do
+    reusepods
+
+end
+
+target 'MSOSDK_Tests' do
+    reusepods
+end
+

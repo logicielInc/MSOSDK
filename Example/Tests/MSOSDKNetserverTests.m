@@ -1615,5 +1615,113 @@
     XCTAssertNotNil(mso_response);
 }
 
+- (void)test_msoNetserverFetchProductList {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverFetchItemList:@"john"
+     companyId:@"1"
+     itemList:@[@"ADORF01MDBLKAC3"]
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         [expectation fulfill];
+
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+
+         err = error;
+         [expectation fulfill];
+
+     } handler:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
+     
+         mso_response = responseObject;
+         NSData *data = [mso_response.data dataUsingEncoding:NSUTF8StringEncoding];
+         SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:error];
+         XCTAssertNotNil(doc);
+         XCTAssertNil(err);
+     
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    
+}
+
+- (void)test_msoNetserverSaveMapping {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverSaveCustomerMappingScheme:@"john"
+     mappingScheme:@""
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+        
+         [expectation fulfill];
+        
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+
+         err = error;
+         [expectation fulfill];
+     
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    
+}
+
+- (void)test_msoNetserverUpdateMapping {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverUpdateCustomerMappingScheme:@"john"
+     mappingScheme:@""
+     mappingSchemeData:@""
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    
+}
 
 @end

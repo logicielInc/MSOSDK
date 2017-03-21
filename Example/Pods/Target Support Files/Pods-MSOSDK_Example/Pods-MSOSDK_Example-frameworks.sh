@@ -82,16 +82,3 @@ strip_invalid_archs() {
   fi
 }
 
-
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking-iOS9.3/AFNetworking.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMNSStringHTMLAdditions-iOS9.3/GTMNSStringHTMLAdditions.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MSOSDK-iOS9.3/MSOSDK.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SMXMLDocument-iOS9.3/SMXMLDocument.framework"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking-iOS9.3/AFNetworking.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMNSStringHTMLAdditions-iOS9.3/GTMNSStringHTMLAdditions.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MSOSDK-iOS9.3/MSOSDK.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SMXMLDocument-iOS9.3/SMXMLDocument.framework"
-fi

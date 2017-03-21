@@ -192,36 +192,68 @@
 
 #pragma mark - Products
 - (NSURLSessionDataTask *)_msoNetserverFetchItemList:(NSString *)username
+                                           companyId:(NSString *)companyId
                                             itemList:(NSArray<NSString *> *)itemList
                                              success:(MSOSuccessBlock)success
                                             progress:(MSOProgressBlock)progress
-                                             failure:(MSOFailureBlock)failure {
+                                             failure:(MSOFailureBlock)failure
+                                             handler:(MSOHandlerBlock)handler {
  
-    /*
-    [Utility doworkWithCommand:[NSString stringWithFormat:@"<*!BEGIN!*><~~>_P005^%@^1^Item List^%@<*!END!*>", username, [productList componentsJoinedByString:@"^"]]
-                   withTimeout:kiMRTimeoutProductsSyncKey
-                  resetTimeout:kiMRTimeoutDefaultKey
-                     didFinish:^(id value) {
-                         if ([value containsString:@"P005^OK"]) {
-                             NSString* xmlString = [[value componentsSeparatedByString:@"^"] objectAtIndex:3];
-                             [Product updateSetOfProducts:xmlString];
-                             if (completionBlock) {
-                                 completionBlock(YES, nil);
-                             }
-                             return;
-                         }
-                         
-                         if (completionBlock) {
-                             completionBlock(NO, [Utility returnErrorObject:value withTitle:@"Unable To Update Item List"]);
-                         }
-                     } didError:^(id error) {
-                         if (completionBlock) {
-                             completionBlock(NO, [Utility returnErrorObject:error withTitle:@"Unable To Update Item List"]);
-                         }
-                         return;
-                     }];
-    */
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_P005" mso_build_command:@[username,
+                                                                                                      companyId,
+                                                                                                      @"Item List",
+                                                                                                      [itemList componentsJoinedByString:@"^"]]]
+                                                                 forKey:@"str"];
     
+    NSURLRequest *request = [MSOSDK
+                             urlRequestWithParameters:@[parameter]
+                             type:mso_soap_function_doWork
+                             url:self.serviceUrl
+                             netserver:YES
+                             timeout:kMSOTimeoutProductsSyncKey];
+
+    
+    NSURLSessionDataTask *task =
+    [self
+     dataTaskWithRequest:request
+     progress:nil
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+         
+         NSString *command = [MSOSDK sanatizeData:responseObject];
+         
+         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
+         if (!validate) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         NSArray *components = [command componentsSeparatedByString:@"^"];
+         MSOSDKResponseNetserverQueryProducts *mso_response = [MSOSDKResponseNetserverQueryProducts msosdk_commandWithResponse:components];
+
+         if (handler) {
+             handler(response, mso_response, &error);
+         }
+         
+         if (error) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         if (success) {
+             if (handler) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     success(response, nil);
+                 });
+             } else {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     success(response, mso_response);
+                 });
+             }
+         }
+         
+     } failure:failure];
+    
+    return task;
 }
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadNumberOfProducts:(NSString *)username
@@ -567,25 +599,36 @@
                                                         progress:(MSOProgressBlock)progress
                                                          failure:(MSOFailureBlock)failure {
     
-    /*
-    [Utility doworkWithCommand:[Utility buildCommand:@"_C006" params:@[username, @"Auto-Mapping", mappingString]]
-                   withTimeout:kiMRTimeoutMappingKey
-                  resetTimeout:kiMRTimeoutDefaultKey
-                     didFinish:^(id value) {
-                         
-                         if (completion) {
-                             completion(value, nil);
-                         }
-                         
-                     } didError:^(id error) {
-                         
-                         if (completion) {
-                             completion(nil, nil);
-                         }
-                         
-                     }];
-     */
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C006" mso_build_command:@[username,
+                                                                                                      @"Auto-Mapping",
+                                                                                                      mappingScheme]]
+                                                                 forKey:@"str"];
+    
+    NSURLRequest *request = [MSOSDK
+                             urlRequestWithParameters:@[parameter]
+                             type:mso_soap_function_doWork
+                             url:self.serviceUrl
+                             netserver:YES
+                             timeout:kMSOTimeoutCustomersSyncKey];
 
+    NSURLSessionDataTask *task =
+    [self
+     dataTaskWithRequest:request
+     progress:progress
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+         
+         NSString *command = [MSOSDK sanatizeData:responseObject];
+         
+         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
+         if (!validate) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
+
+         
+     } failure:failure];
+    
+    return task;
 }
 
 - (NSURLSessionDataTask *)_msoNetserverUpdateCustomerMappingScheme:(NSString *)username
@@ -595,20 +638,37 @@
                                                           progress:(MSOProgressBlock)progress
                                                            failure:(MSOFailureBlock)failure {
 
-    /*
-    [Utility doworkWithCommand:[Utility buildCommand:@"_C007" params:@[username, @"Save-Mapping", mappingString, data]]
-                   withTimeout:kiMRTimeoutMappingKey
-                  resetTimeout:kiMRTimeoutDefaultKey
-                     didFinish:^(id value) {
-                         if (completion) {
-                             completion(value, nil);
-                         }
-                     } didError:^(id error) {
-                         if (completion) {
-                             completion(nil, nil);
-                         }
-                     }];
-    */
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C007" mso_build_command:@[username,
+                                                                                                      @"Save-Mapping",
+                                                                                                      mappingScheme,
+                                                                                                      mappingSchemeData]]
+                                                                 forKey:@"str"];
+    
+    NSURLRequest *request = [MSOSDK
+                             urlRequestWithParameters:@[parameter]
+                             type:mso_soap_function_doWork
+                             url:self.serviceUrl
+                             netserver:YES
+                             timeout:kMSOTimeoutCustomersSyncKey];
+
+    NSURLSessionDataTask *task =
+    [self
+     dataTaskWithRequest:request
+     progress:progress
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+         
+         NSString *command = [MSOSDK sanatizeData:responseObject];
+         
+         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
+         if (!validate) {
+             [self errorHandler:error response:response failure:failure];
+             return;
+         }
+
+         
+     } failure:failure];
+
+    return task;
 }
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(NSString *)username

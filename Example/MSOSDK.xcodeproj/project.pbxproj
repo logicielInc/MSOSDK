@@ -12,7 +12,6 @@
 		1EF0E5A71E79E18300E9DFE3 /* MSOTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A01E79E15000E9DFE3 /* MSOTestCase.m */; };
 		1EF0E5A91E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */; };
 		1EF0E5AA1E79EA1B00E9DFE3 /* passed_xml_order_escaping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */; };
-		23B2F865F647DBB2344226C6 /* Pods_MSOSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2BECD6E4129B1BD3C67717E /* Pods_MSOSDK_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -27,7 +26,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		FC3DB2EFD772FE7245192BD5 /* Pods_MSOSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE8D8894BA185FD6E906646 /* Pods_MSOSDK_Tests.framework */; };
+		8ADFFAC2C5292397D4D01CEF /* libPods-MSOSDK_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8CBCFB1A922A8D683AB3AD /* libPods-MSOSDK_Example.a */; };
+		E5E24650D3CCB6DE70B106F7 /* libPods-MSOSDK_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0AB2E542D9B153A66198A8C /* libPods-MSOSDK_Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,12 +69,12 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6FE8D8894BA185FD6E906646 /* Pods_MSOSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MSOSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C2BECD6E4129B1BD3C67717E /* Pods_MSOSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MSOSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C8CBCFB1A922A8D683AB3AD /* libPods-MSOSDK_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MSOSDK_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AFFE09C1645E10C444A47B /* Pods-MSOSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSOSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MSOSDK_Tests/Pods-MSOSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D84167864330A5F4C4E88512 /* Pods-MSOSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSOSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MSOSDK_Example/Pods-MSOSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		F0AB2E542D9B153A66198A8C /* libPods-MSOSDK_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MSOSDK_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				23B2F865F647DBB2344226C6 /* Pods_MSOSDK_Example.framework in Frameworks */,
+				8ADFFAC2C5292397D4D01CEF /* libPods-MSOSDK_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				FC3DB2EFD772FE7245192BD5 /* Pods_MSOSDK_Tests.framework in Frameworks */,
+				E5E24650D3CCB6DE70B106F7 /* libPods-MSOSDK_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,8 +131,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				C2BECD6E4129B1BD3C67717E /* Pods_MSOSDK_Example.framework */,
-				6FE8D8894BA185FD6E906646 /* Pods_MSOSDK_Tests.framework */,
+				9C8CBCFB1A922A8D683AB3AD /* libPods-MSOSDK_Example.a */,
+				F0AB2E542D9B153A66198A8C /* libPods-MSOSDK_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

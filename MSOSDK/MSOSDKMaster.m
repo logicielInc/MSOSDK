@@ -479,13 +479,7 @@ static NSString * authPassword;
     
     NSError *error = nil;
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[url absoluteString] parameters:nil error:&error];
-   
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
-//    [request setValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-//    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[soapMessage length]] forHTTPHeaderField:@"Content-Length"];
-//    [request setValue:[actionURL absoluteString] forHTTPHeaderField:@"SOAPAction"];
-//    [request setHTTPMethod:@"POST"];
-    
+       
     if (!request) {
         NSLog(@"%@", [error description]);
         return nil;
