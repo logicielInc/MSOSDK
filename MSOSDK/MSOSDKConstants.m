@@ -18,6 +18,7 @@ NSInteger const kMSOTimeoutCustomerSearchKey        = 10;
 NSInteger const kMSOTimeoutDataRequestKey           = kMSOTimeoutDefaultKey;
 NSInteger const kMSOTimeoutForgotPassword           = 20;
 NSInteger const kMSOTimeoutImageSyncKey             = 15;
+NSInteger const kMSOTimeoutImageUploadSyncKey       = 60;
 NSInteger const kMSOTimeoutLoginKey                 = 10;
 NSInteger const kMSOTimeoutPingKey                  = 3;
 NSInteger const kMSOTimeoutProductsSyncKey          = 30;

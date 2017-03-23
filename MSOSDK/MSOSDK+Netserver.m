@@ -173,12 +173,7 @@
      dataTaskWithRequest:request
      progress:nil
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         if (error) {
-             [self errorHandler:error response:response failure:failure];
-             return;
-         }
-         
+                  
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, nil);
@@ -1907,7 +1902,7 @@
                              type:mso_soap_function_doWork
                              url:self.serviceUrl
                              netserver:YES
-                             timeout:kMSOTimeoutImageSyncKey];
+                             timeout:kMSOTimeoutImageUploadSyncKey];
     
     NSURLSessionDataTask *task =
     

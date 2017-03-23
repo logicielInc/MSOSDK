@@ -487,7 +487,7 @@ static NSString * authPassword;
     
     [request setHTTPBody:[soapMessage dataUsingEncoding:stringEncoding]];
   
-    [request printRequestWithBenchmark:[NSDate date] headerMessage:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    //[request printRequestWithBenchmark:[NSDate date] headerMessage:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     return request;
 }

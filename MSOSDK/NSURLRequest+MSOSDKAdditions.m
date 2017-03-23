@@ -13,12 +13,9 @@
 - (void)printRequestWithBenchmark:(NSDate *)date headerMessage:(NSString *)headerMessage {
     NSError *error = nil;
     if (self.HTTPBody) {
-        id json = [NSJSONSerialization JSONObjectWithData:self.HTTPBody
+        NSString *json = [NSJSONSerialization JSONObjectWithData:self.HTTPBody
                                                   options:NSJSONReadingMutableContainers
                                                     error:&error];
-        //        if (!json || [json isKindOfClass:[NSNull class]] || [json isEqual:[NSNull null]]) {
-        //            json = [NSKeyedUnarchiver unarchiveObjectWithData:self.HTTPBody];
-        //        }
         
         if (!json || [json isKindOfClass:[NSNull class]] || [json isEqual:[NSNull null]]) {
             json = [[NSString alloc] initWithData:self.HTTPBody encoding:NSUTF8StringEncoding];

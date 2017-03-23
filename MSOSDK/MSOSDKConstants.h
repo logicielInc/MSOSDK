@@ -18,6 +18,7 @@ extern NSInteger const kMSOTimeoutCustomerSearchKey;
 extern NSInteger const kMSOTimeoutDataRequestKey;
 extern NSInteger const kMSOTimeoutForgotPassword;
 extern NSInteger const kMSOTimeoutImageSyncKey;
+extern NSInteger const kMSOTimeoutImageUploadSyncKey;
 extern NSInteger const kMSOTimeoutLoginKey;
 extern NSInteger const kMSOTimeoutPingKey;
 extern NSInteger const kMSOTimeoutProductsSyncKey;
