@@ -1657,7 +1657,7 @@
     
 }
 
-- (void)test_msoNetserverSaveMapping {
+- (void)test_msoNetserverSaveMapping_error {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -1685,12 +1685,12 @@
     
     [self waitForExpectationsWithLongTimeout];
     
-    XCTAssertNil(err);
-    XCTAssertNotNil(mso_response);
+    XCTAssertNotNil(err);
+    XCTAssertNil(mso_response);
     
 }
 
-- (void)test_msoNetserverUpdateMapping {
+- (void)test_msoNetserverUpdateMapping_error {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -1719,8 +1719,8 @@
     
     [self waitForExpectationsWithLongTimeout];
     
-    XCTAssertNil(err);
-    XCTAssertNotNil(mso_response);
+    XCTAssertNotNil(err);
+    XCTAssertNil(mso_response);
     
 }
 

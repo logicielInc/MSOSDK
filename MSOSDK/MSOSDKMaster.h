@@ -14,13 +14,10 @@
 #import "NSString+MSOSDKAdditions.h"
 #import "NSError+MSOSDKAdditions.h"
 #import "NSURLRequest+MSOSDKAdditions.h"
+#import "NSDateFormatter+MSOSDKAdditions.h"
+#import "NSURL+MSOSDKAdditions.h"
 
-@interface MSOSoapParameter : NSObject
-
-+ (nullable instancetype)parameterWithObject:(nullable id)object forKey:(nonnull NSString *)key;
-- (nonnull NSString *)xml;
-
-@end
+@class MSOSoapParameter;
 
 /**
  `MSOSDK` adopts `NSObject` and is the master object for all Logiciel web operations
@@ -69,6 +66,17 @@
               msoDeviceIpAddress:(nullable NSString *)msoDeviceIpAddress
                       msoEventId:(nullable NSString *)msoEventId
                      msoPassword:(nullable NSString *)msoPassword;
+
+/**
+ Sets the NetserverIPAddress, deviceName, deviceIpAddress and EventId to validate requests made to Netserver. This method must be called before signaling the first call using MSOSDK networking methods
+ 
+ @param msoNetserverIpAddress The Netserver IP Address set for interacting with Netserver on the host computer.
+ @param msoDeviceName The Device Name of the iPad for interacting with Netserver on the host computer.
+ @param msoDeviceIpAddress The Device IP Address of the iPad for interacting with Netserver on the host computer.
+ @param msoEventId The Event ID the current rep is assigned to for interacting with Netserver on the host computer.
+ @param authUsername The Event ID the current rep is assigned to for interacting with Netserver on the host computer.
+ @param authPassword The Event ID the current rep is assigned to for interacting with Netserver on the host computer.
+ */
 + (void)setMSONetserverIpAddress:(nullable NSString *)msoNetserverIpAddress
                    msoDeviceName:(nullable NSString *)msoDeviceName
               msoDeviceIpAddress:(nullable NSString *)msoDeviceIpAddress
@@ -77,14 +85,8 @@
                     authUsername:(nullable NSString *)authUsername
                     authPassword:(nullable NSString *)authPassword;
 
-
 + (nonnull NSString *)sanatizeData:(nonnull NSData *)responseObject;
 + (nonnull NSString *)sanatizeImageData:(nonnull NSData *)responseObject;
-+ (nonnull NSURL *)logicielCustomerURL;
-+ (nonnull NSURL *)logicielFTPServiceURL;
-
-+ (nonnull NSDateFormatter *)longDateFormatter;
-+ (nonnull NSDateFormatter *)mediumDateFormatter;
 
 + (nullable NSString *)stringFromDate:(nullable NSDate *)date;
 + (nullable NSDate *)dateFromString:(nullable NSString *)date;
@@ -104,8 +106,6 @@
                  status:(nullable NSString *)status
                   error:(NSError * __autoreleasing _Nullable * _Nullable)error;
 
-+ (nonnull NSString *)kMSOProductSearchType:(kMSOProductSearchType)type;
-
 + (nonnull NSURLRequest *)urlRequestImage:(nullable NSURL *)url
                                   timeout:(NSTimeInterval)timeout
                                     error:(NSError * __autoreleasing _Nullable * _Nullable)error;
@@ -116,14 +116,43 @@
                                           netserver:(BOOL)netserver
                                             timeout:(NSTimeInterval)timeout;
 
-- (void)errorHandler:(nullable NSError *)error
-            response:(nullable NSURLResponse *)response
-             failure:(_Nullable MSOFailureBlock)failure;
-
 - (nonnull NSURLSessionDataTask *)dataTaskWithRequest:(nonnull NSURLRequest *)request
                                              progress:(_Nullable MSOProgressBlock)progress
                                               success:(void (^_Nullable)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))success
                                               failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
 
+
+@end
+
+/**
+ `MSOSoapParameter` is a subclass of NSObject and is used to format an `NSURLRequest` body parameters
+ */
+@interface MSOSoapParameter : NSObject
+
+/**
+ The object to be formatted for the XML `NSURLRequest`
+ */
+@property (strong, nonatomic, nullable, readonly) id object;
+
+/**
+ The identifier to be formatted for the XML `NSURLRequest`
+ */
+@property (strong, nonatomic, nullable, readonly) NSString *key;
+
+/**
+ Generates an `MSOSoapParameter` object that is used to generate a Soap Request
+ 
+ @param object The value of the parameter
+ @param key The identifier of the parameter
+ @return `MSOSoapParameter
+ */
++ (nullable instancetype)parameterWithObject:(nullable id)object forKey:(nonnull NSString *)key;
+
+/**
+ Generates an `NSString` object that is formatted for XML requests.
+ 
+ @return An `NSString` object
+ */
+- (nonnull NSString *)xml;
 
 @end

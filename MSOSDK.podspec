@@ -35,6 +35,13 @@ TODO: Add long description of the pod here.
         ss.public_header_files = 'External/*'
     end
 
+    s.subspec 'Objects' do |ss|
+        ss.dependency 'MSOSDK/Constants'
+
+        ss.source_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
+        ss.public_header_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
+    end
+
     s.subspec 'Categories' do |ss|
         ss.dependency 'GTMNSStringHTMLAdditions'
 
@@ -45,13 +52,6 @@ TODO: Add long description of the pod here.
     s.subspec 'Constants' do |ss|
         ss.source_files = 'MSOSDK/MSOSDKConstants.{h,m}'
         ss.public_header_files = 'MSOSDK/MSOSDKConstants.{h,m}'
-    end
-
-    s.subspec 'Objects' do |ss|
-        ss.dependency 'MSOSDK/Constants'
-
-        ss.source_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
-        ss.public_header_files = 'MSOSDK/MSOSDKResponse*.{h,m}'
     end
 
     s.subspec 'Master' do |ss|
@@ -67,6 +67,7 @@ TODO: Add long description of the pod here.
         ss.dependency 'MSOSDK/Objects'
         ss.dependency 'MSOSDK/Master'
         ss.dependency 'MSOSDK/External'
+        ss.dependency 'MSOSDK/Categories'
         ss.dependency 'SMXMLDocument'
 
         ss.source_files = 'MSOSDK/MSOSDK+*'

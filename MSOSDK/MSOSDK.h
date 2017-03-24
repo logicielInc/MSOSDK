@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #ifndef _MSOSDK_
-    #define _MSOSDK_
 
-    #import "MSOSDKResponseNetserver.h"
-    #import "MSOSDKResponseWebService.h"
+    #define _MSOSDK_
 
     #import "MSOSDK+Netserver.h"
     #import "MSOSDK+WebService.h"
+
+    #import "MSOSDKResponseNetserver.h"
+    #import "MSOSDKResponseWebService.h"
 
     #import "MSOSDKConstants.h"
 

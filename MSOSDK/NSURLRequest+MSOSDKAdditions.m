@@ -10,9 +10,12 @@
 
 @implementation NSURLRequest (MSOSDKAdditions)
 
-- (void)printRequestWithBenchmark:(NSDate *)date headerMessage:(NSString *)headerMessage {
+- (void)printRequestWithBenchmark:(NSDate *)date
+                    headerMessage:(NSString *)headerMessage {
+    
     NSError *error = nil;
     if (self.HTTPBody) {
+        
         NSString *json = [NSJSONSerialization JSONObjectWithData:self.HTTPBody
                                                   options:NSJSONReadingMutableContainers
                                                     error:&error];
@@ -22,21 +25,25 @@
         }
         
         if (date) {
-            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nURL = %@ (DECODED)\nMETHOD = %@\nHEADERS = %@\nBODY = \n%@\n\n",
-                       headerMessage, self.URL, [[self.URL absoluteString] stringByRemovingPercentEncoding], self.HTTPMethod, self.allHTTPHeaderFields, json);
+            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nMETHOD = %@\nHEADERS = %@\nBODY = \n%@\n\n",
+                       headerMessage, self.URL, self.HTTPMethod, self.allHTTPHeaderFields, json);
         } else {
-            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nURL = %@ (DECODED)\nMETHOD = %@\nHEADERS = %@\nBODY = \n%@\nTime Executed = %f\n\n",
-                       headerMessage, self.URL, [[self.URL absoluteString] stringByRemovingPercentEncoding], self.HTTPMethod, self.allHTTPHeaderFields, json, [[NSDate date] timeIntervalSinceDate:date]);
+            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nMETHOD = %@\nHEADERS = %@\nBODY = \n%@\nTime Executed = %f\n\n",
+                       headerMessage, self.URL, self.HTTPMethod, self.allHTTPHeaderFields, json, [[NSDate date] timeIntervalSinceDate:date]);
         }
+        
     } else {
+        
         if (date) {
-            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nURL = %@ (DECODED)\nMETHOD = %@\nHEADERS = %@\nTime Executed = %f\n\n",
-                       headerMessage, self.URL, [[self.URL absoluteString] stringByRemovingPercentEncoding], self.HTTPMethod, self.allHTTPHeaderFields, [[NSDate date] timeIntervalSinceDate:date]);
+            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nMETHOD = %@\nHEADERS = %@\nTime Executed = %f\n\n",
+                       headerMessage, self.URL, self.HTTPMethod, self.allHTTPHeaderFields, [[NSDate date] timeIntervalSinceDate:date]);
         } else {
-            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nURL = %@ (DECODED)\nMETHOD = %@\nHEADERS = %@\n\n",
-                       headerMessage, self.URL, [[self.URL absoluteString] stringByRemovingPercentEncoding], self.HTTPMethod, self.allHTTPHeaderFields);
+            NSLog(@"Debug: \n\nCallie = %@\nURL = %@\nMETHOD = %@\nHEADERS = %@\n\n",
+                       headerMessage, self.URL, self.HTTPMethod, self.allHTTPHeaderFields);
         }
+        
     }
+    
 }
 
 @end

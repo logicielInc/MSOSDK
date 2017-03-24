@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "MSOSDKConstants.h"
 
 /**
  Description
@@ -46,4 +47,10 @@
 + (nonnull instancetype)mso_netserver_order_retrieval_no_orders;
 + (nonnull instancetype)mso_netserver_order_retrieval_order_not_found;
 + (nonnull instancetype)mso_netserver_image_upload_error;
++ (nonnull instancetype)mso_netserver_auto_mapping_not_created_error;
++ (nonnull instancetype)mso_netserver_auto_mapping_update_error;
+
++ (void)errorHandler:(nullable NSError *)error
+            response:(nullable NSURLResponse *)response
+             failure:(_Nullable MSOFailureBlock)failure;
 @end

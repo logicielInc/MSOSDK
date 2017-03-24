@@ -10,9 +10,6 @@
 
 #import <GTMNSStringHTMLAdditions/GTMNSString+HTML.h>
 
-static NSString * const MSOSDK_begin_command = @"<*!BEGIN!*><~~>";
-static NSString * const MSOSDK_end_command = @"<*!END!*>";
-
 @implementation NSString (MSOSDKAdditions)
 
 - (instancetype)mso_build_command:(NSArray *)parameters {
@@ -59,5 +56,9 @@ static NSString * const MSOSDK_end_command = @"<*!END!*>";
     return nil;
 }
 
++ (NSString *)mso_product_search_type_formatted:(kMSOProductSearchType)type {
+    if (type < 0 || type > 5) return @"1";
+    return [NSString stringWithFormat:@"%li", (long)type];
+}
 
 @end

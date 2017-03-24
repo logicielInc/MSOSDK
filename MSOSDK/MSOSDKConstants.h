@@ -65,6 +65,9 @@ static NSString * _Nonnull const _msoNetserverLogoutCommand = @"<*!BEGIN!*><~~><
 static NSString * _Nonnull const _msoNetserverBeginEscapedCommand = @"&amp;lt;*!BEGIN!*&amp;gt;";
 static NSString * _Nonnull const _msoNetserverEndEscapedCommand = @"&amp;lt;*!END!*&amp;gt;";
 
+static NSString * _Nonnull const MSOSDK_begin_command = @"<*!BEGIN!*><~~>";
+static NSString * _Nonnull const MSOSDK_end_command = @"<*!END!*>";
+
 /**
  enums that define a product search type. This is only applied to Netserver Product Requests
  

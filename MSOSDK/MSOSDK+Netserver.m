@@ -6,12 +6,7 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import "MSOSDKResponseNetserver.h"
-
 #import "MSOSDK+Netserver.h"
-
-#import "NSString+MSOSDKAdditions.h"
-#import "NSArray+MSOSDKAdditions.h"
 
 @implementation MSOSDK (Netserver)
 
@@ -90,7 +85,7 @@
                                   command:msosdk_command.command
                                    status:msosdk_command.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -138,7 +133,7 @@
                                   command:msosdk_command.command
                                    status:msosdk_command.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -218,7 +213,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -230,7 +225,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -278,7 +273,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -286,7 +281,7 @@
          MSOSDKResponseNetserverProductsCount *mso_response = [MSOSDKResponseNetserverProductsCount msosdk_commandWithResponse:components];
          validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -333,7 +328,7 @@
               }
               
               if (*error) {
-                  [self errorHandler:*error response:response failure:failure];
+                  [NSError errorHandler:*error response:response failure:failure];
                   return;
               }
               
@@ -388,7 +383,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -397,7 +392,7 @@
          MSOSDKResponseNetserverSyncProducts *mso_response = [MSOSDKResponseNetserverSyncProducts msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -406,7 +401,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -456,7 +451,7 @@
                                                 success:(MSOSuccessBlock)success
                                                 failure:(MSOFailureBlock)failure {
     
-    NSString *type = [MSOSDK kMSOProductSearchType:searchType];
+    NSString *type = [NSString mso_product_search_type_formatted:searchType];
     MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_P002" mso_build_command:@[username,
                                                                                                       searchTerm,
                                                                                                       companyId,
@@ -482,7 +477,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -491,7 +486,7 @@
          MSOSDKResponseNetserverQueryProducts *mso_response = [MSOSDKResponseNetserverQueryProducts msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -550,7 +545,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -558,7 +553,7 @@
          [mso_response appendResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -614,12 +609,16 @@
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
+         BOOL validate = [MSOSDK validate:command command:@"_C006" status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 
+         if (success) {
+             success(response, nil);
+         }
+         
          
      } failure:failure];
     
@@ -654,12 +653,15 @@
          
          NSString *command = [MSOSDK sanatizeData:responseObject];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
+         BOOL validate = [MSOSDK validate:command command:@"_C007" status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 
+         if (success) {
+             success(response, nil);
+         }
          
      } failure:failure];
 
@@ -696,7 +698,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -704,7 +706,7 @@
          MSOSDKResponseNetserverSyncCustomers *mso_response = [MSOSDKResponseNetserverSyncCustomers msosdk_commandWithResponse:parameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -713,7 +715,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -795,7 +797,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -804,7 +806,7 @@
          MSOSDKResponseNetserverQueryCustomers *mso_response = [MSOSDKResponseNetserverQueryCustomers msosdk_commandWithResponse:parameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -872,7 +874,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -880,7 +882,7 @@
          MSOSDKResponseNetserverSaveCustomer *mso_response = [MSOSDKResponseNetserverSaveCustomer msosdk_commandWithResponse:parameters];
          validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -953,7 +955,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -961,7 +963,7 @@
          MSOSDKResponseNetserverSaveCustomerShippingAddress *mso_response = [MSOSDKResponseNetserverSaveCustomerShippingAddress msosdk_commandWithResponse:parameters];
          validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1065,7 +1067,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1073,7 +1075,7 @@
          MSOSDKResponseNetserverUpdateCustomer *mso_response = [MSOSDKResponseNetserverUpdateCustomer msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.message command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1118,7 +1120,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1127,7 +1129,7 @@
          MSOSDKResponseNetserverSyncSettings *mso_response = [MSOSDKResponseNetserverSyncSettings msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1136,7 +1138,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1205,7 +1207,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1248,7 +1250,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1257,7 +1259,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1321,7 +1323,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1329,7 +1331,7 @@
          MSOSDKResponseNetserverQuerySalesOrder *mso_response = [MSOSDKResponseNetserverQuerySalesOrder msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1396,7 +1398,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1404,7 +1406,7 @@
          [mso_response mso_appendResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1468,7 +1470,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1477,7 +1479,7 @@
          MSOSDKResponseNetserverQueryCustomerSalesOrders *mso_response = [MSOSDKResponseNetserverQueryCustomerSalesOrders msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1546,7 +1548,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1555,7 +1557,7 @@
          MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1637,7 +1639,7 @@
          
          BOOL validate = [MSOSDK validate:command command:@"_O002" status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1646,7 +1648,7 @@
          MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1731,7 +1733,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1761,7 +1763,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1827,7 +1829,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1841,7 +1843,7 @@
              }
              
              if (error) {
-                 [self errorHandler:error response:response failure:failure];
+                 [NSError errorHandler:error response:response failure:failure];
                  return;
              }
              
@@ -1932,7 +1934,7 @@
          
          BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1941,7 +1943,7 @@
          MSOSDKResponseNetserverSaveImage *mso_response = [MSOSDKResponseNetserverSaveImage msosdk_commandWithResponse:commandParameters];
          validate = [MSOSDK validate:mso_response.message command:mso_response.command status:mso_response.status error:&error];
          if (!validate) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          

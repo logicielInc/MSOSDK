@@ -28,6 +28,16 @@
       "public_header_files": "External/*"
     },
     {
+      "name": "Objects",
+      "dependencies": {
+        "MSOSDK/Constants": [
+
+        ]
+      },
+      "source_files": "MSOSDK/MSOSDKResponse*.{h,m}",
+      "public_header_files": "MSOSDK/MSOSDKResponse*.{h,m}"
+    },
+    {
       "name": "Categories",
       "dependencies": {
         "GTMNSStringHTMLAdditions": [
@@ -41,16 +51,6 @@
       "name": "Constants",
       "source_files": "MSOSDK/MSOSDKConstants.{h,m}",
       "public_header_files": "MSOSDK/MSOSDKConstants.{h,m}"
-    },
-    {
-      "name": "Objects",
-      "dependencies": {
-        "MSOSDK/Constants": [
-
-        ]
-      },
-      "source_files": "MSOSDK/MSOSDKResponse*.{h,m}",
-      "public_header_files": "MSOSDK/MSOSDKResponse*.{h,m}"
     },
     {
       "name": "Master",
@@ -78,6 +78,9 @@
 
         ],
         "MSOSDK/External": [
+
+        ],
+        "MSOSDK/Categories": [
 
         ],
         "SMXMLDocument": [

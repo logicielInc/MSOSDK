@@ -16,66 +16,6 @@ static NSString * msoPassword;
 static NSString * authUsername;
 static NSString * authPassword;
 
-@interface MSOSoapParameter ()
-@property (strong, nonatomic, nullable) id object;
-@property (strong, nonatomic, nullable) NSString *key;
-@end
-
-@implementation MSOSoapParameter
-
-+ (instancetype)parameterWithObject:(id)object forKey:(NSString *)key {
-    return [[MSOSoapParameter alloc] initWithObject:object forKey:key];
-}
-
-- (instancetype)initWithObject:(id)object forKey:(NSString *)key {
-    
-    self = [super init];
-    
-    if (self) {
-        _object = object;
-        _key = key;
-    }
-    
-    return self;
-}
-
-- (NSString *)xml {
-    
-    if (!self.object) {
-
-        return [NSString stringWithFormat:@"<%@ xsi:nil=\"true\"/>", self.key];
-    
-    } else {
-    
-        return [MSOSoapParameter serialize:self.object withKey:self.key];
-    
-    }
-}
-
-+ (NSString *)serialize:(id)object withKey:(NSString *)key {
- 
-    return [NSString stringWithFormat:@"<%@>%@</%@>", key, [MSOSoapParameter serialize:object], key];
-    
-}
-
-+ (NSString *)serialize:(id)object {
-    
-    if ([object isKindOfClass:[NSDate class]]) {
-        return [[MSOSDK longDateFormatter] stringFromDate:object];
-    } else if ([object isKindOfClass:[NSData class]]) {
-        return [object base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn | NSDataBase64EncodingEndLineWithLineFeed];
-    } else if ([object isKindOfClass:[UIImage class]]) {
-        NSData *data = UIImagePNGRepresentation(object);
-        NSString *dataFormatted = [data base64EncodedStringWithOptions:kNilOptions];
-        return dataFormatted;
-    } else {
-        return object;
-    }
-    
-}
-
-@end
-
 @interface MSOSDK ()
 @property (strong, nonatomic, nullable, readwrite) AFHTTPSessionManager *operation;
 
@@ -222,59 +162,13 @@ static NSString * authPassword;
     return escapedData;
 }
 
-#pragma mark Helpers
-+ (NSURL *)logicielCustomerURL {
-    static NSURL *url = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        url = [NSURL URLWithString:mso_endpoint_logicielIncUrl];
-        url = [url URLByAppendingPathComponent:[mso_endpoint_logicielUpdateEndpoint stringByAppendingPathComponent:mso_endpoint_logicielCustomerASMX]];
-    });
-    return url;
-}
-
-+ (NSURL *)logicielFTPServiceURL {
-    static NSURL *url = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        url = [NSURL URLWithString:mso_endpoint_logicielIncUrl];
-        url = [url URLByAppendingPathComponent:[mso_endpoint_logicielFTPWSEndpoint stringByAppendingPathComponent:mso_endpoint_logicielFTPServiceASMX]];
-    });
-    return url;
-}
-
-+ (NSDateFormatter *)longDateFormatter {
-    static NSDateFormatter *formatter = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        formatter = [[NSDateFormatter alloc] init];
-        NSLocale* enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        [formatter setLocale: enUS];
-        [formatter setLenient: YES];
-        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
-    });
-    return formatter;
-}
-
-+ (NSDateFormatter *)mediumDateFormatter {
-    static NSDateFormatter *dateFormatter = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dateFormatter = [[NSDateFormatter alloc] init];
-        //    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-        //    [dateFormatter setLocale:enUSPOSIXLocale];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    });
-    return dateFormatter;
-}
-
 + (NSString *)stringFromDate:(NSDate *)date {
-    NSString *string = [[MSOSDK longDateFormatter] stringFromDate:date];
+    NSString *string = [[NSDateFormatter mso_longDateFormatter] stringFromDate:date];
     return string;
 }
 
 + (NSDate *)dateFromString:(NSString *)date {    
-    NSDate *string = [[MSOSDK mediumDateFormatter] dateFromString:date];
+    NSDate *string = [[NSDateFormatter mso_mediumDateFormatter] dateFromString:date];
     return string;
 }
 
@@ -386,17 +280,26 @@ static NSString * authPassword;
         }
     }
     
+    if ([command isEqualToString:@"_C006"]) {
+        if ([data hasSuffix:@"No Auto-Mapping Created."]) {
+            *error = [NSError mso_netserver_auto_mapping_not_created_error];
+            return NO;
+        }
+    }
+    
+    if ([command isEqualToString:@"_C007"]) {
+        if ([data hasSuffix:@"Index was outside the bounds of the array."]) {
+            *error = [NSError mso_netserver_auto_mapping_not_created_error];
+            return NO;            
+        }
+    }
+    
     if ([status isEqualToString:@"NO"]) {
         *error = [NSError mso_netserver_method_request_error:command];
         return NO;
     }
     
     return YES;
-}
-
-+ (NSString *)kMSOProductSearchType:(kMSOProductSearchType)type {
-    if (type < 0 || type > 5) return @"1";
-    return [NSString stringWithFormat:@"%li", (long)type];
 }
 
 + (NSURLRequest *)urlRequestImage:(NSURL *)url
@@ -492,15 +395,6 @@ static NSString * authPassword;
     return request;
 }
 
-- (void)errorHandler:(NSError *)error response:(NSURLResponse *)response failure:(MSOFailureBlock)failure {
-    NSLog(@"Error: %@", [error description]);
-    if (failure) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            failure(response, error);
-        });
-    }
-}
-
 + (NSString *)createEnvelope:(NSString *)method forNamespace:(NSString *)namespace forParameters:(NSString *)parameters {
     NSMutableString *hcSoap = [NSMutableString string];
     [hcSoap appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"];
@@ -528,7 +422,7 @@ static NSString * authPassword;
      completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -538,6 +432,67 @@ static NSString * authPassword;
          
      }];;
     return task;
+}
+
+@end
+
+
+@interface MSOSoapParameter ()
+@property (strong, nonatomic, nullable, readwrite) id object;
+@property (strong, nonatomic, nullable, readwrite) NSString *key;
+@end
+
+@implementation MSOSoapParameter
+
++ (instancetype)parameterWithObject:(id)object forKey:(NSString *)key {
+    return [[MSOSoapParameter alloc] initWithObject:object forKey:key];
+}
+
+- (instancetype)initWithObject:(id)object forKey:(NSString *)key {
+    
+    self = [super init];
+    
+    if (self) {
+        _object = object;
+        _key = key;
+    }
+    
+    return self;
+}
+
+- (NSString *)xml {
+    
+    if (!self.object) {
+        
+        return [NSString stringWithFormat:@"<%@ xsi:nil=\"true\"/>", self.key];
+        
+    } else {
+        
+        return [MSOSoapParameter serialize:self.object withKey:self.key];
+        
+    }
+}
+
++ (NSString *)serialize:(id)object withKey:(NSString *)key {
+    
+    return [NSString stringWithFormat:@"<%@>%@</%@>", key, [MSOSoapParameter serialize:object], key];
+    
+}
+
++ (NSString *)serialize:(id)object {
+    
+    if ([object isKindOfClass:[NSDate class]]) {
+        return [[NSDateFormatter mso_longDateFormatter] stringFromDate:object];
+    } else if ([object isKindOfClass:[NSData class]]) {
+        return [object base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn | NSDataBase64EncodingEndLineWithLineFeed];
+    } else if ([object isKindOfClass:[UIImage class]]) {
+        NSData *data = UIImagePNGRepresentation(object);
+        NSString *dataFormatted = [data base64EncodedStringWithOptions:kNilOptions];
+        return dataFormatted;
+    } else {
+        return object;
+    }
+    
 }
 
 @end

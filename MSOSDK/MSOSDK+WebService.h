@@ -8,6 +8,12 @@
 
 #import "MSOSDKMaster.h"
 
+#import <SMXMLDocument/SMXMLDocument.h>
+
+#import "GRRequestProtocol.h"
+#import "MSOSDKResponseWebService.h"
+#import "NSURL+MSOSDKAdditions.h"
+
 @interface MSOSDK (WebService) <GRRequestsManagerDelegate>
 
 #pragma mark - LogicielCustomer

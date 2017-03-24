@@ -7,13 +7,7 @@
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import <SMXMLDocument/SMXMLDocument.h>
-
-#import "MSOSDKResponseWebService.h"
-
 #import "MSOSDK+WebService.h"
-
-#import "GRRequestProtocol.h"
 
 @implementation MSOSDK (WebService)
 
@@ -50,7 +44,7 @@
                                                         parameterIType,
                                                         parameterMSOPassword]
                              type:user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutLoginKey];
     
@@ -78,7 +72,7 @@
          error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -127,7 +121,7 @@
                                                         parameterIType,
                                                         parameterMSOPassword]
                              type:mso_soap_function_iCheckMobileDevice
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutForgotPassword];
     
@@ -149,7 +143,7 @@
          error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -187,7 +181,7 @@
                                                         parameterAppVersion,
                                                         parameterMSOPassword]
                              type:mso_soap_function_iRegisterShortKey
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutRegistrationKey];
     
@@ -203,7 +197,7 @@
          
          if (!data) {
              error = [NSError mso_internet_registration_key_invalid];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -234,7 +228,7 @@
          }
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -302,7 +296,7 @@
                                                         parameterAppVersion,
                                                         parameterMSOPassword]
                              type:mso_soap_function_iRegisterCode
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutRegistrationKey];
     
@@ -328,7 +322,7 @@
          
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -413,7 +407,7 @@ static MSOFailureBlock gr_failure_block;
                              urlRequestWithParameters:@[parameterItemNo,
                                                         parameterPin]
                              type:mso_soap_function_checkPhotoFileStatus
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -433,7 +427,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 
@@ -502,7 +496,7 @@ static MSOFailureBlock gr_failure_block;
          
          if (!image) {
              error = [NSError mso_internet_image_download_error:response.URL.lastPathComponent];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -546,7 +540,7 @@ static MSOFailureBlock gr_failure_block;
                              urlRequestWithParameters:@[parameterPin,
                                                         parameterMSOPassword]
                              type:mso_soap_function_getEventList
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -561,7 +555,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -607,7 +601,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterCheckType,
                                                         parameterViewDate]
                              type:mso_soap_function_iCheckMobileMessage
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -654,7 +648,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterCheckType,
                                                         parameterViewDate]
                              type:mso_soap_function_iCheckMobileFileForDownloading
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -669,7 +663,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -725,7 +719,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterCheckType,
                                                         parameterViewDate]
                              type:mso_soap_function_iCheckPDAMessage
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -791,7 +785,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameter]
                              type:mso_soap_function_updateDownloadInfo
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDataRequestKey];
     
@@ -805,7 +799,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -820,7 +814,7 @@ static MSOFailureBlock gr_failure_block;
          
          if (![mso_response.status isEqualToNumber:@2]) {
              error = [NSError mso_internet_request_data_error];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -850,7 +844,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterUsername,
                                                         parameterCheckType]
                              type:mso_soap_function_iCheckPDAHistoryForDownloading
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -861,7 +855,7 @@ static MSOFailureBlock gr_failure_block;
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          if (error) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -922,7 +916,7 @@ static MSOFailureBlock gr_failure_block;
 
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
          
-         [self errorHandler:error response:response failure:failure];
+         [NSError errorHandler:error response:response failure:failure];
          
      }];
     
@@ -950,7 +944,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterLength,
                                                         parameterNewFile]
                              type:mso_soap_function_uploadFile
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutSalesOrderKey];
     
@@ -965,7 +959,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 
@@ -1044,7 +1038,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameter]
                              type:mso_soap_function_updateUploadInfo
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -1058,7 +1052,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 
@@ -1079,7 +1073,7 @@ static MSOFailureBlock gr_failure_block;
          }
         
          error = [NSError mso_internet_upload_processing_error];
-         [self errorHandler:error response:response failure:failure];
+         [NSError errorHandler:error response:response failure:failure];
          
      } failure:failure];
 
@@ -1132,7 +1126,7 @@ static MSOFailureBlock gr_failure_block;
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameter]
                              type:mso_soap_function_updateUploadInfo
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutDataRequestKey];
     
@@ -1146,7 +1140,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1161,7 +1155,7 @@ static MSOFailureBlock gr_failure_block;
          
          if (![mso_response.status isEqualToNumber:@2]) {
              error = [NSError mso_internet_request_data_error];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1190,7 +1184,7 @@ static MSOFailureBlock gr_failure_block;
                              urlRequestWithParameters:@[parameterPin,
                                                         parameterCatalogName]
                              type:mso_soap_function_checkCatalogFileStatus
-                             url:[MSOSDK logicielFTPServiceURL]
+                             url:[NSURL logicielFTPServiceURL]
                              netserver:NO
                              timeout:kMSOTimeoutCatalogKey];
     
@@ -1205,7 +1199,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1215,7 +1209,7 @@ static MSOFailureBlock gr_failure_block;
          if (!catalogs || [catalogs count] == 0) {
              // No data in FTP, return error
              error = [NSError mso_internet_catalog_no_content];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1234,7 +1228,7 @@ static MSOFailureBlock gr_failure_block;
          
          if ([catalogObjects count] == 0) {
              error = [NSError mso_internet_catalog_no_content];
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
@@ -1268,7 +1262,7 @@ static MSOFailureBlock gr_failure_block;
                                                         parameterMSOPassword,
                                                         parameterLogicielApplication]
                              type:mso_soap_function_getCustomersByCompany
-                             url:[MSOSDK logicielCustomerURL]
+                             url:[NSURL logicielCustomerURL]
                              netserver:NO
                              timeout:kMSOTimeoutDefaultKey];
     
@@ -1283,7 +1277,7 @@ static MSOFailureBlock gr_failure_block;
          responseObject = nil;
          
          if (!document) {
-             [self errorHandler:error response:response failure:failure];
+             [NSError errorHandler:error response:response failure:failure];
              return;
          }
 

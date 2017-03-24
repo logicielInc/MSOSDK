@@ -10,6 +10,13 @@
 
 @interface NSURLRequest (MSOSDKAdditions)
 
-- (void)printRequestWithBenchmark:(nullable NSDate *)date headerMessage:(nullable NSString *)headerMessage;
+/**
+ Used for debug purposes. Prints the entire `NSURLRequest` object, from its BODY to URL
+
+ @param date The date to run against when the request has finished being generated
+ @param headerMessage A custom message to print (e.g __PRETTY_FUNCTION)
+ */
+- (void)printRequestWithBenchmark:(nullable NSDate *)date
+                    headerMessage:(nullable NSString *)headerMessage;
 
 @end
