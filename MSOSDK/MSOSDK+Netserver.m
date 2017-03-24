@@ -1845,19 +1845,36 @@
                  return;
              }
              
-             
-             NSURLSessionDataTask *task =
-             [self
-              msoDownloadPurchaseHistory:username
-              customerName:customerName
-              customerZip:customerZip
-              nextId:mso_response.nextId
-              success:success
-              progress:progress
-              failure:failure
-              handler:handler];
-             
-             [task resume];
+             if (mso_response.nextId.length > 0) {
+
+                 NSURLSessionDataTask *task =
+                 [self
+                  msoDownloadPurchaseHistory:username
+                  customerName:customerName
+                  customerZip:customerZip
+                  nextId:mso_response.nextId
+                  success:success
+                  progress:progress
+                  failure:failure
+                  handler:handler];
+                 
+                 [task resume];
+
+             } else {
+                 
+                 if (success) {
+                     if (handler) {
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             success(response, nil);
+                         });
+                     } else {
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             success(response, mso_response);
+                         });
+                     }
+                 }
+                 
+             }
              
          } else {
              
