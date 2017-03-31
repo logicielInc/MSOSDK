@@ -402,14 +402,12 @@
  @param success <#success description#>
  @param progress <#progress description#>
  @param failure <#failure description#>
- @param handler <#handler description#>
  @return <#return value description#>
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProductImage:(nullable NSString *)identifier
                                                             success:(_Nullable MSOSuccessBlock)success
                                                            progress:(_Nullable MSOProgressBlock)progress
-                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                            handler:(_Nullable MSOHandlerBlock)handler;
+                                                            failure:(_Nullable MSOFailureBlock)failure;
 
 /**
  <#Description#>

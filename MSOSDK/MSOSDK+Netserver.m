@@ -615,10 +615,13 @@
              return;
          }
 
+         NSArray *components = [command componentsSeparatedByString:@"^"];
+         MSOSDKResponseNetserverSyncCustomerMapping *mso_response = [MSOSDKResponseNetserverSyncCustomerMapping msosdk_commandWithResponse:components];
          if (success) {
-             success(response, nil);
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, mso_response);
+             });
          }
-         
          
      } failure:failure];
     
@@ -1228,9 +1231,8 @@
 - (NSURLSessionDataTask *)_msoNetserverDownloadProductImage:(NSString *)identifier
                                                     success:(MSOSuccessBlock)success
                                                    progress:(MSOProgressBlock)progress
-                                                    failure:(MSOFailureBlock)failure
-                                                    handler:(MSOHandlerBlock)handler {
-    
+                                                    failure:(MSOFailureBlock)failure {
+
     MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[[NSString stringWithFormat:@"<PHOTOALL>%@", identifier] mso_build_command:nil]
                                                                  forKey:@"str"];
     NSURLRequest *request = [MSOSDK
@@ -1254,27 +1256,31 @@
              return;
          }
          
-         if (handler) {
-             handler(response, command, &error);
-         }
-         
          if (error) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         if (success) {
+
+         NSData* data = [[NSData alloc] initWithBase64EncodedString:command options:kNilOptions];
+         UIImage *image = [UIImage imageWithData:data];
+         if (!image) {
              
-             if (handler) {
+             if (failure) {
+                 error = [NSError mso_internet_image_download_error:identifier];
                  dispatch_async(dispatch_get_main_queue(), ^{
-                     success(response, nil);
-                 });
-             } else {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     success(response, command);
+                     failure(response, error);
                  });
              }
+             return;
              
+         }
+         
+         if (success) {
+         
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, image);
+             });
+
          }
      } failure:failure];
     

@@ -133,6 +133,22 @@
 
 @end
 
+@implementation MSOSDKResponseNetserverSyncCustomerMapping
+
+- (instancetype)initWithCommand:(NSArray *)command {
+
+    self = [super initWithCommand:command];
+    
+    if (self) {
+        self.objectCount = [command mso_safeObjectAtIndex:2];
+        self.data = [self fullData:command breakpoint:3];
+    }
+    return self;
+    
+}
+
+@end
+
 @implementation MSOSDKResponseNetserverSyncProducts
 
 - (instancetype)initWithCommand:(NSArray *)command {
@@ -251,6 +267,9 @@
 - (instancetype)initWithCommand:(NSArray *)command {
     self = [super initWithCommand:command];
     if (self) {
+        self.command = [command mso_safeObjectAtIndex:0];
+        self.status = [command mso_safeObjectAtIndex:1];
+        _objectCount = [command mso_safeObjectAtIndex:2];
         NSUInteger count = [command count];
         NSInteger index = 3;
         if (index < count) {

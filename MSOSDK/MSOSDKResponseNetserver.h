@@ -79,9 +79,13 @@
 @interface MSOSDKResponseNetserverSyncCustomers : MSOSDKResponseNetserverSync
 @end
 
+@interface MSOSDKResponseNetserverSyncCustomerMapping : MSOSDKResponseNetserverSync
+@end
+
 @interface MSOSDKResponseNetserverSyncProducts : MSOSDKResponseNetserverSync
 @property (strong, nonatomic, nullable) NSString *companyId;
 @end
+
 
 @interface MSOSDKResponseNetserverSyncPurchaseHistory : MSOSDKResponseNetserverSync
 - (void)appendCommand:(nullable NSArray *)command;
@@ -115,6 +119,7 @@
 @end
 
 @interface MSOSDKResponseNetserverQueryImages : MSOSDKResponseNetserver
+@property (strong, nonatomic, nullable) NSNumber *objectCount;
 @property (strong, nonatomic, nullable) NSArray <NSString *> *images;
 @end
 

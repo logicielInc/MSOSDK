@@ -688,6 +688,47 @@
     XCTAssertTrue([mso_response.images count] > 0);
 }
 
+- (void)test_msoNetserverFetchAllProductImageReferences_toms_database {
+
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.206"
+                       msoDeviceName:@"MSOTests"
+                  msoDeviceIpAddress:@"72.242.241.52"
+                          msoEventId:@"1217H"
+                         msoPassword:@"logic99"];
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block NSError *err = nil;
+    __block UIImage *image = nil;
+    
+    NSURLSessionTask *task =
+    [sdk
+     _msoNetserverDownloadProductImage:@"86663"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         NSData* data = [[NSData alloc] initWithBase64EncodedString:responseObject options:kNilOptions];
+         image = [UIImage imageWithData:data];
+         
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(image);
+    XCTAssertNotNil(err);
+    
+}
+
 - (void)test_msoNetserverDownloadProductImage {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
