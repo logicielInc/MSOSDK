@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSInteger const kMSOTimeoutDefaultKey;
-
 extern NSInteger const kMSOTimeoutAllImageSyncKey;
 extern NSInteger const kMSOTimeoutCatalogKey;
 extern NSInteger const kMSOTimeoutCustomerSaveKey;

@@ -409,7 +409,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_checkPhotoFileStatus
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
@@ -603,7 +603,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_iCheckMobileMessage
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
@@ -650,7 +650,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_iCheckMobileFileForDownloading
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
@@ -721,7 +721,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_iCheckPDAMessage
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
@@ -846,7 +846,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_iCheckPDAHistoryForDownloading
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
@@ -1043,7 +1043,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_updateUploadInfo
                              url:[NSURL logicielFTPServiceURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
@@ -1267,7 +1267,7 @@ static MSOFailureBlock gr_failure_block;
                              type:mso_soap_function_getCustomersByCompany
                              url:[NSURL logicielCustomerURL]
                              netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
+                             timeout:kMSOTimeoutCustomerSearchKey];
     
     NSURLSessionDataTask *task =
     
