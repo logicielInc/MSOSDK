@@ -854,14 +854,17 @@ static MSOFailureBlock gr_failure_block;
      progress:progress
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
-         if (error) {
+         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
+         responseObject = nil;
+         
+         if (!document) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
+
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, responseObject);
+                 success(response, document);
              });
          }
          

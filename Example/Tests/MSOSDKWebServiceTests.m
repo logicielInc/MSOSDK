@@ -731,4 +731,42 @@
     
 }
 
+- (void)test_msoWebServiceCheckPDAHistoryForDownloading {
+    
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.206"
+                       msoDeviceName:@"MSOTests"
+                  msoDeviceIpAddress:@"72.242.241.52"
+                          msoEventId:@"1217H"
+                         msoPassword:@"logic99"];
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block NSArray *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoWebServiceCheckPDAHistoryForDownloading:@"010"
+     pin:@"20040201"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         [expectation fulfill];
+
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         
+         [expectation fulfill];
+         
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    
+}
+
 @end

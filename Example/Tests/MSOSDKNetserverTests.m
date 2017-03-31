@@ -743,22 +743,14 @@
      _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC3"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
 
-        [expectation fulfill];
+         mso_response = responseObject;
+         [expectation fulfill];
         
     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
         
         err = error;
         [expectation fulfill];
 
-    } handler:^(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
-        
-        NSData* data = [[NSData alloc] initWithBase64EncodedString:responseObject options:kNilOptions];
-        UIImage *image = [UIImage imageWithData:data];
-        mso_response = image;
-        if (!mso_response) {
-            *error = [NSError mso_internet_image_download_error];
-        }
-        
     }];
 
      
@@ -783,23 +775,15 @@
     [sdk
      _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC32"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-        
-        [expectation fulfill];
-        
-    } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-        err = error;
-        [expectation fulfill];
-        
-    } handler:^(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
-       
-        NSData *data = [[NSData alloc] initWithBase64EncodedString:responseObject options:kNilOptions];
-        UIImage *image = [UIImage imageWithData:data];
-        mso_response = image;
-        if (!mso_response) {
-            *error = [NSError mso_internet_image_download_error];
-        }
-        
-    }];
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         err = error;
+         [expectation fulfill];
+         
+     }];
     
     
     [task resume];
@@ -825,6 +809,7 @@
      _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC3"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
         
+         mso_response = responseObject;
         [expectation fulfill];
         
     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
@@ -832,16 +817,7 @@
         err = error;
         [expectation fulfill];
         
-    } handler:^(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error) {
-        
-        NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
-        UIImage *image = [UIImage imageWithData:data];
-        mso_response = image;
-        if (!mso_response) {
-            *error = [NSError mso_internet_image_download_error];
-        }
-        
-    }];
+    }];;
     
     
     [task resume];
