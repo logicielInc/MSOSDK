@@ -8,25 +8,29 @@
 
 #import "MSOSDKConstants.h"
 
-NSInteger const kMSOTimeoutDefaultKey               = 5;
+NSInteger const kMSOTimeoutVeryShortKey     = 5;
+NSInteger const kMSOTimeoutShortKey         = 15;
+NSInteger const kMSOTimeoutRegularKey       = 30;
+NSInteger const kMSOTimeoutLongKey          = 60;
+NSInteger const kMSOTimeoutVeryLongKey      = 90;
 
-NSInteger const kMSOTimeoutAllImageSyncKey          = 90;
-NSInteger const kMSOTimeoutCatalogKey               = 15;
-NSInteger const kMSOTimeoutCustomerSaveKey          = 10;
-NSInteger const kMSOTimeoutCustomersSyncKey         = 30;
-NSInteger const kMSOTimeoutCustomerSearchKey        = 10;
-NSInteger const kMSOTimeoutDataRequestKey           = kMSOTimeoutDefaultKey;
-NSInteger const kMSOTimeoutForgotPassword           = 20;
-NSInteger const kMSOTimeoutImageSyncKey             = 15;
-NSInteger const kMSOTimeoutImageUploadSyncKey       = 60;
-NSInteger const kMSOTimeoutLoginKey                 = 10;
-NSInteger const kMSOTimeoutPingKey                  = 3;
-NSInteger const kMSOTimeoutProductsSyncKey          = 30;
-NSInteger const kMSOTimeoutPurchaseHistoryKey       = 20;
-NSInteger const kMSOTimeoutRetrieveSalesOrderKey    = 30;
-NSInteger const kMSOTimeoutRegistrationKey          = 10;
-NSInteger const kMSOTimeoutSalesOrderKey            = 30;
-NSInteger const kMSOTimeoutScannerKey               = kMSOTimeoutDefaultKey;
-NSInteger const kMSOTimeoutSettingsSyncKey          = 30;
+NSInteger const kMSOTimeoutAllImageSyncKey          = kMSOTimeoutVeryLongKey;
+NSInteger const kMSOTimeoutCatalogKey               = kMSOTimeoutShortKey;
+NSInteger const kMSOTimeoutCustomerSaveKey          = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutCustomersSyncKey         = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutCustomerSearchKey        = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutDataRequestKey           = kMSOTimeoutRegularKey;
+NSInteger const kMSOTimeoutForgotPassword           = kMSOTimeoutShortKey;
+NSInteger const kMSOTimeoutImageSyncKey             = kMSOTimeoutShortKey;
+NSInteger const kMSOTimeoutImageUploadSyncKey       = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutLoginKey                 = kMSOTimeoutShortKey;
+NSInteger const kMSOTimeoutPingKey                  = kMSOTimeoutVeryShortKey;
+NSInteger const kMSOTimeoutProductsSyncKey          = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutPurchaseHistoryKey       = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutRetrieveSalesOrderKey    = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutRegistrationKey          = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutSalesOrderKey            = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutScannerKey               = kMSOTimeoutVeryShortKey;
+NSInteger const kMSOTimeoutSettingsSyncKey          = kMSOTimeoutLongKey;
 
 NSString * const kMSOLogicielHTTPURLKey = @"http://logicielinc.com/PUBLIC/Customer_Auto_FTP/";
