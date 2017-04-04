@@ -194,7 +194,7 @@
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
          data = [data mso_stringBetweenString:@"<iRegisterShortKeyResult>" andString:@"</iRegisterShortKeyResult>"];
-         
+         data = [data mso_unescape];
          if (!data) {
              error = [NSError mso_internet_registration_key_invalid];
              [NSError errorHandler:error response:response failure:failure];

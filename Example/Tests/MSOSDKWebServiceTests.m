@@ -208,6 +208,45 @@
     XCTAssertTrue([mso_response.key isEqualToString:@"A0010012745NODHIV3WU"]);
 }
 
+- (void)test_msoWebServiceRegister_amp_company {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoWebServiceRegisterRep:@"John"
+     accesskey:@"G2FUV"
+     email:@"john@logiciel.com"
+     udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
+     appversion:@"1.5.66"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    
+    [task resume];
+    
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebServiceRegister class]]);
+}
+
 - (void)test_msoWebServiceRegister_fail_invalidkey {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
