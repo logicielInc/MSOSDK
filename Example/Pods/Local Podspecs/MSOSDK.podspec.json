@@ -39,11 +39,6 @@
     },
     {
       "name": "Categories",
-      "dependencies": {
-        "GTMNSStringHTMLAdditions": [
-
-        ]
-      },
       "source_files": "MSOSDK/*+MSOSDKAdditions.{h,m}",
       "public_header_files": "MSOSDK/*+MSOSDKAdditions.{h,m}"
     },
@@ -81,9 +76,6 @@
 
         ],
         "MSOSDK/Categories": [
-
-        ],
-        "SMXMLDocument": [
 
         ]
       },

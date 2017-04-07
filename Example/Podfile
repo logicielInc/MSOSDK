@@ -2,6 +2,7 @@
 
 def reusepods
     pod 'MSOSDK', :path => '../'
+    pod 'SMXMLDocument'
 end
 
 target 'MSOSDK_Example' do

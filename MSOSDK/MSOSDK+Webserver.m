@@ -28,7 +28,7 @@
     MSOSoapParameter *parameterCompanyName = [MSOSoapParameter parameterWithObject:companyname              forKey:@"companyName"];
     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username                 forKey:@"userAccount"];
-    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@"football33"                      forKey:@"userPassword"];
+    MSOSoapParameter *parameterPassword    = [MSOSoapParameter parameterWithObject:@""                      forKey:@"userPassword"];
     MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
     MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"0"                     forKey:@"iType"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
@@ -53,27 +53,15 @@
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         /*
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         responseObject = nil;
-         
-         if (user) {
-             data = [data mso_stringBetweenString:@"<iCheckMobileUserResult>" andString:@"</iCheckMobileUserResult>"];
-         } else {
-             data = [data mso_stringBetweenString:@"<iCheckMobileDeviceResult>" andString:@"</iCheckMobileDeviceResult>"];
-         }
-         
-         NSArray *components = [data componentsSeparatedByString:@","];
-         data = nil;
-         MSOSDKResponseWebserverCredentials *mso_response = [MSOSDKResponseWebserverCredentials msosdk_commandWithResponse:components];
-         components = nil;
-         mso_response.command = user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice;
-         
-         error = [MSOSDKResponseWebserver errorFromStatus:mso_response.status];
-         
-         if (error) {
+         MSOSDKResponseWebserverCredentials *mso_response =
+         [MSOSDKResponseWebserverCredentials
+          msosdk_commandWithResponse:responseObject
+          command:user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -83,7 +71,6 @@
                  success(response, mso_response);
              });
          }
-         */
          
      } failure:failure];
     
@@ -133,11 +120,12 @@
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
          MSOSDKResponseWebserverCredentials *mso_response =
          [MSOSDKResponseWebserverCredentials
-          msosdk_commandWithResponseObject:responseObject
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_iCheckMobileDevice
           error:&error];
 
          if (!mso_response) {
@@ -189,51 +177,18 @@
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         /*
-         NSString *data = [MSOSDK sanatizeData:responseObject];
-         responseObject = nil;
-         data = [data mso_stringBetweenString:@"<iRegisterShortKeyResult>" andString:@"</iRegisterShortKeyResult>"];
-         if (!data) {
-             error = [NSError mso_internet_registration_key_invalid];
+         MSOSDKResponseWebserverRegister *mso_response =
+         [MSOSDKResponseWebserverRegister
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_iRegisterShortKey
+          error:&error];
+         
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         NSArray *components = [data componentsSeparatedByString:@","];
-         NSString *type = @"";
-         if ([components count] >= 1) {
-             type = [components objectAtIndex:0];
-         }
-         
-         // Account Not Found
-         if ([type isEqualToString:@""]) {
-             error = [NSError mso_internet_registration_key_not_found];
-         }
-         
-         // Account In Use
-         if ([type isEqualToString:@"1"]) {
-             error = [NSError mso_internet_registration_key_in_use];
-         }
-         
-         // Account Already Registered with Same Company
-         if ([type isEqualToString:@"2"]) {
-             error = [NSError mso_internet_registration_key_same_company_use];
-         }
-         
-         // Account Not Ready For Use
-         if ([type isEqualToString:@"3"]) {
-             error = [NSError mso_internet_registration_key_not_ready];
-         }
-         
-         if (error) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         MSOSDKResponseWebserverRegister *mso_response = [MSOSDKResponseWebserverRegister msosdk_commandWithResponse:data];
-         data = nil;
          
          if ([mso_response.pin isEqualToString:@"?"]) {
              
@@ -263,7 +218,6 @@
                  success(response, mso_response);
              });
          }
-         */
          
      } failure:failure];
     
@@ -306,31 +260,25 @@
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         responseObject = nil;
-         data = [data mso_stringBetweenString:@"<iRegisterCodeResult>" andString:@"</iRegisterCodeResult>"];
-         NSString *pin = nil;
+         MSOSDKResponseWebserverRegisterCode *mso_code =
+         [MSOSDKResponseWebserverRegisterCode
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_iRegisterCode
+          error:&error];
          
-         if ([data isEqualToString:@""] || !data) {
-             error = [NSError mso_internet_registration_key_unlock_code_error];
-         } else if ([data isEqualToString:@"1"]) {
-             error = [NSError mso_internet_registration_key_disabled_or_inuse];
-         } else {
-             //will return fullCDS instead if ([returnFromService isEqualToString:@"2"]) {
-             pin = [[data componentsSeparatedByString:@"-"] objectAtIndex:2];
-         }
-         
-         
-         if (error) {
+         if (!mso_code) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
+         NSString *pin = mso_code.pin;
+         
          if (pin) {
              
-             MSOSDKResponseWebserverRegister *mso_response = [[MSOSDKResponseWebserverRegister alloc] init];
+             MSOSDKResponseWebserverRegister *mso_response = [MSOSDKResponseWebserverRegister new];
+             mso_response.command = mso_soap_function_iRegisterShortKey;
              mso_response.pin = pin;
              mso_response.key = accesskey;
              mso_response.rep = username;
@@ -418,52 +366,37 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
      
-         /*
-          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-          responseObject = nil;
-          data = [data mso_stringBetweenString:@"<_CheckPhotoFileStatusResult>" andString:@"</_CheckPhotoFileStatusResult>"];
-          */
+         MSOSDKResponseWebserverPhotoResponse *mso_response =
+         [MSOSDKResponseWebserverPhotoResponse
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_checkPhotoFileStatus
+          error:&error];
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *parentPhotos = [element firstObject];
-         SMXMLElement *potentialPhotos = [parentPhotos descendantWithPath:@"_CheckPhotoFileStatusResponse._CheckPhotoFileStatusResult"];
-         NSArray <NSString *> *photos = [[potentialPhotos children] valueForKey:@"value"];
-         
-         NSMutableArray <MSOSDKResponseWebserverPhotoDetails *> * photoDetails = [NSMutableArray array];
-         
          NSString *string = [NSString stringWithFormat:@"^%@(-[0-9]+)?\\.(jpg|jpeg|png)$", itemNo];
          NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES [cd] %@", string];
-         
-         if (photos) {
+         NSMutableArray *filtered = [NSMutableArray arrayWithCapacity:[mso_response.responseData count]];
+         for (MSOSDKResponseWebserverPhotoDetails *details in mso_response.responseData) {
              
-             for (NSString *photo in photos) {
-                 
-                 MSOSDKResponseWebserverPhotoDetails *photoDetail = [MSOSDKResponseWebserverPhotoDetails detailsWithValue:photo];
-                 
-                 if (![predicate evaluateWithObject:photoDetail.filename]) {
-                     photoDetail = nil;
-                     continue;
-                 }
-                 
-                 [photoDetails addObject:photoDetail];
-                 
+             if (![predicate evaluateWithObject:details.filename]) {
+                 continue;
              }
+             
+             [filtered addObject:details];
              
          }
          
+         mso_response.responseData = [filtered copy];
+         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, photoDetails);
+                 success(response, mso_response);
              });
          }
          
@@ -494,7 +427,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
          UIImage *image = [UIImage imageWithData:responseObject];
          
@@ -520,6 +453,7 @@ static MSOFailureBlock gr_failure_block;
                               progress:(MSOProgressBlock)progress
                                failure:(MSOFailureBlock)failure {
     
+    
     NSString *hostname = @"ftp://ftp.logicielinc.com";
     NSString *username = @"manager";
     NSString *password = @"Log-8910";
@@ -536,54 +470,57 @@ static MSOFailureBlock gr_failure_block;
     gr_progress_block = [progress copy];
     gr_failure_block = [failure copy];
     
+    
     /*
-     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
-     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
-     
-     NSURLRequest *request = [MSOSDK
+    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
+    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
+    
+    NSURLRequest *request =
+    [MSOSDK
      urlRequestWithParameters:@[parameterPin,
-     parameterMSOPassword]
+                                parameterMSOPassword]
      type:mso_soap_function_getEventList
      url:[NSURL logicielCustomerURL]
      netserver:NO
-     timeout:kMSOTimeoutDefaultKey];
-     
-     NSURLSessionDataTask *task =
-     
-     [self
+     timeout:kMSOTimeoutDataRequestKey];
+    
+    NSURLSessionDataTask *task =
+    
+    [self
      dataTaskForWebserverWithRequest:request
      progress:progress
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-     
-     SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-     responseObject = nil;
-     
-     if (!document) {
-     [NSError errorHandler:error response:response failure:failure];
-     return;
-     }
-     
-     NSArray <SMXMLElement *> *element = document.children;
-     SMXMLElement *parent = [element firstObject];
-     SMXMLElement *eventObjects = [parent descendantWithPath:@"GetEventListResponse.GetEventListResult"];
-     NSArray <SMXMLElement *> *events = [eventObjects children];
-     
-     NSMutableArray *eventsFormatted = [NSMutableArray array];
-     for (SMXMLElement *event in events) {
-     [eventsFormatted addObject:event.value];
-     }
-     
-     if (success) {
-     dispatch_async(dispatch_get_main_queue(), ^{
-     success(response, eventsFormatted);
-     });
-     }
-     
+         
+         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
+         responseObject = nil;
+         
+         if (!document) {
+             [NSError errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         NSArray <SMXMLElement *> *element = document.children;
+         SMXMLElement *parent = [element firstObject];
+         SMXMLElement *eventObjects = [parent descendantWithPath:@"GetEventListResponse.GetEventListResult"];
+         NSArray <SMXMLElement *> *events = [eventObjects children];
+         
+         NSMutableArray *eventsFormatted = [NSMutableArray array];
+         for (SMXMLElement *event in events) {
+             [eventsFormatted addObject:event.value];
+         }
+         
+         if (success) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, eventsFormatted);
+             });
+         }
+         
      } failure:failure];
-     [task resume];
-     */
     
-    //return task;
+    [task resume];
+    
+    return task;
+    */
 }
 
 #pragma mark Check For Files
@@ -615,13 +552,11 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         responseObject = nil;
-         data = [data mso_stringBetweenString:@"<_iCheckMobileMessageResult>" andString:@"</_iCheckMobileMessageResult>"];
+         responseObject = [responseObject mso_stringBetweenString:@"<_iCheckMobileMessageResult>" andString:@"</_iCheckMobileMessageResult>"];
          
-         NSNumber *numberOfFile = @([data integerValue]);
+         NSNumber *numberOfFile = @([responseObject integerValue]);
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -663,37 +598,19 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
+         MSOSDKResponseWebserverFilesToDownload *mso_response =
+         [MSOSDKResponseWebserverFilesToDownload
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_iCheckMobileFileForDownloading
+          error:&error];
          
-         if (!document) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         MSOSDKResponseWebserverFilesToDownload *mso_response = [MSOSDKResponseWebserverFilesToDownload new];
-         mso_response.command = mso_soap_function_iCheckMobileFileForDownloading;
-         
-         
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *parent = [element firstObject];
-         SMXMLElement *child = [parent descendantWithPath:@"_iCheckMobileFileForDownloadingResponse"];
-         SMXMLElement *filesToDownload = [child descendantWithPath:@"_iCheckMobileFileForDownloadingResult"];
-         NSArray <SMXMLElement *> *files = [filesToDownload children];
-         SMXMLElement *updatedDate = [child descendantWithPath:@"sLastUpdateDate"];
-         NSString *updatedDateFormatted = updatedDate.value;
-         mso_response.files = [NSArray array];
-         
-         for (SMXMLElement *file in files) {
-             NSString *value = file.value;
-             mso_response.files = [mso_response.files arrayByAddingObject:value];
-         }
-         
-         NSDate *dateFormatted = [updatedDateFormatted mso_dateFromString];
-         mso_response.dateUpdated = dateFormatted;
-         
+
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, mso_response);
@@ -735,7 +652,7 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
          //NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          
@@ -801,27 +718,15 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
+         MSOSDKResponseWebserverRequestData *mso_response =
+         [MSOSDKResponseWebserverRequestData
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_updateDownloadInfo
+          error:&error];
          
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *statusResponse = [element firstObject];
-         SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateDownloadInfoResponse._UpdateDownloadInfoResult"];
-         NSString *formattedStatus = statusResponseFormatted.value;
-         
-         MSOSDKResponseWebserverRequestData *mso_response = [MSOSDKResponseWebserverRequestData new];
-         mso_response.status = @([formattedStatus integerValue]);
-         mso_response.command = mso_soap_function_updateDownloadInfo;
-         
-         if (![mso_response.status isEqualToNumber:@2]) {
-             error = [NSError mso_internet_request_data_error];
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -861,19 +766,11 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
-         
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, document);
+                 success(response, responseObject);
              });
          }
          
@@ -966,36 +863,22 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
+         MSOSDKResponseWebserverRequestData *mso_response =
+         [MSOSDKResponseWebserverRequestData
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_updateUploadInfo
+          error:&error];
          
-         if (!document) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *statusResponse = [element firstObject];
-         SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UploadFileResponse._UploadFileResult"];
-         NSString *formattedStatus = statusResponseFormatted.value;
-         
-         if (![formattedStatus boolValue]) {
-             
-             if (failure) {
-                 error = [NSError mso_internet_upload_processing_error];
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     failure(response, error);
-                 });
-             }
-             return;
-             
-         }
-         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, @1);
+                 success(response, mso_response);
              });
          }
          
@@ -1060,34 +943,26 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
          
-         if (!document) {
+         MSOSDKResponseWebserverRequestData *mso_response =
+         [MSOSDKResponseWebserverRequestData
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_updateUploadInfo
+          error:&error];
+         
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *statusResponse = [element firstObject];
-         SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateUploadInfoResponse._UpdateUploadInfoResult"];
-         NSString *formattedStatus = statusResponseFormatted.value;
-         
-         if ([formattedStatus isEqualToString:@"2"]) {
-             
-             if (success) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     success(response, @1);
-                 });
-             }
-             return;
-             
+         if (success) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, mso_response);
+             });
          }
          
-         error = [NSError mso_internet_upload_processing_error];
-         [NSError errorHandler:error response:response failure:failure];
          
      } failure:failure];
     
@@ -1134,8 +1009,7 @@ static MSOFailureBlock gr_failure_block;
         [command appendFormat:@"<string>%@</string>", str];
     }
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command
-                                                                 forKey:@"allInfo"];
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command forKey:@"allInfo"];
     
     NSURLRequest *request =
     [MSOSDK
@@ -1149,29 +1023,16 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         /*
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *statusResponse = [element firstObject];
-         SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateUploadInfoResponse._UpdateUploadInfoResult"];
-         NSString *formattedStatus = statusResponseFormatted.value;
-         
-         MSOSDKResponseWebserverRequestData *mso_response = [MSOSDKResponseWebserverRequestData msosdk_commandWithResponse:nil];
-         mso_response.status = @([formattedStatus integerValue]);
-         mso_response.command = mso_soap_function_updateUploadInfo;
-         
-         if (![mso_response.status isEqualToNumber:@2]) {
-             error = [NSError mso_internet_request_data_error];
-             [NSError errorHandler:error response:response failure:failure];
+         MSOSDKResponseWebserverRequestData *mso_response =
+         [MSOSDKResponseWebserverRequestData
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_updateUploadInfo
+          error:&error];
+
+         if (!mso_response) {
+             [NSError errorHandler:[NSError mso_internet_request_data_error] response:response failure:failure];
              return;
          }
          
@@ -1180,7 +1041,6 @@ static MSOFailureBlock gr_failure_block;
                  success(response, mso_response);
              });
          }
-         */
          
      } failure:failure];
     
@@ -1211,52 +1071,24 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         /*
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
+         MSOSDKResponseWebserverCatalogResponse *mso_response =
+         [MSOSDKResponseWebserverCatalogResponse
+          msosdk_commandWithResponse:responseObject
+          command:mso_soap_function_checkCatalogFileStatus
+          error:&error];
          
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         SMXMLElement *element = [document descendantWithPath:@"Body._CheckCatalogFileStatusResponse._CheckCatalogFileStatusResult"];
-         NSArray <SMXMLElement *> *catalogs = [element children];
-         
-         if (!catalogs || [catalogs count] == 0) {
-             // No data in FTP, return error
-             error = [NSError mso_internet_catalog_no_content];
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSMutableArray *catalogObjects = [NSMutableArray array];
-         
-         for (SMXMLElement *catalog in catalogs) {
-             
-             NSString *value = catalog.value;
-             NSArray* components = [value componentsSeparatedByString:@"]["];
-             if ([components count] > 2) {
-                 MSOSDKResponseWebserverCatalog *catalogObject = [MSOSDKResponseWebserverCatalog msosdk_commandWithResponse:components];
-                 [catalogObjects addObject:catalogObject];
-             }
-             
-         }
-         
-         if ([catalogObjects count] == 0) {
-             error = [NSError mso_internet_catalog_no_content];
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, catalogObjects);
+                 success(response, mso_response);
              });
          }
-         */
          
      } failure:failure];
     
@@ -1292,23 +1124,8 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         //         SMXMLElement *element = [document descendantWithPath:@"Body.GetCustomersByCompanyResponse.GetCustomersByCompanyResult"];
-         
-         if (success) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, nil);
-             });
-         }
          
      } failure:failure];
     

@@ -423,8 +423,14 @@ static NSString * authPassword;
          } else if (requestType == kMSOSDKRequestTypeWebserver) {
              
              sanatizedResponse = [responseObject sanatizeDataForWebServiceResponse];
-             if (success) {
-                 success(response, sanatizedResponse, nil);
+             if (!sanatizedResponse) {
+                 if (success) {
+                     success(response, responseObject, nil);
+                 }
+             } else {
+                 if (success) {
+                     success(response, sanatizedResponse, nil);
+                 }
              }
 
          } else {
@@ -455,7 +461,7 @@ static NSString * authPassword;
 
 - (NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(NSURLRequest *)request
                                                  progress:(MSOProgressBlock)progress
-                                                  success:(void (^)(NSURLResponse *, NSString *, NSError *))success
+                                                  success:(void (^)(NSURLResponse *, id, NSError *))success
                                                   failure:(void (^)(NSURLResponse *, NSError *))failure {
     
     return [self

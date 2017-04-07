@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "MSOSDKConstants.h"
-#import <SMXMLDocument/SMXMLDocument.h>
 
 #import "NSString+MSOSDKAdditions.h"
 #import "NSError+MSOSDKAdditions.h"
@@ -43,6 +42,10 @@
 @property (strong, nonatomic, nullable) NSString *cds;
 @end
 
+@interface MSOSDKResponseWebserverRegisterCode : MSOSDKResponseWebserver
+@property (strong, nonatomic, nullable) NSString *pin;
+@end
+
 @interface MSOSDKResponseWebserverRequestData : MSOSDKResponseWebserver
 @property (strong, nonatomic, nullable) NSNumber *status;
 @end
@@ -57,15 +60,24 @@
 @property (strong, nonatomic, nullable) NSString *data;
 @end
 
-@interface MSOSDKResponseWebserverCatalog : MSOSDKResponseWebserver;
+@interface MSOSDKResponseWebserverCatalogDetails : MSOSDKResponseWebserver;
 @property (strong, nonatomic, nullable) NSString *filename;
 @property (strong, nonatomic, nullable) NSDate *dateUpdated;
 @property (strong, nonatomic, nullable) NSNumber *filesize;
 @end
 
-@interface MSOSDKResponseWebserverPhotoDetails : NSObject
+@interface MSOSDKResponseWebserverCatalogResponse : MSOSDKResponseWebserver;
+@property (strong, nonatomic, nullable) NSArray <MSOSDKResponseWebserverCatalogDetails *> *catalogDetails;
+@end
+
+@interface MSOSDKResponseWebserverPhotoDetails : MSOSDKResponseWebserver
 @property (strong, nonatomic, nullable) NSString *filename;
 @property (strong, nonatomic, nullable) NSDate *dateUploaded;
-@property (strong, nonatomic, nullable) NSString *id;
-+ (nullable instancetype)detailsWithValue:(nullable NSString *)value;
+@property (strong, nonatomic, nullable) NSNumber *filesize;
 @end
+
+@interface MSOSDKResponseWebserverPhotoResponse : MSOSDKResponseWebserver
+@property (strong, nonatomic, nullable) NSArray <MSOSDKResponseWebserverPhotoDetails *> *responseData;
+@end
+
+

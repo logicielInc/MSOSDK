@@ -8,8 +8,6 @@
 
 #import "MSOSDKMaster.h"
 
-#import <SMXMLDocument/SMXMLDocument.h>
-
 #import "GRRequestProtocol.h"
 #import "MSOSDKResponseWebserver.h"
 

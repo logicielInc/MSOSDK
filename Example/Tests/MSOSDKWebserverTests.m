@@ -123,7 +123,7 @@
      accesskey:@"A0020010138LA4YUKQS3"
      udid:@"7D7DE0A1-AAB2-4F14-AD8C-7C2A34FE2F20"
      pin:@"20150731"
-     companyname:@"Acme Inc"
+     companyname:@"Acme & Inc"
      appversion:@"1.5.64.16302"
      user:YES
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -206,45 +206,6 @@
     XCTAssertTrue([mso_response.company isEqualToString:@"Testing1"]);
     XCTAssertTrue([mso_response.rep isEqualToString:@"John"]);
     XCTAssertTrue([mso_response.key isEqualToString:@"A0010012745NODHIV3WU"]);
-}
-
-- (void)test_msoWebserverRegister_amp_company {
-    
-    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
-    
-    MSOSDK *sdk = [MSOSDK sharedSession];
-    
-    __block MSOSDKResponseWebserverRegister *mso_response = nil;
-    __block NSError *err = nil;
-    
-    NSURLSessionDataTask *task =
-    [sdk
-     _msoWebserverRegisterRep:@"John"
-     accesskey:@"G2FUV"
-     email:@"john@logiciel.com"
-     udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
-     appversion:@"1.5.66"
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-         
-         mso_response = responseObject;
-         [expectation fulfill];
-         
-     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-         
-         err = error;
-         [expectation fulfill];
-         
-     }];
-    
-    
-    [task resume];
-    
-    
-    [self waitForExpectationsWithLongTimeout];
-    
-    XCTAssertNil(err);
-    XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebserverRegister class]]);
 }
 
 - (void)test_msoWebserverRegister_fail_invalidkey {
@@ -363,7 +324,7 @@
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
+    __block MSOSDKResponseWebserverPhotoResponse *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
@@ -388,7 +349,7 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response count] == 1);
+    XCTAssertTrue([mso_response.responseData count] == 1);
 }
 
 - (void)test_msoWebserverPhotoFileStatus_noresults {
@@ -397,7 +358,7 @@
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
+    __block MSOSDKResponseWebserverPhotoResponse *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
@@ -422,7 +383,7 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response count] == 0);
+    XCTAssertTrue([mso_response.responseData count] == 0);
 }
 
 - (void)test_msoWebserverPhotoFileStatus_chineselaundry {
@@ -431,7 +392,7 @@
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
+    __block MSOSDKResponseWebserverPhotoResponse *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
@@ -456,7 +417,7 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response count] == 1);
+    XCTAssertTrue([mso_response.responseData count] == 1);
 }
 
 - (void)test_msoWebserverDownloadPhoto {
@@ -753,13 +714,11 @@
          mso_response = responseObject;
          [expectation fulfill];
          
-     } progress:^(NSProgress * _Nonnull progress) {
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
          
-         NSLog(@"%@", progress);
-         
-     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
          err = error;
          [expectation fulfill];
+
      }];
     
     
@@ -782,7 +741,7 @@
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray *mso_response = nil;
+    __block NSString *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
@@ -791,10 +750,12 @@
      pin:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
+         mso_response = responseObject;
          [expectation fulfill];
          
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
          
+         err = error;
          [expectation fulfill];
          
      }];
@@ -807,5 +768,75 @@
     XCTAssertNotNil(mso_response);
     
 }
+
+- (void)test_msoWebserverDownloadCatalog_without_clickable {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseWebserverCatalogResponse *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoWebserverFetchCatalog:@"ibolili"
+     pin:@"20040201"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    XCTAssertTrue([mso_response.catalogDetails count] == 2);
+}
+
+- (void)test_msoWebserverDownloadCatalog_with_clickable {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseWebserverCatalogResponse *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoWebserverFetchCatalog:@"AREAWARE"
+     pin:@"20040201"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+    XCTAssertTrue([mso_response.catalogDetails count] == 2);
+}
+
+
 
 @end

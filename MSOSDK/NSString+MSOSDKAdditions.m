@@ -8,8 +8,6 @@
 
 #import "NSString+MSOSDKAdditions.h"
 
-#import <GTMNSStringHTMLAdditions/GTMNSString+HTML.h>
-
 @implementation NSString (MSOSDKAdditions)
 
 - (instancetype)mso_build_command:(NSArray *)parameters {
@@ -61,7 +59,7 @@
 }
 
 
-+ (NSDate *)dateFromString {
+- (NSDate *)mso_dateFromString {
     NSDate *string = [[NSDateFormatter mso_mediumDateFormatter] dateFromString:self];
     return string;
 }

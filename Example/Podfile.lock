@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - GTMNSStringHTMLAdditions (0.2.1)
   - MSOSDK (0.1.0):
     - MSOSDK/Categories (= 0.1.0)
     - MSOSDK/Constants (= 0.1.0)
@@ -22,8 +21,7 @@ PODS:
     - MSOSDK/Master (= 0.1.0)
     - MSOSDK/Networking (= 0.1.0)
     - MSOSDK/Objects (= 0.1.0)
-  - MSOSDK/Categories (0.1.0):
-    - GTMNSStringHTMLAdditions
+  - MSOSDK/Categories (0.1.0)
   - MSOSDK/Constants (0.1.0)
   - MSOSDK/External (0.1.0)
   - MSOSDK/Master (0.1.0):
@@ -35,13 +33,13 @@ PODS:
     - MSOSDK/External
     - MSOSDK/Master
     - MSOSDK/Objects
-    - SMXMLDocument
   - MSOSDK/Objects (0.1.0):
     - MSOSDK/Constants
   - SMXMLDocument (1.1)
 
 DEPENDENCIES:
   - MSOSDK (from `../`)
+  - SMXMLDocument
 
 EXTERNAL SOURCES:
   MSOSDK:
@@ -49,10 +47,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  GTMNSStringHTMLAdditions: 4bfc402b1b17165360728083156cae0a74ecb308
-  MSOSDK: b5ed18d3ac74c68be9619231a26bc234e9a61583
+  MSOSDK: 89e2324119997a807784499333debd38e9fa2690
   SMXMLDocument: e0d9fbf726a2a0921871b492966458acb3ad9689
 
-PODFILE CHECKSUM: 6e8f5d316b1eb9edd654d0421d26c3742284ad05
+PODFILE CHECKSUM: 6f6ee4b534c06be7643f98f84f3b1f29ca5e7955
 
 COCOAPODS: 1.1.1

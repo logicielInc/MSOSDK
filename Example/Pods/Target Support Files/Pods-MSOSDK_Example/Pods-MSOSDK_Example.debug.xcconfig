@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/GTMNSStringHTMLAdditions" "${PODS_ROOT}/Headers/Public/MSOSDK" "${PODS_ROOT}/Headers/Public/SMXMLDocument"
-LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking-iOS9.3" "$PODS_CONFIGURATION_BUILD_DIR/GTMNSStringHTMLAdditions-iOS9.3" "$PODS_CONFIGURATION_BUILD_DIR/MSOSDK-iOS9.3" "$PODS_CONFIGURATION_BUILD_DIR/SMXMLDocument-iOS9.3"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/GTMNSStringHTMLAdditions" -isystem "${PODS_ROOT}/Headers/Public/MSOSDK" -isystem "${PODS_ROOT}/Headers/Public/SMXMLDocument"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking-iOS9.3" -l"GTMNSStringHTMLAdditions-iOS9.3" -l"MSOSDK-iOS9.3" -l"SMXMLDocument-iOS9.3" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/MSOSDK" "${PODS_ROOT}/Headers/Public/SMXMLDocument"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking-iOS9.3" "$PODS_CONFIGURATION_BUILD_DIR/MSOSDK-iOS9.3" "$PODS_CONFIGURATION_BUILD_DIR/SMXMLDocument-iOS9.3"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/MSOSDK" -isystem "${PODS_ROOT}/Headers/Public/SMXMLDocument"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking-iOS9.3" -l"MSOSDK-iOS9.3" -l"SMXMLDocument-iOS9.3" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}/Pods
