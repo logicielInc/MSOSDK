@@ -12,23 +12,90 @@
 #import "NSString+MSOSDKAdditions.h"
 
 @implementation MSOSDKResponseNetserver
-+ (instancetype)msosdk_commandWithResponse:(NSArray *)response {
-    return [[self alloc] initWithCommand:response];
+
++ (instancetype)msosdk_commandWithResponse:(NSString *)response error:(NSError **)error {
+
+    if ([response hasPrefix:@"Invalid Login:"] ||
+        [response hasSuffix:@"Invalid ID/Password or Access Level."]) {
+        
+        *error = [NSError mso_internet_login_credientials_invalid];
+        return nil;
+    }
+    
+    if ([response hasPrefix:@"Invalid Event:"]) {
+        *error = [NSError mso_netserver_event_invalid];
+        return nil;
+    }
+
+    if ([response containsString:@"OutOfMemoryException"]) {
+        *error = [NSError mso_netserver_out_of_memory_exception_error];
+        return nil;
+    }
+    
+    if ([response hasPrefix:@"Invalid Event."]) {
+
+        NSString *eventId = [response mso_stringBetweenString:@"[" andString:@"]"];
+        
+        NSUInteger position = [response rangeOfString:@"]"].location + 2;
+        NSUInteger length = [response length] - position;
+        NSRange range = NSMakeRange(position, length);
+        
+        NSString *eventName = [response substringWithRange:range];
+
+        *error = [NSError mso_netserver_event_invalid_with_eventName:eventName eventId:eventId];        
+        return nil;
+    }
+    
+    if ([response isEqualToString:@"Photo Not Found"]) {
+        *error = [NSError mso_netserver_image_not_found_error];
+        return nil;
+    }
+    
+    NSArray *components = [response componentsSeparatedByString:@"^"];
+    return [[self alloc] initWithResponse:components];
 }
 
-- (instancetype)initWithCommand:(NSArray *)command {
+- (instancetype)initWithResponse:(NSArray *)response {
     self = [super init];
     if (self) {
-        _command = [command mso_safeObjectAtIndex:0];
-        _status = [command mso_safeObjectAtIndex:1];
+        
+        _command = [response mso_safeObjectAtIndex:0];
+        
+        if ([_command isEqualToString:@"iPad connection terminated"]) {
+            _status = @"OK";
+            return self;
+        }
+        
+        _status = [response mso_safeObjectAtIndex:1];
+
+        if ([response count] > 2) {
+            _trailingResponse = [response subarrayWithRange:NSMakeRange(2, [response count] - 2)];
+        }
+        
     }
     return self;
+}
+
++ (instancetype)msosdk_commandWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    return [[self alloc] initWithResponseObject:responseObject error:error];
+}
+
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super init];
+    if (self) {
+        _command = [responseObject command];
+        _status = [responseObject status];
+        _trailingResponse = [responseObject trailingResponse];
+    }
+    
+    return self;
+    
 }
 
 - (NSString *)fullData:(NSArray *)command breakpoint:(NSUInteger)breakpoint {
     if ([command count] > breakpoint + 1) {
         NSArray *subArray = [command subarrayWithRange:NSMakeRange(breakpoint, [command count] - breakpoint)];
-        return [subArray componentsJoinedByString:@""];
+        return [subArray componentsJoinedByString:@"^"];
     } else {
         return [command mso_safeObjectAtIndex:breakpoint];
     }
@@ -38,63 +105,98 @@
 
 @implementation MSOSDKResponseNetserverProductsCount
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _productCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
+
+        NSArray <NSString *> *response = responseObject.trailingResponse;
+        if (response) {
+            _productCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+        }
+
     }
     return self;
+
 }
 
 @end
 
 @implementation MSOSDKResponseNetserverSaveCustomer
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _objectsSavedCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        _mainstoreNumber = [command mso_safeObjectAtIndex:3];
-        _accountNumber = [command mso_safeObjectAtIndex:4];
-        _terms = [command mso_safeObjectAtIndex:5];
-        _something = @([[command mso_safeObjectAtIndex:6] integerValue]);
+
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            _objectsSavedCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+            _mainstoreNumber = [response mso_safeObjectAtIndex:1];
+            _accountNumber = [response mso_safeObjectAtIndex:2];
+            _terms = [response mso_safeObjectAtIndex:3];
+            _priceLevel = @([[response mso_safeObjectAtIndex:4] integerValue]);
+            
+        }
+
     }
     return self;
+
 }
 
 @end
 
 @implementation MSOSDKResponseNetserverUpdateCustomer
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _objectsSavedCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        _message = [command mso_safeObjectAtIndex:3];
+
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            _objectsSavedCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+            
+            NSString *message = [response mso_safeObjectAtIndex:1];
+            if (!message || [message isEqualToString:@"No Customer Updated."]) {
+                *error = [NSError mso_netserver_customer_query_not_found_error];
+                return nil;
+            }
+            
+            _message = message;
+            
+        }
+
     }
     return self;
+
 }
 
 @end
 
 @implementation MSOSDKResponseNetserverSaveCustomerShippingAddress
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _customerName = [command mso_safeObjectAtIndex:7];
-        _contactName = [command mso_safeObjectAtIndex:8];
-        _address1 = [command mso_safeObjectAtIndex:9];
-        _address2 = [command mso_safeObjectAtIndex:10];
-        _city = [command mso_safeObjectAtIndex:11];
-        _state = [command mso_safeObjectAtIndex:12];
-        _zip = [command mso_safeObjectAtIndex:13];
-        _country = [command mso_safeObjectAtIndex:14];
-        _phone = [command mso_safeObjectAtIndex:15];
-        _fax = [command mso_safeObjectAtIndex:16];
-        _email = [command mso_safeObjectAtIndex:17];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            _customerName = [response mso_safeObjectAtIndex:5];
+            _contactName = [response mso_safeObjectAtIndex:6];
+            _address1 = [response mso_safeObjectAtIndex:7];
+            _address2 = [response mso_safeObjectAtIndex:8];
+            _city = [response mso_safeObjectAtIndex:9];
+            _state = [response mso_safeObjectAtIndex:10];
+            _zip = [response mso_safeObjectAtIndex:11];
+            _country = [response mso_safeObjectAtIndex:12];
+            _phone = [response mso_safeObjectAtIndex:13];
+            _fax = [response mso_safeObjectAtIndex:14];
+            _email = [response mso_safeObjectAtIndex:15];
+            
+        }
     }
     return self;
+
 }
 
 @end
@@ -105,43 +207,94 @@
 
 @implementation MSOSDKResponseNetserverSyncSettings
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        NSString *index = [command mso_safeObjectAtIndex:2];
-        NSArray *components = [index componentsSeparatedByString:@"|"];
-        self.objectCount = @([[components mso_safeObjectAtIndex:0] integerValue]);
-        self.nextIndex = [components mso_safeObjectAtIndex:1];
-        self.data = [self fullData:command breakpoint:3];
+
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            NSString *index = [response mso_safeObjectAtIndex:0];
+            NSArray *components = [index componentsSeparatedByString:@"|"];
+            self.objectCount = @([[components mso_safeObjectAtIndex:0] integerValue]);
+            self.nextIndex = [components mso_safeObjectAtIndex:1];
+            self.data = [self fullData:response breakpoint:1];
+            
+        }
+
     }
+    
     return self;
+
 }
 
 @end
 
 @implementation MSOSDKResponseNetserverSyncCustomers
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        self.objectCount = [command mso_safeObjectAtIndex:2];
-        self.nextIndex = [command mso_safeObjectAtIndex:3];
-        self.data = [self fullData:command breakpoint:4];
+
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            self.objectCount = [response mso_safeObjectAtIndex:0];
+            self.nextIndex = [response mso_safeObjectAtIndex:1];
+            self.data = [self fullData:response breakpoint:2];
+            
+        }
+
     }
+    
     return self;
 }
 
 @end
 
-@implementation MSOSDKResponseNetserverSyncCustomerMapping
+@implementation MSOSDKResponseNetserverSyncSaveCustomerMapping
 
-- (instancetype)initWithCommand:(NSArray *)command {
-
-    self = [super initWithCommand:command];
-    
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        self.objectCount = [command mso_safeObjectAtIndex:2];
-        self.data = [self fullData:command breakpoint:3];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            if ([response containsObject:@"No Auto-Mapping Created."]) {
+                
+                *error = [NSError mso_netserver_auto_mapping_not_created_error];
+                return nil;
+                
+            }
+            
+            self.objectCount = [response mso_safeObjectAtIndex:0];
+            self.data = [self fullData:response breakpoint:1];
+        }        
+    }
+    return self;
+    
+}
+
+@end
+
+@implementation MSOSDKResponseNetserverSyncUpdateCustomerMapping
+
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
+    if (self) {
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            
+            if ([response containsObject:@" *****Error Message: Index was outside the bounds of the array."]) {
+                            
+                *error = [NSError mso_netserver_auto_mapping_update_error];
+                return nil;
+                
+            }
+            
+            self.objectCount = [response mso_safeObjectAtIndex:0];
+            self.data = [self fullData:response breakpoint:1];
+        }
     }
     return self;
     
@@ -151,13 +304,16 @@
 
 @implementation MSOSDKResponseNetserverSyncProducts
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        self.objectCount = [command mso_safeObjectAtIndex:2];
-        _companyId = [command mso_safeObjectAtIndex:3];
-        self.nextIndex = [command mso_safeObjectAtIndex:4];
-        self.data = [self fullData:command breakpoint:5];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            self.objectCount = [response mso_safeObjectAtIndex:0];
+            _companyId = [response mso_safeObjectAtIndex:1];
+            self.nextIndex = [response mso_safeObjectAtIndex:2];
+            self.data = [self fullData:response breakpoint:3];
+        }
     }
     return self;
 }
@@ -166,20 +322,26 @@
 
 @implementation MSOSDKResponseNetserverSyncPurchaseHistory
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        self.objectCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        _nextId = [command mso_safeObjectAtIndex:4];
-        _detailLoop = [command mso_safeObjectAtIndex:5];
-        self.data = [self fullData:command breakpoint:6];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            self.objectCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+            _nextId = [response mso_safeObjectAtIndex:2];
+            _detailLoop = [response mso_safeObjectAtIndex:3];
+            self.data = [self fullData:response breakpoint:4];
+        }
     }
     return self;
 }
 
-- (void)appendCommand:(NSArray *)command {
-    self.detailLoop = @([[command mso_safeObjectAtIndex:2] integerValue]);
-    self.data = [self.data stringByAppendingString:[command mso_safeObjectAtIndex:3]];
+- (void)mso_appendResponseObject:(MSOSDKResponseNetserverSyncPurchaseHistory *)responseObject {
+    self.command = responseObject.command;
+    self.status = responseObject.status;
+    NSArray <NSString *> *command = responseObject.trailingResponse;
+    self.detailLoop = @([[command mso_safeObjectAtIndex:0] integerValue]);
+    self.data = [self.data stringByAppendingString:[command mso_safeObjectAtIndex:1]];
 }
 
 @end
@@ -187,25 +349,31 @@
 
 @implementation MSOSDKResponseNetserverQuery
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _pages = [command mso_safeObjectAtIndex:2];
-        _data = [self fullData:command breakpoint:3];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            self.pages = [response mso_safeObjectAtIndex:0];
+            self.data = [self fullData:response breakpoint:1];
+        }
     }
+    
     return self;
 }
 
-- (void)appendResponse:(NSArray *)response {
-    self.status = [response mso_safeObjectAtIndex:1];
-    _pages = [response mso_safeObjectAtIndex:2];
-    NSString *data = [self fullData:response breakpoint:3];
-    data = [data stringByReplacingOccurrencesOfString:@"<NewDataSet>" withString:@""];
-    data = [data stringByReplacingOccurrencesOfString:@"</NewDataSet>" withString:@""];
-    _data = [_data stringByReplacingOccurrencesOfString:@"<NewDataSet>" withString:@""];
-    _data = [_data stringByReplacingOccurrencesOfString:@"</NewDataSet>" withString:@""];
-    _data = [_data stringByAppendingString:data];
+- (void)mso_appendResponseObject:(MSOSDKResponseNetserverQuery *)responseObject {
+    self.command = responseObject.command;
+    self.status = responseObject.status;
+    
+    NSArray <NSString *> *response = responseObject.trailingResponse;
+    
+    _pages = [response mso_safeObjectAtIndex:0];
+    NSString *data = [self fullData:response breakpoint:1];
     NSMutableString *formattedData = [_data mutableCopy];
+    [formattedData appendString:data];
+    [formattedData replaceOccurrencesOfString:@"<NewDataSet>" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [formattedData length])];
+    [formattedData replaceOccurrencesOfString:@"</NewDataSet>" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [formattedData length])];
     [formattedData insertString:@"<NewDataSet>" atIndex:0];
     [formattedData appendString:@"</NewDataSet>"];
     _data = [formattedData copy];
@@ -216,20 +384,69 @@
 
 @implementation MSOSDKResponseNetserverQueryProducts
 
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
+    if (self) {
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            self.pages = [response mso_safeObjectAtIndex:0];
+            
+            NSString *data = [response mso_safeObjectAtIndex:1];
+            if ([data isEqualToString:@"Item Not Found."]) {
+                *error = [NSError mso_netserver_product_fetch_empty_result];
+                return nil;
+            }
+            
+            self.data = [self fullData:response breakpoint:1];
+        }
+    }
+    
+    return self;
+}
+
 @end
 
 @implementation MSOSDKResponseNetserverQueryCustomers
+
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
+    if (self) {
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            self.pages = [response mso_safeObjectAtIndex:0];
+            
+            NSString *data = [response mso_safeObjectAtIndex:1];
+            if ([data hasPrefix:@"Exceeded Limit"]) {
+                *error = [NSError mso_netserver_customer_query_exceeded_limit_error];
+                return nil;
+            }
+            
+            self.data = [self fullData:response breakpoint:1];
+        }
+    }
+    
+    return self;
+}
 
 @end
 
 @implementation MSOSDKResponseNetserverQueryCustomerSalesOrders
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _objectCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        _data = [command mso_safeObjectAtIndex:3];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            NSString *count = [response mso_safeObjectAtIndex:0];
+            if ([count integerValue] == 0) {
+                *error = [NSError mso_netserver_order_retrieval_no_orders];
+                return nil;
+            }
+            self.objectCount = [response mso_safeObjectAtIndex:0];
+            self.data = [self fullData:response breakpoint:1];
+        }
     }
+
     return self;
 }
 
@@ -237,25 +454,42 @@
 
 @implementation MSOSDKResponseNetserverQuerySalesOrder
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
-    if (self) {
-        _objectCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
 
-        if ([command count] >= 5) {
-            _data = [command mso_safeObjectAtIndex:4];
+    self = [super initWithResponseObject:responseObject error:error];
+    if (self) {
+        
+        NSArray <NSString *> *response = self.trailingResponse;
+        
+        if ([response containsObject:@"Order in Using."]) {
+            *error = [NSError mso_netserver_order_retrieval_in_use];
+            return nil;
+        }
+        
+        if ([response containsObject:@"No Sales Order Found."]) {
+            *error = [NSError mso_netserver_order_retrieval_order_not_found];
+            return nil;
+        }
+        
+        _objectCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+
+        if ([response count] >= 3) {
+            _data = [response mso_safeObjectAtIndex:2];
             return self;
         }
         
-        NSString *data = [command mso_safeObjectAtIndex:3];
+        NSString *data = [response mso_safeObjectAtIndex:1];
         _data = data;
     }
     return self;
 }
 
-- (void)mso_appendResponse:(NSArray *)response {
-    _objectCount = @([[response mso_safeObjectAtIndex:2] integerValue]);
-    NSString *data = [response mso_safeObjectAtIndex:3];
+- (void)mso_appendResponseObject:(MSOSDKResponseNetserverQuerySalesOrder *)responseObject {
+    self.command = responseObject.command;
+    self.status = responseObject.status;
+    NSArray <NSString *> *response = responseObject.trailingResponse;
+    _objectCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+    NSString *data = [response mso_safeObjectAtIndex:1];
     _data = [_data stringByAppendingString:data];
 }
 
@@ -263,21 +497,23 @@
 
 
 @implementation MSOSDKResponseNetserverQueryImages
-
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        self.command = [command mso_safeObjectAtIndex:0];
-        self.status = [command mso_safeObjectAtIndex:1];
-        _objectCount = [command mso_safeObjectAtIndex:2];
-        NSUInteger count = [command count];
-        NSInteger index = 3;
-        if (index < count) {
-            NSRange range = NSMakeRange(index, count - index);
-            _images = [command subarrayWithRange:range];
-        } else {
-            _images = [NSArray array];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            _objectCount = [response mso_safeObjectAtIndex:0];
+            NSUInteger count = [response count];
+            NSInteger index = 1;
+            if (index < count) {
+                NSRange range = NSMakeRange(index, count - index);
+                _images = [response subarrayWithRange:range];
+            } else {
+                _images = [NSArray array];
+            }
+
         }
+        
     }
     return self;
 }
@@ -286,11 +522,14 @@
 
 @implementation MSOSDKResponseNetserverSaveImage
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _identifier = [command mso_safeObjectAtIndex:2];
-        _message = [command mso_safeObjectAtIndex:3];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+            _identifier = [response mso_safeObjectAtIndex:0];
+            _message = [response mso_safeObjectAtIndex:1];
+        }
     }
     return self;
 }
@@ -299,24 +538,32 @@
 
 @implementation MSOSDKResponseNetserverSubmitSalesOrder
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _objectCount = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        _orderNumber = [command mso_safeObjectAtIndex:3];
-        _customerName = [command mso_safeObjectAtIndex:4];
+        NSArray <NSString *> *response = self.trailingResponse;
+        if (response) {
+        
+            if ([[response lastObject] hasSuffix:@"*****Error Message: Value was either too large or too small for a Decimal."]) {
+                *error = [NSError mso_netserver_sales_order_total_error];
+                return nil;
+            }
 
-        if (_customerName) {
-            _customerAccountNumber = [_customerName mso_stringBetweenString:@"[" andString:@"]"];
-            NSString *replacement = [NSString stringWithFormat:@" [%@]", _customerAccountNumber];
-            _customerName = [_customerName stringByReplacingOccurrencesOfString:replacement withString:@""];
+            _objectCount = @([[response mso_safeObjectAtIndex:0] integerValue]);
+            _orderNumber = [response mso_safeObjectAtIndex:1];
+            _customerName = [response mso_safeObjectAtIndex:2];
+            
+            if (_customerName) {
+                _customerAccountNumber = [_customerName mso_stringBetweenString:@"[" andString:@"]"];
+                NSString *replacement = [NSString stringWithFormat:@" [%@]", _customerAccountNumber];
+                _customerName = [_customerName stringByReplacingOccurrencesOfString:replacement withString:@""];
+            }
+            
+            //_customerName = [command mso_safeObjectAtIndex:5];
+            //_customerName = [command mso_safeObjectAtIndex:6];
+            //_customerName = [command mso_safeObjectAtIndex:7];
+
         }
-        
-        //_customerName = [command mso_safeObjectAtIndex:5];
-        //_customerName = [command mso_safeObjectAtIndex:6];
-        //_customerName = [command mso_safeObjectAtIndex:7];
-        
     }
     return self;
     
@@ -327,12 +574,27 @@
 
 @implementation MSOSDKResponseNetserverPing
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _extendedCommand = [command mso_safeObjectAtIndex:2];
-        _eventId = [command mso_safeObjectAtIndex:3];
-        _eventName = [command mso_safeObjectAtIndex:4];
+
+        if ([self.status isEqualToString:@"NO"]) {
+            
+            *error =
+            [NSError
+             mso_netserver_ping_error];
+
+            return nil;
+        }
+        
+        NSArray <NSString *> *response = self.trailingResponse;
+        
+        if (response) {
+            _extendedCommand = [response mso_safeObjectAtIndex:0];
+            _eventId = [response mso_safeObjectAtIndex:1];
+            _eventName = [response mso_safeObjectAtIndex:2];
+        }
+        
     }
     return self;
 }
@@ -341,13 +603,24 @@
 
 @implementation MSOSDKResponseNetserverLogin
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
-        _response = [command componentsJoinedByString:@"^"];
         
-        _userId = [command mso_safeObjectAtIndex:2];
-        _message = [command mso_safeObjectAtIndex:3];
+        if ([self.status isEqualToString:@"NO"]) {
+            *error =
+            [NSError
+             mso_internet_login_credientials_invalid];
+            return nil;
+        }
+        
+        NSArray <NSString *> *response = self.trailingResponse;
+        
+        if (response) {
+            _userId = [response mso_safeObjectAtIndex:0];
+            _message = [response mso_safeObjectAtIndex:1];
+        }
+        
     }
     return self;
 }
@@ -356,75 +629,61 @@
 
 @implementation MSOSDKResponseNetserverSettings
 
-- (instancetype)initWithCommand:(NSArray *)command {
-    self = [super initWithCommand:command];
+- (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
+    self = [super initWithResponseObject:responseObject error:error];
     if (self) {
         
-        _response = [command componentsJoinedByString:@"^"];
+        NSArray <NSString *> *response = responseObject.trailingResponse;
         
-        if ([_response hasPrefix:@"Invalid Event."]) {
-            
-            self.status = [_response mso_stringBetweenString:@"[" andString:@"]"];
-
-            NSUInteger position = [_response rangeOfString:@"]"].location + 2;
-            NSUInteger length = [_response length] - position;
-            NSRange range = NSMakeRange(position, length);
-
-            self.command = [_response substringWithRange:range];
-            
-            return self;
-        }
-        
-        // Start at index 2: 0 = Command, 1 = Status
-        _keyboardControl                                = @([[command mso_safeObjectAtIndex:2] integerValue]);
-        NSString *scannerSetup                              = [command mso_safeObjectAtIndex:3];
-        // 4 (TCP WLAN)
-        _productPhotoSaveOption                         = @([[command mso_safeObjectAtIndex:5] integerValue]);
-        NSString *displayFormat                             = [command mso_safeObjectAtIndex:6];
-        // 7 (Dummy)
-        // 8 (PDA Prefix ?)
-        _minimumOrderAmount                             = @([[command mso_safeObjectAtIndex:9] doubleValue]);
-        _multipleCompanies                              = @([[command mso_safeObjectAtIndex:10] boolValue]);
-        _recalculateSet                                 = @([[command mso_safeObjectAtIndex:11] boolValue]);
-        _recalculatePriceTagAlong                       = @([[command mso_safeObjectAtIndex:12] boolValue]);
-        _itemSelectionAlert                             = @([[command mso_safeObjectAtIndex:13] integerValue]);
-        _pricingStructure                               = [command mso_safeObjectAtIndex:14];
-        _discountRule                                   = @([[command mso_safeObjectAtIndex:15] integerValue]);
-        _discountRuleSubtotal                           = @([[command mso_safeObjectAtIndex:16] integerValue]);
-        _discountRuleAllowShipping                      = @([[command mso_safeObjectAtIndex:17] boolValue]);
-        // 18 (WLAN Submit)
-        _eventName                                      = [command mso_safeObjectAtIndex:19];
-        _alertIfOrderQuantityMoreThanOnHandQuantity     = @([[command mso_safeObjectAtIndex:20] boolValue]);
-        _applyCustomerDiscountAsOrderDiscount           = [command mso_safeObjectAtIndex:21];
-        _backupOrder                                    = [command mso_safeObjectAtIndex:22];
-        _keepSubmittedOrderCopy                         = [command mso_safeObjectAtIndex:23];
-        // 24 999 (Dummy)
-        _orderDefaultShipVia                            = [command mso_safeObjectAtIndex:25];
-        _orderDefaultTerms                              = [command mso_safeObjectAtIndex:26];
-        NSString *autoDefaultQuantityShipDate               = [command mso_safeObjectAtIndex:27];
-        _alertBelowMinimumPrice                         = @([[command mso_safeObjectAtIndex:28] boolValue]);
-        _orderSortByItemNumber                          = @([[command mso_safeObjectAtIndex:29] boolValue]);
-        NSString *salesOrderRequirements                    = [command mso_safeObjectAtIndex:30];
-        _salesTax                                       = [command mso_safeObjectAtIndex:31];
-        _scanSwipeBadgeMapping                          = @([[command mso_safeObjectAtIndex:32] boolValue]);
+        _keyboardControl                                    = @([[response mso_safeObjectAtIndex:0] integerValue]);
+        NSString *scannerSetup                              = [response mso_safeObjectAtIndex:1];
+        // 2 (TCP WLAN)
+        _productPhotoSaveOption                             = @([[response mso_safeObjectAtIndex:3] integerValue]);
+        NSString *displayFormat                             = [response mso_safeObjectAtIndex:4];
+        // 5 (Dummy)
+        // 6 (PDA Prefix ?)
+        _minimumOrderAmount                                 = @([[response mso_safeObjectAtIndex:7] doubleValue]);
+        _multipleCompanies                                  = @([[response mso_safeObjectAtIndex:8] boolValue]);
+        _recalculateSet                                     = @([[response mso_safeObjectAtIndex:9] boolValue]);
+        _recalculatePriceTagAlong                           = @([[response mso_safeObjectAtIndex:10] boolValue]);
+        _itemSelectionAlert                                 = @([[response mso_safeObjectAtIndex:11] integerValue]);
+        _pricingStructure                                   = [response mso_safeObjectAtIndex:12];
+        _discountRule                                       = @([[response mso_safeObjectAtIndex:13] integerValue]);
+        _discountRuleSubtotal                               = @([[response mso_safeObjectAtIndex:14] integerValue]);
+        _discountRuleAllowShipping                          = @([[response mso_safeObjectAtIndex:15] boolValue]);
+        // 16 (WLAN Submit)
+        _eventName                                          = [response mso_safeObjectAtIndex:17];
+        _alertIfOrderQuantityMoreThanOnHandQuantity         = @([[response mso_safeObjectAtIndex:18] boolValue]);
+        _applyCustomerDiscountAsOrderDiscount               = [response mso_safeObjectAtIndex:19];
+        _backupOrder                                        = [response mso_safeObjectAtIndex:20];
+        _keepSubmittedOrderCopy                             = [response mso_safeObjectAtIndex:21];
+        // 22 999 (Dummy)
+        _orderDefaultShipVia                                = [response mso_safeObjectAtIndex:23];
+        _orderDefaultTerms                                  = [response mso_safeObjectAtIndex:24];
+        NSString *autoDefaultQuantityShipDate               = [response mso_safeObjectAtIndex:25];
+        _alertBelowMinimumPrice                             = @([[response mso_safeObjectAtIndex:26] boolValue]);
+        _orderSortByItemNumber                              = @([[response mso_safeObjectAtIndex:27] boolValue]);
+        NSString *salesOrderRequirements                    = [response mso_safeObjectAtIndex:28];
+        _salesTax                                           = [response mso_safeObjectAtIndex:29];
+        _scanSwipeBadgeMapping                              = @([[response mso_safeObjectAtIndex:30] boolValue]);
+        // 31
+        // 32
         // 33
-        // 34
-        // 35
-        _orderRequiresMinimumItemQuantity               = @([[command mso_safeObjectAtIndex:36] boolValue]);
-        _allowCustomAssortment                          = @([[command mso_safeObjectAtIndex:37] boolValue]);
-        _optionsIfOrderQuantityMoreThanOnHandQuantity   = @([[command mso_safeObjectAtIndex:38] integerValue]);
-        _lastPurchasePricePriority                      = @([[command mso_safeObjectAtIndex:39] boolValue]);
-        NSString *eventDefaultTitles                        = [command mso_safeObjectAtIndex:40];
-        _salesManagerPrivilegeInTradeshow               = @([[command mso_safeObjectAtIndex:41] boolValue]);
-        _salesTaxForSampleSales                         = [command mso_safeObjectAtIndex:42];
-        _discountRuleShippingChoice                     = [command mso_safeObjectAtIndex:43];
-        _companyPriceLevel                              = [command mso_safeObjectAtIndex:44];
-        // 45-53 (Blanks)
-//        NSString *licenseInfo                               = [command mso_safeObjectAtIndex:54];
-        NSString *printOut                                  = [command mso_safeObjectAtIndex:55];
-        _messageCompanyPolicy                           = [command mso_safeObjectAtIndex:56];
-        _messageCustomerGreeting                        = [command mso_safeObjectAtIndex:57];
-        _messagePayment                                 = [command mso_safeObjectAtIndex:58];
+        _orderRequiresMinimumItemQuantity                   = @([[response mso_safeObjectAtIndex:34] boolValue]);
+        _allowCustomAssortment                              = @([[response mso_safeObjectAtIndex:35] boolValue]);
+        _optionsIfOrderQuantityMoreThanOnHandQuantity       = @([[response mso_safeObjectAtIndex:36] integerValue]);
+        _lastPurchasePricePriority                          = @([[response mso_safeObjectAtIndex:37] boolValue]);
+        NSString *eventDefaultTitles                        = [response mso_safeObjectAtIndex:38];
+        _salesManagerPrivilegeInTradeshow                   = @([[response mso_safeObjectAtIndex:39] boolValue]);
+        _salesTaxForSampleSales                             = [response mso_safeObjectAtIndex:40];
+        _discountRuleShippingChoice                         = [response mso_safeObjectAtIndex:41];
+        _companyPriceLevel                                  = [response mso_safeObjectAtIndex:42];
+        // 43-51 (Blanks)
+//        NSString *licenseInfo                               = [command mso_safeObjectAtIndex:52];
+        NSString *printOut                                  = [response mso_safeObjectAtIndex:53];
+        _messageCompanyPolicy                               = [response mso_safeObjectAtIndex:54];
+        _messageCustomerGreeting                            = [response mso_safeObjectAtIndex:55];
+        _messagePayment                                     = [response mso_safeObjectAtIndex:56];
         
         [self parseAutoDefaultQuantityShipDate:autoDefaultQuantityShipDate];
         [self parseScannerSetup:scannerSetup];

@@ -21,21 +21,20 @@
     }
     
     NSString *formatted = [NSString _mso_build_command:params];
-//    NSString *escaped = formatted;
     NSString *escaped = [formatted mso_escape];
-    
     return escaped;
 }
 
 - (NSString *)mso_escape {
-    NSString *escaped = [self gtm_stringByEscapingForHTML];
+//    NSString *escaped = [self gtm_stringByEscapingForHTML];
+    NSString *escaped = [[[self mutableCopy] mso_string_escape] copy];
     return escaped;
 }
 
 - (NSString *)mso_unescape {
 //    NSString *unescaped = [self gtm_stringByUnescapingFromHTML];
-    //NSString *unescaped = [self htmlEntityDecode];
-    return [[self gtm_stringByUnescapingFromHTML] gtm_stringByUnescapingFromHTML];
+    NSString *unescaped = [[[self mutableCopy] mso_string_unescape] copy];
+    return unescaped;
 }
 
 + (instancetype)_mso_build_command:(NSString *)internal {
@@ -60,5 +59,12 @@
     if (type < 0 || type > 5) return @"1";
     return [NSString stringWithFormat:@"%li", (long)type];
 }
+
+
++ (NSDate *)dateFromString {
+    NSDate *string = [[NSDateFormatter mso_mediumDateFormatter] dateFromString:self];
+    return string;
+}
+
 
 @end

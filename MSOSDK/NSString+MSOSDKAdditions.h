@@ -10,6 +10,8 @@
 #import <CoreFoundation/CoreFoundation.h>
 
 #import "MSOSDKConstants.h"
+#import "NSMutableString+MSOSDKAdditions.h"
+#import "NSDateFormatter+MSOSDKAdditions.h"
 
 @interface NSString (MSOSDKAdditions)
 
@@ -52,5 +54,7 @@
  @return A formatted `NSString` value
  */
 + (nonnull NSString *)mso_product_search_type_formatted:(kMSOProductSearchType)type;
+
+- (nullable NSDate *)mso_dateFromString;
 
 @end

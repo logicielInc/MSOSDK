@@ -1,31 +1,25 @@
 //
-//  MSOSDKResponseWebService.m
+//  MSOSDKResponseWebserver.m
 //  iMobileRep
 //
 //  Created by John Setting on 2/14/17.
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import "MSOSDKResponseWebService.h"
+#import "MSOSDKResponseWebserver.h"
 
-#import <SMXMLDocument/SMXMLDocument.h>
+@implementation MSOSDKResponseWebserver
 
-#import "MSOSDK.h"
-#import "NSError+MSOSDKAdditions.h"
-#import "NSArray+MSOSDKAdditions.h"
-
-@implementation MSOSDKResponseWebService
-
-+ (instancetype)msosdk_commandWithResponse:(id)response {
-    return [[self alloc] initWithResponse:response];
++ (instancetype)msosdk_commandWithResponse:(NSString *)response command:(NSString *)command error:(NSError * _Nullable __autoreleasing *)error {
+    return [[self alloc] initWithResponse:response command:command error:error];
 }
 
-- (instancetype)initWithResponse:(id)response {
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
+- (instancetype)initWithResponse:(NSString *)response command:(NSString *)command error:(NSError * _Nullable __autoreleasing *)error {
+    [[NSException
+      exceptionWithName:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]
+      reason:@"This method needs to be overriden"
+      userInfo:nil]
+     raise];
 }
 
 + (NSDateFormatter *)msosdk_webservice_dateformatter {
@@ -38,66 +32,66 @@
     return dateFormatter;
 }
 
-+ (kMSOSDKResponseWebServiceStatus)status:(NSString *)status {
++ (kMSOSDKResponseWebserverStatus)status:(NSString *)status {
     
     if ([status isEqualToString:@"0"]) {
-        return kMSOSDKResponseWebServiceStatusNotFound;
+        return kMSOSDKResponseWebserverStatusNotFound;
     }
     
     if ([status isEqualToString:@"00"]) {
-        return kMSOSDKResponseWebServiceStatusUnregistered;
+        return kMSOSDKResponseWebserverStatusUnregistered;
     }
     
     if ([status isEqualToString:@"1"]) {
-        return kMSOSDKResponseWebServiceStatusExpired;
+        return kMSOSDKResponseWebserverStatusExpired;
     }
     
     if ([status isEqualToString:@"11"]) {
-        return kMSOSDKResponseWebServiceStatusDisabled;
+        return kMSOSDKResponseWebserverStatusDisabled;
     }
     
     if ([status isEqualToString:@"-1"]) {
-        return kMSOSDKResponseWebServiceStatusSuspended;
+        return kMSOSDKResponseWebserverStatusSuspended;
     }
     
     if ([status isEqualToString:@"-2"]) {
-        return kMSOSDKResponseWebServiceStatusInvalid;
+        return kMSOSDKResponseWebserverStatusInvalid;
     }
     
     if ([status isEqualToString:@"2"]) {
-        return kMSOSDKResponseWebServiceStatusSuccess;
+        return kMSOSDKResponseWebserverStatusSuccess;
     }
 
-    return kMSOSDKResponseWebServiceStatusUnknown;
+    return kMSOSDKResponseWebserverStatusUnknown;
 }
 
-+ (NSError *)errorFromStatus:(kMSOSDKResponseWebServiceStatus)status {
++ (NSError *)errorFromStatus:(kMSOSDKResponseWebserverStatus)status {
 
-    if (status == kMSOSDKResponseWebServiceStatusNotFound) {
+    if (status == kMSOSDKResponseWebserverStatusNotFound) {
         return [NSError mso_internet_registration_key_not_found];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusUnregistered) {
+    if (status == kMSOSDKResponseWebserverStatusUnregistered) {
         return [NSError mso_internet_registration_key_unregistered];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusExpired) {
+    if (status == kMSOSDKResponseWebserverStatusExpired) {
         return [NSError mso_internet_registration_key_expired];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusDisabled) {
+    if (status == kMSOSDKResponseWebserverStatusDisabled) {
         return [NSError mso_internet_registration_key_disabled];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusSuspended) {
+    if (status == kMSOSDKResponseWebserverStatusSuspended) {
         return [NSError mso_internet_registration_key_suspended];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusInvalid) {
+    if (status == kMSOSDKResponseWebserverStatusInvalid) {
         return [NSError mso_internet_login_credientials_invalid];
     }
     
-    if (status == kMSOSDKResponseWebServiceStatusUnknown) {
+    if (status == kMSOSDKResponseWebserverStatusUnknown) {
         return [NSError mso_internet_login_credientials_invalid];
     }
     
@@ -106,26 +100,48 @@
 
 @end
 
-@implementation MSOSDKResponseWebServiceCredentials
+@implementation MSOSDKResponseWebserverCredentials
 
-- (instancetype)initWithResponse:(NSArray *)response {
-    self = [super initWithResponse:response];
+- (instancetype)initWithResponse:(NSString *)response
+                         command:(nullable NSString *)command
+                           error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    
+    self = [super init];
     if (self) {
-        NSString *status = [response mso_safeObjectAtIndex:0];
-        _status = [MSOSDKResponseWebService status:status];
-        NSString *date = [response mso_safeObjectAtIndex:1];
-        NSDateFormatter *formatter = [MSOSDKResponseWebService msosdk_webservice_dateformatter];
-        _dateCreated = [formatter dateFromString:date];
+        
+        self.command = command;
+        
+        NSAssert(self.command, @"There must be a command passed into this function: %s for class %@", __PRETTY_FUNCTION__, NSStringFromClass([self class]));
+        
+        NSString *between = [self.command isEqualToString:mso_soap_function_iCheckMobileUser] ? @"iCheckMobileUserResult" : @"iCheckMobileDeviceResult";
+        
+        NSString *parsed =
+        [response
+         mso_stringBetweenString:[NSString stringWithFormat:@"<%@>", between]
+         andString:[NSString stringWithFormat:@"</%@>", between]];
+        
+        NSArray <NSString *> *components = [parsed componentsSeparatedByString:@","];
+        NSString *status = [components mso_safeObjectAtIndex:0];
+        _status = [MSOSDKResponseWebserver status:status];
+        *error = [MSOSDKResponseWebserver errorFromStatus:_status];
+        if (*error) {
+            return nil;
+        }
+        
+        NSString *date = [components mso_safeObjectAtIndex:1];
+        NSDateFormatter *formatter = [MSOSDKResponseWebserver msosdk_webservice_dateformatter];
+        _dateExpired = [formatter dateFromString:date];
+        
     }
     return self;
 }
 
 @end
 
-@implementation MSOSDKResponseWebServiceRegister
+@implementation MSOSDKResponseWebserverRegister
 
-- (instancetype)initWithResponse:(NSString *)response {
-    self = [super initWithResponse:response];
+- (instancetype)initWithResponse:(NSString *)response error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
+    self = [super init];
     if (self) {
         NSArray *components = [response componentsSeparatedByString:@"-"];
         
@@ -157,22 +173,22 @@
 
 @end
 
-@implementation MSOSDKResponseWebServiceRequestData
+@implementation MSOSDKResponseWebserverRequestData
 
 
 
 @end
 
-@implementation MSOSDKResponseWebServiceFilesToDownload
+@implementation MSOSDKResponseWebserverFilesToDownload
 
 
 @end
 
-@implementation MSOSDKResponseWebServiceDownloadHistory
+@implementation MSOSDKResponseWebserverDownloadHistory
 
 @end
 
-@implementation MSOSDKResponseWebServiceCatalog
+@implementation MSOSDKResponseWebserverCatalog
 
 - (instancetype)initWithResponse:(NSArray *)response {
     
@@ -185,7 +201,7 @@
         self.command = mso_soap_function_checkCatalogFileStatus;
         _filename = filename;
         _filesize = @([filesize longLongValue]);
-        _dateUpdated = [MSOSDK dateFromString:lastUpdate];
+        _dateUpdated = [lastUpdate mso_dateFromString];
 
     }
     return self;
@@ -194,7 +210,7 @@
 
 @end
 
-@implementation MSOSDKResponseWebServicePhotoDetails
+@implementation MSOSDKResponseWebserverPhotoDetails
 
 + (NSDateFormatter *)formatter {
     static NSDateFormatter *dateFormatter = nil;
@@ -222,7 +238,7 @@
         identifier = [identifier stringByReplacingOccurrencesOfString:@"]" withString:@""];
         
         _filename = filename;
-        _dateUploaded = [[MSOSDKResponseWebServicePhotoDetails formatter] dateFromString:dateUploaded];
+        _dateUploaded = [[MSOSDKResponseWebserverPhotoDetails formatter] dateFromString:dateUploaded];
         _id = identifier;
         
     }

@@ -33,7 +33,9 @@
 + (nonnull instancetype)mso_internet_registration_key_unregistered;
 + (nonnull instancetype)mso_internet_registration_key_expired;
 + (nonnull instancetype)mso_internet_registration_key_suspended;
-            
+
++ (nonnull instancetype)mso_netserver_ping_error;
+
 + (nonnull instancetype)mso_netserver_product_fetch_empty_result;
 + (nonnull instancetype)mso_netserver_event_invalid;
 + (nonnull instancetype)mso_netserver_event_invalid_with_eventName:(nullable NSString *)eventName eventId:(nullable NSString *)eventId;
@@ -44,6 +46,8 @@
 + (nonnull instancetype)mso_netserver_image_not_found_error;
 + (nonnull instancetype)mso_netserver_customer_query_exceeded_limit_error;
 + (nonnull instancetype)mso_netserver_customer_query_not_found_error;
+
++ (nonnull instancetype)mso_netserver_order_retrieval_in_use;
 + (nonnull instancetype)mso_netserver_order_retrieval_no_orders;
 + (nonnull instancetype)mso_netserver_order_retrieval_order_not_found;
 + (nonnull instancetype)mso_netserver_image_upload_error;

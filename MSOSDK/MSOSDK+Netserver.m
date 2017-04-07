@@ -14,29 +14,45 @@
 - (NSURLSessionDataTask *)_msoNetserverPing:(MSOSuccessBlock)success
                                     failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S001" mso_build_command:@[@"",
-                                                                                                      @"WLAN Connection?"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S001"
+     mso_build_command:@[@"",
+                         @"WLAN Connection?"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutPingKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutPingKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverPing *msosdk_command =
+         [MSOSDKResponseNetserverPing
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSArray *commandArray = [command componentsSeparatedByString:@"^"];
-         command = nil;
-         MSOSDKResponseNetserverPing *msosdk_command = [MSOSDKResponseNetserverPing msosdk_commandWithResponse:commandArray];
-         commandArray = nil;
+         if (!msosdk_command) {
+
+             if (failure) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     failure(response, error);
+                 });
+             }
+
+             return;
+         }
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -56,39 +72,41 @@
                                      success:(MSOSuccessBlock)success
                                      failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_U001" mso_build_command:@[@"",
-                                                                                                      username,
-                                                                                                      password]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_U001"
+     mso_build_command:@[@"",
+                         username,
+                         password]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutLoginKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutLoginKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverLogin *msosdk_command =
+         [MSOSDKResponseNetserverLogin
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSArray *commandArray = [command componentsSeparatedByString:@"^"];
-         command = nil;
-         MSOSDKResponseNetserverLogin *msosdk_command = [MSOSDKResponseNetserverLogin msosdk_commandWithResponse:commandArray];
-         commandArray = nil;
-         
-         BOOL validate = [MSOSDK validate:msosdk_command.response
-                                  command:msosdk_command.command
-                                   status:msosdk_command.status error:&error];
-         if (!validate) {
+         if (!msosdk_command) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
+                  
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, msosdk_command);
@@ -105,34 +123,36 @@
                                                     success:(MSOSuccessBlock)success
                                                     failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S002" mso_build_command:@[username,
-                                                                                                      @"Initial iPad Settings?"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S002"
+     mso_build_command:@[username,
+                         @"Initial iPad Settings?"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutLoginKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutLoginKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverSettings *msosdk_command =
+         [MSOSDKResponseNetserverSettings
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSArray *commandArray = [command componentsSeparatedByString:@"^"];
-         command = nil;
-         MSOSDKResponseNetserverSettings *msosdk_command = [MSOSDKResponseNetserverSettings msosdk_commandWithResponse:commandArray];
-         commandArray = nil;
-         
-         BOOL validate = [MSOSDK validate:msosdk_command.response
-                                  command:msosdk_command.command
-                                   status:msosdk_command.status error:&error];
-         if (!validate) {
+         if (!msosdk_command) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -153,22 +173,29 @@
                                       failure:(MSOFailureBlock)failure {
     
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"" mso_build_command:nil]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@""
+     mso_build_command:nil];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutLoginKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutLoginKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                  
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, nil);
@@ -189,44 +216,44 @@
                                              failure:(MSOFailureBlock)failure
                                              handler:(MSOHandlerBlock)handler {
  
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_P005" mso_build_command:@[username,
-                                                                                                      companyId,
-                                                                                                      @"Item List",
-                                                                                                      [itemList componentsJoinedByString:@"^"]]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_P005"
+     mso_build_command:@[username,
+                         companyId,
+                         @"Item List",
+                         [itemList componentsJoinedByString:@"^"]]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutProductsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutProductsSyncKey];
 
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverQueryProducts *mso_response =
+         [MSOSDKResponseNetserverQueryProducts
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         NSArray *components = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverQueryProducts *mso_response = [MSOSDKResponseNetserverQueryProducts msosdk_commandWithResponse:components];
-
          if (handler) {
              handler(response, mso_response, &error);
-         }
-         
-         if (error) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
          }
          
          if (success) {
@@ -251,46 +278,47 @@
                                                        progress:(MSOProgressBlock)progress
                                                         failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S004" mso_build_command:@[username,
-                                                                                                      @"Product Total?",
-                                                                                                      @""]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S004"
+     mso_build_command:@[username,
+                         @"Product Total?",
+                         @""]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutProductsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutProductsSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverProductsCount *msosdk_command =
+         [MSOSDKResponseNetserverProductsCount
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+         if (!msosdk_command) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         NSArray *components = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverProductsCount *mso_response = [MSOSDKResponseNetserverProductsCount msosdk_commandWithResponse:components];
-         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, mso_response);
+                 success(response, msosdk_command);
              });
          }
+         
      } failure:failure];
     
     return task;
@@ -360,38 +388,38 @@
                                                    failure:(MSOFailureBlock)failure
                                                    handler:(MSOHandlerBlock)handler {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S004" mso_build_command:@[username,
-                                                                                                      @"Product List?[iPad]",
-                                                                                                      companyId,
-                                                                                                      nextId]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S004"
+     mso_build_command:@[username,
+                         @"Product List?[iPad]",
+                         companyId,
+                         nextId]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutProductsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutProductsSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverSyncProducts *mso_response =
+         [MSOSDKResponseNetserverSyncProducts
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverSyncProducts *mso_response = [MSOSDKResponseNetserverSyncProducts msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -404,10 +432,6 @@
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
-         
-         commandParameters = nil;
-         command = nil;
          
          NSString *nextIndex = mso_response.nextIndex;
          NSString *companyId = mso_response.companyId;
@@ -451,43 +475,47 @@
                                                 success:(MSOSuccessBlock)success
                                                 failure:(MSOFailureBlock)failure {
     
-    NSString *type = [NSString mso_product_search_type_formatted:searchType];
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_P002" mso_build_command:@[username,
-                                                                                                      searchTerm,
-                                                                                                      companyId,
-                                                                                                      @"0",
-                                                                                                      type]]
-                                                                 forKey:@"str"];
+    NSString *type =
+    [NSString
+     mso_product_search_type_formatted:searchType];
+
+    NSString *xml =
+    [@"_P002"
+     mso_build_command:@[username,
+                         searchTerm,
+                         companyId,
+                         @"0",
+                         type]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutProductsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutProductsSyncKey];
     
     NSURLSessionDataTask *task =
-    
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverQueryProducts *mso_response =
+         [MSOSDKResponseNetserverQueryProducts
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
+             
              [NSError errorHandler:error response:response failure:failure];
              return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverQueryProducts *mso_response = [MSOSDKResponseNetserverQueryProducts msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
+             
          }
          
          if ([mso_response.command isEqualToString:@"_X001"]) {
@@ -511,6 +539,7 @@
              });
          }
          
+         
      } failure:failure];
     
     return task;
@@ -523,36 +552,34 @@
     
     __block MSOSDKResponseNetserverQueryProducts *mso_response = *mso_respons;
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[mso_response.command mso_build_command:@[username,
-                                                                                                                  mso_response.pages]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [mso_response.command
+     mso_build_command:@[username,
+                         mso_response.pages]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutProductsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutProductsSyncKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         [mso_response mso_appendResponseObject:responseObject];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         [mso_response appendResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -575,7 +602,6 @@
              });
          }
          
-         
      } failure:failure];
     
     return task;
@@ -589,34 +615,41 @@
                                                         progress:(MSOProgressBlock)progress
                                                          failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C006" mso_build_command:@[username,
-                                                                                                      @"Auto-Mapping",
-                                                                                                      mappingScheme]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_C006"
+     mso_build_command:@[username,
+                         @"Auto-Mapping",
+                         mappingScheme]];
+
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutCustomersSyncKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutCustomersSyncKey];
 
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSyncSaveCustomerMapping *mso_response =
+         [MSOSDKResponseNetserverSyncSaveCustomerMapping
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:@"_C006" status:nil error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
-         NSArray *components = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverSyncCustomerMapping *mso_response = [MSOSDKResponseNetserverSyncCustomerMapping msosdk_commandWithResponse:components];
+         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, mso_response);
@@ -635,35 +668,42 @@
                                                           progress:(MSOProgressBlock)progress
                                                            failure:(MSOFailureBlock)failure {
 
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C007" mso_build_command:@[username,
-                                                                                                      @"Save-Mapping",
-                                                                                                      mappingScheme,
-                                                                                                      mappingSchemeData]]
-                                                                 forKey:@"str"];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:[@"_C007" mso_build_command:@[username,
+                                                       @"Save-Mapping",
+                                                       mappingScheme,
+                                                       mappingSchemeData]]
+     forKey:@"str"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutCustomersSyncKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutCustomersSyncKey];
 
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSyncUpdateCustomerMapping *mso_response =
+         [MSOSDKResponseNetserverSyncUpdateCustomerMapping
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:@"_C007" status:nil error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
+         
          if (success) {
-             success(response, nil);
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, mso_response);
+             });
          }
          
      } failure:failure];
@@ -679,36 +719,37 @@
                                                     handler:(MSOHandlerBlock)handler {
     
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S003" mso_build_command:@[username,
-                                                                                                      @"Customer List?[iPad]",
-                                                                                                      nextId]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S003"
+     mso_build_command:@[username,
+                         @"Customer List?[iPad]",
+                         nextId]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutCustomersSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutCustomersSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSyncCustomers *mso_response =
+         [MSOSDKResponseNetserverSyncCustomers
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *parameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverSyncCustomers *mso_response = [MSOSDKResponseNetserverSyncCustomers msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -723,8 +764,6 @@
          }
          
          NSString *nextIndex = mso_response.nextIndex;
-         
-         command = nil;
          
          if ([nextIndex integerValue] != 0) {
              NSURLSessionDataTask *task =
@@ -754,6 +793,7 @@
              return;
          }
          
+         
      } failure:failure];
     
     return task;
@@ -772,43 +812,43 @@
                                                 progress:(MSOProgressBlock)progress
                                                  failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C001" mso_build_command:@[username,
-                                                                                                      billing ? @"0" : @"1",
-                                                                                                      accountNumber,
-                                                                                                      name,
-                                                                                                      phone,
-                                                                                                      city,
-                                                                                                      state,
-                                                                                                      zip,
-                                                                                                      @"Search Customer"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_C001"
+     mso_build_command:@[username,
+                         billing ? @"0" : @"1",
+                         accountNumber,
+                         name,
+                         phone,
+                         city,
+                         state,
+                         zip,
+                         @"Search Customer"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutCustomerSearchKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutCustomerSearchKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverQueryCustomers *mso_response =
+         [MSOSDKResponseNetserverQueryCustomers
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *parameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverQueryCustomers *mso_response = [MSOSDKResponseNetserverQueryCustomers msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -842,49 +882,50 @@
                                            progress:(MSOProgressBlock)progress
                                             failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C005" mso_build_command:@[username,
-                                                                                                      @"New Customer",
-                                                                                                      @"", /* This is where account number would go, but since were in tradeshow mode, we dont set this becauase it would populate the PDA# */
-                                                                                                      terms,
-                                                                                                      customerName,
-                                                                                                      contactName,
-                                                                                                      address1,
-                                                                                                      address2,
-                                                                                                      city,
-                                                                                                      state,
-                                                                                                      zip,
-                                                                                                      country,
-                                                                                                      phone,
-                                                                                                      fax,
-                                                                                                      email,
-                                                                                                      @""]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_C005"
+     mso_build_command:@[username,
+                         @"New Customer",
+                         @"", /* This is where account number would go, but since were in tradeshow mode, we dont set this becauase it would populate the PDA# */
+                         terms,
+                         customerName,
+                         contactName,
+                         address1,
+                         address2,
+                         city,
+                         state,
+                         zip,
+                         country,
+                         phone,
+                         fax,
+                         email,
+                         @""]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutImageSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutImageSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *parameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverSaveCustomer *mso_response = [MSOSDKResponseNetserverSaveCustomer msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSaveCustomer *mso_response =
+         [MSOSDKResponseNetserverSaveCustomer
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -895,7 +936,6 @@
              });
              return;
          }
-         
          
      } failure:failure];
     
@@ -922,24 +962,30 @@
                                                           progress:(MSOProgressBlock)progress
                                                            failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C005" mso_build_command:@[username,
-                                                                                                      @"New Customer",
-                                                                                                      accountNumber,
-                                                                                                      terms,
-                                                                                                      customerName,
-                                                                                                      contactName,
-                                                                                                      address1,
-                                                                                                      address2,
-                                                                                                      city,
-                                                                                                      state,
-                                                                                                      zip,
-                                                                                                      country,
-                                                                                                      phone,
-                                                                                                      fax,
-                                                                                                      email,
-                                                                                                      mainstoreNumber
-                                                                                                      ]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_C005"
+     mso_build_command:@[username,
+                         @"New Customer",
+                         accountNumber,
+                         terms,
+                         customerName,
+                         contactName,
+                         address1,
+                         address2,
+                         city,
+                         state,
+                         zip,
+                         country,
+                         phone,
+                         fax,
+                         email,
+                         mainstoreNumber
+                         ]];
+    
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
     
     NSURLRequest *request = [MSOSDK
                              urlRequestWithParameters:@[parameter]
@@ -950,22 +996,16 @@
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *parameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverSaveCustomerShippingAddress *mso_response = [MSOSDKResponseNetserverSaveCustomerShippingAddress msosdk_commandWithResponse:parameters];
-         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSaveCustomerShippingAddress *mso_response =
+         [MSOSDKResponseNetserverSaveCustomerShippingAddress
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -976,7 +1016,6 @@
              });
              return;
          }
-         
          
      } failure:failure];
     
@@ -1046,38 +1085,39 @@
     
     NSString *com = [components componentsJoinedByString:@"{"];
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_C004" mso_build_command:@[username,
-                                                                                                      @"Update Customer Information",
-                                                                                                      companyName,
-                                                                                                      accountNumber,
-                                                                                                      com]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_C004"
+     mso_build_command:@[username,
+                         @"Update Customer Information",
+                         companyName,
+                         accountNumber,
+                         com]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutCustomerSaveKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutCustomerSaveKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverUpdateCustomer *mso_response = [MSOSDKResponseNetserverUpdateCustomer msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.message command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         MSOSDKResponseNetserverUpdateCustomer *mso_response =
+         [MSOSDKResponseNetserverUpdateCustomer
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -1087,6 +1127,7 @@
                  success(response, mso_response);
              });
          }
+         
      } failure:failure];
     
     return task;
@@ -1101,37 +1142,37 @@
                                                    failure:(MSOFailureBlock)failure
                                                    handler:(MSOHandlerBlock)handler {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S005" mso_build_command:@[username,
-                                                                                                      @"Group Settings?[iPad]",
-                                                                                                      nextId]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S005"
+     mso_build_command:@[username,
+                         @"Group Settings?[iPad]",
+                         nextId]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutSettingsSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutSettingsSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverSyncSettings *mso_response =
+         [MSOSDKResponseNetserverSyncSettings
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverSyncSettings *mso_response = [MSOSDKResponseNetserverSyncSettings msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -1146,9 +1187,6 @@
          }
          
          NSString *nextIndex = mso_response.nextIndex;
-         
-         commandParameters = nil;
-         command = nil;
          
          if (nextIndex.length > 0) {
              NSURLSessionDataTask *task =
@@ -1188,41 +1226,47 @@
                                                       progress:(MSOProgressBlock)progress
                                                        failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_S007" mso_build_command:@[username,
-                                                                                                      @"All Photo?[iPad]",
-                                                                                                      @""]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_S007"
+     mso_build_command:@[username,
+                         @"All Photo?[iPad]",
+                         @""]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutAllImageSyncKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutAllImageSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverQueryImages *msosdk_command =
+         [MSOSDKResponseNetserverQueryImages
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!msosdk_command) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverQueryImages *mso_response = [MSOSDKResponseNetserverQueryImages msosdk_commandWithResponse:commandParameters];
-         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, mso_response);
+                 success(response, msosdk_command);
              });
          }
+         
      } failure:failure];
     
     return task;
@@ -1233,35 +1277,29 @@
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure {
 
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[[NSString stringWithFormat:@"<PHOTOALL>%@", identifier] mso_build_command:nil]
-                                                                 forKey:@"str"];
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutImageSyncKey];
+    NSString *xml =
+    [[NSString stringWithFormat:@"<PHOTOALL>%@", identifier]
+     mso_build_command:nil];
+    
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutImageSyncKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeImageData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         if (error) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
 
-         NSData* data = [[NSData alloc] initWithBase64EncodedString:command options:kNilOptions];
+         NSData* data = [[NSData alloc] initWithBase64EncodedString:responseObject.command options:kNilOptions];
          UIImage *image = [UIImage imageWithData:data];
          if (!image) {
              
@@ -1276,12 +1314,14 @@
          }
          
          if (success) {
-         
+             
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, image);
              });
-
+             
          }
+
+         
      } failure:failure];
     
     return task;
@@ -1307,38 +1347,41 @@
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_O001" mso_build_command:@[username,
-                                                                                                      orderNumber,
-                                                                                                      @"Restore Submitted Order (check in-use)"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_O001"
+     mso_build_command:@[username,
+                         orderNumber,
+                         @"Restore Submitted Order (check in-use)"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutPurchaseHistoryKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutPurchaseHistoryKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverQuerySalesOrder *mso_response =
+         [MSOSDKResponseNetserverQuerySalesOrder
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
+             
              [NSError errorHandler:error response:response failure:failure];
              return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverQuerySalesOrder *mso_response = [MSOSDKResponseNetserverQuerySalesOrder msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
+             
          }
          
          if ([mso_response.objectCount integerValue] > 1) {
@@ -1382,39 +1425,32 @@
     
     __block MSOSDKResponseNetserverQuerySalesOrder *mso_response = *mso_respons;
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_X001" mso_build_command:@[username,
-                                                                                                      orderNumber,
-                                                                                                      @"Get More Order Data"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_X001"
+     mso_build_command:@[username,
+                         orderNumber,
+                         @"Get More Order Data"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutPurchaseHistoryKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutPurchaseHistoryKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         [mso_response mso_appendResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         [mso_response mso_appendResponseObject:responseObject];
          
          if ([mso_response.objectCount integerValue] > 1) {
              NSURLSessionDataTask *task =
@@ -1453,38 +1489,38 @@
                                              progress:(MSOProgressBlock)progress
                                               failure:(MSOFailureBlock)failure {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_E004" mso_build_command:@[username,
-                                                                                                      customerName,
-                                                                                                      customerAccountNumber,
-                                                                                                      @"Search Submitted Order"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_E004"
+     mso_build_command:@[username,
+                         customerName,
+                         customerAccountNumber,
+                         @"Search Submitted Order"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutSalesOrderKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutSalesOrderKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
+         MSOSDKResponseNetserverQueryCustomerSalesOrders *mso_response =
+         [MSOSDKResponseNetserverQueryCustomerSalesOrders
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverQueryCustomerSalesOrders *mso_response = [MSOSDKResponseNetserverQueryCustomerSalesOrders msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.data command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -1510,8 +1546,8 @@
     
     if ([imageNotes count] == 0) {
         if (success) {
-            MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:@[@"_X003", @"OK"]];
-            success([[NSURLResponse alloc] init], mso_response);
+            //MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:@[@"_X003", @"OK"]];
+            //success([[NSURLResponse alloc] init], mso_response);
         }
         return nil;
     }
@@ -1527,42 +1563,40 @@
                                               progress:(MSOProgressBlock)progress
                                                failure:(MSOFailureBlock)failure {
     
-    NSError *error = nil;
+    NSString *xml =
+    [@"_X003"
+     mso_build_command:@[username,
+                         orderNumber,
+                         [NSString stringWithFormat:@"%lu", (unsigned long)index],
+                         [NSString stringWithFormat:@"%lu", (unsigned long)[imageNotes count]],
+                         @"Pre-Send Image Data",
+                         [imageNotes firstObject]]];
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_X003" mso_build_command:@[username,
-                                                                                                      orderNumber,
-                                                                                                      [NSString stringWithFormat:@"%lu", (unsigned long)index],
-                                                                                                      [NSString stringWithFormat:@"%lu", (unsigned long)[imageNotes count]],
-                                                                                                      @"Pre-Send Image Data",
-                                                                                                      [imageNotes firstObject]]]
-                                                                 forKey:@"str"];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutSalesOrderKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutSalesOrderKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSubmitSalesOrder *mso_response =
+         [MSOSDKResponseNetserverSubmitSalesOrder
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
@@ -1621,41 +1655,43 @@
         commandString = @"Submit Order";
     }
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_O002" mso_build_command:@[username,
-                                                                                                      orderNumber,
-                                                                                                      commandInteger,
-                                                                                                      commandString,
-                                                                                                      orderString]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_O002"
+     mso_build_command:@[username,
+                         orderNumber,
+                         commandInteger,
+                         commandString,
+                         orderString]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutSalesOrderKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutSalesOrderKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:@"_O002" status:nil error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSubmitSalesOrder *mso_response =
+         [MSOSDKResponseNetserverSubmitSalesOrder
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
+             
              [NSError errorHandler:error response:response failure:failure];
              return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.status command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
+             
          }
          
          if (success) {
@@ -1715,36 +1751,44 @@
                                              failure:(MSOFailureBlock)failure
                                              handler:(MSOHandlerBlock)handler {
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_H001" mso_build_command:@[username,
-                                                                                                      customerName,
-                                                                                                      customerZip,
-                                                                                                      nextId,
-                                                                                                      @"Sales Order History"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_H001"
+     mso_build_command:@[username,
+                         customerName,
+                         customerZip,
+                         nextId,
+                         @"Sales Order History"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutPurchaseHistoryKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutPurchaseHistoryKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSyncPurchaseHistory *mso_response =
+         [MSOSDKResponseNetserverSyncPurchaseHistory
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
+             
              [NSError errorHandler:error response:response failure:failure];
              return;
+             
          }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = [MSOSDKResponseNetserverSyncPurchaseHistory msosdk_commandWithResponse:commandParameters];
          
          if ([mso_response.detailLoop integerValue] != 1) {
              
@@ -1797,6 +1841,8 @@
                  success(response, nil);
              });
          }
+         
+          
      } failure:failure];
     
     return task;
@@ -1813,34 +1859,32 @@
     
     __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = *mso_respons;
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_X001" mso_build_command:@[username,
-                                                                                                      [NSString stringWithFormat:@"%li", (long)mso_response.detailLoop],
-                                                                                                      @"Get More History Data"]]
-                                                                 forKey:@"str"];
+    NSString *xml =
+    [@"_X001"
+     mso_build_command:@[username,
+                         [NSString stringWithFormat:@"%li", (long)mso_response.detailLoop],
+                         @"Get More History Data"]];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutPurchaseHistoryKey];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutPurchaseHistoryKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         [mso_response appendCommand:commandParameters];
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         [mso_response mso_appendResponseObject:responseObject];
          
          if ([mso_response.detailLoop integerValue] == 1) {
              
@@ -1915,40 +1959,39 @@
                                           progress:(MSOProgressBlock)progress
                                            failure:(MSOFailureBlock)failure {
     
+    NSString *xml =
+    [@"_P011"
+     mso_build_command:@[username,
+                         identifier,
+                         @"Submit Product Photo",
+                         base64EncodedImage]];
     
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:[@"_P011" mso_build_command:@[username,
-                                                                                                      identifier,
-                                                                                                      @"Submit Product Photo",
-                                                                                                      base64EncodedImage]]
-                                                                 forKey:@"str"];
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_doWork
-                             url:self.serviceUrl
-                             netserver:YES
-                             timeout:kMSOTimeoutImageUploadSyncKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutImageUploadSyncKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForNetserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+
+         MSOSDKResponseNetserverSaveImage *mso_response =
+         [MSOSDKResponseNetserverSaveImage
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
          
-         NSString *command = [MSOSDK sanatizeData:responseObject];
-         
-         BOOL validate = [MSOSDK validate:command command:nil status:nil error:&error];
-         if (!validate) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray *commandParameters = [command componentsSeparatedByString:@"^"];
-         
-         MSOSDKResponseNetserverSaveImage *mso_response = [MSOSDKResponseNetserverSaveImage msosdk_commandWithResponse:commandParameters];
-         validate = [MSOSDK validate:mso_response.message command:mso_response.command status:mso_response.status error:&error];
-         if (!validate) {
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }

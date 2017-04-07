@@ -1,5 +1,5 @@
 //
-//  MSOSDKWebServiceTests.m
+//  MSOSDKWebserverTests.m
 //  iMobileRep
 //
 //  Created by John Setting on 2/16/17.
@@ -8,40 +8,40 @@
 
 #import "MSOTestCase.h"
 
-@interface MSOSDKWebServiceTests : MSOTestCase
+@interface MSOSDKWebserverTests : MSOTestCase
 
 @end
 
-@implementation MSOSDKWebServiceTests
+@implementation MSOSDKWebserverTests
 
 - (void)setUp {
     [super setUp];
-
+    
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
                           msoEventId:@"1301H"
                          msoPassword:@"logic99"];
-
+    
 }
 
 - (void)tearDown {
-
+    
     [super tearDown];
 }
 
 
-- (void)test_msoWebServiceForgotPassword {
+- (void)test_msoWebserverForgotPassword {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceCredentials *mso_response = nil;
+    __block MSOSDKResponseWebserverCredentials *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceForgotPassword:@"John"
+     _msoWebserverForgotPassword:@"John"
      password:@""
      accesskey:@"A0010012745NODHIV3WU"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -67,20 +67,20 @@
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
     XCTAssertTrue([mso_response.command isEqualToString:mso_soap_function_iCheckMobileDevice]);
-    XCTAssertTrue(mso_response.status == kMSOSDKResponseWebServiceStatusSuccess);
+    XCTAssertTrue(mso_response.status == kMSOSDKResponseWebserverStatusSuccess);
 }
 
-- (void)test_msoWebServiceForgotPassword_fail_notfound {
+- (void)test_msoWebserverForgotPassword_fail_notfound {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceCredentials *mso_response = nil;
+    __block MSOSDKResponseWebserverCredentials *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceForgotPassword:@"John"
+     _msoWebserverForgotPassword:@"John"
      password:nil
      accesskey:@"A0010012745NODHIV3WU"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -108,18 +108,18 @@
     XCTAssertNil(mso_response);
 }
 
-- (void)test_msoWebServiceValidUser {
+- (void)test_msoWebserverValidUser {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceCredentials *mso_response = nil;
+    __block MSOSDKResponseWebserverCredentials *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceValidity:@"john2"
+     _msoWebserverValidity:@"john2"
      accesskey:@"A0020010138LA4YUKQS3"
      udid:@"7D7DE0A1-AAB2-4F14-AD8C-7C2A34FE2F20"
      pin:@"20150731"
@@ -137,8 +137,8 @@
          
      }];
     /*
-    [sdk
-     _msoWebServiceValidity:@"John"
+     [sdk
+     _msoWebserverValidity:@"John"
      accesskey:@"A0010012745NODHIV3WU"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
      pin:@"20010101"
@@ -147,36 +147,36 @@
      user:YES
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
      
-         mso_response = responseObject;
-         [expectation fulfill];
-   
+     mso_response = responseObject;
+     [expectation fulfill];
+     
      } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-         err = error;
-         [expectation fulfill];
+     err = error;
+     [expectation fulfill];
      
      }];
-    */
+     */
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue(mso_response.status == kMSOSDKResponseWebServiceStatusSuccess);
+    XCTAssertTrue(mso_response.status == kMSOSDKResponseWebserverStatusSuccess);
 }
 
-- (void)test_msoWebServiceRegister {
+- (void)test_msoWebserverRegister {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    __block MSOSDKResponseWebserverRegister *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceRegisterRep:@"John"
+     _msoWebserverRegisterRep:@"John"
      accesskey:@"IV3WU"
      email:@"john@logiciel.com"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -201,25 +201,25 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebServiceRegister class]]);
+    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebserverRegister class]]);
     XCTAssertTrue([mso_response.type isEqualToString:@"A"]);
     XCTAssertTrue([mso_response.company isEqualToString:@"Testing1"]);
     XCTAssertTrue([mso_response.rep isEqualToString:@"John"]);
     XCTAssertTrue([mso_response.key isEqualToString:@"A0010012745NODHIV3WU"]);
 }
 
-- (void)test_msoWebServiceRegister_amp_company {
+- (void)test_msoWebserverRegister_amp_company {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    __block MSOSDKResponseWebserverRegister *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceRegisterRep:@"John"
+     _msoWebserverRegisterRep:@"John"
      accesskey:@"G2FUV"
      email:@"john@logiciel.com"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -244,20 +244,20 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebServiceRegister class]]);
+    XCTAssertTrue([mso_response isKindOfClass:[MSOSDKResponseWebserverRegister class]]);
 }
 
-- (void)test_msoWebServiceRegister_fail_invalidkey {
+- (void)test_msoWebserverRegister_fail_invalidkey {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
-
-    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    
+    __block MSOSDKResponseWebserverRegister *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceRegisterRep:@"John"
+     _msoWebserverRegisterRep:@"John"
      accesskey:@"IV3WQ"
      email:@"john@logiciel.com"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -274,27 +274,27 @@
          
      }];
     
-
+    
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
-
+    
     XCTAssertNotNil(err);
     XCTAssertTrue([err isEqual:[NSError mso_internet_registration_key_invalid]]);
     XCTAssertNil(mso_response);
 }
 
-- (void)test_msoWebServiceRegister_fail_invalidemail {
+- (void)test_msoWebserverRegister_fail_invalidemail {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
-
-    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    
+    __block MSOSDKResponseWebserverRegister *mso_response = nil;
     __block NSError *err = nil;
-   
+    
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceRegisterRep:@"John"
+     _msoWebserverRegisterRep:@"John"
      accesskey:@"IV3WU"
      email:@"joh@logiciel.com"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
@@ -321,31 +321,31 @@
     XCTAssertNil(mso_response);
 }
 
-- (void)test_msoWebServiceRegister_fail_invalidudid {
+- (void)test_msoWebserverRegister_fail_invalidudid {
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceRegister *mso_response = nil;
+    __block MSOSDKResponseWebserverRegister *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceRegisterRep:@"John"
+     _msoWebserverRegisterRep:@"John"
      accesskey:@"IV3WU"
      email:@"john@logiciel.com"
      udid:@""
      appversion:@"1.5.66"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-     
+         
          mso_response = responseObject;
          [expectation fulfill];
-
+         
      } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-     
+         
          err = error;
          [expectation fulfill];
-
+         
      }];
     
     [task resume];
@@ -357,52 +357,52 @@
     XCTAssertNil(mso_response);
 }
 
-- (void)test_msoWebServicePhotoFileStatus {
+- (void)test_msoWebserverPhotoFileStatus {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebServicePhotoDetails *> *mso_response = nil;
+    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceFetchPhotoFileStatus:@"ADORF01MDBLKAC3"
+     _msoWebserverFetchPhotoFileStatus:@"ADORF01MDBLKAC3"
      pin:@"20010101"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-        
+         
          mso_response = responseObject;
          [expectation fulfill];
          
-    } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-
-        err = error;
-        [expectation fulfill];
-        
-    }];
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
     
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
-
+    
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
     XCTAssertTrue([mso_response count] == 1);
 }
 
-- (void)test_msoWebServicePhotoFileStatus_noresults {
+- (void)test_msoWebserverPhotoFileStatus_noresults {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebServicePhotoDetails *> *mso_response = nil;
+    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceFetchPhotoFileStatus:@"B00121d"
+     _msoWebserverFetchPhotoFileStatus:@"B00121d"
      pin:@"20010101"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -425,18 +425,18 @@
     XCTAssertTrue([mso_response count] == 0);
 }
 
-- (void)test_msoWebServicePhotoFileStatus_chineselaundry {
+- (void)test_msoWebserverPhotoFileStatus_chineselaundry {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block NSArray <MSOSDKResponseWebServicePhotoDetails *> *mso_response = nil;
+    __block NSArray <MSOSDKResponseWebserverPhotoDetails *> *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceFetchPhotoFileStatus:@"ADORF01MD_BLACK"
+     _msoWebserverFetchPhotoFileStatus:@"ADORF01MD_BLACK"
      pin:@"20120418"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -459,18 +459,18 @@
     XCTAssertTrue([mso_response count] == 1);
 }
 
-- (void)test_msoWebServiceDownloadPhoto {
+- (void)test_msoWebserverDownloadPhoto {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
-
+    
     MSOSDK *sdk = [MSOSDK sharedSession];
     
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
-
+    
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceDownloadPhoto:@"ADORF01MDBLKAC3.jpg"
+     _msoWebserverDownloadPhoto:@"ADORF01MDBLKAC3.jpg"
      pin:@"20010101"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -478,10 +478,10 @@
          [expectation fulfill];
          
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-
+         
          err = error;
          [expectation fulfill];
-
+         
      }];
     
     [task resume];
@@ -491,10 +491,10 @@
     XCTAssertNil(err);
     XCTAssertTrue([mso_response isKindOfClass:[UIImage class]]);
     XCTAssertNotNil(mso_response);
-
+    
 }
 
-- (void)test_msoWebServiceDownloadPhoto_testing_hashtags {
+- (void)test_msoWebserverDownloadPhoto_testing_hashtags {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -505,7 +505,7 @@
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceDownloadPhoto:@"FKABC22FA_B#B.jpg"
+     _msoWebserverDownloadPhoto:@"FKABC22FA_B#B.jpg"
      pin:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -530,43 +530,43 @@
 }
 
 /*
-- (void)test_msoWebServiceDownloadPhoto_testing_no_extension {
-    
-    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
-    
-    MSOSDK *sdk = [MSOSDK sharedSession];
-    
-    __block UIImage *mso_response = nil;
-    __block NSError *err = nil;
-    
-    NSURLSessionDataTask *task =
-    [sdk
-     _msoWebServiceDownloadPhoto:@"FKABC22FA_B"
-     pin:@"20040201"
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-         
-         mso_response = responseObject;
-         [expectation fulfill];
-         
-     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-         
-         err = error;
-         [expectation fulfill];
-         
-     }];
-    
-    [task resume];
-    
-    [self waitForExpectationsWithCommonTimeout];
-    
-    XCTAssertNil(err);
-    XCTAssertTrue([mso_response isKindOfClass:[UIImage class]]);
-    XCTAssertNotNil(mso_response);
-    
-}
-*/
+ - (void)test_msoWebserverDownloadPhoto_testing_no_extension {
+ 
+ __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+ 
+ MSOSDK *sdk = [MSOSDK sharedSession];
+ 
+ __block UIImage *mso_response = nil;
+ __block NSError *err = nil;
+ 
+ NSURLSessionDataTask *task =
+ [sdk
+ _msoWebserverDownloadPhoto:@"FKABC22FA_B"
+ pin:@"20040201"
+ success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+ 
+ mso_response = responseObject;
+ [expectation fulfill];
+ 
+ } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+ 
+ err = error;
+ [expectation fulfill];
+ 
+ }];
+ 
+ [task resume];
+ 
+ [self waitForExpectationsWithCommonTimeout];
+ 
+ XCTAssertNil(err);
+ XCTAssertTrue([mso_response isKindOfClass:[UIImage class]]);
+ XCTAssertNotNil(mso_response);
+ 
+ }
+ */
 
-- (void)test_msoWebServiceDownloadPhoto_fail_noimagefound {
+- (void)test_msoWebserverDownloadPhoto_fail_noimagefound {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -577,7 +577,7 @@
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceDownloadPhoto:@"ADORF01MDBLKAC3ds.jpg"
+     _msoWebserverDownloadPhoto:@"ADORF01MDBLKAC3ds.jpg"
      pin:@"20010101"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
@@ -600,7 +600,7 @@
     
 }
 
-- (void)test_msoWebServiceDownloadEventList {
+- (void)test_msoWebserverDownloadEventList {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -610,17 +610,17 @@
     __block NSError *err = nil;
     
     [sdk
-     _msoWebServiceDownloadEventList:@"20040201"
+     _msoWebserverDownloadEventList:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-
+         
          mso_response = responseObject;
          [expectation fulfill];
          
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-     
+         
          err = error;
          [expectation fulfill];
-    
+         
      }];
     
     [self waitForExpectationsWithCommonTimeout];
@@ -631,7 +631,7 @@
     
 }
 
-- (void)test_msoWebServiceCheckForNumberOfFilesToDownload {
+- (void)test_msoWebserverCheckForNumberOfFilesToDownload {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -642,7 +642,7 @@
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceCheckForNumberOfFilesToDownload:@"John"
+     _msoWebserverCheckForNumberOfFilesToDownload:@"John"
      pin:@"20010101"
      date:[NSDate date]
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -651,10 +651,10 @@
          [expectation fulfill];
          
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-
+         
          err = error;
          [expectation fulfill];
-
+         
      }];
     
     [task resume];
@@ -665,18 +665,18 @@
     XCTAssertNotNil(mso_response);
 }
 
-- (void)test_msoWebServiceCheckForFilesToDownload {
+- (void)test_msoWebserverCheckForFilesToDownload {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebServiceFilesToDownload *mso_response = nil;
+    __block MSOSDKResponseWebserverFilesToDownload *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceCheckForFilesToDownload:@"John"
+     _msoWebserverCheckForFilesToDownload:@"John"
      pin:@"20010101"
      date:[NSDate date]
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -700,29 +700,29 @@
     XCTAssertTrue([mso_response.dateUpdated isKindOfClass:[NSDate class]]);
 }
 
-- (void)test_msoWebServiceSendDataRequest {
+- (void)test_msoWebserverSendDataRequest {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseWebService *mso_response = nil;
+    __block MSOSDKResponseWebserver *mso_response = nil;
     __block NSError *err = nil;
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceSendDataRequest:@"John"
+     _msoWebserverSendDataRequest:@"John"
      pin:@"20010101"
      udid:@"B1D2D4F5-1324-41C6-97E9-5A4ACE080499"
      companyname:@"Testing 1"
      criteria:@""
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-
+         
          mso_response = responseObject;
          [expectation fulfill];
-
+         
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-
+         
          err = error;
          [expectation fulfill];
          
@@ -737,7 +737,7 @@
     
 }
 
-- (void)test_msoWebServiceFetchAllPhotoReferences {
+- (void)test_msoWebserverFetchAllPhotoReferences {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
@@ -747,12 +747,12 @@
     __block NSError *err = nil;
     
     [sdk
-     _msoWebServiceFetchAllPhotoReferences:@"20010101"
+     _msoWebserverFetchAllPhotoReferences:@"20010101"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;
          [expectation fulfill];
-
+         
      } progress:^(NSProgress * _Nonnull progress) {
          
          NSLog(@"%@", progress);
@@ -770,7 +770,7 @@
     
 }
 
-- (void)test_msoWebServiceCheckPDAHistoryForDownloading {
+- (void)test_msoWebserverCheckPDAHistoryForDownloading {
     
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.206"
                        msoDeviceName:@"MSOTests"
@@ -787,12 +787,12 @@
     
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebServiceCheckPDAHistoryForDownloading:@"010"
+     _msoWebserverCheckPDAHistoryForDownloading:@"010"
      pin:@"20040201"
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          [expectation fulfill];
-
+         
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
          
          [expectation fulfill];

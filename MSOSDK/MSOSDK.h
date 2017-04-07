@@ -13,10 +13,10 @@
     #define _MSOSDK_
 
     #import "MSOSDK+Netserver.h"
-    #import "MSOSDK+WebService.h"
+    #import "MSOSDK+Webserver.h"
 
     #import "MSOSDKResponseNetserver.h"
-    #import "MSOSDKResponseWebService.h"
+    #import "MSOSDKResponseWebserver.h"
 
     #import "MSOSDKConstants.h"
 

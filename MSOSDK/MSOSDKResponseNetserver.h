@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NSError+MSOSDKAdditions.h"
+
 /**
  `MSOSDKResponseNetserver` adopts `NSObject` and is the general response object that all Netserver response objects adopt.
  */
@@ -15,24 +17,33 @@
 
 - (nullable instancetype)init NS_UNAVAILABLE;
 
+- (nullable instancetype)initWithResponseObject:(nonnull MSOSDKResponseNetserver *)responseObject error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
 /**
  The general initializer for an `MSOSDKResponseNetserver` object.
 
  @param response A `^` seperated response. Some responses contain `^` in the XML so this may be bad practice
  @return `MSOSDKResponseNetserver` object
  */
-+ (nullable instancetype)msosdk_commandWithResponse:(nullable NSArray *)response;
++ (nullable instancetype)msosdk_commandWithResponse:(nullable NSString *)response error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
++ (nullable instancetype)msosdk_commandWithResponseObject:(nonnull MSOSDKResponseNetserver *)responseObject error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
 
 /**
  The command of the request made (e.g _P001). If there are multiple pages to further append to this request, the command will result in _X001. Which means there are more requests to be made to complete the xml response
  */
-@property (strong, nonatomic, nullable) NSString *command;
+@property (copy, nonatomic, nullable) NSString *command;
 
 /**
  The status either results in NO, OK, or nil
  */
-@property (strong, nonatomic, nullable) NSString *status;
+@property (copy, nonatomic, nullable) NSString *status;
+
+@property (copy, nonatomic, nullable) NSArray <NSString *> *trailingResponse;
 @end
+
+
 
 @interface MSOSDKResponseNetserverProductsCount : MSOSDKResponseNetserver
 @property (strong, nonatomic, nullable) NSNumber *productCount;
@@ -44,7 +55,7 @@
 @property (strong, nonatomic, nullable) NSString *mainstoreNumber;
 @property (strong, nonatomic, nullable) NSString *accountNumber;
 @property (strong, nonatomic, nullable) NSString *terms;
-@property (strong, nonatomic, nullable) NSNumber *something;
+@property (strong, nonatomic, nullable) NSNumber *priceLevel;
 @end
 
 @interface MSOSDKResponseNetserverUpdateCustomer : MSOSDKResponseNetserver
@@ -79,7 +90,10 @@
 @interface MSOSDKResponseNetserverSyncCustomers : MSOSDKResponseNetserverSync
 @end
 
-@interface MSOSDKResponseNetserverSyncCustomerMapping : MSOSDKResponseNetserverSync
+@interface MSOSDKResponseNetserverSyncSaveCustomerMapping : MSOSDKResponseNetserverSync
+@end
+
+@interface MSOSDKResponseNetserverSyncUpdateCustomerMapping : MSOSDKResponseNetserverSync
 @end
 
 @interface MSOSDKResponseNetserverSyncProducts : MSOSDKResponseNetserverSync
@@ -88,13 +102,13 @@
 
 
 @interface MSOSDKResponseNetserverSyncPurchaseHistory : MSOSDKResponseNetserverSync
-- (void)appendCommand:(nullable NSArray *)command;
+- (void)mso_appendResponseObject:(nullable MSOSDKResponseNetserverSyncPurchaseHistory *)responseObject;
 @property (strong, nonatomic, nullable) NSString *nextId;
 @property (strong, nonatomic, nullable) NSNumber *detailLoop;
 @end
 
 @interface MSOSDKResponseNetserverQuery : MSOSDKResponseNetserver
-- (void)appendResponse:(nullable NSArray *)response;
+- (void)mso_appendResponseObject:(nullable MSOSDKResponseNetserverQuery *)responseObject;
 @property (strong, nonatomic, nullable) NSString *data;
 @property (strong, nonatomic, nullable) NSString *pages;
 @end
@@ -111,7 +125,7 @@
 @end
 
 @interface MSOSDKResponseNetserverQuerySalesOrder : MSOSDKResponseNetserver
-- (void)mso_appendResponse:(nullable NSArray *)response;
+- (void)mso_appendResponseObject:(nullable MSOSDKResponseNetserverQuerySalesOrder *)responseObject;
 @property (assign, nonatomic) BOOL itemSetRemaining;
 @property (strong, nonatomic, nullable) NSNumber *objectCount;
 @property (strong, nonatomic, nullable) NSString *data;

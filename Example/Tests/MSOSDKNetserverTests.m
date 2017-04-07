@@ -8,6 +8,11 @@
 
 #import "MSOTestCase.h"
 
+// Test suite 1 == Chinese Laundry
+// Test suite 2 == Volume Distributer
+
+#define testSuite 2
+
 @interface MSOSDKNetserverTests : MSOTestCase
 
 @end
@@ -20,7 +25,11 @@
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
+#if testSuite == 1
                           msoEventId:@"1301H"
+#elif testSuite == 2
+                          msoEventId:@"1403H"
+#endif
                          msoPassword:@"logic99"];
 }
 
@@ -49,6 +58,47 @@
         [expectation fulfill];
         
     }];
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(command);
+    XCTAssertTrue([command.status isEqualToString:@"OK"]);
+}
+
+- (void)test_msoNetserverStatus1 {
+    
+    // Need to check if the response from a mismatch eventId causes issues
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
+                       msoDeviceName:@"MSOTests"
+                  msoDeviceIpAddress:@"72.242.241.52"
+#if testSuite == 1
+                          msoEventId:@"1302H"
+#elif testSuite == 2
+                          msoEventId:@"1404H"
+#endif
+                         msoPassword:@"logic99"];
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverPing *command = nil;
+    __block NSError *err = nil;
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverPing:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         command = responseObject;
+         [expectation fulfill];
+         
+     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
@@ -145,6 +195,48 @@
         [expectation fulfill];
         
     }];
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(command);
+    XCTAssertTrue([command.status isEqualToString:@"OK"]);
+}
+
+- (void)test_msoNetserverFetchInitialSettings_invalid_event {
+    
+    // Need to check if the response from a mismatch eventId causes issues
+    [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
+                       msoDeviceName:@"MSOTests"
+                  msoDeviceIpAddress:@"72.242.241.52"
+#if testSuite == 1
+                          msoEventId:@"1302H"
+#elif testSuite == 2
+                          msoEventId:@"1404H"
+#endif
+                         msoPassword:@"logic99"];
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverSettings *command = nil;
+    __block NSError *err = nil;
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverFetchInitialSettings:@"John"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         command = responseObject;
+         [expectation fulfill];
+         
+     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
     [task resume];
     
     [self waitForExpectationsWithCommonTimeout];
@@ -348,10 +440,17 @@
     __block MSOSDKResponseNetserverQueryCustomers *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *account_no =
+#if testSuite == 1
+    @"BAC";
+#elif testSuite == 2
+    @"0016";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadCustomers:@"John"
-     accountnumber:@"BAC"
+     accountnumber:account_no
      name:@""
      phone:@""
      city:@""
@@ -391,10 +490,17 @@
     __block MSOSDKResponseNetserverQueryCustomers *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *account_no =
+#if testSuite == 1
+    @"B";
+#elif testSuite == 2
+    @"0";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadCustomers:@"John"
-     accountnumber:@"B"
+     accountnumber:account_no
      name:@""
      phone:@""
      city:@""
@@ -509,11 +615,19 @@
     
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
+
+    NSString *search_term =
+#if testSuite == 1
+    @"B00001";
+#elif testSuite == 2
+    @"AL";
+#endif
+
     
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadProducts:@"John"
-     searchTerm:@"B00001"
+     searchTerm:search_term
      companyId:@"1"
      searchType:kMSOProductSearchTypeItemNumber
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -549,11 +663,18 @@
     
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
-    
+
+    NSString *search_term =
+#if testSuite == 1
+    @"B0";
+#elif testSuite == 2
+    @"LAS";
+#endif
+
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadProducts:@"John"
-     searchTerm:@"B0"
+     searchTerm:search_term
      companyId:@"1"
      searchType:kMSOProductSearchTypeItemNumber
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -589,11 +710,19 @@
     
     __block MSOSDKResponseNetserverQuery *mso_response = nil;
     __block NSError *err = nil;
+
+    NSString *search_term =
+#if testSuite == 1
+    @"ADORF01MDBLsKAC";
+#elif testSuite == 2
+    @"LAS-811132";
+#endif
+
     
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadProducts:@"John"
-     searchTerm:@"ADORF01MDBLsKAC"
+     searchTerm:search_term
      companyId:@"1"
      searchType:kMSOProductSearchTypeItemNumber
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
@@ -738,9 +867,16 @@
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *item =
+#if testSuite == 1
+    @"ADORF01MDBLKAC3";
+#elif testSuite == 2
+    @"USA-99893";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
-     _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC3"
+     _msoNetserverDownloadProductImage:item
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
 
          mso_response = responseObject;
@@ -771,9 +907,16 @@
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *item =
+#if testSuite == 1
+    @"ADORF01MDBLKAC32";
+#elif testSuite == 2
+    @"USA-998932";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
-     _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC32"
+     _msoNetserverDownloadProductImage:item
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;
@@ -792,40 +935,6 @@
     
     XCTAssertNotNil(err);
     XCTAssertTrue([err isEqual:[NSError mso_netserver_image_not_found_error]]);
-    XCTAssertNil(mso_response);
-}
-
-- (void)test_msoNetserverDownloadProductImage_fail_parseError {
-    
-    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
-    
-    MSOSDK *sdk = [MSOSDK sharedSession];
-    
-    __block UIImage *mso_response = nil;
-    __block NSError *err = nil;
-    
-    NSURLSessionDataTask *task =
-    [sdk
-     _msoNetserverDownloadProductImage:@"ADORF01MDBLKAC3"
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-        
-         mso_response = responseObject;
-        [expectation fulfill];
-        
-    } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
-        
-        err = error;
-        [expectation fulfill];
-        
-    }];;
-    
-    
-    [task resume];
-    
-    [self waitForExpectationsWithLongTimeout];
-    
-    XCTAssertNotNil(err);
-    XCTAssertTrue([err isEqual:[NSError mso_internet_image_download_error]]);
     XCTAssertNil(mso_response);
 }
 
@@ -857,7 +966,15 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
-    XCTAssertTrue([mso_response.productCount isEqualToNumber:@46622]);
+    
+    NSNumber *count =
+#if testSuite == 1
+    @46622;
+#elif testSuite == 2
+    @3329;
+#endif
+    
+    XCTAssertTrue([mso_response.productCount isEqualToNumber:count]);
 }
 
 - (void)test_msoNetserverDownloadNumberOfProducts_invalidLogin {
@@ -985,12 +1102,20 @@
     
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
+
+    NSString *account_no =
+    
+#if testSuite == 1
+    @"1301H0127";
+#elif testSuite == 2
+    @"1403H0037";
+#endif
     
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverSaveCustomerShippingAddress:@"john"
-     accountNumber:@"1301H0127"
-     mainstoreNumber:@"1301H0127"
+     accountNumber:account_no
+     mainstoreNumber:account_no
      customerName:@"johns test customer"
      contactName:@"John Setting"
      address1:@"123 Livingston St."
@@ -1079,12 +1204,18 @@
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
     
-    NSURLSessionDataTask *task =
+    NSString *account_no =
+#if testSuite == 1
+    @"1301H0127";
+#elif testSuite == 2
+    @"1403H0037";
+#endif
     
+    NSURLSessionDataTask *task =
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
      companyName:@"Default Company"
-     accountNumber:@"1301H0127"
+     accountNumber:account_no
      name:@"johns test customer"
      contactName:@"John Setting Update"
      address1:@"123 Livingston St."
@@ -1119,6 +1250,7 @@
     
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
+    XCTAssertTrue([mso_response.status isEqualToString:@"OK"]);
 
 }
 
@@ -1184,12 +1316,18 @@
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
     
-    NSURLSessionDataTask *task =
+    NSString *account_no =
+#if testSuite == 1
+    @"1301H0127-001";
+#elif testSuite == 2
+    @"1403H0037-001";
+#endif
     
+    NSURLSessionDataTask *task =
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
      companyName:@"Default Company"
-     accountNumber:@"1301H0127-001"
+     accountNumber:account_no
      name:@"johns test customer"
      contactName:@"John Setting Update (w123)"
      address1:@"123 Livingston St."
@@ -1289,11 +1427,18 @@
     __block MSOSDKResponseNetserverQueryCustomerSalesOrders *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *account_no =
+#if testSuite == 1
+    @"SOL14741";
+#elif testSuite == 2
+    @"25111";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverRetrieveOrders:@"john"
      customerName:@""
-     customerAccountNumber:@"SOL14741"
+     customerAccountNumber:account_no
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;
@@ -1364,10 +1509,17 @@
     __block MSOSDKResponseNetserverQuerySalesOrder *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *order_no =
+#if testSuite == 1
+    @"JohnP0206";
+#elif testSuite == 2
+    @"007P0128";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverRetrieveOrder:@"john"
-     orderNumber:@"JohnP0206"
+     orderNumber:order_no
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;
@@ -1436,10 +1588,17 @@
     __block MSOSDKResponseNetserverQuerySalesOrder *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *order_no =
+#if testSuite == 1
+    @"JohnP0218";
+#elif testSuite == 2
+    @"P0052";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverRetrieveOrder:@"john"
-     orderNumber:@"JohnP0218"
+     orderNumber:order_no
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;
@@ -1553,11 +1712,18 @@
     __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *customer_zip =
+#if testSuite == 1
+    @"90210";
+#elif testSuite == 2
+    @"25586";
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverDownloadPurchaseHistory:@"john"
      customerName:@""
-     customerZip:@"90210"
+     customerZip:customer_zip
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          [expectation fulfill];
@@ -1641,11 +1807,18 @@
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
     
+    NSArray <NSString *> *item_list =
+#if testSuite == 1
+    @[@"ADORF01MDBLKAC3"];
+#elif testSuite == 2
+    @[@"MGD-60014", @"MGD-60015", @"MGD-60016", @"MGD-60017"];
+#endif
+    
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverFetchItemList:@"john"
      companyId:@"1"
-     itemList:@[@"ADORF01MDBLKAC3"]
+     itemList:item_list
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          [expectation fulfill];
@@ -1700,9 +1873,10 @@
     
     [task resume];
     
-    [self waitForExpectationsWithLongTimeout];
+    [self waitForExpectationsWithCommonTimeout];
     
     XCTAssertNotNil(err);
+    XCTAssertTrue([err isEqual:[NSError mso_netserver_auto_mapping_not_created_error]]);
     XCTAssertNil(mso_response);
     
 }
@@ -1734,9 +1908,10 @@
     
     [task resume];
     
-    [self waitForExpectationsWithLongTimeout];
+    [self waitForExpectationsWithCommonTimeout];
     
     XCTAssertNotNil(err);
+    XCTAssertTrue([err isEqual:[NSError mso_netserver_auto_mapping_update_error]]);
     XCTAssertNil(mso_response);
     
 }

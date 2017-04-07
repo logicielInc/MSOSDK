@@ -88,24 +88,29 @@ typedef NS_ENUM(NSInteger, kMSOProductSearchType) {
 /**
  enums that define the registration status of an access key. This is only applied to Web Service calls
 
- - kMSOSDKResponseWebServiceStatusNotFound: Status Not Found = 0
- - kMSOSDKResponseWebServiceStatusUnregistered: Status Unregistered = 00
- - kMSOSDKResponseWebServiceStatusExpired: Status Expired = 1
- - kMSOSDKResponseWebServiceStatusDisabled: Status Disabled = 11
- - kMSOSDKResponseWebServiceStatusSuspended: Status Suspended = -1
- - kMSOSDKResponseWebServiceStatusInvalid: Status Invalid = -2
- - kMSOSDKResponseWebServiceStatusSuccess: Status Success = 2
- - kMSOSDKResponseWebServiceStatusUnknown: Status Unknown = ?
+ - kMSOSDKResponseWebserverStatusNotFound: Status Not Found = 0
+ - kMSOSDKResponseWebserverStatusUnregistered: Status Unregistered = 00
+ - kMSOSDKResponseWebserverStatusExpired: Status Expired = 1
+ - kMSOSDKResponseWebserverStatusDisabled: Status Disabled = 11
+ - kMSOSDKResponseWebserverStatusSuspended: Status Suspended = -1
+ - kMSOSDKResponseWebserverStatusInvalid: Status Invalid = -2
+ - kMSOSDKResponseWebserverStatusSuccess: Status Success = 2
+ - kMSOSDKResponseWebserverStatusUnknown: Status Unknown = ?
  */
-typedef NS_ENUM(NSInteger, kMSOSDKResponseWebServiceStatus) {
-    kMSOSDKResponseWebServiceStatusNotFound = 0,
-    kMSOSDKResponseWebServiceStatusUnregistered = 1,
-    kMSOSDKResponseWebServiceStatusExpired = 2,
-    kMSOSDKResponseWebServiceStatusDisabled = 3,
-    kMSOSDKResponseWebServiceStatusSuspended = 4,
-    kMSOSDKResponseWebServiceStatusInvalid = 5,
-    kMSOSDKResponseWebServiceStatusSuccess = 6,
-    kMSOSDKResponseWebServiceStatusUnknown = -1,
+typedef NS_ENUM(NSInteger, kMSOSDKResponseWebserverStatus) {
+    kMSOSDKResponseWebserverStatusNotFound = 0,
+    kMSOSDKResponseWebserverStatusUnregistered = 1,
+    kMSOSDKResponseWebserverStatusExpired = 2,
+    kMSOSDKResponseWebserverStatusDisabled = 3,
+    kMSOSDKResponseWebserverStatusSuspended = 4,
+    kMSOSDKResponseWebserverStatusInvalid = 5,
+    kMSOSDKResponseWebserverStatusSuccess = 6,
+    kMSOSDKResponseWebserverStatusUnknown = -1,
+};
+
+typedef NS_ENUM(NSInteger, kMSOSDKRequestType) {
+    kMSOSDKRequestTypeNetserver = 1 << 0,
+    kMSOSDKRequestTypeWebserver = 1 << 1,
 };
 
 /**

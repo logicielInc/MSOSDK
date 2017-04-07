@@ -146,6 +146,17 @@
                        NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"Key is currently suspended"]}];
 }
 
++ (instancetype)mso_netserver_ping_error {
+    
+    return
+    [NSError
+     errorWithDomain:NSURLErrorDomain
+     code:204
+     userInfo:@{NSLocalizedDescriptionKey : @"Netserver Ping Error",
+                NSLocalizedFailureReasonErrorKey : @"There was an error checking if netserver is available. Please try again"}];
+    
+}
+
 + (instancetype)mso_netserver_product_fetch_empty_result {
     return [NSError
             errorWithDomain:NSURLErrorDomain
@@ -167,7 +178,9 @@
             errorWithDomain:NSURLErrorDomain
             code:204
             userInfo:@{NSLocalizedDescriptionKey : @"Event Updated",
-                       NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"Updated current event on the iPad to '%@ (%@)'.\nPlease log-in again.", eventName, eventId]}];
+                       NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"Updated current event on the iPad to '%@ (%@)'.\nPlease log-in again.", eventName, eventId],
+                       @"eventName" : eventName,
+                       @"eventId" : eventId}];
 }
 
 + (instancetype)mso_netserver_method_request_error:(NSString *)action {
@@ -226,13 +239,23 @@
                        NSLocalizedFailureReasonErrorKey : @"Try different search methods and also check MSO to see if there in fact does contain a customer with the exact search criteria"}];
 }
 
++ (instancetype)mso_netserver_order_retrieval_in_use {
+    return [NSError
+            errorWithDomain:NSURLErrorDomain
+            code:204
+            userInfo:@{
+                       NSLocalizedDescriptionKey : @"Retrieve Sales Order Error",
+                       NSLocalizedFailureReasonErrorKey : @"The sales order is currently in use. For you to retrieve it, you must close the sales order in Tradeshow32"
+                       }];
+}
+
 + (instancetype)mso_netserver_order_retrieval_no_orders {
     return [NSError
             errorWithDomain:NSURLErrorDomain
             code:204
             userInfo:@{
                        NSLocalizedDescriptionKey : @"No Sales Orders Found",
-                       NSLocalizedFailureReasonErrorKey : [NSString stringWithFormat:@"There were no sales orders found for the specified search criteria"]
+                       NSLocalizedFailureReasonErrorKey : @"There were no sales orders found for the specified search criteria"
                        }];
 }
 

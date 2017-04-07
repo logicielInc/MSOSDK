@@ -145,33 +145,6 @@ static NSString * authPassword;
     return url;
 }
 
-+ (NSString *)sanatizeData:(NSData *)responseObject {
-    NSString *unsanitizedData = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-    NSString *escapedData = [unsanitizedData mso_stringBetweenString:_msoNetserverBeginEscapedCommand andString:_msoNetserverEndEscapedCommand];
-    unsanitizedData = nil;
-    responseObject = nil;
-    NSString *command = [escapedData mso_unescape];
-    escapedData = nil;
-    return command;
-}
-
-+ (NSString *)sanatizeImageData:(NSData *)responseObject {
-    NSString *unsanitizedData = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-    NSString *escapedData = [unsanitizedData mso_stringBetweenString:@"<DoWorkResult>" andString:@"</DoWorkResult>"];
-    unsanitizedData = nil;
-    return escapedData;
-}
-
-+ (NSString *)stringFromDate:(NSDate *)date {
-    NSString *string = [[NSDateFormatter mso_longDateFormatter] stringFromDate:date];
-    return string;
-}
-
-+ (NSDate *)dateFromString:(NSString *)date {    
-    NSDate *string = [[NSDateFormatter mso_mediumDateFormatter] dateFromString:date];
-    return string;
-}
-
 + (BOOL)validate:(NSString *)data command:(NSString *)command status:(NSString *)status error:(NSError *__autoreleasing *)error {
     
     BOOL validity = NO;
@@ -411,28 +384,98 @@ static NSString * authPassword;
 
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
                                      progress:(MSOProgressBlock)progress
+                                  requestType:(kMSOSDKRequestType)requestType
                                       success:(void (^)(NSURLResponse *, id, NSError *))success
                                       failure:(void (^)(NSURLResponse *, NSError *))failure {
-    
+
     NSURLSessionDataTask *task =
     [self.operation
      dataTaskWithRequest:request
      uploadProgress:nil
      downloadProgress:progress
-     completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseObject, NSError * _Nullable error) {
          
          if (error) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
          
-         if (success) {
-             success(response, responseObject, nil);
+         NSString *sanatizedResponse;
+         
+         if (requestType == kMSOSDKRequestTypeNetserver) {
+             
+             sanatizedResponse = [responseObject sanatizeDataForNetserverResponse];
+             
+             MSOSDKResponseNetserver *mso_response =
+             [MSOSDKResponseNetserver
+              msosdk_commandWithResponse:sanatizedResponse
+              error:&error];
+             
+             if (!mso_response) {
+                 [NSError errorHandler:error response:response failure:failure];
+                 return;
+             }
+             
+             if (success) {
+                 success(response, mso_response, nil);
+             }
+             
+         } else if (requestType == kMSOSDKRequestTypeWebserver) {
+             
+             sanatizedResponse = [responseObject sanatizeDataForWebServiceResponse];
+             if (success) {
+                 success(response, sanatizedResponse, nil);
+             }
+
+         } else {
+
+             sanatizedResponse = nil;
+         
          }
          
-     }];;
+         
+     }];
+
     return task;
 }
+
+- (NSURLSessionDataTask *)dataTaskForNetserverWithRequest:(NSURLRequest *)request
+                                                 progress:(MSOProgressBlock)progress
+                                                  success:(void (^)(NSURLResponse *, MSOSDKResponseNetserver *, NSError *))success
+                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    return [self
+            dataTaskWithRequest:request
+            progress:progress
+            requestType:kMSOSDKRequestTypeNetserver
+            success:success
+            failure:failure];
+    
+}
+
+- (NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(NSURLRequest *)request
+                                                 progress:(MSOProgressBlock)progress
+                                                  success:(void (^)(NSURLResponse *, NSString *, NSError *))success
+                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    return [self
+            dataTaskWithRequest:request
+            progress:progress
+            requestType:kMSOSDKRequestTypeWebserver
+            success:success
+            failure:failure];
+    
+}
+
++ (NSURLRequest *)mso_imageRequestNetserver:(NSString *)ipAddress filename:(NSString *)filename {
+    NSMutableString *command = [NSMutableString stringWithFormat:@"<*!BEGIN!*><~~><PHOTOALL>%@<*!END!*>", filename];
+    command = [command mso_string_escape];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", ipAddress]];
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command forKey:@"str"];
+    NSURLRequest *request = [MSOSDK urlRequestWithParameters:@[parameter] type:mso_soap_function_doWork url:url netserver:YES timeout:kMSOTimeoutImageSyncKey];
+    return request;
+}
+
 
 @end
 

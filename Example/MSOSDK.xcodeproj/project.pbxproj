@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E67840F1E96C69D002FBCEF /* MSOSDKWebserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E67840E1E96C69D002FBCEF /* MSOSDKWebserverTests.m */; };
 		1EF0E5A41E79E18300E9DFE3 /* MSOSDKNetserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF0E59D1E79E15000E9DFE3 /* MSOSDKNetserverTests.m */; };
-		1EF0E5A51E79E18300E9DFE3 /* MSOSDKWebServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF0E59E1E79E15000E9DFE3 /* MSOSDKWebServiceTests.m */; };
 		1EF0E5A71E79E18300E9DFE3 /* MSOTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A01E79E15000E9DFE3 /* MSOTestCase.m */; };
 		1EF0E5A91E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */; };
 		1EF0E5AA1E79EA1B00E9DFE3 /* passed_xml_order_escaping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */; };
@@ -44,8 +44,8 @@
 		04B21E77F660B40658E3A3EA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		06414A59FC6011E091A1409C /* Pods-MSOSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSOSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MSOSDK_Example/Pods-MSOSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		07B5D071A5F7E8C08F017886 /* Pods-MSOSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSOSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MSOSDK_Tests/Pods-MSOSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		1E67840E1E96C69D002FBCEF /* MSOSDKWebserverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOSDKWebserverTests.m; sourceTree = "<group>"; };
 		1EF0E59D1E79E15000E9DFE3 /* MSOSDKNetserverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOSDKNetserverTests.m; sourceTree = "<group>"; };
-		1EF0E59E1E79E15000E9DFE3 /* MSOSDKWebServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOSDKWebServiceTests.m; sourceTree = "<group>"; };
 		1EF0E59F1E79E15000E9DFE3 /* MSOTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOTestCase.h; sourceTree = "<group>"; };
 		1EF0E5A01E79E15000E9DFE3 /* MSOTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOTestCase.m; sourceTree = "<group>"; };
 		1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = passed_xml_order_escaping.xml; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF0E59D1E79E15000E9DFE3 /* MSOSDKNetserverTests.m */,
-				1EF0E59E1E79E15000E9DFE3 /* MSOSDKWebServiceTests.m */,
+				1E67840E1E96C69D002FBCEF /* MSOSDKWebserverTests.m */,
 				1EF0E59F1E79E15000E9DFE3 /* MSOTestCase.h */,
 				1EF0E5A01E79E15000E9DFE3 /* MSOTestCase.m */,
 				1EF0E5A81E79E9AC00E9DFE3 /* passed_xml_order_escaping.xml */,
@@ -419,7 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EF0E5A41E79E18300E9DFE3 /* MSOSDKNetserverTests.m in Sources */,
-				1EF0E5A51E79E18300E9DFE3 /* MSOSDKWebServiceTests.m in Sources */,
+				1E67840F1E96C69D002FBCEF /* MSOSDKWebserverTests.m in Sources */,
 				1EF0E5A71E79E18300E9DFE3 /* MSOTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

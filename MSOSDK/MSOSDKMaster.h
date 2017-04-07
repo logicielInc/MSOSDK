@@ -11,11 +11,15 @@
 #import "MSOSDKConstants.h"
 #import "GRRequestsManager.h"
 
+#import "MSOSDKResponseNetserver.h"
+#import "MSOSDKResponseWebserver.h"
+
 #import "NSString+MSOSDKAdditions.h"
 #import "NSError+MSOSDKAdditions.h"
 #import "NSURLRequest+MSOSDKAdditions.h"
 #import "NSDateFormatter+MSOSDKAdditions.h"
 #import "NSURL+MSOSDKAdditions.h"
+#import "NSData+MSOSDKAdditions.h"
 
 @class MSOSoapParameter;
 
@@ -85,11 +89,6 @@
                     authUsername:(nullable NSString *)authUsername
                     authPassword:(nullable NSString *)authPassword;
 
-+ (nonnull NSString *)sanatizeData:(nonnull NSData *)responseObject;
-+ (nonnull NSString *)sanatizeImageData:(nonnull NSData *)responseObject;
-
-+ (nullable NSString *)stringFromDate:(nullable NSDate *)date;
-+ (nullable NSDate *)dateFromString:(nullable NSString *)date;
 
 + (BOOL)validate:(nullable NSString *)data
          command:(nullable NSString *)command
@@ -116,11 +115,18 @@
                                           netserver:(BOOL)netserver
                                             timeout:(NSTimeInterval)timeout;
 
-- (nonnull NSURLSessionDataTask *)dataTaskWithRequest:(nonnull NSURLRequest *)request
-                                             progress:(_Nullable MSOProgressBlock)progress
-                                              success:(void (^_Nullable)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))success
-                                              failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
+- (nonnull NSURLSessionDataTask *)dataTaskForNetserverWithRequest:(nonnull NSURLRequest *)request
+                                                         progress:(_Nullable MSOProgressBlock)progress
+                                                          success:(void (^_Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error))success
+                                                          failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
 
+- (nonnull NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(nonnull NSURLRequest *)request
+                                                         progress:(_Nullable MSOProgressBlock)progress
+                                                          success:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error))success
+                                                          failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
+
+
++ (nullable NSURLRequest *)mso_imageRequestNetserver:(nullable NSString *)ipAddress filename:(nullable NSString *)filename;
 
 @end
 

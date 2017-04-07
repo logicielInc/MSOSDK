@@ -1,27 +1,27 @@
 
 //
-//  MSOSDK+WebService.m
+//  MSOSDK+Webserver.m
 //  iMobileRep
 //
 //  Created by John Setting on 2/16/17.
 //  Copyright © 2017 John Setting. All rights reserved.
 //
 
-#import "MSOSDK+WebService.h"
+#import "MSOSDK+Webserver.h"
 
-@implementation MSOSDK (WebService)
+@implementation MSOSDK (Webserver)
 
 #pragma mark - Web Service Credentials
 #pragma mark Login
-- (NSURLSessionDataTask *)_msoWebServiceValidity:(NSString *)username
-                                       accesskey:(NSString *)accesskey
-                                            udid:(NSString *)udid
-                                             pin:(NSString *)pin
-                                     companyname:(NSString *)companyname
-                                      appversion:(NSString *)appversion
-                                            user:(BOOL)user
-                                         success:(MSOSuccessBlock)success
-                                         failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverValidity:(NSString *)username
+                                      accesskey:(NSString *)accesskey
+                                           udid:(NSString *)udid
+                                            pin:(NSString *)pin
+                                    companyname:(NSString *)companyname
+                                     appversion:(NSString *)appversion
+                                           user:(BOOL)user
+                                        success:(MSOSuccessBlock)success
+                                        failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
     MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
@@ -33,27 +33,29 @@
     MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"0"                     forKey:@"iType"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterAccessKey,
-                                                        parameterUDID,
-                                                        parameterCompanyName,
-                                                        parameterPin,
-                                                        parameterUsername,
-                                                        parameterPassword,
-                                                        parameterAppVersion,
-                                                        parameterIType,
-                                                        parameterMSOPassword]
-                             type:user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutLoginKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterAccessKey,
+                                parameterUDID,
+                                parameterCompanyName,
+                                parameterPin,
+                                parameterUsername,
+                                parameterPassword,
+                                parameterAppVersion,
+                                parameterIType,
+                                parameterMSOPassword]
+     type:user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutLoginKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
+         /*
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
          
@@ -65,11 +67,11 @@
          
          NSArray *components = [data componentsSeparatedByString:@","];
          data = nil;
-         MSOSDKResponseWebServiceCredentials *mso_response = [MSOSDKResponseWebServiceCredentials msosdk_commandWithResponse:components];
+         MSOSDKResponseWebserverCredentials *mso_response = [MSOSDKResponseWebserverCredentials msosdk_commandWithResponse:components];
          components = nil;
          mso_response.command = user ? mso_soap_function_iCheckMobileUser : mso_soap_function_iCheckMobileDevice;
          
-         error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
+         error = [MSOSDKResponseWebserver errorFromStatus:mso_response.status];
          
          if (error) {
              [NSError errorHandler:error response:response failure:failure];
@@ -81,6 +83,7 @@
                  success(response, mso_response);
              });
          }
+         */
          
      } failure:failure];
     
@@ -90,15 +93,15 @@
 
 
 #pragma mark Forgot Password
-- (NSURLSessionDataTask *)_msoWebServiceForgotPassword:(NSString *)username
-                                              password:(NSString *)password
-                                             accesskey:(NSString *)accesskey
-                                                  udid:(NSString *)udid
-                                                   pin:(NSString *)pin
-                                            appversion:(NSString *)appversion
-                                           companyname:(NSString *)companyname
-                                               success:(MSOSuccessBlock)success
-                                               failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverForgotPassword:(NSString *)username
+                                             password:(NSString *)password
+                                            accesskey:(NSString *)accesskey
+                                                 udid:(NSString *)udid
+                                                  pin:(NSString *)pin
+                                           appversion:(NSString *)appversion
+                                          companyname:(NSString *)companyname
+                                              success:(MSOSuccessBlock)success
+                                              failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
     MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
@@ -109,62 +112,58 @@
     MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
     MSOSoapParameter *parameterIType       = [MSOSoapParameter parameterWithObject:@"1"                     forKey:@"iType"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
-        
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterAccessKey,
-                                                        parameterUDID,
-                                                        parameterCompanyName,
-                                                        parameterPin,
-                                                        parameterUsername,
-                                                        parameterPassword,
-                                                        parameterAppVersion,
-                                                        parameterIType,
-                                                        parameterMSOPassword]
-                             type:mso_soap_function_iCheckMobileDevice
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutForgotPassword];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterAccessKey,
+                                parameterUDID,
+                                parameterCompanyName,
+                                parameterPin,
+                                parameterUsername,
+                                parameterPassword,
+                                parameterAppVersion,
+                                parameterIType,
+                                parameterMSOPassword]
+     type:mso_soap_function_iCheckMobileDevice
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutForgotPassword];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         responseObject = nil;
-         data = [data mso_stringBetweenString:@"<iCheckMobileDeviceResult>" andString:@"</iCheckMobileDeviceResult>"];
-         NSArray *components = [data componentsSeparatedByString:@","];
-         data = nil;
-         MSOSDKResponseWebServiceCredentials *mso_response = [MSOSDKResponseWebServiceCredentials msosdk_commandWithResponse:components];
-         components = nil;
-         mso_response.command = mso_soap_function_iCheckMobileDevice;
-         
-         error = [MSOSDKResponseWebService errorFromStatus:mso_response.status];
-         
-         if (error) {
+         MSOSDKResponseWebserverCredentials *mso_response =
+         [MSOSDKResponseWebserverCredentials
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+
+         if (!mso_response) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-         
+
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, mso_response);
              });
          }
+          
      } failure:failure];
     
     return task;
 }
 
 #pragma mark Registration
-- (NSURLSessionDataTask *)_msoWebServiceRegisterRep:(NSString *)username
-                                          accesskey:(NSString *)accesskey
-                                              email:(NSString *)email
-                                               udid:(NSString *)udid
-                                         appversion:(NSString *)appversion
-                                            success:(MSOSuccessBlock)success
-                                            failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverRegisterRep:(NSString *)username
+                                         accesskey:(NSString *)accesskey
+                                             email:(NSString *)email
+                                              udid:(NSString *)udid
+                                        appversion:(NSString *)appversion
+                                           success:(MSOSuccessBlock)success
+                                           failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
     MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
@@ -172,29 +171,30 @@
     MSOSoapParameter *parameterEmail       = [MSOSoapParameter parameterWithObject:email                    forKey:@"userEmail"];
     MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
-        
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterAccessKey,
-                                                        parameterUDID,
-                                                        parameterUsername,
-                                                        parameterEmail,
-                                                        parameterAppVersion,
-                                                        parameterMSOPassword]
-                             type:mso_soap_function_iRegisterShortKey
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutRegistrationKey];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterAccessKey,
+                                parameterUDID,
+                                parameterUsername,
+                                parameterEmail,
+                                parameterAppVersion,
+                                parameterMSOPassword]
+     type:mso_soap_function_iRegisterShortKey
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutRegistrationKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
+         /*
+         NSString *data = [MSOSDK sanatizeData:responseObject];
          responseObject = nil;
          data = [data mso_stringBetweenString:@"<iRegisterShortKeyResult>" andString:@"</iRegisterShortKeyResult>"];
-         data = [data mso_unescape];
          if (!data) {
              error = [NSError mso_internet_registration_key_invalid];
              [NSError errorHandler:error response:response failure:failure];
@@ -232,7 +232,7 @@
              return;
          }
          
-         MSOSDKResponseWebServiceRegister *mso_response = [MSOSDKResponseWebServiceRegister msosdk_commandWithResponse:data];
+         MSOSDKResponseWebserverRegister *mso_response = [MSOSDKResponseWebserverRegister msosdk_commandWithResponse:data];
          data = nil;
          
          if ([mso_response.pin isEqualToString:@"?"]) {
@@ -240,7 +240,7 @@
              NSURLSessionDataTask *task =
              
              [self
-              _msoWebServiceRegisterCode:mso_response.rep
+              _msoWebserverRegisterCode:mso_response.rep
               cds:mso_response.cds
               accesskey:mso_response.key
               code:mso_response.code
@@ -263,6 +263,7 @@
                  success(response, mso_response);
              });
          }
+         */
          
      } failure:failure];
     
@@ -270,18 +271,18 @@
     
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceRegisterCode:(NSString *)username
-                                                 cds:(NSString *)cds
-                                           accesskey:(NSString *)accesskey
-                                                code:(NSString *)code
-                                                type:(NSString *)type
-                                             company:(NSString *)company
-                                               email:(NSString *)email
-                                                udid:(NSString *)udid
-                                          appversion:(NSString *)appversion
-                                          reregister:(BOOL)reregister
-                                             success:(MSOSuccessBlock)success
-                                             failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverRegisterCode:(NSString *)username
+                                                cds:(NSString *)cds
+                                          accesskey:(NSString *)accesskey
+                                               code:(NSString *)code
+                                               type:(NSString *)type
+                                            company:(NSString *)company
+                                              email:(NSString *)email
+                                               udid:(NSString *)udid
+                                         appversion:(NSString *)appversion
+                                         reregister:(BOOL)reregister
+                                            success:(MSOSuccessBlock)success
+                                            failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
     MSOSoapParameter *parameterUDID        = [MSOSoapParameter parameterWithObject:udid                     forKey:@"deviceID"];
@@ -289,22 +290,23 @@
     MSOSoapParameter *parameterAppVersion  = [MSOSoapParameter parameterWithObject:appversion               forKey:@"appVersion"];
     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterAccessKey,
-                                                        parameterUDID,
-                                                        parameterCDs,
-                                                        parameterAppVersion,
-                                                        parameterMSOPassword]
-                             type:mso_soap_function_iRegisterCode
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutRegistrationKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterAccessKey,
+                                parameterUDID,
+                                parameterCDs,
+                                parameterAppVersion,
+                                parameterMSOPassword]
+     type:mso_soap_function_iRegisterCode
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutRegistrationKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -328,7 +330,7 @@
          
          if (pin) {
              
-             MSOSDKResponseWebServiceRegister *mso_response = [[MSOSDKResponseWebServiceRegister alloc] init];
+             MSOSDKResponseWebserverRegister *mso_response = [[MSOSDKResponseWebserverRegister alloc] init];
              mso_response.pin = pin;
              mso_response.key = accesskey;
              mso_response.rep = username;
@@ -348,7 +350,7 @@
              
              NSURLSessionDataTask *task =
              [self
-              _msoWebServiceRegisterRep:username
+              _msoWebserverRegisterRep:username
               accesskey:accesskey
               email:email
               udid:udid
@@ -373,10 +375,10 @@ static MSOSuccessBlock gr_success_block;
 static MSOProgressBlock gr_progress_block;
 static MSOFailureBlock gr_failure_block;
 
-- (void)_msoWebServiceFetchAllPhotoReferences:(NSString *)pin
-                                      success:(MSOSuccessBlock)success
-                                     progress:(MSOProgressBlock)progress
-                                      failure:(MSOFailureBlock)failure {
+- (void)_msoWebserverFetchAllPhotoReferences:(NSString *)pin
+                                     success:(MSOSuccessBlock)success
+                                    progress:(MSOProgressBlock)progress
+                                     failure:(MSOFailureBlock)failure {
     
     NSString *hostname = @"ftp://ftp.logicielinc.com";
     NSString *username = @"manager";
@@ -394,34 +396,35 @@ static MSOFailureBlock gr_failure_block;
     gr_failure_block = [failure copy];
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceFetchPhotoFileStatus:(NSString *)itemNo
-                                                         pin:(NSString *)pin
-                                                     success:(MSOSuccessBlock)success
-                                                    progress:(MSOProgressBlock)progress
-                                                     failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverFetchPhotoFileStatus:(NSString *)itemNo
+                                                        pin:(NSString *)pin
+                                                    success:(MSOSuccessBlock)success
+                                                   progress:(MSOProgressBlock)progress
+                                                    failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterItemNo  = [MSOSoapParameter parameterWithObject:itemNo forKey:@"sItemNo"];
     MSOSoapParameter *parameterPin     = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterItemNo,
-                                                        parameterPin]
-                             type:mso_soap_function_checkPhotoFileStatus
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterItemNo,
+                                parameterPin]
+     type:mso_soap_function_checkPhotoFileStatus
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+     
          /*
-         NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         responseObject = nil;
-         data = [data mso_stringBetweenString:@"<_CheckPhotoFileStatusResult>" andString:@"</_CheckPhotoFileStatusResult>"];
-         */
+          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
+          responseObject = nil;
+          data = [data mso_stringBetweenString:@"<_CheckPhotoFileStatusResult>" andString:@"</_CheckPhotoFileStatusResult>"];
+          */
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -430,13 +433,13 @@ static MSOFailureBlock gr_failure_block;
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
+         
          NSArray <SMXMLElement *> *element = document.children;
          SMXMLElement *parentPhotos = [element firstObject];
          SMXMLElement *potentialPhotos = [parentPhotos descendantWithPath:@"_CheckPhotoFileStatusResponse._CheckPhotoFileStatusResult"];
          NSArray <NSString *> *photos = [[potentialPhotos children] valueForKey:@"value"];
          
-         NSMutableArray <MSOSDKResponseWebServicePhotoDetails *> * photoDetails = [NSMutableArray array];
+         NSMutableArray <MSOSDKResponseWebserverPhotoDetails *> * photoDetails = [NSMutableArray array];
          
          NSString *string = [NSString stringWithFormat:@"^%@(-[0-9]+)?\\.(jpg|jpeg|png)$", itemNo];
          NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES [cd] %@", string];
@@ -445,7 +448,7 @@ static MSOFailureBlock gr_failure_block;
              
              for (NSString *photo in photos) {
                  
-                 MSOSDKResponseWebServicePhotoDetails *photoDetail = [MSOSDKResponseWebServicePhotoDetails detailsWithValue:photo];
+                 MSOSDKResponseWebserverPhotoDetails *photoDetail = [MSOSDKResponseWebserverPhotoDetails detailsWithValue:photo];
                  
                  if (![predicate evaluateWithObject:photoDetail.filename]) {
                      photoDetail = nil;
@@ -469,28 +472,29 @@ static MSOFailureBlock gr_failure_block;
     return task;
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceDownloadPhoto:(NSString *)filename
-                                                  pin:(NSString *)pin
-                                              success:(MSOSuccessBlock)success
-                                             progress:(MSOProgressBlock)progress
-                                              failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverDownloadPhoto:(NSString *)filename
+                                                 pin:(NSString *)pin
+                                             success:(MSOSuccessBlock)success
+                                            progress:(MSOProgressBlock)progress
+                                             failure:(MSOFailureBlock)failure {
     
     NSURL *url = [NSURL URLWithString:kMSOLogicielHTTPURLKey];
     url = [url URLByAppendingPathComponent:pin];
     url = [url URLByAppendingPathComponent:@"Photos"];
     url = [url URLByAppendingPathComponent:filename];
-
+    
     NSError *error = nil;
-    NSURLRequest *request = [MSOSDK
-                             urlRequestImage:url
-                             timeout:kMSOTimeoutImageSyncKey
-                             error:&error];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestImage:url
+     timeout:kMSOTimeoutImageSyncKey
+     error:&error];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          UIImage *image = [UIImage imageWithData:responseObject];
          
@@ -511,10 +515,10 @@ static MSOFailureBlock gr_failure_block;
 }
 
 #pragma mark - Event
-- (void)_msoWebServiceDownloadEventList:(NSString *)pin
-                                success:(MSOSuccessBlock)success
-                               progress:(MSOProgressBlock)progress
-                                failure:(MSOFailureBlock)failure {
+- (void)_msoWebserverDownloadEventList:(NSString *)pin
+                               success:(MSOSuccessBlock)success
+                              progress:(MSOProgressBlock)progress
+                               failure:(MSOFailureBlock)failure {
     
     NSString *hostname = @"ftp://ftp.logicielinc.com";
     NSString *username = @"manager";
@@ -533,84 +537,85 @@ static MSOFailureBlock gr_failure_block;
     gr_failure_block = [failure copy];
     
     /*
-    MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
-    MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
-    
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPin,
-                                                        parameterMSOPassword]
-                             type:mso_soap_function_getEventList
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDefaultKey];
-    
-    NSURLSessionDataTask *task =
-    
-    [self
-     dataTaskWithRequest:request
+     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin                      forKey:@"PIN"];
+     MSOSoapParameter *parameterMSOPassword = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
+     
+     NSURLRequest *request = [MSOSDK
+     urlRequestWithParameters:@[parameterPin,
+     parameterMSOPassword]
+     type:mso_soap_function_getEventList
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutDefaultKey];
+     
+     NSURLSessionDataTask *task =
+     
+     [self
+     dataTaskForWebserverWithRequest:request
      progress:progress
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-         
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         NSArray <SMXMLElement *> *element = document.children;
-         SMXMLElement *parent = [element firstObject];
-         SMXMLElement *eventObjects = [parent descendantWithPath:@"GetEventListResponse.GetEventListResult"];
-         NSArray <SMXMLElement *> *events = [eventObjects children];
-         
-         NSMutableArray *eventsFormatted = [NSMutableArray array];
-         for (SMXMLElement *event in events) {
-             [eventsFormatted addObject:event.value];
-         }
-         
-         if (success) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, eventsFormatted);
-             });
-         }
-         
+     
+     SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
+     responseObject = nil;
+     
+     if (!document) {
+     [NSError errorHandler:error response:response failure:failure];
+     return;
+     }
+     
+     NSArray <SMXMLElement *> *element = document.children;
+     SMXMLElement *parent = [element firstObject];
+     SMXMLElement *eventObjects = [parent descendantWithPath:@"GetEventListResponse.GetEventListResult"];
+     NSArray <SMXMLElement *> *events = [eventObjects children];
+     
+     NSMutableArray *eventsFormatted = [NSMutableArray array];
+     for (SMXMLElement *event in events) {
+     [eventsFormatted addObject:event.value];
+     }
+     
+     if (success) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+     success(response, eventsFormatted);
+     });
+     }
+     
      } failure:failure];
-    [task resume];
-    */
+     [task resume];
+     */
     
     //return task;
 }
 
 #pragma mark Check For Files
-- (NSURLSessionDataTask *)_msoWebServiceCheckForNumberOfFilesToDownload:(NSString *)userId
-                                                                    pin:(NSString *)pin
-                                                                   date:(NSDate *)date
-                                                                success:(MSOSuccessBlock)success
-                                                               progress:(MSOProgressBlock)progress
-                                                                failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverCheckForNumberOfFilesToDownload:(NSString *)userId
+                                                                   pin:(NSString *)pin
+                                                                  date:(NSDate *)date
+                                                               success:(MSOSuccessBlock)success
+                                                              progress:(MSOProgressBlock)progress
+                                                               failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterPIN         = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:userId forKey:@"sUserID"];
     MSOSoapParameter *parameterCheckType   = [MSOSoapParameter parameterWithObject:@"1"   forKey:@"iCheckType"];
     MSOSoapParameter *parameterViewDate    = [MSOSoapParameter parameterWithObject:date   forKey:@"sLastViewDate"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPIN,
-                                                        parameterUsername,
-                                                        parameterCheckType,
-                                                        parameterViewDate]
-                             type:mso_soap_function_iCheckMobileMessage
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPIN,
+                                parameterUsername,
+                                parameterCheckType,
+                                parameterViewDate]
+     type:mso_soap_function_iCheckMobileMessage
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          responseObject = nil;
@@ -630,34 +635,35 @@ static MSOFailureBlock gr_failure_block;
     
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceCheckForFilesToDownload:(NSString *)userId
-                                                            pin:(NSString *)pin
-                                                           date:(NSDate *)date
-                                                        success:(MSOSuccessBlock)success
-                                                       progress:(MSOProgressBlock)progress
-                                                        failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverCheckForFilesToDownload:(NSString *)userId
+                                                           pin:(NSString *)pin
+                                                          date:(NSDate *)date
+                                                       success:(MSOSuccessBlock)success
+                                                      progress:(MSOProgressBlock)progress
+                                                       failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterPIN         = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:userId forKey:@"sUserID"];
     MSOSoapParameter *parameterCheckType   = [MSOSoapParameter parameterWithObject:@"1"   forKey:@"iCheckType"];
     MSOSoapParameter *parameterViewDate    = [MSOSoapParameter parameterWithObject:date   forKey:@"sLastViewDate"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPIN,
-                                                        parameterUsername,
-                                                        parameterCheckType,
-                                                        parameterViewDate]
-                             type:mso_soap_function_iCheckMobileFileForDownloading
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPIN,
+                                parameterUsername,
+                                parameterCheckType,
+                                parameterViewDate]
+     type:mso_soap_function_iCheckMobileFileForDownloading
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -667,9 +673,9 @@ static MSOFailureBlock gr_failure_block;
              return;
          }
          
-         MSOSDKResponseWebServiceFilesToDownload *mso_response = [MSOSDKResponseWebServiceFilesToDownload new];
+         MSOSDKResponseWebserverFilesToDownload *mso_response = [MSOSDKResponseWebserverFilesToDownload new];
          mso_response.command = mso_soap_function_iCheckMobileFileForDownloading;
-
+         
          
          NSArray <SMXMLElement *> *element = document.children;
          SMXMLElement *parent = [element firstObject];
@@ -685,7 +691,7 @@ static MSOFailureBlock gr_failure_block;
              mso_response.files = [mso_response.files arrayByAddingObject:value];
          }
          
-         NSDate *dateFormatted = [MSOSDK dateFromString:updatedDateFormatted];
+         NSDate *dateFormatted = [updatedDateFormatted mso_dateFromString];
          mso_response.dateUpdated = dateFormatted;
          
          if (success) {
@@ -700,12 +706,12 @@ static MSOFailureBlock gr_failure_block;
     
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceCheckForFiles:(NSString *)userId
-                                                  pin:(NSString *)pin
-                                                 date:(NSDate *)date
-                                              success:(MSOSuccessBlock)success
-                                             progress:(MSOProgressBlock)progress
-                                              failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverCheckForFiles:(NSString *)userId
+                                                 pin:(NSString *)pin
+                                                date:(NSDate *)date
+                                             success:(MSOSuccessBlock)success
+                                            progress:(MSOProgressBlock)progress
+                                             failure:(MSOFailureBlock)failure {
     
     
     MSOSoapParameter *parameterPIN         = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
@@ -713,22 +719,23 @@ static MSOFailureBlock gr_failure_block;
     MSOSoapParameter *parameterCheckType   = [MSOSoapParameter parameterWithObject:@"1"   forKey:@"iCheckType"];
     MSOSoapParameter *parameterViewDate    = [MSOSoapParameter parameterWithObject:date   forKey:@"sLastViewDate"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPIN,
-                                                        parameterUsername,
-                                                        parameterCheckType,
-                                                        parameterViewDate]
-                             type:mso_soap_function_iCheckPDAMessage
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPIN,
+                                parameterUsername,
+                                parameterCheckType,
+                                parameterViewDate]
+     type:mso_soap_function_iCheckPDAMessage
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          //NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
          
@@ -744,17 +751,17 @@ static MSOFailureBlock gr_failure_block;
     
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceUpdateDownloadInfo:(NSString *)username
-                                               companyname:(NSString *)companyname
-                                                      udid:(NSString *)udid
-                                                       pin:(NSString *)pin
-                                                  fileName:(NSString *)fileName
-                                                downloadDate:(NSDate *)downloadDate
-                                                  filesize:(unsigned long long)filesize
-                                                   success:(MSOSuccessBlock)success
-                                                  progress:(MSOProgressBlock)progress
-                                                   failure:(MSOFailureBlock)failure {
-
+- (NSURLSessionDataTask *)_msoWebserverUpdateDownloadInfo:(NSString *)username
+                                              companyname:(NSString *)companyname
+                                                     udid:(NSString *)udid
+                                                      pin:(NSString *)pin
+                                                 fileName:(NSString *)fileName
+                                             downloadDate:(NSDate *)downloadDate
+                                                 filesize:(unsigned long long)filesize
+                                                  success:(MSOSuccessBlock)success
+                                                 progress:(MSOProgressBlock)progress
+                                                  failure:(MSOFailureBlock)failure {
+    
     NSMutableArray *allInfo = [NSMutableArray array];
     [allInfo addObject:@""];
     [allInfo addObject:pin];
@@ -762,7 +769,7 @@ static MSOFailureBlock gr_failure_block;
     [allInfo addObject:@"100"];
     [allInfo addObject:[fileName lastPathComponent]];
     [allInfo addObject:@""];
-    [allInfo addObject:[MSOSDK stringFromDate:downloadDate]];
+    [allInfo addObject:[downloadDate mso_stringFromDate]];
     [allInfo addObject:companyname];
     [allInfo addObject:@""];
     [allInfo addObject:username];
@@ -782,18 +789,19 @@ static MSOFailureBlock gr_failure_block;
     
     MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command forKey:@"allInfo"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_updateDownloadInfo
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_updateDownloadInfo
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -808,7 +816,7 @@ static MSOFailureBlock gr_failure_block;
          SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateDownloadInfoResponse._UpdateDownloadInfoResult"];
          NSString *formattedStatus = statusResponseFormatted.value;
          
-         MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData new];
+         MSOSDKResponseWebserverRequestData *mso_response = [MSOSDKResponseWebserverRequestData new];
          mso_response.status = @([formattedStatus integerValue]);
          mso_response.command = mso_soap_function_updateDownloadInfo;
          
@@ -829,30 +837,31 @@ static MSOFailureBlock gr_failure_block;
     return task;
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceCheckPDAHistoryForDownloading:(NSString *)username
-                                                                  pin:(NSString *)pin
-                                                              success:(MSOSuccessBlock)success
-                                                             progress:(MSOProgressBlock)progress
-                                                              failure:(MSOFailureBlock)failure {
-
+- (NSURLSessionDataTask *)_msoWebserverCheckPDAHistoryForDownloading:(NSString *)username
+                                                                 pin:(NSString *)pin
+                                                             success:(MSOSuccessBlock)success
+                                                            progress:(MSOProgressBlock)progress
+                                                             failure:(MSOFailureBlock)failure {
+    
     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin        forKey:@"sPIN"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:username   forKey:@"sUserID"];
     MSOSoapParameter *parameterCheckType   = [MSOSoapParameter parameterWithObject:@"0"       forKey:@"iCheckType"];
-
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPin,
-                                                        parameterUsername,
-                                                        parameterCheckType]
-                             type:mso_soap_function_iCheckPDAHistoryForDownloading
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPin,
+                                parameterUsername,
+                                parameterCheckType]
+     type:mso_soap_function_iCheckPDAHistoryForDownloading
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -861,7 +870,7 @@ static MSOFailureBlock gr_failure_block;
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
+         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, document);
@@ -876,12 +885,12 @@ static MSOFailureBlock gr_failure_block;
 
 #pragma mark - FTP Interaction
 #pragma mark Upload
-- (NSURLSessionDataTask *)_msoWebServiceUploadToFTP:(NSDictionary <NSString *, NSData *> *)data
-                                                pin:(NSString *)pin
-                                            newfile:(BOOL)newfile
-                                            success:(MSOSuccessBlock)success
-                                           progress:(MSOProgressBlock)progress
-                                            failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverUploadToFTP:(NSDictionary <NSString *, NSData *> *)data
+                                               pin:(NSString *)pin
+                                           newfile:(BOOL)newfile
+                                           success:(MSOSuccessBlock)success
+                                          progress:(MSOProgressBlock)progress
+                                           failure:(MSOFailureBlock)failure {
     
     
     NSMutableDictionary *dDict = [data mutableCopy];
@@ -894,7 +903,7 @@ static MSOFailureBlock gr_failure_block;
      pin:pin
      newfile:newfile
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-
+         
          [dDict removeObjectForKey:filename];
          
          if ([[dDict allKeys] count] == 0) {
@@ -908,7 +917,7 @@ static MSOFailureBlock gr_failure_block;
          
          NSURLSessionDataTask *innerTask =
          [self
-          _msoWebServiceUploadToFTP:dDict
+          _msoWebserverUploadToFTP:dDict
           pin:pin
           newfile:newfile
           success:success
@@ -916,7 +925,7 @@ static MSOFailureBlock gr_failure_block;
           failure:failure];
          
          [innerTask resume];
-
+         
      } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
          
          [NSError errorHandler:error response:response failure:failure];
@@ -940,23 +949,24 @@ static MSOFailureBlock gr_failure_block;
     MSOSoapParameter *parameterLength      = [MSOSoapParameter parameterWithObject:@((int)[data length])          forKey:@"contentLenth"];
     MSOSoapParameter *parameterNewFile     = [MSOSoapParameter parameterWithObject:@(newfile)                     forKey:@"newFile"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPin,
-                                                        parameterFilename,
-                                                        parameterBytes,
-                                                        parameterLength,
-                                                        parameterNewFile]
-                             type:mso_soap_function_uploadFile
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutSalesOrderKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPin,
+                                parameterFilename,
+                                parameterBytes,
+                                parameterLength,
+                                parameterNewFile]
+     type:mso_soap_function_uploadFile
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutSalesOrderKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
@@ -965,14 +975,14 @@ static MSOFailureBlock gr_failure_block;
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
+         
          NSArray <SMXMLElement *> *element = document.children;
          SMXMLElement *statusResponse = [element firstObject];
          SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UploadFileResponse._UploadFileResult"];
          NSString *formattedStatus = statusResponseFormatted.value;
          
          if (![formattedStatus boolValue]) {
-            
+             
              if (failure) {
                  error = [NSError mso_internet_upload_processing_error];
                  dispatch_async(dispatch_get_main_queue(), ^{
@@ -984,9 +994,9 @@ static MSOFailureBlock gr_failure_block;
          }
          
          if (success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                success(response, @1);
-            });
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, @1);
+             });
          }
          
      } failure:failure];
@@ -995,16 +1005,16 @@ static MSOFailureBlock gr_failure_block;
     
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceUploadToFTPUpdate:(NSString *)pin
-                                                 username:(NSString *)username
-                                              companyname:(NSString *)companyname
-                                                 filename:(NSString *)filename
-                                                 filesize:(unsigned long long)filesize
-                                                     udid:(NSString *)udid
-                                               updateDate:(NSDate *)updateDate
-                                                  success:(MSOSuccessBlock)success
-                                                 progress:(MSOProgressBlock)progress
-                                                  failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverUploadToFTPUpdate:(NSString *)pin
+                                                username:(NSString *)username
+                                             companyname:(NSString *)companyname
+                                                filename:(NSString *)filename
+                                                filesize:(unsigned long long)filesize
+                                                    udid:(NSString *)udid
+                                              updateDate:(NSDate *)updateDate
+                                                 success:(MSOSuccessBlock)success
+                                                progress:(MSOProgressBlock)progress
+                                                 failure:(MSOFailureBlock)failure {
     
     NSMutableArray *allInfo = [NSMutableArray arrayWithCapacity:23];
     [allInfo addObject:@""];
@@ -1014,7 +1024,7 @@ static MSOFailureBlock gr_failure_block;
     [allInfo addObject:@"Rep-PDA"];
     [allInfo addObject:[filename lastPathComponent]];
     [allInfo addObject:@""];
-    [allInfo addObject:[MSOSDK stringFromDate:updateDate]];
+    [allInfo addObject:[updateDate mso_stringFromDate]];
     [allInfo addObject:companyname];
     [allInfo addObject:@""];
     [allInfo addObject:username];
@@ -1038,19 +1048,20 @@ static MSOFailureBlock gr_failure_block;
     
     MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:info forKey:@"allInfo"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_updateUploadInfo
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_updateUploadInfo
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+         
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1058,12 +1069,12 @@ static MSOFailureBlock gr_failure_block;
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
+         
          NSArray <SMXMLElement *> *element = document.children;
          SMXMLElement *statusResponse = [element firstObject];
          SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateUploadInfoResponse._UpdateUploadInfoResult"];
          NSString *formattedStatus = statusResponseFormatted.value;
-
+         
          if ([formattedStatus isEqualToString:@"2"]) {
              
              if (success) {
@@ -1074,23 +1085,23 @@ static MSOFailureBlock gr_failure_block;
              return;
              
          }
-        
+         
          error = [NSError mso_internet_upload_processing_error];
          [NSError errorHandler:error response:response failure:failure];
          
      } failure:failure];
-
+    
     return task;
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceSendDataRequest:(NSString *)username
-                                                    pin:(NSString *)pin
-                                                   udid:(NSString *)udid
-                                            companyname:(NSString *)companyname
-                                               criteria:(NSString *)criteria
-                                                success:(MSOSuccessBlock)success
-                                               progress:(MSOProgressBlock)progress
-                                                failure:(MSOFailureBlock)failure {
+- (NSURLSessionDataTask *)_msoWebserverSendDataRequest:(NSString *)username
+                                                   pin:(NSString *)pin
+                                                  udid:(NSString *)udid
+                                           companyname:(NSString *)companyname
+                                              criteria:(NSString *)criteria
+                                               success:(MSOSuccessBlock)success
+                                              progress:(MSOProgressBlock)progress
+                                               failure:(MSOFailureBlock)failure {
     
     //if select tradeshow event we send "99" instead of criteria combination.
     NSMutableArray *allInfo = [NSMutableArray arrayWithCapacity:23];
@@ -1101,7 +1112,7 @@ static MSOFailureBlock gr_failure_block;
     [allInfo addObject:@"Data Request"];
     [allInfo addObject:@".FrPDA"];
     [allInfo addObject:@""];
-    [allInfo addObject:[MSOSDK stringFromDate:[NSDate date]]];
+    [allInfo addObject:[[NSDate date] mso_stringFromDate]];
     [allInfo addObject:companyname];
     [allInfo addObject:@""];
     [allInfo addObject:username];
@@ -1124,21 +1135,23 @@ static MSOFailureBlock gr_failure_block;
     }
     
     MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command
-                                                           forKey:@"allInfo"];
+                                                                 forKey:@"allInfo"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameter]
-                             type:mso_soap_function_updateUploadInfo
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutDataRequestKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_updateUploadInfo
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutDataRequestKey];
     
     NSURLSessionDataTask *task =
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
+         /*
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1152,7 +1165,7 @@ static MSOFailureBlock gr_failure_block;
          SMXMLElement *statusResponseFormatted = [statusResponse descendantWithPath:@"_UpdateUploadInfoResponse._UpdateUploadInfoResult"];
          NSString *formattedStatus = statusResponseFormatted.value;
          
-         MSOSDKResponseWebServiceRequestData *mso_response = [MSOSDKResponseWebServiceRequestData msosdk_commandWithResponse:nil];
+         MSOSDKResponseWebserverRequestData *mso_response = [MSOSDKResponseWebserverRequestData msosdk_commandWithResponse:nil];
          mso_response.status = @([formattedStatus integerValue]);
          mso_response.command = mso_soap_function_updateUploadInfo;
          
@@ -1167,6 +1180,7 @@ static MSOFailureBlock gr_failure_block;
                  success(response, mso_response);
              });
          }
+         */
          
      } failure:failure];
     
@@ -1174,30 +1188,32 @@ static MSOFailureBlock gr_failure_block;
 }
 
 #pragma mark - Catalogs
-- (NSURLSessionDataTask *)_msoWebServiceFetchCatalog:(NSString *)catalogName
-                                                 pin:(NSString *)pin
-                                             success:(MSOSuccessBlock)success
-                                            progress:(MSOProgressBlock)progress
-                                             failure:(MSOFailureBlock)failure {
-        
+- (NSURLSessionDataTask *)_msoWebserverFetchCatalog:(NSString *)catalogName
+                                                pin:(NSString *)pin
+                                            success:(MSOSuccessBlock)success
+                                           progress:(MSOProgressBlock)progress
+                                            failure:(MSOFailureBlock)failure {
+    
     MSOSoapParameter *parameterPin         = [MSOSoapParameter parameterWithObject:pin            forKey:@"sPIN"];
     MSOSoapParameter *parameterCatalogName = [MSOSoapParameter parameterWithObject:catalogName    forKey:@"sCatalogNo"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterPin,
-                                                        parameterCatalogName]
-                             type:mso_soap_function_checkCatalogFileStatus
-                             url:[NSURL logicielFTPServiceURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutCatalogKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterPin,
+                                parameterCatalogName]
+     type:mso_soap_function_checkCatalogFileStatus
+     url:[NSURL logicielFTPServiceURL]
+     netserver:NO
+     timeout:kMSOTimeoutCatalogKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
          
+         /*
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1223,7 +1239,7 @@ static MSOFailureBlock gr_failure_block;
              NSString *value = catalog.value;
              NSArray* components = [value componentsSeparatedByString:@"]["];
              if ([components count] > 2) {
-                 MSOSDKResponseWebServiceCatalog *catalogObject = [MSOSDKResponseWebServiceCatalog msosdk_commandWithResponse:components];
+                 MSOSDKResponseWebserverCatalog *catalogObject = [MSOSDKResponseWebserverCatalog msosdk_commandWithResponse:components];
                  [catalogObjects addObject:catalogObject];
              }
              
@@ -1240,42 +1256,44 @@ static MSOFailureBlock gr_failure_block;
                  success(response, catalogObjects);
              });
          }
+         */
          
      } failure:failure];
     
     return task;
-
+    
 }
 
-- (NSURLSessionDataTask *)_msoWebServiceFetchCustomersByCompanyName:(NSString *)companyName
-                                                                pin:(NSString *)pin
-                                                            success:(MSOSuccessBlock)success
-                                                           progress:(MSOProgressBlock)progress
-                                                            failure:(MSOFailureBlock)failure
+- (NSURLSessionDataTask *)_msoWebserverFetchCustomersByCompanyName:(NSString *)companyName
+                                                               pin:(NSString *)pin
+                                                           success:(MSOSuccessBlock)success
+                                                          progress:(MSOProgressBlock)progress
+                                                           failure:(MSOFailureBlock)failure
 {
-        
+    
     MSOSoapParameter *parameterCompanyName         = [MSOSoapParameter parameterWithObject:companyName              forKey:@"companyName"];
     MSOSoapParameter *parameterPin                 = [MSOSoapParameter parameterWithObject:pin                      forKey:@"pin"];
     MSOSoapParameter *parameterMSOPassword         = [MSOSoapParameter parameterWithObject:[MSOSDK _msoPassword]    forKey:@"password"];
     MSOSoapParameter *parameterLogicielApplication = [MSOSoapParameter parameterWithObject:@"1"                     forKey:@"logicielApplication"];
     
-    NSURLRequest *request = [MSOSDK
-                             urlRequestWithParameters:@[parameterCompanyName,
-                                                        parameterPin,
-                                                        parameterMSOPassword,
-                                                        parameterLogicielApplication]
-                             type:mso_soap_function_getCustomersByCompany
-                             url:[NSURL logicielCustomerURL]
-                             netserver:NO
-                             timeout:kMSOTimeoutCustomerSearchKey];
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameterCompanyName,
+                                parameterPin,
+                                parameterMSOPassword,
+                                parameterLogicielApplication]
+     type:mso_soap_function_getCustomersByCompany
+     url:[NSURL logicielCustomerURL]
+     netserver:NO
+     timeout:kMSOTimeoutCustomerSearchKey];
     
     NSURLSessionDataTask *task =
     
     [self
-     dataTaskWithRequest:request
+     dataTaskForWebserverWithRequest:request
      progress:nil
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                  
+     success:^(NSURLResponse * _Nonnull response, NSString * _Nullable responseObject, NSError * _Nullable error) {
+         
          SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
          responseObject = nil;
          
@@ -1283,9 +1301,9 @@ static MSOFailureBlock gr_failure_block;
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-
-//         SMXMLElement *element = [document descendantWithPath:@"Body.GetCustomersByCompanyResponse.GetCustomersByCompanyResult"];
-
+         
+         //         SMXMLElement *element = [document descendantWithPath:@"Body.GetCustomersByCompanyResponse.GetCustomersByCompanyResult"];
+         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, nil);
