@@ -382,12 +382,49 @@ static NSString * authPassword;
 
 }
 
+- (NSURLSessionDataTask *)dataTaskForNetserverWithRequest:(NSURLRequest *)request
+                                                 progress:(MSOProgressBlock)progress
+                                                  success:(void (^)(NSURLResponse *, MSOSDKResponseNetserver *, NSError *))success
+                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    return [self
+            dataTaskWithRequest:request
+            progress:progress
+            requestType:kMSOSDKRequestTypeNetserver
+            success:success
+            failure:failure];
+    
+}
+
+- (NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(NSURLRequest *)request
+                                                 progress:(MSOProgressBlock)progress
+                                                  success:(void (^)(NSURLResponse *, id, NSError *))success
+                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    return [self
+            dataTaskWithRequest:request
+            progress:progress
+            requestType:kMSOSDKRequestTypeWebserver
+            success:success
+            failure:failure];
+    
+}
+
++ (NSURLRequest *)mso_imageRequestNetserver:(NSString *)ipAddress filename:(NSString *)filename {
+    NSMutableString *command = [NSMutableString stringWithFormat:@"<*!BEGIN!*><~~><PHOTOALL>%@<*!END!*>", filename];
+    command = [command mso_string_escape];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", ipAddress]];
+    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command forKey:@"str"];
+    NSURLRequest *request = [MSOSDK urlRequestWithParameters:@[parameter] type:mso_soap_function_doWork url:url netserver:YES timeout:kMSOTimeoutImageSyncKey];
+    return request;
+}
+
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
                                      progress:(MSOProgressBlock)progress
                                   requestType:(kMSOSDKRequestType)requestType
                                       success:(void (^)(NSURLResponse *, id, NSError *))success
                                       failure:(void (^)(NSURLResponse *, NSError *))failure {
-
+    
     NSURLSessionDataTask *task =
     [self.operation
      dataTaskWithRequest:request
@@ -432,56 +469,18 @@ static NSString * authPassword;
                      success(response, sanatizedResponse, nil);
                  }
              }
-
+             
          } else {
-
+             
              sanatizedResponse = nil;
-         
+             
          }
          
          
      }];
-
+    
     return task;
 }
-
-- (NSURLSessionDataTask *)dataTaskForNetserverWithRequest:(NSURLRequest *)request
-                                                 progress:(MSOProgressBlock)progress
-                                                  success:(void (^)(NSURLResponse *, MSOSDKResponseNetserver *, NSError *))success
-                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
-    
-    return [self
-            dataTaskWithRequest:request
-            progress:progress
-            requestType:kMSOSDKRequestTypeNetserver
-            success:success
-            failure:failure];
-    
-}
-
-- (NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(NSURLRequest *)request
-                                                 progress:(MSOProgressBlock)progress
-                                                  success:(void (^)(NSURLResponse *, id, NSError *))success
-                                                  failure:(void (^)(NSURLResponse *, NSError *))failure {
-    
-    return [self
-            dataTaskWithRequest:request
-            progress:progress
-            requestType:kMSOSDKRequestTypeWebserver
-            success:success
-            failure:failure];
-    
-}
-
-+ (NSURLRequest *)mso_imageRequestNetserver:(NSString *)ipAddress filename:(NSString *)filename {
-    NSMutableString *command = [NSMutableString stringWithFormat:@"<*!BEGIN!*><~~><PHOTOALL>%@<*!END!*>", filename];
-    command = [command mso_string_escape];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8178/LogicielNetServer", ipAddress]];
-    MSOSoapParameter *parameter = [MSOSoapParameter parameterWithObject:command forKey:@"str"];
-    NSURLRequest *request = [MSOSDK urlRequestWithParameters:@[parameter] type:mso_soap_function_doWork url:url netserver:YES timeout:kMSOTimeoutImageSyncKey];
-    return request;
-}
-
 
 @end
 
