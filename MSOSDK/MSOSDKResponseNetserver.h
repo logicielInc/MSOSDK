@@ -166,7 +166,8 @@
 @property (strong, nonatomic, nullable) NSString *response;
 
 @property (strong, nonatomic, nullable) NSString *userId;
-@property (strong, nonatomic, nullable) NSString *message;
+@property (strong, nonatomic, nullable) NSNumber *manager;
+@property (strong, nonatomic, nullable) NSNumber *foundPriceLevels;
 @property (strong, nonatomic, nullable) NSNumber *priceLevelAllow1;
 @property (strong, nonatomic, nullable) NSNumber *priceLevelAllow2;
 @property (strong, nonatomic, nullable) NSNumber *priceLevelAllow3;

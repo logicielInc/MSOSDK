@@ -618,7 +618,28 @@
         
         if (response) {
             _userId = [response mso_safeObjectAtIndex:0];
-            _message = [response mso_safeObjectAtIndex:1];
+
+            NSString *manager = [response mso_safeObjectAtIndex:1];
+            _manager = manager ? @([manager boolValue]) : @0;
+            
+            NSString *priceLevels = [response mso_safeObjectAtIndex:2];
+            _foundPriceLevels = [priceLevels containsString:@"|"] ? @1 : @0;
+            
+            NSArray *priceLevelComponents = [priceLevels componentsSeparatedByString:@"|"];
+            NSString *priceLevel1       = [priceLevelComponents mso_safeObjectAtIndex:0];
+            NSString *priceLevel2       = [priceLevelComponents mso_safeObjectAtIndex:1];
+            NSString *priceLevel3       = [priceLevelComponents mso_safeObjectAtIndex:2];
+            NSString *priceLevel4       = [priceLevelComponents mso_safeObjectAtIndex:3];
+            NSString *priceLevel5       = [priceLevelComponents mso_safeObjectAtIndex:4];
+            NSString *priceLevelAllow   = [priceLevelComponents mso_safeObjectAtIndex:5];
+
+            _priceLevelAllow1 = priceLevel1 ? @([priceLevel1 boolValue]) : @0;
+            _priceLevelAllow2 = priceLevel2 ? @([priceLevel2 boolValue]) : @0;
+            _priceLevelAllow3 = priceLevel3 ? @([priceLevel3 boolValue]) : @0;
+            _priceLevelAllow4 = priceLevel4 ? @([priceLevel4 boolValue]) : @0;
+            _priceLevelAllow5 = priceLevel5 ? @([priceLevel5 boolValue]) : @0;
+
+            _allowUserDefinedPriceLevel = priceLevelAllow ? @([priceLevelAllow boolValue]) : @0;
         }
         
     }

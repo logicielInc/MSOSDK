@@ -193,7 +193,7 @@
                                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncCustomers * _Nullable responseObject))success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure
-                                                            handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncCustomers * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
+                                                            handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncCustomers * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 /**
  <#Description#>
@@ -375,7 +375,7 @@
                                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull response , MSOSDKResponseNetserverSyncSettings * _Nullable responseObject))success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncSettings * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
+                                                           handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncSettings * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 ///---------------------
 /// @name Image
@@ -423,7 +423,7 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverUploadImage:(nullable NSString *)username
                                         base64EncodedImage:(nullable NSString *)base64EncodedImage
                                                 identifier:(nullable NSString *)identifier
-                                                   success:(_Nullable MSOSuccessBlock)success
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSaveImage * _Nonnull responseObject))success
                                                   progress:(_Nullable MSOProgressBlock)progress
                                                    failure:(_Nullable MSOFailureBlock)failure;
 
@@ -531,7 +531,7 @@
                                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable responseObject))success
                                                                  progress:(_Nullable MSOProgressBlock)progress
                                                                   failure:(_Nullable MSOFailureBlock)failure
-                                                                  handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
+                                                                  handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 /**
  <#Description#>
@@ -551,7 +551,7 @@
                                                                success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable responseObject))success
                                                               progress:(_Nullable MSOProgressBlock)progress
                                                                failure:(_Nullable MSOFailureBlock)failure
-                                                               handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
+                                                               handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 
 @end

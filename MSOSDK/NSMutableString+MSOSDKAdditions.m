@@ -22,11 +22,11 @@
 
 - (NSMutableString *)mso_string_unescape {
     NSMutableString *string = [self mutableCopy];
-    [string replaceOccurrencesOfString:@"&amp;"     withString:@"&"     options:NSLiteralSearch range:NSMakeRange(0, [string length])];
     [string replaceOccurrencesOfString:@"&gt;"      withString:@">"     options:NSLiteralSearch range:NSMakeRange(0, [string length])];
     [string replaceOccurrencesOfString:@"&lt;"      withString:@"<"     options:NSLiteralSearch range:NSMakeRange(0, [string length])];
     [string replaceOccurrencesOfString:@"&apos"     withString:@"'"     options:NSLiteralSearch range:NSMakeRange(0, [string length])];
     [string replaceOccurrencesOfString:@"&quot;"    withString:@"\""    options:NSLiteralSearch range:NSMakeRange(0, [string length])];
+    [string replaceOccurrencesOfString:@"&amp;"     withString:@"&"     options:NSLiteralSearch range:NSMakeRange(0, [string length])];
     return string;
 }
 
