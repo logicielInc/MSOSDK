@@ -27,7 +27,7 @@
  @return `NSURLSessionDataTask`
  @see `MSOSDKResponseNetserverPing`
  */
-- (nonnull NSURLSessionDataTask *)_msoNetserverPing:(_Nullable MSOSuccessBlock)success
+- (nonnull NSURLSessionDataTask *)_msoNetserverPing:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverPing * _Nonnull responseObject))success
                                             failure:(_Nullable MSOFailureBlock)failure;
 
 ///---------------------
@@ -46,7 +46,7 @@
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverLogin:(nullable NSString *)username
                                             password:(nullable NSString *)password
-                                             success:(_Nullable MSOSuccessBlock)success
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverLogin * _Nonnull responseObject))success
                                              failure:(_Nullable MSOFailureBlock)failure;
 
 /**
@@ -57,7 +57,7 @@
  @return `NSURLSessionDataTask`
  @see `MSOSDKResponseNetserverLogin`
  */
-- (nonnull NSURLSessionDataTask *)_msoNetserverLogout:(_Nullable MSOSuccessBlock)success
+- (nonnull NSURLSessionDataTask *)_msoNetserverLogout:(void (^ _Nullable)(NSURLResponse * _Nonnull response, BOOL responseObject))success
                                               failure:(_Nullable MSOFailureBlock)failure;
 
 
@@ -73,7 +73,7 @@
  @see `MSOSDKResponseNetserverSettings`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchInitialSettings:(nullable NSString *)username
-                                                            success:(_Nullable MSOSuccessBlock)success
+                                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSettings * _Nonnull responseObject))success
                                                             failure:(_Nullable MSOFailureBlock)failure;
 
 ///---------------------
@@ -83,10 +83,10 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchItemList:(nullable NSString *)username
                                                    companyId:(nullable NSString *)companyId
                                                     itemList:(nullable NSArray <NSString *> *)itemList
-                                                     success:(_Nullable MSOSuccessBlock)success
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryProducts * _Nullable responseObject))success
                                                     progress:(_Nullable MSOProgressBlock)progress
                                                      failure:(_Nullable MSOFailureBlock)failure
-                                                     handler:(_Nullable MSOHandlerBlock)handler;
+                                                     handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryProducts * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 /**
  <#Description#>
@@ -98,7 +98,7 @@
  @return <#return value description#>
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadNumberOfProducts:(nullable NSString *)username
-                                                                success:(_Nullable MSOSuccessBlock)success
+                                                                success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverProductsCount * _Nonnull responseObject))success
                                                                progress:(_Nullable MSOProgressBlock)progress
                                                                 failure:(_Nullable MSOFailureBlock)failure;
 
@@ -117,7 +117,7 @@
                                                      searchTerm:(nullable NSString *)searchTerm
                                                       companyId:(nullable NSString *)companyId
                                                      searchType:(kMSOProductSearchType)searchType
-                                                        success:(_Nullable MSOSuccessBlock)success
+                                                        success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryProducts * _Nonnull responseObject))success
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
 
@@ -136,10 +136,10 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(nullable NSString *)username
                                                             nextId:(nullable NSString *)nextId
                                                          companyId:(nullable NSString *)companyId
-                                                           success:(_Nullable MSOSuccessBlock)success
+                                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncProducts * _Nonnull responseObject))success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSOHandlerBlock)handler;
+                                                           handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncProducts * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 /**
  <#Description#>
@@ -155,9 +155,9 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(nullable NSString *)username
                                                             nextId:(nullable NSString *)nextId
                                                          companyId:(nullable NSString *)companyId
-                                                           success:(_Nullable MSOSuccessBlock)success
+                                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncProducts * _Nullable responseObject))success
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSOHandlerBlock)handler;
+                                                           handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncProducts * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable error))handler;
 
 ///---------------------
 /// @name Customers
@@ -165,14 +165,14 @@
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverSaveCustomerMappingScheme:(nullable NSString *)username
                                                            mappingScheme:(nullable NSString *)mappingScheme
-                                                                 success:(_Nullable MSOSuccessBlock)success
+                                                                 success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncSaveCustomerMapping * _Nonnull responseObject))success
                                                                 progress:(_Nullable MSOProgressBlock)progress
                                                                  failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoNetserverUpdateCustomerMappingScheme:(nullable NSString *)username
                                                              mappingScheme:(nullable NSString *)mappingScheme
                                                          mappingSchemeData:(nullable NSString *)mappingSchemeData
-                                                                   success:(_Nullable MSOSuccessBlock)success
+                                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncUpdateCustomerMapping * _Nonnull responseObject))success
                                                                   progress:(_Nullable MSOProgressBlock)progress
                                                                    failure:(_Nullable MSOFailureBlock)failure;
 
@@ -190,10 +190,10 @@
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(nullable NSString *)username
                                                              nextId:(nullable NSString *)nextId
-                                                            success:(_Nullable MSOSuccessBlock)success
+                                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncCustomers * _Nullable responseObject))success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure
-                                                            handler:(_Nullable MSOHandlerBlock)handler;
+                                                            handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncCustomers * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
 
 /**
  <#Description#>
@@ -219,7 +219,7 @@
                                                            state:(nullable NSString *)state
                                                              zip:(nullable NSString *)zip
                                                          billing:(BOOL)billing
-                                                         success:(_Nullable MSOSuccessBlock)success
+                                                         success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryCustomers * _Nonnull responseObject))success
                                                         progress:(_Nullable MSOProgressBlock)progress
                                                          failure:(_Nullable MSOFailureBlock)failure;
 
@@ -257,7 +257,7 @@
                                                         fax:(nullable NSString *)fax
                                                       email:(nullable NSString *)email
                                                       terms:(nullable NSString *)terms
-                                                    success:(_Nullable MSOSuccessBlock)success
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSaveCustomer * _Nonnull responseObject))success
                                                    progress:(_Nullable MSOProgressBlock)progress
                                                     failure:(_Nullable MSOFailureBlock)failure;
 
@@ -299,7 +299,7 @@
                                                                        fax:(nullable NSString *)fax
                                                                      email:(nullable NSString *)email
                                                                      terms:(nullable NSString *)terms
-                                                                   success:(_Nullable MSOSuccessBlock)success
+                                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSaveCustomerShippingAddress * _Nonnull responseObject))success
                                                                   progress:(_Nullable MSOProgressBlock)progress
                                                                    failure:(_Nullable MSOFailureBlock)failure;
 
@@ -351,7 +351,7 @@
                                                             discount:(nullable NSNumber *)discount
                                                           priceLevel:(nullable NSNumber *)priceLevel
                                                              billing:(BOOL)billing
-                                                             success:(_Nullable MSOSuccessBlock)success
+                                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverUpdateCustomer * _Nonnull responseObject))success
                                                             progress:(_Nullable MSOProgressBlock)progress
                                                              failure:(_Nullable MSOFailureBlock)failure;
 
@@ -372,10 +372,10 @@
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllSettings:(nullable NSString *)userId
                                                             nextId:(nullable NSString *)nextId
-                                                           success:(_Nullable MSOSuccessBlock)success
+                                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull response , MSOSDKResponseNetserverSyncSettings * _Nullable responseObject))success
                                                           progress:(_Nullable MSOProgressBlock)progress
                                                            failure:(_Nullable MSOFailureBlock)failure
-                                                           handler:(_Nullable MSOHandlerBlock)handler;
+                                                           handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncSettings * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
 
 ///---------------------
 /// @name Image
@@ -391,7 +391,7 @@
  @return <#return value description#>
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverFetchAllImageReferences:(nullable NSString *)username
-                                                               success:(_Nullable MSOSuccessBlock)success
+                                                               success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryImages * _Nonnull responseObject))success
                                                               progress:(_Nullable MSOProgressBlock)progress
                                                                failure:(_Nullable MSOFailureBlock)failure;
 
@@ -405,7 +405,7 @@
  @return <#return value description#>
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProductImage:(nullable NSString *)identifier
-                                                            success:(_Nullable MSOSuccessBlock)success
+                                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, UIImage * _Nonnull responseObject))success
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure;
 
@@ -446,7 +446,7 @@
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverRetrieveOrder:(nullable NSString *)username
                                                  orderNumber:(nullable NSString *)orderNumber
-                                                     success:(_Nullable MSOSuccessBlock)success
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQuerySalesOrder * _Nonnull responseObject))success
                                                     progress:(_Nullable MSOProgressBlock)progress
                                                      failure:(_Nullable MSOFailureBlock)failure;
 
@@ -464,7 +464,7 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverRetrieveOrders:(nullable NSString *)username
                                                  customerName:(nullable NSString *)customerName
                                         customerAccountNumber:(nullable NSString *)customerAccountNumber
-                                                      success:(_Nullable MSOSuccessBlock)success
+                                                      success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryCustomerSalesOrders * _Nonnull responseObject))success
                                                      progress:(_Nullable MSOProgressBlock)progress
                                                       failure:(_Nullable MSOFailureBlock)failure;
 
@@ -486,7 +486,7 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverSubmitImageNotes:(nullable NSString *)username
                                                     orderNumber:(nullable NSString *)orderNumber
                                                      imageNotes:(nullable NSArray<NSString *> *)imageNotes
-                                                        success:(_Nullable MSOSuccessBlock)success
+                                                        success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSubmitSalesOrder * _Nonnull responseObject))success
                                                        progress:(_Nullable MSOProgressBlock)progress
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
@@ -508,7 +508,7 @@
                                                orderString:(nullable NSString *)orderString
                                                     update:(BOOL)update
                                                 imageNotes:(BOOL)imageNotes
-                                                   success:(_Nullable MSOSuccessBlock)success
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSubmitSalesOrder * _Nonnull responseObject))success
                                                   progress:(_Nullable MSOProgressBlock)progress
                                                    failure:(_Nullable MSOFailureBlock)failure;
 
@@ -528,10 +528,10 @@
  @return <#return value description#>
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadAllPurchaseHistory:(nullable NSString *)username
-                                                                  success:(_Nullable MSOSuccessBlock)success
+                                                                  success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable responseObject))success
                                                                  progress:(_Nullable MSOProgressBlock)progress
                                                                   failure:(_Nullable MSOFailureBlock)failure
-                                                                  handler:(_Nullable MSOHandlerBlock)handler;
+                                                                  handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
 
 /**
  <#Description#>
@@ -548,10 +548,10 @@
 - (nonnull NSURLSessionDataTask *)_msoNetserverDownloadPurchaseHistory:(nullable NSString *)username
                                                           customerName:(nullable NSString *)customerName
                                                            customerZip:(nullable NSString *)customerZip
-                                                               success:(_Nullable MSOSuccessBlock)success
+                                                               success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable responseObject))success
                                                               progress:(_Nullable MSOProgressBlock)progress
                                                                failure:(_Nullable MSOFailureBlock)failure
-                                                               handler:(_Nullable MSOHandlerBlock)handler;
+                                                               handler:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull responseObject, NSError * _Nullable __autoreleasing * _Nullable))handler;
 
 
 @end

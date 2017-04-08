@@ -20,7 +20,7 @@
                                     companyname:(NSString *)companyname
                                      appversion:(NSString *)appversion
                                            user:(BOOL)user
-                                        success:(MSOSuccessBlock)success
+                                        success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCredentials * _Nonnull responseObject))success
                                         failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
@@ -87,7 +87,7 @@
                                                   pin:(NSString *)pin
                                            appversion:(NSString *)appversion
                                           companyname:(NSString *)companyname
-                                              success:(MSOSuccessBlock)success
+                                              success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCredentials * _Nonnull responseObject))success
                                               failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
@@ -150,7 +150,7 @@
                                              email:(NSString *)email
                                               udid:(NSString *)udid
                                         appversion:(NSString *)appversion
-                                           success:(MSOSuccessBlock)success
+                                           success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRegister * _Nonnull responseObject))success
                                            failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
@@ -235,7 +235,7 @@
                                                udid:(NSString *)udid
                                          appversion:(NSString *)appversion
                                          reregister:(BOOL)reregister
-                                            success:(MSOSuccessBlock)success
+                                            success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRegister * _Nonnull responseObject))success
                                             failure:(MSOFailureBlock)failure {
     
     MSOSoapParameter *parameterAccessKey   = [MSOSoapParameter parameterWithObject:accesskey                forKey:@"accessKey"];
@@ -324,7 +324,7 @@ static MSOProgressBlock gr_progress_block;
 static MSOFailureBlock gr_failure_block;
 
 - (void)_msoWebserverFetchAllPhotoReferences:(NSString *)pin
-                                     success:(MSOSuccessBlock)success
+                                     success:(void (^)(NSURLResponse * _Nonnull response, NSArray <NSString *> * _Nonnull responseObject))success
                                     progress:(MSOProgressBlock)progress
                                      failure:(MSOFailureBlock)failure {
     
@@ -346,7 +346,7 @@ static MSOFailureBlock gr_failure_block;
 
 - (NSURLSessionDataTask *)_msoWebserverFetchPhotoFileStatus:(NSString *)itemNo
                                                         pin:(NSString *)pin
-                                                    success:(MSOSuccessBlock)success
+                                                    success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverPhotoResponse * _Nonnull responseObject))success
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure {
     
@@ -407,7 +407,7 @@ static MSOFailureBlock gr_failure_block;
 
 - (NSURLSessionDataTask *)_msoWebserverDownloadPhoto:(NSString *)filename
                                                  pin:(NSString *)pin
-                                             success:(MSOSuccessBlock)success
+                                             success:(void (^)(NSURLResponse * _Nonnull response, UIImage * _Nonnull responseObject))success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure {
     
@@ -449,7 +449,7 @@ static MSOFailureBlock gr_failure_block;
 
 #pragma mark - Event
 - (void)_msoWebserverDownloadEventList:(NSString *)pin
-                               success:(MSOSuccessBlock)success
+                               success:(void (^)(NSURLResponse * _Nonnull response, NSArray <NSString *> * _Nonnull responseObject))success
                               progress:(MSOProgressBlock)progress
                                failure:(MSOFailureBlock)failure {
     
@@ -527,7 +527,7 @@ static MSOFailureBlock gr_failure_block;
 - (NSURLSessionDataTask *)_msoWebserverCheckForNumberOfFilesToDownload:(NSString *)userId
                                                                    pin:(NSString *)pin
                                                                   date:(NSDate *)date
-                                                               success:(MSOSuccessBlock)success
+                                                               success:(void (^)(NSURLResponse * _Nonnull response, NSNumber * _Nonnull responseObject))success
                                                               progress:(MSOProgressBlock)progress
                                                                failure:(MSOFailureBlock)failure {
     
@@ -555,6 +555,9 @@ static MSOFailureBlock gr_failure_block;
      success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
          responseObject = [responseObject mso_stringBetweenString:@"<_iCheckMobileMessageResult>" andString:@"</_iCheckMobileMessageResult>"];
+         if (!responseObject || [responseObject length] == 0) {
+             responseObject = @"0";
+         }
          
          NSNumber *numberOfFile = @([responseObject integerValue]);
          
@@ -573,7 +576,7 @@ static MSOFailureBlock gr_failure_block;
 - (NSURLSessionDataTask *)_msoWebserverCheckForFilesToDownload:(NSString *)userId
                                                            pin:(NSString *)pin
                                                           date:(NSDate *)date
-                                                       success:(MSOSuccessBlock)success
+                                                       success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverFilesToDownload * _Nonnull responseObject))success
                                                       progress:(MSOProgressBlock)progress
                                                        failure:(MSOFailureBlock)failure {
     
@@ -626,7 +629,7 @@ static MSOFailureBlock gr_failure_block;
 - (NSURLSessionDataTask *)_msoWebserverCheckForFiles:(NSString *)userId
                                                  pin:(NSString *)pin
                                                 date:(NSDate *)date
-                                             success:(MSOSuccessBlock)success
+                                             success:(void (^)(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject))success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure {
     
@@ -654,11 +657,9 @@ static MSOFailureBlock gr_failure_block;
      progress:progress
      success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
          
-         //NSString *data = [[NSString alloc] initWithData:responseObject encoding:stringEncoding];
-         
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, nil);
+                 success(response, responseObject);
              });
          }
          
@@ -675,7 +676,7 @@ static MSOFailureBlock gr_failure_block;
                                                  fileName:(NSString *)fileName
                                              downloadDate:(NSDate *)downloadDate
                                                  filesize:(unsigned long long)filesize
-                                                  success:(MSOSuccessBlock)success
+                                                  success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
                                                  progress:(MSOProgressBlock)progress
                                                   failure:(MSOFailureBlock)failure {
     
@@ -744,7 +745,7 @@ static MSOFailureBlock gr_failure_block;
 
 - (NSURLSessionDataTask *)_msoWebserverCheckPDAHistoryForDownloading:(NSString *)username
                                                                  pin:(NSString *)pin
-                                                             success:(MSOSuccessBlock)success
+                                                             success:(void (^)(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject))success
                                                             progress:(MSOProgressBlock)progress
                                                              failure:(MSOFailureBlock)failure {
     
@@ -785,7 +786,7 @@ static MSOFailureBlock gr_failure_block;
 - (NSURLSessionDataTask *)_msoWebserverUploadToFTP:(NSDictionary <NSString *, NSData *> *)data
                                                pin:(NSString *)pin
                                            newfile:(BOOL)newfile
-                                           success:(MSOSuccessBlock)success
+                                           success:(void (^)(NSURLResponse * _Nonnull response, BOOL responseObject))success
                                           progress:(MSOProgressBlock)progress
                                            failure:(MSOFailureBlock)failure {
     
@@ -799,14 +800,14 @@ static MSOFailureBlock gr_failure_block;
      data:[dDict objectForKey:filename]
      pin:pin
      newfile:newfile
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+     success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
          
          [dDict removeObjectForKey:filename];
          
          if ([[dDict allKeys] count] == 0) {
              if (success) {
                  dispatch_async(dispatch_get_main_queue(), ^{
-                     success(response, nil);
+                     success(response, YES);
                  });
              }
              return;
@@ -836,7 +837,7 @@ static MSOFailureBlock gr_failure_block;
                                            data:(NSData *)data
                                             pin:(NSString *)pin
                                         newfile:(BOOL)newfile
-                                        success:(MSOSuccessBlock)success
+                                        success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
                                        progress:(MSOProgressBlock)progress
                                         failure:(MSOFailureBlock)failure {
     
@@ -895,7 +896,7 @@ static MSOFailureBlock gr_failure_block;
                                                 filesize:(unsigned long long)filesize
                                                     udid:(NSString *)udid
                                               updateDate:(NSDate *)updateDate
-                                                 success:(MSOSuccessBlock)success
+                                                 success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
                                                 progress:(MSOProgressBlock)progress
                                                  failure:(MSOFailureBlock)failure {
     
@@ -974,7 +975,7 @@ static MSOFailureBlock gr_failure_block;
                                                   udid:(NSString *)udid
                                            companyname:(NSString *)companyname
                                               criteria:(NSString *)criteria
-                                               success:(MSOSuccessBlock)success
+                                               success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
                                               progress:(MSOProgressBlock)progress
                                                failure:(MSOFailureBlock)failure {
     
@@ -1050,7 +1051,7 @@ static MSOFailureBlock gr_failure_block;
 #pragma mark - Catalogs
 - (NSURLSessionDataTask *)_msoWebserverFetchCatalog:(NSString *)catalogName
                                                 pin:(NSString *)pin
-                                            success:(MSOSuccessBlock)success
+                                            success:(void (^)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCatalogResponse * _Nonnull responseObject))success
                                            progress:(MSOProgressBlock)progress
                                             failure:(MSOFailureBlock)failure {
     

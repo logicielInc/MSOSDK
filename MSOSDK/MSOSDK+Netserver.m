@@ -11,7 +11,7 @@
 @implementation MSOSDK (Netserver)
 
 #pragma mark - Connection
-- (NSURLSessionDataTask *)_msoNetserverPing:(MSOSuccessBlock)success
+- (NSURLSessionDataTask *)_msoNetserverPing:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverPing * _Nonnull))success
                                     failure:(MSOFailureBlock)failure {
     
     NSString *xml =
@@ -69,7 +69,7 @@
 #pragma mark Login
 - (NSURLSessionDataTask *)_msoNetserverLogin:(NSString *)username
                                     password:(NSString *)password
-                                     success:(MSOSuccessBlock)success
+                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverLogin * _Nonnull))success
                                      failure:(MSOFailureBlock)failure {
     
     NSString *xml =
@@ -120,7 +120,7 @@
 }
 
 - (NSURLSessionDataTask *)_msoNetserverFetchInitialSettings:(NSString *)username
-                                                    success:(MSOSuccessBlock)success
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSettings * _Nonnull))success
                                                     failure:(MSOFailureBlock)failure {
     
     NSString *xml =
@@ -169,7 +169,7 @@
 }
 
 #pragma mark Logout
-- (NSURLSessionDataTask *)_msoNetserverLogout:(MSOSuccessBlock)success
+- (NSURLSessionDataTask *)_msoNetserverLogout:(void (^ _Nullable)(NSURLResponse * _Nonnull, BOOL))success
                                       failure:(MSOFailureBlock)failure {
     
     
@@ -198,7 +198,7 @@
          
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, nil);
+                 success(response, YES);
              });
          }
          
@@ -211,10 +211,10 @@
 - (NSURLSessionDataTask *)_msoNetserverFetchItemList:(NSString *)username
                                            companyId:(NSString *)companyId
                                             itemList:(NSArray<NSString *> *)itemList
-                                             success:(MSOSuccessBlock)success
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQueryProducts * _Nullable))success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure
-                                             handler:(MSOHandlerBlock)handler {
+                                             handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQueryProducts * _Nonnull, NSError **error))handler {
  
     NSString *xml =
     [@"_P005"
@@ -274,7 +274,7 @@
 }
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadNumberOfProducts:(NSString *)username
-                                                        success:(MSOSuccessBlock)success
+                                                        success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverProductsCount * _Nonnull))success
                                                        progress:(MSOProgressBlock)progress
                                                         failure:(MSOFailureBlock)failure {
     
@@ -328,10 +328,10 @@
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(NSString *)username
                                                     nextId:(NSString *)nextId
                                                  companyId:(NSString *)companyId
-                                                   success:(MSOSuccessBlock)success
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncProducts * _Nonnull))success
                                                   progress:(MSOProgressBlock)progress
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSOHandlerBlock)handler {
+                                                   handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncProducts * _Nonnull, NSError **))handler {
     
     NSURLSessionDataTask *task =
     [self
@@ -384,10 +384,10 @@
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllProducts:(NSString *)username
                                                     nextId:(NSString *)nextId
                                                  companyId:(NSString *)companyId
-                                                   success:(MSOSuccessBlock)success
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncProducts * _Nullable))success
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSOHandlerBlock)handler {
-    
+                                                   handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncProducts * _Nonnull, NSError **))handler {
+
     NSString *xml =
     [@"_S004"
      mso_build_command:@[username,
@@ -611,7 +611,7 @@
 #pragma mark - Customers
 - (NSURLSessionDataTask *)_msoNetserverSaveCustomerMappingScheme:(NSString *)username
                                                    mappingScheme:(NSString *)mappingScheme
-                                                         success:(MSOSuccessBlock)success
+                                                         success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncSaveCustomerMapping * _Nonnull))success
                                                         progress:(MSOProgressBlock)progress
                                                          failure:(MSOFailureBlock)failure {
     
@@ -664,7 +664,7 @@
 - (NSURLSessionDataTask *)_msoNetserverUpdateCustomerMappingScheme:(NSString *)username
                                                      mappingScheme:(NSString *)mappingScheme
                                                  mappingSchemeData:(NSString *)mappingSchemeData
-                                                           success:(MSOSuccessBlock)success
+                                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncUpdateCustomerMapping * _Nonnull))success
                                                           progress:(MSOProgressBlock)progress
                                                            failure:(MSOFailureBlock)failure {
 
@@ -713,11 +713,10 @@
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllCustomers:(NSString *)username
                                                      nextId:(NSString *)nextId
-                                                    success:(MSOSuccessBlock)success
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncCustomers * _Nullable))success
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure
-                                                    handler:(MSOHandlerBlock)handler {
-    
+                                                    handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncCustomers * _Nonnull, NSError **))handler {
     
     NSString *xml =
     [@"_S003"
@@ -808,7 +807,7 @@
                                                    state:(NSString *)state
                                                      zip:(NSString *)zip
                                                  billing:(BOOL)billing
-                                                 success:(MSOSuccessBlock)success
+                                                 success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQueryCustomers * _Nonnull))success
                                                 progress:(MSOProgressBlock)progress
                                                  failure:(MSOFailureBlock)failure {
     
@@ -878,7 +877,7 @@
                                                 fax:(NSString *)fax
                                               email:(NSString *)email
                                               terms:(NSString *)terms
-                                            success:(MSOSuccessBlock)success
+                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSaveCustomer * _Nonnull))success
                                            progress:(MSOProgressBlock)progress
                                             failure:(MSOFailureBlock)failure {
     
@@ -958,7 +957,7 @@
                                                                fax:(NSString *)fax
                                                              email:(NSString *)email
                                                              terms:(NSString *)terms
-                                                           success:(MSOSuccessBlock)success
+                                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSaveCustomerShippingAddress * _Nonnull))success
                                                           progress:(MSOProgressBlock)progress
                                                            failure:(MSOFailureBlock)failure {
     
@@ -1042,7 +1041,7 @@
                                                     discount:(NSNumber *)discount
                                                   priceLevel:(NSNumber *)priceLevel
                                                      billing:(BOOL)billing
-                                                     success:(MSOSuccessBlock)success
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverUpdateCustomer * _Nonnull))success
                                                     progress:(MSOProgressBlock)progress
                                                      failure:(MSOFailureBlock)failure {
     
@@ -1137,10 +1136,10 @@
 #pragma mark - Settings
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllSettings:(NSString *)username
                                                     nextId:(NSString *)nextId
-                                                   success:(MSOSuccessBlock)success
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncSettings * _Nullable))success
                                                   progress:(MSOProgressBlock)progress
                                                    failure:(MSOFailureBlock)failure
-                                                   handler:(MSOHandlerBlock)handler {
+                                                   handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncSettings * _Nonnull, NSError **))handler {
     
     NSString *xml =
     [@"_S005"
@@ -1222,7 +1221,7 @@
 
 #pragma mark - Images
 - (NSURLSessionDataTask *)_msoNetserverFetchAllImageReferences:(NSString *)username
-                                                       success:(MSOSuccessBlock)success
+                                                       success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQueryImages * _Nonnull))success
                                                       progress:(MSOProgressBlock)progress
                                                        failure:(MSOFailureBlock)failure {
     
@@ -1273,7 +1272,7 @@
 }
 
 - (NSURLSessionDataTask *)_msoNetserverDownloadProductImage:(NSString *)identifier
-                                                    success:(MSOSuccessBlock)success
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull, UIImage * _Nonnull))success
                                                    progress:(MSOProgressBlock)progress
                                                     failure:(MSOFailureBlock)failure {
 
@@ -1343,7 +1342,7 @@
 #pragma mark - Orders
 - (NSURLSessionDataTask *)_msoNetserverRetrieveOrder:(NSString *)username
                                          orderNumber:(NSString *)orderNumber
-                                             success:(MSOSuccessBlock)success
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQuerySalesOrder * _Nonnull))success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure {
     
@@ -1419,7 +1418,7 @@
 - (NSURLSessionDataTask *)_msoNetserverRetrieveExtendedOrder:(NSString *)username
                                                  orderNumber:(NSString *)orderNumber
                                                 mso_response:(MSOSDKResponseNetserverQuerySalesOrder **)mso_respons
-                                                     success:(MSOSuccessBlock)success
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQuerySalesOrder * _Nonnull))success
                                                     progress:(MSOProgressBlock)progress
                                                      failure:(MSOFailureBlock)failure {
     
@@ -1485,7 +1484,7 @@
 - (NSURLSessionDataTask *)_msoNetserverRetrieveOrders:(NSString *)username
                                          customerName:(NSString *)customerName
                                 customerAccountNumber:(NSString *)customerAccountNumber
-                                              success:(MSOSuccessBlock)success
+                                              success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverQueryCustomerSalesOrders * _Nonnull))success
                                              progress:(MSOProgressBlock)progress
                                               failure:(MSOFailureBlock)failure {
     
@@ -1540,14 +1539,15 @@
 - (NSURLSessionDataTask *)_msoNetserverSubmitImageNotes:(NSString *)username
                                             orderNumber:(NSString *)orderNumber
                                              imageNotes:(NSArray<NSString *> *)imageNotes
-                                                success:(MSOSuccessBlock)success
+                                                success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSubmitSalesOrder * _Nonnull))success
                                                progress:(MSOProgressBlock)progress
                                                 failure:(MSOFailureBlock)failure {
     
     if ([imageNotes count] == 0) {
         if (success) {
-            //MSOSDKResponseNetserverSubmitSalesOrder *mso_response = [MSOSDKResponseNetserverSubmitSalesOrder msosdk_commandWithResponse:@[@"_X003", @"OK"]];
-            //success([[NSURLResponse alloc] init], mso_response);
+            MSOSDKResponseNetserverSubmitSalesOrder *mso_response =
+            [MSOSDKResponseNetserverSubmitSalesOrder new];
+            success([[NSURLResponse alloc] init], mso_response);
         }
         return nil;
     }
@@ -1559,7 +1559,7 @@
                                            orderNumber:(NSString *)orderNumber
                                                  index:(NSUInteger)index
                                             imageNotes:(NSMutableArray<NSString *> *)imageNotes
-                                               success:(MSOSuccessBlock)success
+                                               success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSubmitSalesOrder * _Nonnull))success
                                               progress:(MSOProgressBlock)progress
                                                failure:(MSOFailureBlock)failure {
     
@@ -1637,7 +1637,7 @@
                                        orderString:(NSString *)orderString
                                             update:(BOOL)update
                                         imageNotes:(BOOL)imageNotes
-                                           success:(MSOSuccessBlock)success
+                                           success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSubmitSalesOrder * _Nonnull))success
                                           progress:(MSOProgressBlock)progress
                                            failure:(MSOFailureBlock)failure {
     
@@ -1688,10 +1688,8 @@
           error:&error];
 
          if (!mso_response) {
-             
              [NSError errorHandler:error response:response failure:failure];
              return;
-             
          }
          
          if (success) {
@@ -1708,10 +1706,10 @@
 
 #pragma mark Order History
 - (NSURLSessionDataTask *)_msoNetserverDownloadAllPurchaseHistory:(NSString *)username
-                                                          success:(MSOSuccessBlock)success
+                                                          success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable))success
                                                          progress:(MSOProgressBlock)progress
                                                           failure:(MSOFailureBlock)failure
-                                                          handler:(MSOHandlerBlock)handler {
+                                                          handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull, NSError **))handler {
     
     return [self
             msoDownloadPurchaseHistory:username
@@ -1727,10 +1725,10 @@
 - (NSURLSessionDataTask *)_msoNetserverDownloadPurchaseHistory:(NSString *)username
                                                   customerName:(NSString *)customerName
                                                    customerZip:(NSString *)customerZip
-                                                       success:(MSOSuccessBlock)success
+                                                       success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable))success
                                                       progress:(MSOProgressBlock)progress
                                                        failure:(MSOFailureBlock)failure
-                                                       handler:(MSOHandlerBlock)handler {
+                                                       handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull, NSError **))handler {
     return [self
             msoDownloadPurchaseHistory:username
             customerName:customerName
@@ -1746,10 +1744,10 @@
                                         customerName:(NSString *)customerName
                                          customerZip:(NSString *)customerZip
                                               nextId:(NSString *)nextId
-                                             success:(MSOSuccessBlock)success
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nullable))success
                                             progress:(MSOProgressBlock)progress
                                              failure:(MSOFailureBlock)failure
-                                             handler:(MSOHandlerBlock)handler {
+                                             handler:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSyncPurchaseHistory * _Nonnull, NSError **))handler {
     
     NSString *xml =
     [@"_H001"

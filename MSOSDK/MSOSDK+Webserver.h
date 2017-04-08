@@ -36,14 +36,14 @@
  @see http://logicielinc.com/logicielupdatews/logicielcustomer.asmx?op=iCheckMobileDevice
  */
 - (nonnull NSURLSessionDataTask *)_msoWebserverValidity:(nullable NSString *)username
-                                               accesskey:(nullable NSString *)accesskey
-                                                    udid:(nullable NSString *)udid
-                                                     pin:(nullable NSString *)pin
-                                             companyname:(nullable NSString *)companyname
-                                              appversion:(nullable NSString *)appversion
-                                                    user:(BOOL)user
-                                                 success:(_Nullable MSOSuccessBlock)success
-                                                 failure:(_Nullable MSOFailureBlock)failure;
+                                              accesskey:(nullable NSString *)accesskey
+                                                   udid:(nullable NSString *)udid
+                                                    pin:(nullable NSString *)pin
+                                            companyname:(nullable NSString *)companyname
+                                             appversion:(nullable NSString *)appversion
+                                                   user:(BOOL)user
+                                                success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCredentials * _Nonnull responseObject))success
+                                                failure:(_Nullable MSOFailureBlock)failure;
 
 
 #pragma mark Forgot password
@@ -63,14 +63,14 @@
  @see http://logicielinc.com/logicielupdatews/logicielcustomer.asmx?op=iCheckMobileDevice
  */
 - (nonnull NSURLSessionDataTask *)_msoWebserverForgotPassword:(nullable NSString *)username
-                                                      password:(nullable NSString *)password
-                                                     accesskey:(nullable NSString *)accesskey
-                                                          udid:(nullable NSString *)udid
-                                                           pin:(nullable NSString *)pin
-                                                    appversion:(nullable NSString *)appversion
-                                                   companyname:(nullable NSString *)companyname
-                                                       success:(_Nullable MSOSuccessBlock)success
-                                                       failure:(_Nullable MSOFailureBlock)failure;
+                                                     password:(nullable NSString *)password
+                                                    accesskey:(nullable NSString *)accesskey
+                                                         udid:(nullable NSString *)udid
+                                                          pin:(nullable NSString *)pin
+                                                   appversion:(nullable NSString *)appversion
+                                                  companyname:(nullable NSString *)companyname
+                                                      success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCredentials * _Nonnull responseObject))success
+                                                      failure:(_Nullable MSOFailureBlock)failure;
 
 #pragma mark Registration
 /**
@@ -86,12 +86,12 @@
  @see http://logicielinc.com/logicielupdatews/logicielcustomer.asmx?op=iRegisterShortKey
  */
 - (nonnull NSURLSessionDataTask *)_msoWebserverRegisterRep:(nullable NSString *)username
-                                                  accesskey:(nullable NSString *)accesskey
-                                                      email:(nullable NSString *)email
-                                                       udid:(nullable NSString *)udid
-                                                 appversion:(nullable NSString *)appversion
-                                                    success:(_Nullable MSOSuccessBlock)success
-                                                    failure:(_Nullable MSOFailureBlock)failure;
+                                                 accesskey:(nullable NSString *)accesskey
+                                                     email:(nullable NSString *)email
+                                                      udid:(nullable NSString *)udid
+                                                appversion:(nullable NSString *)appversion
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRegister * _Nonnull responseObject))success
+                                                   failure:(_Nullable MSOFailureBlock)failure;
 
 
 /**
@@ -111,37 +111,37 @@
  @see http://logicielinc.com/logicielupdatews/logicielcustomer.asmx?op=iRegisterCode
  */
 - (nonnull NSURLSessionDataTask *)_msoWebserverRegisterCode:(nullable NSString *)username
-                                                         cds:(nullable NSString *)cds
-                                                   accesskey:(nullable NSString *)accesskey
-                                                        code:(nullable NSString *)code
-                                                        type:(nullable NSString *)type
-                                                     company:(nullable NSString *)company
-                                                       email:(nullable NSString *)email
-                                                        udid:(nullable NSString *)udid
-                                                  appversion:(nullable NSString *)appversion
-                                                  reregister:(BOOL)reregister
-                                                     success:(_Nullable MSOSuccessBlock)success
-                                                     failure:(_Nullable MSOFailureBlock)failure;
+                                                        cds:(nullable NSString *)cds
+                                                  accesskey:(nullable NSString *)accesskey
+                                                       code:(nullable NSString *)code
+                                                       type:(nullable NSString *)type
+                                                    company:(nullable NSString *)company
+                                                      email:(nullable NSString *)email
+                                                       udid:(nullable NSString *)udid
+                                                 appversion:(nullable NSString *)appversion
+                                                 reregister:(BOOL)reregister
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRegister * _Nonnull responseObject))success
+                                                    failure:(_Nullable MSOFailureBlock)failure;
 
 #pragma mark - FTPService
 
 #pragma mark Images
 - (void)_msoWebserverFetchAllPhotoReferences:(nullable NSString *)pin
-                                      success:(_Nullable MSOSuccessBlock)success
-                                     progress:(_Nullable MSOProgressBlock)progress
-                                      failure:(_Nullable MSOFailureBlock)failure;
+                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, NSArray <NSString *> * _Nonnull responseObject))success
+                                    progress:(_Nullable MSOProgressBlock)progress
+                                     failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverFetchPhotoFileStatus:(nullable NSString *)itemNo
-                                                                 pin:(nullable NSString *)pin
-                                                             success:(_Nullable MSOSuccessBlock)success
-                                                            progress:(_Nullable MSOProgressBlock)progress
-                                                             failure:(_Nullable MSOFailureBlock)failure;
+                                                                pin:(nullable NSString *)pin
+                                                            success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverPhotoResponse * _Nonnull responseObject))success
+                                                           progress:(_Nullable MSOProgressBlock)progress
+                                                            failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverDownloadPhoto:(nullable NSString *)filename
-                                                          pin:(nullable NSString *)pin
-                                                      success:(_Nullable MSOSuccessBlock)success
-                                                     progress:(_Nullable MSOProgressBlock)progress
-                                                      failure:(_Nullable MSOFailureBlock)failure;
+                                                         pin:(nullable NSString *)pin
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, UIImage * _Nonnull responseObject))success
+                                                    progress:(_Nullable MSOProgressBlock)progress
+                                                     failure:(_Nullable MSOFailureBlock)failure;
 
 #pragma mark Event
 
@@ -151,91 +151,91 @@
  @response NSArray of NSString objects (filenames of .zip files)
  */
 - (void)_msoWebserverDownloadEventList:(nullable NSString *)pin
-                                success:(_Nullable MSOSuccessBlock)success
-                               progress:(_Nullable MSOProgressBlock)progress
-                                failure:(_Nullable MSOFailureBlock)failure;
+                               success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, NSArray <NSString *> * _Nonnull responseObject))success
+                              progress:(_Nullable MSOProgressBlock)progress
+                               failure:(_Nullable MSOFailureBlock)failure;
 
 
 #pragma mark Check For Files
 - (nonnull NSURLSessionDataTask *)_msoWebserverCheckForNumberOfFilesToDownload:(nullable NSString *)userId
-                                                                            pin:(nullable NSString *)pin
-                                                                           date:(nullable NSDate *)date
-                                                                        success:(_Nullable MSOSuccessBlock)success
-                                                                       progress:(_Nullable MSOProgressBlock)progress
-                                                                        failure:(_Nullable MSOFailureBlock)failure;
+                                                                           pin:(nullable NSString *)pin
+                                                                          date:(nullable NSDate *)date
+                                                                       success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, NSNumber * _Nonnull responseObject))success
+                                                                      progress:(_Nullable MSOProgressBlock)progress
+                                                                       failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverCheckForFilesToDownload:(nullable NSString *)userId
-                                                                    pin:(nullable NSString *)pin
-                                                                   date:(nullable NSDate *)date
-                                                                success:(_Nullable MSOSuccessBlock)success
-                                                               progress:(_Nullable MSOProgressBlock)progress
-                                                                failure:(_Nullable MSOFailureBlock)failure;
+                                                                   pin:(nullable NSString *)pin
+                                                                  date:(nullable NSDate *)date
+                                                               success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverFilesToDownload * _Nonnull responseObject))success
+                                                              progress:(_Nullable MSOProgressBlock)progress
+                                                               failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverCheckForFiles:(nullable NSString *)userId
-                                                          pin:(nullable NSString *)pin
-                                                         date:(nullable NSDate *)date
-                                                      success:(_Nullable MSOSuccessBlock)success
-                                                     progress:(_Nullable MSOProgressBlock)progress
-                                                      failure:(_Nullable MSOFailureBlock)failure;
+                                                         pin:(nullable NSString *)pin
+                                                        date:(nullable NSDate *)date
+                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject))success
+                                                    progress:(_Nullable MSOProgressBlock)progress
+                                                     failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverUploadToFTP:(nullable NSDictionary <NSString *, NSData *> *)data
-                                                        pin:(nullable NSString *)pin
-                                                    newfile:(BOOL)newfile
-                                                    success:(_Nullable MSOSuccessBlock)success
-                                                   progress:(_Nullable MSOProgressBlock)progress
-                                                    failure:(_Nullable MSOFailureBlock)failure;
+                                                       pin:(nullable NSString *)pin
+                                                   newfile:(BOOL)newfile
+                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, BOOL responseObject))success
+                                                  progress:(_Nullable MSOProgressBlock)progress
+                                                   failure:(_Nullable MSOFailureBlock)failure;
 
 - (nonnull NSURLSessionDataTask *)_msoWebserverUploadToFTPUpdate:(nullable NSString *)pin
-                                                         username:(nullable NSString *)userName
-                                                      companyname:(nullable NSString *)companyName
-                                                         filename:(nullable NSString *)fileName
-                                                         filesize:(unsigned long long)filesize
+                                                        username:(nullable NSString *)userName
+                                                     companyname:(nullable NSString *)companyName
+                                                        filename:(nullable NSString *)fileName
+                                                        filesize:(unsigned long long)filesize
+                                                            udid:(nullable NSString *)udid
+                                                      updateDate:(nullable NSDate *)updateDate
+                                                         success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
+                                                        progress:(_Nullable MSOProgressBlock)progress
+                                                         failure:(_Nullable MSOFailureBlock)failure;
+
+- (nonnull NSURLSessionDataTask *)_msoWebserverSendDataRequest:(nullable NSString *)username
+                                                           pin:(nullable NSString *)pin
+                                                          udid:(nullable NSString *)udid
+                                                   companyname:(nullable NSString *)companyname
+                                                      criteria:(nullable NSString *)criteria
+                                                       success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
+                                                      progress:(_Nullable MSOProgressBlock)progress
+                                                       failure:(_Nullable MSOFailureBlock)failure;
+
+- (nonnull NSURLSessionDataTask *)_msoWebserverUpdateDownloadInfo:(nullable NSString *)username
+                                                      companyname:(nullable NSString *)companyname
                                                              udid:(nullable NSString *)udid
-                                                       updateDate:(nullable NSDate *)updateDate
-                                                          success:(_Nullable MSOSuccessBlock)success
+                                                              pin:(nullable NSString *)pin
+                                                         fileName:(nullable NSString *)fileName
+                                                     downloadDate:(nullable NSDate *)downloadDate
+                                                         filesize:(unsigned long long)filesize
+                                                          success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject))success
                                                          progress:(_Nullable MSOProgressBlock)progress
                                                           failure:(_Nullable MSOFailureBlock)failure;
 
-- (nonnull NSURLSessionDataTask *)_msoWebserverSendDataRequest:(nullable NSString *)username
-                                                            pin:(nullable NSString *)pin
-                                                           udid:(nullable NSString *)udid
-                                                    companyname:(nullable NSString *)companyname
-                                                       criteria:(nullable NSString *)criteria
-                                                        success:(_Nullable MSOSuccessBlock)success
-                                                       progress:(_Nullable MSOProgressBlock)progress
-                                                        failure:(_Nullable MSOFailureBlock)failure;
-
-- (nonnull NSURLSessionDataTask *)_msoWebserverUpdateDownloadInfo:(nullable NSString *)username
-                                                       companyname:(nullable NSString *)companyname
-                                                              udid:(nullable NSString *)udid
-                                                               pin:(nullable NSString *)pin
-                                                          fileName:(nullable NSString *)fileName
-                                                      downloadDate:(nullable NSDate *)downloadDate
-                                                          filesize:(unsigned long long)filesize
-                                                           success:(_Nullable MSOSuccessBlock)success
-                                                          progress:(_Nullable MSOProgressBlock)progress
-                                                           failure:(_Nullable MSOFailureBlock)failure;
-
 - (nonnull NSURLSessionDataTask *)_msoWebserverCheckPDAHistoryForDownloading:(nullable NSString *)username
-                                                                          pin:(nullable NSString *)pin
-                                                                      success:(_Nullable MSOSuccessBlock)success
-                                                                     progress:(_Nullable MSOProgressBlock)progress
-                                                                      failure:(_Nullable MSOFailureBlock)failure;
+                                                                         pin:(nullable NSString *)pin
+                                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, NSString * _Nonnull responseObject))success
+                                                                    progress:(_Nullable MSOProgressBlock)progress
+                                                                     failure:(_Nullable MSOFailureBlock)failure;
 
 #pragma mark Catalogs
 - (nonnull NSURLSessionDataTask *)_msoWebserverFetchCatalog:(nullable NSString *)catalogName
-                                                         pin:(nullable NSString *)pin
-                                                     success:(_Nullable MSOSuccessBlock)success
-                                                    progress:(_Nullable MSOProgressBlock)progress
-                                                     failure:(_Nullable MSOFailureBlock)failure;
-    
+                                                        pin:(nullable NSString *)pin
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCatalogResponse * _Nonnull responseObject))success
+                                                   progress:(_Nullable MSOProgressBlock)progress
+                                                    failure:(_Nullable MSOFailureBlock)failure;
+
 
 /**
  @brief This method may be unimplemented on the server side. All thats returned is the schema for a customer object
  */
 - (nonnull NSURLSessionDataTask *)_msoWebserverFetchCustomersByCompanyName:(nullable NSString *)companyName
-                                                                        pin:(nullable NSString *)pin
-                                                                    success:(_Nullable MSOSuccessBlock)success
-                                                                   progress:(_Nullable MSOProgressBlock)progress
-                                                                    failure:(_Nullable MSOFailureBlock)failure;
+                                                                       pin:(nullable NSString *)pin
+                                                                   success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverCredentials * _Nullable responseObject))success
+                                                                  progress:(_Nullable MSOProgressBlock)progress
+                                                                   failure:(_Nullable MSOFailureBlock)failure;
 @end
