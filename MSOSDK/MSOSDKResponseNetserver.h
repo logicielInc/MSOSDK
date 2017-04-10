@@ -176,9 +176,21 @@
 @property (strong, nonatomic, nullable) NSNumber *allowUserDefinedPriceLevel;
 @end
 
+typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsAlertScope) {
+    kMSOSDKResponseNetserverSettingsAlertItemSetup      = 0,
+    kMSOSDKResponseNetserverSettingsAlertBackOrder,
+    kMSOSDKResponseNetserverSettingsAlertOfferChoice,
+};
+
+typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantity) {
+    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityAlwaysAppend      = 0,
+    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityAlwaysRetrieve,
+    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityOfferChoice,
+};
+
 @interface MSOSDKResponseNetserverSettings : MSOSDKResponseNetserver
 
-@property (strong, nonatomic, nullable) NSString *response;
++ (nullable instancetype)mso_settingsWithoutCommand:(nullable NSString *)settings error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 @property (strong, nonatomic, nullable) NSNumber *companyPriceLevel;
 @property (strong, nonatomic, nullable) NSNumber *multipleCompanies;
@@ -266,14 +278,14 @@
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeTotal;
 
 
-/**
- @brief MSO will return back 3 results: 0 = Append, 1 = Retrieve, 2 = Choice
- */
-@property (strong, nonatomic, nullable) NSNumber *itemSelectionAlert;
+@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsAlertScope itemSelectionAlert;
 @property (strong, nonatomic, nullable) NSNumber *recalculateSet;
 @property (strong, nonatomic, nullable) NSNumber *recalculatePriceTagAlong;
 @property (strong, nonatomic, nullable) NSNumber *alertIfOrderQuantityMoreThanOnHandQuantity;
-@property (strong, nonatomic, nullable) NSNumber *optionsIfOrderQuantityMoreThanOnHandQuantity;
+/**
+ @brief MSO will return back 3 results: 0 = Append, 1 = Retrieve, 2 = Choice
+ */
+@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantity optionsIfOrderQuantityMoreThanOnHandQuantity;
 @property (strong, nonatomic, nullable) NSNumber *alertBelowMinimumPrice;
 @property (strong, nonatomic, nullable) NSNumber *applyCustomerDiscountAsOrderDiscount;
 @property (strong, nonatomic, nullable) NSNumber *defaultQuantityToPreviousEntry;
@@ -323,5 +335,7 @@
 @property (strong, nonatomic, nullable) NSString *userDefinedProductLine;
 @property (strong, nonatomic, nullable) NSString *userDefinedCategory;
 @property (strong, nonatomic, nullable) NSString *userDefinedSeason;
+
+- (BOOL)productPricing;
 
 @end

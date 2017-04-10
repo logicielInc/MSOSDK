@@ -650,6 +650,20 @@
 
 @implementation MSOSDKResponseNetserverSettings
 
++ (instancetype)mso_settingsWithoutCommand:(NSString *)settings error:(NSError **)error {
+    NSMutableArray *components = [settings mutableCopy];
+    if ([components count] == 0) {
+        return nil;
+    }
+    [components insertObject:@"OK" atIndex:0];
+    [components insertObject:@"_S002" atIndex:0];
+    MSOSDKResponseNetserver *responseObject =
+    [MSOSDKResponseNetserver
+     msosdk_commandWithResponse:[components componentsJoinedByString:@"^"]
+     error:error];
+    return [[self alloc] initWithResponseObject:responseObject error:error];
+}
+
 - (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithResponseObject:responseObject error:error];
     if (self) {
@@ -667,7 +681,7 @@
         _multipleCompanies                                  = @([[response mso_safeObjectAtIndex:8] boolValue]);
         _recalculateSet                                     = @([[response mso_safeObjectAtIndex:9] boolValue]);
         _recalculatePriceTagAlong                           = @([[response mso_safeObjectAtIndex:10] boolValue]);
-        _itemSelectionAlert                                 = @([[response mso_safeObjectAtIndex:11] integerValue]);
+        _itemSelectionAlert                                 = [[response mso_safeObjectAtIndex:11] integerValue];
         _pricingStructure                                   = [response mso_safeObjectAtIndex:12];
         _discountRule                                       = @([[response mso_safeObjectAtIndex:13] integerValue]);
         _discountRuleSubtotal                               = @([[response mso_safeObjectAtIndex:14] integerValue]);
@@ -692,7 +706,7 @@
         // 33
         _orderRequiresMinimumItemQuantity                   = @([[response mso_safeObjectAtIndex:34] boolValue]);
         _allowCustomAssortment                              = @([[response mso_safeObjectAtIndex:35] boolValue]);
-        _optionsIfOrderQuantityMoreThanOnHandQuantity       = @([[response mso_safeObjectAtIndex:36] integerValue]);
+        _optionsIfOrderQuantityMoreThanOnHandQuantity       = [[response mso_safeObjectAtIndex:36] integerValue];
         _lastPurchasePricePriority                          = @([[response mso_safeObjectAtIndex:37] boolValue]);
         NSString *eventDefaultTitles                        = [response mso_safeObjectAtIndex:38];
         _salesManagerPrivilegeInTradeshow                   = @([[response mso_safeObjectAtIndex:39] boolValue]);
@@ -744,33 +758,35 @@
     NSArray *displayFormatParameters = [displayFormat componentsSeparatedByString:@"|"];
     
     NSString *priceItemLevel = [displayFormatParameters mso_safeObjectAtIndex:0];
-    _formatterPriceItemLevel = [self returnParsedFormatter:priceItemLevel];
+    _formatterPriceItemLevel = [self returnParsedFormatter:priceItemLevel currency:YES];
     
     NSString *priceTotal = [displayFormatParameters mso_safeObjectAtIndex:1];
-    _formatterPriceTotal = [self returnParsedFormatter:priceTotal];
+    _formatterPriceTotal = [self returnParsedFormatter:priceTotal currency:YES];
     
     NSString *quantityItemLevel = [displayFormatParameters mso_safeObjectAtIndex:2];
-    _formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel];
+    _formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel currency:NO];
     
     NSString *quantityTotal = [displayFormatParameters mso_safeObjectAtIndex:3];
-    _formatterQuantityTotal = [self returnParsedFormatter:quantityTotal];
+    _formatterQuantityTotal = [self returnParsedFormatter:quantityTotal currency:NO];
     
     NSString *weightItemLevel = [displayFormatParameters mso_safeObjectAtIndex:4];
-    _formatterWeightItemLevel = [self returnParsedFormatter:weightItemLevel];
+    _formatterWeightItemLevel = [self returnParsedFormatter:weightItemLevel currency:NO];
     
     NSString *weightTotal = [displayFormatParameters mso_safeObjectAtIndex:5];
-    _formatterWeightTotal = [self returnParsedFormatter:weightTotal];
+    _formatterWeightTotal = [self returnParsedFormatter:weightTotal currency:NO];
     
     NSString *volumeItemLevel = [displayFormatParameters mso_safeObjectAtIndex:6];
-    _formatterVolumeItemLevel = [self returnParsedFormatter:volumeItemLevel];
+    _formatterVolumeItemLevel = [self returnParsedFormatter:volumeItemLevel currency:NO];
     
     NSString *volumeTotal = [displayFormatParameters mso_safeObjectAtIndex:7];
-    _formatterVolumeTotal = [self returnParsedFormatter:volumeTotal];
+    _formatterVolumeTotal = [self returnParsedFormatter:volumeTotal currency:NO];
     
 }
 
-- (NSNumberFormatter *)returnParsedFormatter:(NSString *)formatter {
+- (NSNumberFormatter *)returnParsedFormatter:(NSString *)formatter currency:(BOOL)currency {
     NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
+    [format setNumberStyle:currency ? NSNumberFormatterCurrencyStyle : NSNumberFormatterDecimalStyle];
+    
     NSScanner* scan = [NSScanner scannerWithString:formatter];
     int val;
     if ([scan scanInt:&val] && [scan isAtEnd]) {
@@ -853,6 +869,10 @@
     _userDefinedProductLine = [eventDefaultTitlesParameters mso_safeObjectAtIndex:0];
     _userDefinedCategory = [eventDefaultTitlesParameters mso_safeObjectAtIndex:1];
     _userDefinedSeason = [eventDefaultTitlesParameters mso_safeObjectAtIndex:2];
+}
+
+- (BOOL)productPricing {
+    return [self.pricingStructure isEqualToString:@"B"];
 }
 
 @end
