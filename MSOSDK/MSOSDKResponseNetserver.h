@@ -197,12 +197,26 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMore
 @property (strong, nonatomic, nullable) NSNumber *allowCustomAssortment;
 
 @property (strong, nonatomic, nullable) NSString *eventName;
+@property (strong, nonatomic, nullable) NSString *eventId;
 @property (strong, nonatomic, nullable) NSString *backupOrder;
 @property (strong, nonatomic, nullable) NSNumber *keepSubmittedOrderCopy;
 @property (strong, nonatomic, nullable) NSString *terms;
 @property (strong, nonatomic, nullable) NSString *shipTo;
 
-@property (strong, nonatomic, nullable) NSString *licenseInfo;
+@property (strong, nonatomic, nullable) NSString *companyName;
+@property (strong, nonatomic, nullable) NSString *email;
+@property (strong, nonatomic, nullable) NSString *website;
+@property (strong, nonatomic, nullable) NSString *pin;
+@property (strong, nonatomic, nullable) NSString *address1;
+@property (strong, nonatomic, nullable) NSString *address2;
+@property (strong, nonatomic, nullable) NSString *city;
+@property (strong, nonatomic, nullable) NSString *phone1;
+@property (strong, nonatomic, nullable) NSString *phone2;
+@property (strong, nonatomic, nullable) NSString *state;
+@property (strong, nonatomic, nullable) NSString *country;
+@property (strong, nonatomic, nullable) NSString *zip;
+@property (strong, nonatomic, nullable) NSString *fax;
+
 @property (strong, nonatomic, nullable) NSString *bulkSellingDescription;
 
 #pragma mark - Customer
@@ -337,5 +351,7 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMore
 @property (strong, nonatomic, nullable) NSString *userDefinedSeason;
 
 - (BOOL)productPricing;
+- (nullable NSString *)formattedCompanyAddress;
+- (nullable NSString *)formattedEventName;
 
 @end

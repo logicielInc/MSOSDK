@@ -651,12 +651,18 @@
 @implementation MSOSDKResponseNetserverSettings
 
 + (instancetype)mso_settingsWithoutCommand:(NSString *)settings error:(NSError **)error {
-    NSMutableArray *components = [settings mutableCopy];
+
+    NSMutableArray *components = [[settings componentsSeparatedByString:@"^"] mutableCopy];
     if ([components count] == 0) {
         return nil;
     }
-    [components insertObject:@"OK" atIndex:0];
-    [components insertObject:@"_S002" atIndex:0];
+    
+    if (!([[components objectAtIndex:0] isEqualToString:@"_S002"] &&
+          [[components objectAtIndex:1] isEqualToString:@"OK"])) {
+        [components insertObject:@"OK" atIndex:0];
+        [components insertObject:@"_S002" atIndex:0];        
+    }
+    
     MSOSDKResponseNetserver *responseObject =
     [MSOSDKResponseNetserver
      msosdk_commandWithResponse:[components componentsJoinedByString:@"^"]
@@ -687,7 +693,7 @@
         _discountRuleSubtotal                               = @([[response mso_safeObjectAtIndex:14] integerValue]);
         _discountRuleAllowShipping                          = @([[response mso_safeObjectAtIndex:15] boolValue]);
         // 16 (WLAN Submit)
-        _eventName                                          = [response mso_safeObjectAtIndex:17];
+        NSString *eventNameAndId                            = [response mso_safeObjectAtIndex:17];
         _alertIfOrderQuantityMoreThanOnHandQuantity         = @([[response mso_safeObjectAtIndex:18] boolValue]);
         _applyCustomerDiscountAsOrderDiscount               = [response mso_safeObjectAtIndex:19];
         _backupOrder                                        = [response mso_safeObjectAtIndex:20];
@@ -699,7 +705,7 @@
         _alertBelowMinimumPrice                             = @([[response mso_safeObjectAtIndex:26] boolValue]);
         _orderSortByItemNumber                              = @([[response mso_safeObjectAtIndex:27] boolValue]);
         NSString *salesOrderRequirements                    = [response mso_safeObjectAtIndex:28];
-        _salesTax                                           = [response mso_safeObjectAtIndex:29];
+        _salesTax                                           = @([[response mso_safeObjectAtIndex:29] doubleValue]);
         _scanSwipeBadgeMapping                              = @([[response mso_safeObjectAtIndex:30] boolValue]);
         // 31
         // 32
@@ -714,18 +720,19 @@
         _discountRuleShippingChoice                         = [response mso_safeObjectAtIndex:41];
         _companyPriceLevel                                  = [response mso_safeObjectAtIndex:42];
         // 43-51 (Blanks)
-//        NSString *licenseInfo                               = [command mso_safeObjectAtIndex:52];
+        NSString *licenseInfo                               = [response mso_safeObjectAtIndex:52];
         NSString *printOut                                  = [response mso_safeObjectAtIndex:53];
         _messageCompanyPolicy                               = [response mso_safeObjectAtIndex:54];
         _messageCustomerGreeting                            = [response mso_safeObjectAtIndex:55];
         _messagePayment                                     = [response mso_safeObjectAtIndex:56];
         
+        [self parseEventNameAndEventId:eventNameAndId];
         [self parseAutoDefaultQuantityShipDate:autoDefaultQuantityShipDate];
         [self parseScannerSetup:scannerSetup];
         [self parseDisplayFormat:displayFormat];
         [self parsePDAConfigurationII:salesOrderRequirements eventDefaultTitles:eventDefaultTitles];
         [self parsePrintOut:printOut];
-        
+        [self parseLicenseInfo:licenseInfo];
     }
     return self;
 }
@@ -786,15 +793,44 @@
 - (NSNumberFormatter *)returnParsedFormatter:(NSString *)formatter currency:(BOOL)currency {
     NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
     [format setNumberStyle:currency ? NSNumberFormatterCurrencyStyle : NSNumberFormatterDecimalStyle];
-    
+    NSString *currencySymbol = @"¤";
     NSScanner* scan = [NSScanner scannerWithString:formatter];
-    int val;
-    if ([scan scanInt:&val] && [scan isAtEnd]) {
+    int i;
+    double d;
+    if ([scan scanInt:&i] && [scan isAtEnd]) {
+        if (currency) {
+            formatter = [NSString stringWithFormat:@"%@#,##0", currencySymbol];
+        }
         [format setPositiveFormat:formatter];
         return format;
+    } else if ([scan scanDouble:&d] && [scan isAtEnd]) {
+        NSArray *components = [formatter componentsSeparatedByString:@"."];
+        NSString *decimalPlaces = [components lastObject];
+        NSUInteger decimalPlacesCount = [decimalPlaces length];
+        NSMutableString *str = [NSMutableString string];
+        for (NSUInteger i = 0; i < decimalPlacesCount; i++) {
+            [str appendString:@"0"];
+        }
+        if (currency) {
+            formatter = [NSString stringWithFormat:@"%@#,##0.%@", currencySymbol, str];
+        }
+        [format setPositiveFormat:formatter];
+        return format;
+    } else {
+        return format;
     }
-    
-    return format;
+}
+
+- (void)parseEventNameAndEventId:(NSString *)eventNameId {
+    _eventName = eventNameId;
+    NSArray *components = [eventNameId componentsSeparatedByString:@"]"];
+    NSString *component = [components firstObject];
+    NSString *parsedEventId = [component stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    if (parsedEventId && [parsedEventId length] > 0) {
+        _eventId = parsedEventId;
+    } else {
+        _eventId = @"LOGICIEL";
+    }
 }
 
 - (void)parseScannerSetup:(NSString *)scannerSetup {
@@ -871,8 +907,116 @@
     _userDefinedSeason = [eventDefaultTitlesParameters mso_safeObjectAtIndex:2];
 }
 
+- (void)parseLicenseInfo:(NSString *)licenseInfo {
+    
+    licenseInfo = [licenseInfo stringByReplacingOccurrencesOfString:@"{License Info.*}" withString:@""];
+    NSArray *companyComponents = [licenseInfo componentsSeparatedByString:@"}"];
+
+    _companyName    = [companyComponents mso_safeObjectAtIndex:0];
+    _pin            = [companyComponents mso_safeObjectAtIndex:1];
+    _address1       = [companyComponents mso_safeObjectAtIndex:2];
+    _address2       = [companyComponents mso_safeObjectAtIndex:3];
+    _city           = [companyComponents mso_safeObjectAtIndex:4];
+    _state          = [companyComponents mso_safeObjectAtIndex:5];
+    _zip            = [companyComponents mso_safeObjectAtIndex:6];
+    _country        = [companyComponents mso_safeObjectAtIndex:7];
+    _phone1         = [companyComponents mso_safeObjectAtIndex:8];
+    _phone2         = [companyComponents mso_safeObjectAtIndex:9];
+    _fax            = [companyComponents mso_safeObjectAtIndex:10];
+    _email          = [companyComponents mso_safeObjectAtIndex:11];
+    _website        = [companyComponents mso_safeObjectAtIndex:12];
+}
+
 - (BOOL)productPricing {
     return [self.pricingStructure isEqualToString:@"B"];
+}
+
+- (NSString *)formattedEventName {
+    NSString *eventName = [self.eventName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"[%@]", self.eventId] withString:@""];
+    if (!eventName || [eventName length] == 0 || !self.eventId || [self.eventId length] == 0) {
+        return @"Event: Not Synced";
+    }
+    return [NSString stringWithFormat:@"Event: %@ - %@", self.eventId, eventName];
+}
+
+- (NSString *)formattedCompanyAddress {
+
+    NSMutableArray *components = [NSMutableArray arrayWithCapacity:4];
+    
+
+    NSMutableArray *addressComponents = [NSMutableArray arrayWithCapacity:3];
+    NSMutableArray *addressComponents1 = [NSMutableArray arrayWithCapacity:6];
+    if (self.address1 && [self.address1 length] > 0) {
+        [addressComponents1 addObject:self.address1];
+    }
+    if ([addressComponents1 count] > 0) {
+        [addressComponents addObject:[addressComponents1 componentsJoinedByString:@" "]];
+    }
+
+    NSMutableArray *addressComponents2 = [NSMutableArray arrayWithCapacity:6];
+    if (self.address2 && [self.address2 length] > 0) {
+        [addressComponents2 addObject:self.address2];
+    }
+
+    if (self.city && [self.city length] > 0) {
+        [addressComponents2 addObject:self.city];
+    }
+    if ([addressComponents2 count] > 0) {
+        [addressComponents addObject:[addressComponents2 componentsJoinedByString:@" "]];
+    }
+
+    NSMutableArray *addressComponents3 = [NSMutableArray arrayWithCapacity:6];
+    NSString *addressComponent3 = [NSString string];
+    if (self.state && [self.state length] > 0) {
+        [addressComponents3 addObject:self.state];
+    }
+
+    if (self.zip && [self.zip length] > 0) {
+        [addressComponents3 addObject:self.zip];
+    }
+    
+    if (self.country && [self.country length] > 0) {
+        [addressComponents3 addObject:self.country];
+    }
+    if ([addressComponents3 count] > 0) {
+        [addressComponents addObject:[addressComponents3 componentsJoinedByString:@" "]];
+    }
+
+    if ([addressComponents count] > 0) {
+        [components addObject:[addressComponents componentsJoinedByString:@", "]];
+    }
+    
+    NSMutableArray *phoneComponents = [NSMutableArray arrayWithCapacity:2];
+    if (self.phone1 && [self.phone1 length] > 0) {
+        [phoneComponents addObject:self.phone1];
+    }
+    if (self.phone2 && [self.phone2 length] > 0) {
+        [phoneComponents addObject:self.phone2];
+    }
+    if (self.fax && [self.fax length] > 0) {
+        [phoneComponents addObject:[NSString stringWithFormat:@"Fax %@", self.fax]];
+    }
+    if ([phoneComponents count] > 0) {
+        if ([phoneComponents count] > 1) {
+            [components addObject:[NSString stringWithFormat:@"Tel %@", [phoneComponents componentsJoinedByString:@" "]]];
+        } else {
+            [components addObject:[phoneComponents componentsJoinedByString:@" "]];
+        }
+    }
+
+    NSMutableArray *webComponents = [NSMutableArray arrayWithCapacity:2];
+    if (self.email && [self.email length] > 0) {
+        [webComponents addObject:self.email];
+    }
+    if (self.website && [self.website length] > 0) {
+        [webComponents addObject:self.website];
+    }
+    if ([webComponents count] > 0) {
+        [components addObject:[webComponents componentsJoinedByString:@" "]];
+    }
+    
+    return [components count] > 0 ? [components componentsJoinedByString:@"\n"] : nil;
+
 }
 
 @end
