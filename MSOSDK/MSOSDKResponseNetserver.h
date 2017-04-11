@@ -190,8 +190,6 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMore
 
 @interface MSOSDKResponseNetserverSettings : MSOSDKResponseNetserver
 
-+ (nullable instancetype)mso_settingsWithoutCommand:(nullable NSString *)settings error:(NSError * _Nullable __autoreleasing * _Nullable)error;
-
 @property (strong, nonatomic, nullable) NSNumber *companyPriceLevel;
 @property (strong, nonatomic, nullable) NSNumber *multipleCompanies;
 @property (strong, nonatomic, nullable) NSNumber *allowCustomAssortment;

@@ -650,26 +650,6 @@
 
 @implementation MSOSDKResponseNetserverSettings
 
-+ (instancetype)mso_settingsWithoutCommand:(NSString *)settings error:(NSError **)error {
-
-    NSMutableArray *components = [[settings componentsSeparatedByString:@"^"] mutableCopy];
-    if ([components count] == 0) {
-        return nil;
-    }
-    
-    if (!([[components objectAtIndex:0] isEqualToString:@"_S002"] &&
-          [[components objectAtIndex:1] isEqualToString:@"OK"])) {
-        [components insertObject:@"OK" atIndex:0];
-        [components insertObject:@"_S002" atIndex:0];        
-    }
-    
-    MSOSDKResponseNetserver *responseObject =
-    [MSOSDKResponseNetserver
-     msosdk_commandWithResponse:[components componentsJoinedByString:@"^"]
-     error:error];
-    return [[self alloc] initWithResponseObject:responseObject error:error];
-}
-
 - (instancetype)initWithResponseObject:(MSOSDKResponseNetserver *)responseObject error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithResponseObject:responseObject error:error];
     if (self) {
@@ -822,6 +802,13 @@
 }
 
 - (void)parseEventNameAndEventId:(NSString *)eventNameId {
+    
+    if (!eventNameId) {
+        _eventName = @"";
+        _eventId = @"LOGICIEL";
+        return;
+    }
+    
     _eventName = eventNameId;
     NSArray *components = [eventNameId componentsSeparatedByString:@"]"];
     NSString *component = [components firstObject];
