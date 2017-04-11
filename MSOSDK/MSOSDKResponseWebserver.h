@@ -15,16 +15,21 @@
 #import "NSArray+MSOSDKAdditions.h"
 
 @interface MSOSDKResponseWebserver : NSObject
+
 + (nullable instancetype)msosdk_commandWithResponse:(nullable NSString *)response
                                             command:(nullable NSString *)command
                                               error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
+
 - (nullable instancetype)initWithResponse:(nullable NSString *)response
                                   command:(nullable NSString *)command
                                     error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
-@property (strong, nonatomic, nullable) NSString *command;
+@property (strong, nonatomic, nonnull) NSString *command;
+
 + (kMSOSDKResponseWebserverStatus)status:(nullable NSString *)status;
+
 + (nullable NSError *)errorFromStatus:(kMSOSDKResponseWebserverStatus)status;
+
 @end
 
 @interface MSOSDKResponseWebserverCredentials : MSOSDKResponseWebserver

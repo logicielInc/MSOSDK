@@ -112,13 +112,15 @@
     self = [super initWithCommand:command];
     if (self) {
         
-        NSString *between = [self.command isEqualToString:mso_soap_function_iCheckMobileUser] ? @"iCheckMobileUserResult" : @"iCheckMobileDeviceResult";
+        NSString *between =
+        [self.command
+         isEqualToString:mso_soap_function_iCheckMobileUser] ? @"iCheckMobileUserResult" : @"iCheckMobileDeviceResult";
         
         NSString *parsed =
         [response
          mso_stringBetweenString:[NSString stringWithFormat:@"<%@>", between]
          andString:[NSString stringWithFormat:@"</%@>", between]];
-        
+
         NSArray <NSString *> *components = [parsed componentsSeparatedByString:@","];
         NSString *status = [components mso_safeObjectAtIndex:0];
         _status = [MSOSDKResponseWebserver status:status];
@@ -144,7 +146,11 @@
     
     if (self) {
         
-        NSString *parsed = [response mso_stringBetweenString:@"<iRegisterShortKeyResult>" andString:@"</iRegisterShortKeyResult>"];
+        NSString *parsed =
+        [response
+         mso_stringBetweenString:@"<iRegisterShortKeyResult>"
+         andString:@"</iRegisterShortKeyResult>"];
+        
         if (!parsed) {
             *error = [NSError mso_internet_registration_key_invalid];
             return nil;
@@ -180,8 +186,6 @@
             return nil;
         }
         
-        self.command = command;
-
         components = [parsed componentsSeparatedByString:@"-"];
         
         // Typical Format
@@ -249,7 +253,6 @@
 - (instancetype)initWithResponse:(NSString *)response command:(NSString *)command error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithCommand:command];
     if (self) {
-        self.command = command;
         
         NSString *between;
         if ([self.command isEqualToString:mso_soap_function_updateDownloadInfo]) {
@@ -300,7 +303,6 @@
 - (instancetype)initWithResponse:(NSString *)response command:(NSString *)command error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithCommand:command];
     if (self) {
-        self.command = command;
         
         NSString *date =
         [response
@@ -355,8 +357,6 @@
             return nil;
         }
         
-        self.command = command;
-        
         NSString* filename     = [[components objectAtIndex:0] stringByReplacingOccurrencesOfString:@"[" withString:@""];
         NSString* lastUpdate   = [components objectAtIndex:1];
         NSString* filesize     = [[components objectAtIndex:2] stringByReplacingOccurrencesOfString:@"]" withString:@""];
@@ -377,8 +377,6 @@
 - (instancetype)initWithResponse:(NSString *)response command:(NSString *)command error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithCommand:command];
     if (self) {
-        
-        self.command = command;
         
         NSString *parsed =
         [response
@@ -413,50 +411,7 @@
         }
         
         _catalogDetails = [catalogs copy];
-        /*
-         SMXMLDocument *document = [SMXMLDocument documentWithData:responseObject error:&error];
-         responseObject = nil;
-         
-         if (!document) {
-         [NSError errorHandler:error response:response failure:failure];
-         return;
-         }
-         
-         SMXMLElement *element = [document descendantWithPath:@"Body._CheckCatalogFileStatusResponse._CheckCatalogFileStatusResult"];
-         NSArray <SMXMLElement *> *catalogs = [element children];
-         
-         if (!catalogs || [catalogs count] == 0) {
-         // No data in FTP, return error
-         error = [NSError mso_internet_catalog_no_content];
-         [NSError errorHandler:error response:response failure:failure];
-         return;
-         }
-         
-         NSMutableArray *catalogObjects = [NSMutableArray array];
-         
-         for (SMXMLElement *catalog in catalogs) {
-         
-         NSString *value = catalog.value;
-         NSArray* components = [value componentsSeparatedByString:@"]["];
-         if ([components count] > 2) {
-         MSOSDKResponseWebserverCatalog *catalogObject = [MSOSDKResponseWebserverCatalog msosdk_commandWithResponse:components];
-         [catalogObjects addObject:catalogObject];
-         }
-         
-         }
-         
-         if ([catalogObjects count] == 0) {
-         error = [NSError mso_internet_catalog_no_content];
-         [NSError errorHandler:error response:response failure:failure];
-         return;
-         }
-         
-         if (success) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-         success(response, catalogObjects);
-         });
-         }
-         */
+
     }
     return self;
 }
@@ -503,11 +458,12 @@
 - (instancetype)initWithResponse:(NSString *)response command:(NSString *)command error:(NSError *__autoreleasing  _Nullable *)error {
     self = [super initWithCommand:command];
     if (self) {
-        self.command = command;
+
         NSString *parsed =
         [response
          mso_stringBetweenString:@"<_CheckPhotoFileStatusResult>"
          andString:@"</_CheckPhotoFileStatusResult>"];
+        
         if (parsed) {
             
             NSArray <NSString *> *components = [parsed componentsSeparatedByString:@"</string>"];
