@@ -536,10 +536,23 @@
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
     
+    NSString *imageName;
+    NSString *pin;
+#if test == 1
+    imageName = @"ADORF01MDBLKAC3ds.jpg";
+    pin = @"20010101";
+#elif test == 2
+    imageName = @"ADORF01MDBLKAC3ds.jpg";
+    pin = @"20010101";
+#elif test == 3
+    imageName = @"86877.jpg";
+    pin = @"20040201";
+#endif
+
     NSURLSessionDataTask *task =
     [sdk
-     _msoWebserverDownloadPhoto:@"ADORF01MDBLKAC3ds.jpg"
-     pin:@"20010101"
+     _msoWebserverDownloadPhoto:imageName
+     pin:pin
      success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
          
          mso_response = responseObject;

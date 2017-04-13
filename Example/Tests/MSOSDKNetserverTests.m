@@ -8,11 +8,6 @@
 
 #import "MSOTestCase.h"
 
-// Test suite 1 == Chinese Laundry
-// Test suite 2 == Volume Distributer
-
-#define testSuite 2
-
 @interface MSOSDKNetserverTests : MSOTestCase
 
 @end
@@ -21,15 +16,20 @@
 
 - (void)setUp {
     [super setUp];
+
+    NSString *eventId;
+#if test == 1
+    eventId = @"1301H";
+#elif test == 2
+    eventId = @"1403H";
+#elif test == 3
+    eventId = @"1217H";
+#endif
     
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
-#if testSuite == 1
-                          msoEventId:@"1301H"
-#elif testSuite == 2
-                          msoEventId:@"1403H"
-#endif
+                          msoEventId:eventId
                          msoPassword:@"logic99"];
 }
 
@@ -70,14 +70,20 @@
 - (void)test_msoNetserverStatus1 {
     
     // Need to check if the response from a mismatch eventId causes issues
+
+    NSString *eventId;
+#if test == 1
+    eventId = @"1302H";
+#elif test == 2
+    eventId = @"1404H";
+#elif test == 3
+    eventId = @"1218H";
+#endif
+    
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
-#if testSuite == 1
-                          msoEventId:@"1302H"
-#elif testSuite == 2
-                          msoEventId:@"1404H"
-#endif
+                          msoEventId:eventId
                          msoPassword:@"logic99"];
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
@@ -207,14 +213,20 @@
 - (void)test_msoNetserverFetchInitialSettings_invalid_event {
     
     // Need to check if the response from a mismatch eventId causes issues
+    
+    NSString *eventId;
+#if test == 1
+    eventId = @"1302H";
+#elif test == 2
+    eventId = @"1404H";
+#elif test == 2
+    eventId = @"1218H";
+#endif
+
     [MSOSDK setMSONetserverIpAddress:@"192.168.1.100"
                        msoDeviceName:@"MSOTests"
                   msoDeviceIpAddress:@"72.242.241.52"
-#if testSuite == 1
-                          msoEventId:@"1302H"
-#elif testSuite == 2
-                          msoEventId:@"1404H"
-#endif
+                          msoEventId:eventId
                          msoPassword:@"logic99"];
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
@@ -255,7 +267,7 @@
     __block NSError *err = nil;
     NSURLSessionDataTask *task =
     [sdk
-     _msoNetserverLogout:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+     _msoNetserverLogout:^(NSURLResponse * _Nonnull response, BOOL responseObject) {
          [expectation fulfill];
      } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
          err = error;
@@ -440,11 +452,11 @@
     __block MSOSDKResponseNetserverQueryCustomers *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *account_no =
-#if testSuite == 1
-    @"BAC";
-#elif testSuite == 2
-    @"0016";
+    NSString *account_no;
+#if test == 1
+    account_no = @"BAC";
+#elif test == 2
+    account_no = @"0016";
 #endif
     
     NSURLSessionDataTask *task =
@@ -490,11 +502,11 @@
     __block MSOSDKResponseNetserverQueryCustomers *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *account_no =
-#if testSuite == 1
-    @"B";
-#elif testSuite == 2
-    @"0";
+    NSString *account_no;
+#if test == 1
+    account_no = @"B";
+#elif test == 2
+    account_no = @"0";
 #endif
     
     NSURLSessionDataTask *task =
@@ -616,11 +628,11 @@
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
 
-    NSString *search_term =
-#if testSuite == 1
-    @"B00001";
-#elif testSuite == 2
-    @"AL";
+    NSString *search_term;
+#if test == 1
+    search_term = @"B00001";
+#elif test == 2
+    search_term = @"AL";
 #endif
 
     
@@ -664,11 +676,11 @@
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
 
-    NSString *search_term =
-#if testSuite == 1
-    @"B0";
-#elif testSuite == 2
-    @"LAS";
+    NSString *search_term;
+#if test == 1
+    search_term = @"B0";
+#elif test == 2
+    search_term = @"LAS";
 #endif
 
     NSURLSessionDataTask *task =
@@ -711,11 +723,11 @@
     __block MSOSDKResponseNetserverQuery *mso_response = nil;
     __block NSError *err = nil;
 
-    NSString *search_term =
-#if testSuite == 1
-    @"ADORF01MDBLsKAC";
-#elif testSuite == 2
-    @"LAS-811132";
+    NSString *search_term;
+#if test == 1
+    search_term = @"ADORF01MDBLsKAC";
+#elif test == 2
+    search_term = @"LAS-811132";
 #endif
 
     
@@ -867,11 +879,11 @@
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *item =
-#if testSuite == 1
-    @"ADORF01MDBLKAC3";
-#elif testSuite == 2
-    @"USA-99893";
+    NSString *item;
+#if test == 1
+    item = @"ADORF01MDBLKAC3";
+#elif test == 2
+    item = @"USA-99893";
 #endif
     
     NSURLSessionDataTask *task =
@@ -898,6 +910,46 @@
     XCTAssertNotNil(mso_response);
 }
 
+- (void)test_msoNetserverDownloadProductImage_fail {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block UIImage *mso_response = nil;
+    __block NSError *err = nil;
+    
+    NSString *item;
+#if test == 1
+    item = @"ADORF01MDBLKAC3";
+#elif test == 2
+    item = @"USA-99893";
+#endif
+    
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverDownloadProductImage:item
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         mso_response = responseObject;
+         [expectation fulfill];
+         
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    
+    
+    [task resume];
+    
+    [self waitForExpectationsWithLongTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(mso_response);
+}
+
 - (void)test_msoNetserverDownloadProductImage_fail_notfound {
     
     __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
@@ -907,11 +959,11 @@
     __block UIImage *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *item =
-#if testSuite == 1
-    @"ADORF01MDBLKAC32";
-#elif testSuite == 2
-    @"USA-998932";
+    NSString *item;
+#if test == 1
+    item = @"ADORF01MDBLKAC32";
+#elif test == 2
+    item = @"USA-998932";
 #endif
     
     NSURLSessionDataTask *task =
@@ -967,11 +1019,11 @@
     XCTAssertNil(err);
     XCTAssertNotNil(mso_response);
     
-    NSNumber *count =
-#if testSuite == 1
-    @46622;
-#elif testSuite == 2
-    @3329;
+    NSNumber *count;
+#if test == 1
+    count = @46622;
+#elif test == 2
+    count = @3329;
 #endif
     
     XCTAssertTrue([mso_response.productCount isEqualToNumber:count]);
@@ -1103,12 +1155,11 @@
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
 
-    NSString *account_no =
-    
-#if testSuite == 1
-    @"1301H0127";
-#elif testSuite == 2
-    @"1403H0037";
+    NSString *account_no;
+#if test == 1
+    account_no = @"1301H0127";
+#elif test == 2
+    account_no = @"1403H0037";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1204,11 +1255,11 @@
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *account_no =
-#if testSuite == 1
-    @"1301H0127";
-#elif testSuite == 2
-    @"1403H0037";
+    NSString *account_no;
+#if test == 1
+    account_no = @"1301H0127";
+#elif test == 2
+    account_no = @"1403H0037";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1316,11 +1367,11 @@
     __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *account_no =
-#if testSuite == 1
-    @"1301H0127-001";
-#elif testSuite == 2
-    @"1403H0037-001";
+    NSString *account_no;
+#if test == 1
+    account_no = @"1301H0127-001";
+#elif test == 2
+    account_no = @"1403H0037-001";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1427,11 +1478,11 @@
     __block MSOSDKResponseNetserverQueryCustomerSalesOrders *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *account_no =
-#if testSuite == 1
-    @"SOL14741";
-#elif testSuite == 2
-    @"25111";
+    NSString *account_no;
+#if test == 1
+    account_no = @"SOL14741";
+#elif test == 2
+    account_no = @"25111";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1509,11 +1560,11 @@
     __block MSOSDKResponseNetserverQuerySalesOrder *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *order_no =
-#if testSuite == 1
-    @"JohnP0206";
-#elif testSuite == 2
-    @"007P0128";
+    NSString *order_no;
+#if test == 1
+    order_no = @"JohnP0206";
+#elif test == 2
+    order_no = @"007P0128";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1588,11 +1639,11 @@
     __block MSOSDKResponseNetserverQuerySalesOrder *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *order_no =
-#if testSuite == 1
-    @"JohnP0218";
-#elif testSuite == 2
-    @"P0052";
+    NSString *order_no;
+#if test == 1
+    order_no = @"JohnP0218";
+#elif test == 2
+    order_no = @"P0052";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1712,11 +1763,11 @@
     __block MSOSDKResponseNetserverSyncPurchaseHistory *mso_response = nil;
     __block NSError *err = nil;
     
-    NSString *customer_zip =
-#if testSuite == 1
-    @"90210";
-#elif testSuite == 2
-    @"25586";
+    NSString *customer_zip;
+#if test == 1
+    customer_zip = @"90210";
+#elif test == 2
+    customer_zip = @"25586";
 #endif
     
     NSURLSessionDataTask *task =
@@ -1807,11 +1858,11 @@
     __block MSOSDKResponseNetserverQueryProducts *mso_response = nil;
     __block NSError *err = nil;
     
-    NSArray <NSString *> *item_list =
-#if testSuite == 1
-    @[@"ADORF01MDBLKAC3"];
-#elif testSuite == 2
-    @[@"MGD-60014", @"MGD-60015", @"MGD-60016", @"MGD-60017"];
+    NSArray <NSString *> *item_list;
+#if test == 1
+    item_list = @[@"ADORF01MDBLKAC3"];
+#elif test == 2
+    item_list = @[@"MGD-60014", @"MGD-60015", @"MGD-60016", @"MGD-60017"];
 #endif
     
     NSURLSessionDataTask *task =

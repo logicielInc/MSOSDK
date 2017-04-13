@@ -333,9 +333,12 @@ static MSOFailureBlock gr_failure_block;
     NSString *password = @"Log-8910";
     NSString *photosPath = [NSString stringWithFormat:@"/PUBLIC/Customer_Auto_FTP/%@/Photos/", pin];
     
-    self.requestsManager = [[GRRequestsManager alloc] initWithHostname:hostname
-                                                                  user:username
-                                                              password:password];
+    self.requestsManager =
+    [[GRRequestsManager alloc]
+     initWithHostname:hostname
+     user:username
+     password:password];
+
     self.requestsManager.delegate = self;
     id <GRRequestProtocol> request = [self.requestsManager addRequestForListDirectoryAtPath:photosPath];
     [request start];
@@ -424,11 +427,17 @@ static MSOFailureBlock gr_failure_block;
      error:&error];
     
     NSURLSessionDataTask *task =
-    [self
-     dataTaskForWebserverWithRequest:request
-     progress:progress
-     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
+    [self.operation
+     dataTaskWithRequest:request
+     uploadProgress:nil
+     downloadProgress:progress
+     completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
+         if (error) {
+             [NSError errorHandler:error response:response failure:failure];
+             return;
+         }
+        
          UIImage *image = [UIImage imageWithData:responseObject];
          
          if (!image) {
@@ -442,7 +451,8 @@ static MSOFailureBlock gr_failure_block;
                  success(response, image);
              });
          }
-     } failure:failure];
+
+     }];
     
     return task;
 }
@@ -800,7 +810,7 @@ static MSOFailureBlock gr_failure_block;
      data:[dDict objectForKey:filename]
      pin:pin
      newfile:newfile
-     success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseWebserverRequestData * _Nonnull responseObject) {
          
          [dDict removeObjectForKey:filename];
          
@@ -864,12 +874,12 @@ static MSOFailureBlock gr_failure_block;
     [self
      dataTaskForWebserverWithRequest:request
      progress:progress
-     success:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          
          MSOSDKResponseWebserverRequestData *mso_response =
          [MSOSDKResponseWebserverRequestData
           msosdk_commandWithResponse:responseObject
-          command:mso_soap_function_updateUploadInfo
+          command:mso_soap_function_uploadFile
           error:&error];
          
          if (!mso_response) {

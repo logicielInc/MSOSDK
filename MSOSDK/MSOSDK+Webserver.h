@@ -137,8 +137,8 @@
                                                            progress:(_Nullable MSOProgressBlock)progress
                                                             failure:(_Nullable MSOFailureBlock)failure;
 
-- (nonnull NSURLSessionDataTask *)_msoWebserverDownloadPhoto:(nullable NSString *)filename
-                                                         pin:(nullable NSString *)pin
+- (nonnull NSURLSessionDataTask *)_msoWebserverDownloadPhoto:(nonnull NSString *)filename
+                                                         pin:(nonnull NSString *)pin
                                                      success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, UIImage * _Nonnull responseObject))success
                                                     progress:(_Nullable MSOProgressBlock)progress
                                                      failure:(_Nullable MSOFailureBlock)failure;

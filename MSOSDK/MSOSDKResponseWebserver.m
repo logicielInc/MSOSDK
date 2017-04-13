@@ -274,7 +274,10 @@
                 *error = [NSError mso_internet_upload_processing_error];
                 return nil;
             }
-                
+            
+            _status = @([parsed boolValue]);
+
+            
         } else {
 
             if (![parsed isEqualToString:@"2"]) {
@@ -287,9 +290,9 @@
                 return nil;
             }
 
+            _status = @([parsed integerValue]);
         }
 
-        _status = @([parsed integerValue]);
 
     }
     return self;

@@ -10,6 +10,11 @@
 #import <SMXMLDocument/SMXMLDocument.h>
 #import "MSOSDK.h"
 
+// Test suite 1 == Chinese Laundry
+// Test suite 2 == Volume Distributer
+// Test suite 3 == Logiciel
+#define test 3
+
 @interface MSOTestCase : XCTestCase
 
 @property (nonatomic, assign) NSTimeInterval networkTimeout;
