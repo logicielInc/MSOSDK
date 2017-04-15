@@ -8,39 +8,38 @@
 
 #import "MSOSDKMaster.h"
 
-static NSString * netserverIpAddress;
-static NSString * deviceName;
-static NSString * deviceIPAddress;
-static NSString * eventId;
-static NSString * msoPassword;
-static NSString * authUsername;
-static NSString * authPassword;
+static NSString * netserverIpAddress    = nil;
+static NSString * deviceName            = nil;
+static NSString * deviceIPAddress       = nil;
+static NSString * eventId               = nil;
+static NSString * msoPassword           = nil;
+static NSString * authUsername          = nil;
+static NSString * authPassword          = nil;
 
 @interface MSOSDK ()
 @property (strong, nonatomic, nullable, readwrite) AFHTTPSessionManager *operation;
-
 @end
 
 @implementation MSOSDK
 
 + (NSString *)_msoNetserverIpAddress {
-    return netserverIpAddress;
+    return netserverIpAddress ?: @"192.168.1.206";
 }
 
 + (NSString *)_msoDeviceName {
-    return deviceName;
+    return deviceName ?: @"TestDevice";
 }
 
 + (NSString *)_msoDeviceIpAddress {
-    return deviceIPAddress;
+    return deviceIPAddress ?: @"192.168.1.216";
 }
 
 + (NSString *)_msoEventId {
-    return eventId;
+    return eventId ?: @"1217H";
 }
 
 + (NSString *)_msoPassword {
-    return msoPassword;
+    return msoPassword ?: @"logic99";
 }
 
 + (NSString *)_authUsername {

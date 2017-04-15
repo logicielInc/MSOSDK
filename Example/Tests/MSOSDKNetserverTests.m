@@ -31,6 +31,7 @@
                   msoDeviceIpAddress:@"72.242.241.52"
                           msoEventId:eventId
                          msoPassword:@"logic99"];
+    
 }
 
 - (void)tearDown {
