@@ -667,7 +667,7 @@
         _multipleCompanies                                  = @([[response mso_safeObjectAtIndex:8] boolValue]);
         _recalculateSet                                     = @([[response mso_safeObjectAtIndex:9] boolValue]);
         _recalculatePriceTagAlong                           = @([[response mso_safeObjectAtIndex:10] boolValue]);
-        _itemSelectionAlert                                 = [[response mso_safeObjectAtIndex:11] integerValue];
+        _behaviorWhenEnteringItem                           = [[response mso_safeObjectAtIndex:11] integerValue];
         _pricingStructure                                   = [response mso_safeObjectAtIndex:12];
         _discountRule                                       = @([[response mso_safeObjectAtIndex:13] integerValue]);
         _discountRuleSubtotal                               = @([[response mso_safeObjectAtIndex:14] integerValue]);
@@ -692,7 +692,7 @@
         // 33
         _orderRequiresMinimumItemQuantity                   = @([[response mso_safeObjectAtIndex:34] boolValue]);
         _allowCustomAssortment                              = @([[response mso_safeObjectAtIndex:35] boolValue]);
-        _optionsIfOrderQuantityMoreThanOnHandQuantity       = [[response mso_safeObjectAtIndex:36] integerValue];
+        _optionsIfOrderQuantityGreaterThanOnHandQuantity    = [[response mso_safeObjectAtIndex:36] integerValue];
         _lastPurchasePricePriority                          = @([[response mso_safeObjectAtIndex:37] boolValue]);
         NSString *eventDefaultTitles                        = [response mso_safeObjectAtIndex:38];
         _salesManagerPrivilegeInTradeshow                   = @([[response mso_safeObjectAtIndex:39] boolValue]);

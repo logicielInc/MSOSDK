@@ -13,7 +13,7 @@
 // Test suite 1 == Chinese Laundry
 // Test suite 2 == Volume Distributer
 // Test suite 3 == Logiciel
-#define test 3
+#define test 2
 
 @interface MSOTestCase : XCTestCase
 

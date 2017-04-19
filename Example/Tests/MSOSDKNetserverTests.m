@@ -211,6 +211,39 @@
     XCTAssertTrue([command.status isEqualToString:@"OK"]);
 }
 
+- (void)test_msoNetserverFetchInitialSettings_retrieve {
+    
+    __block XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
+    
+    MSOSDK *sdk = [MSOSDK sharedSession];
+    
+    __block MSOSDKResponseNetserverSettings *command = nil;
+    __block NSError *err = nil;
+    NSURLSessionDataTask *task =
+    [sdk
+     _msoNetserverFetchInitialSettings:@"John"
+     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
+         
+         command = responseObject;
+         [expectation fulfill];
+         
+     } failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+         
+         err = error;
+         [expectation fulfill];
+         
+     }];
+    [task resume];
+    
+    [self waitForExpectationsWithCommonTimeout];
+    
+    XCTAssertNil(err);
+    XCTAssertNotNil(command);
+    XCTAssertTrue(command.optionsIfOrderQuantityGreaterThanOnHandQuantity == kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHandBackOrder);
+    XCTAssertTrue(command.behaviorWhenEnteringItem == kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItemAlwaysRetrieve);
+//    XCTAssertTrue([command.status isEqualToString:@"OK"]);
+}
+
 - (void)test_msoNetserverFetchInitialSettings_invalid_event {
     
     // Need to check if the response from a mismatch eventId causes issues

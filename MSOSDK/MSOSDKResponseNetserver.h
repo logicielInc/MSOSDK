@@ -176,21 +176,23 @@
 @property (strong, nonatomic, nullable) NSNumber *allowUserDefinedPriceLevel;
 @end
 
-typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsAlertScope) {
-    kMSOSDKResponseNetserverSettingsAlertItemSetup      = 0,
-    kMSOSDKResponseNetserverSettingsAlertBackOrder,
-    kMSOSDKResponseNetserverSettingsAlertOfferChoice,
+typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHand) {
+    kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHandItemSetup      = 0,
+    kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHandBackOrder,
+    kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHandOfferChoice,
 };
 
-typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantity) {
-    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityAlwaysAppend      = 0,
-    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityAlwaysRetrieve,
-    kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantityOfferChoice,
+typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItem) {
+    kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItemAlwaysAppend        = 0,
+    kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItemAlwaysRetrieve,
+    kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItemOfferChoice,
 };
 
 @interface MSOSDKResponseNetserverSettings : MSOSDKResponseNetserver
 
 @property (strong, nonatomic, nullable) NSNumber *companyPriceLevel;
+
+/// if yes, multiple companies, else, single company
 @property (strong, nonatomic, nullable) NSNumber *multipleCompanies;
 @property (strong, nonatomic, nullable) NSNumber *allowCustomAssortment;
 
@@ -289,15 +291,17 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsOptionsIfQuantityMore
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeItemLevel;
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeTotal;
 
-
-@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsAlertScope itemSelectionAlert;
+/**
+ @brief MSO will return back 3 results: Always Append, Always Retrieve, Offer Choice
+ */
+@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringItem behaviorWhenEnteringItem;
 @property (strong, nonatomic, nullable) NSNumber *recalculateSet;
 @property (strong, nonatomic, nullable) NSNumber *recalculatePriceTagAlong;
 @property (strong, nonatomic, nullable) NSNumber *alertIfOrderQuantityMoreThanOnHandQuantity;
 /**
- @brief MSO will return back 3 results: 0 = Append, 1 = Retrieve, 2 = Choice
+ @brief MSO will return back 3 results: Item Setup, Back Order, Offer Choice
  */
-@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsOptionsIfQuantityMoreThanOnHandQuantity optionsIfOrderQuantityMoreThanOnHandQuantity;
+@property (assign, nonatomic) kMSOSDKResponseNetserverSettingsRedAlertIfOrderQuantityGreaterThanOnHand optionsIfOrderQuantityGreaterThanOnHandQuantity;
 @property (strong, nonatomic, nullable) NSNumber *alertBelowMinimumPrice;
 @property (strong, nonatomic, nullable) NSNumber *applyCustomerDiscountAsOrderDiscount;
 @property (strong, nonatomic, nullable) NSNumber *defaultQuantityToPreviousEntry;
