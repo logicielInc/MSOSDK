@@ -480,7 +480,7 @@
      mso_product_search_type_formatted:searchType];
 
     NSString *xml =
-    [@"_P002"
+    [@"_P001"
      mso_build_command:@[username,
                          searchTerm,
                          companyId,
