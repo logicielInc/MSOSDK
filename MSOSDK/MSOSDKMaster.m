@@ -448,6 +448,7 @@ static NSString * authPassword          = nil;
               error:&error];
              
              if (!mso_response) {
+                 success(nil, nil, [NSError mso_internet_login_credientials_invalid]);
                  [NSError errorHandler:error response:response failure:failure];
                  return;
              }

@@ -119,6 +119,58 @@
     
 }
 
+- (NSURLSessionDataTask *)_msoNetserverIsManager:(NSString *)username
+                                    password:(NSString *)password
+                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverLogin * _Nonnull))success
+                                     failure:(MSOFailureBlock)failure {
+    
+    NSString *xml =
+    [@"_U001"
+     mso_build_command:@[@"",
+                         username,
+                         password]];
+    
+    MSOSoapParameter *parameter =
+    [MSOSoapParameter
+     parameterWithObject:xml
+     forKey:@"str"];
+    
+    NSURLRequest *request =
+    [MSOSDK
+     urlRequestWithParameters:@[parameter]
+     type:mso_soap_function_doWork
+     url:self.serviceUrl
+     netserver:YES
+     timeout:kMSOTimeoutLoginKey];
+    
+    NSURLSessionDataTask *task =
+    [self
+     dataTaskForNetserverWithRequest:request
+     progress:nil
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+         
+         MSOSDKResponseNetserverLogin *msosdk_command =
+         [MSOSDKResponseNetserverLogin
+          msosdk_commandWithResponseObject:responseObject
+          error:&error];
+         
+         if (!msosdk_command) {
+             [NSError errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         if (success) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 success(response, msosdk_command);
+             });
+         }
+         
+     } failure:failure];
+    
+    return task;
+    
+}
+
 - (NSURLSessionDataTask *)_msoNetserverFetchInitialSettings:(NSString *)username
                                                     success:(void (^ _Nullable)(NSURLResponse * _Nonnull, MSOSDKResponseNetserverSettings * _Nonnull))success
                                                     failure:(MSOFailureBlock)failure {

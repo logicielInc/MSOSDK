@@ -49,6 +49,12 @@
                                              success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverLogin * _Nonnull responseObject))success
                                              failure:(_Nullable MSOFailureBlock)failure;
 
+
+- (nonnull NSURLSessionDataTask *)_msoNetserverIsManager:(nullable NSString *)username
+                                            password:(nullable NSString *)password
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverLogin * _Nonnull responseObject))success
+                                             failure:(_Nullable MSOFailureBlock)failure;
+
 /**
  Creates an `NSURLSessionDataTask` sends a request to netserver to logout
  
