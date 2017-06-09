@@ -120,6 +120,15 @@
                                                           success:(void (^_Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error))success
                                                           failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
 
+- (nonnull NSURLSessionDataTask *)isManagerWithRequest:(nonnull NSURLRequest *)request
+                                              progress:(_Nullable MSOProgressBlock)progress
+                                           requestType:(kMSOSDKRequestType)requestType
+
+                                               success:(void (^_Nullable)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nonnull error))success
+                                               failure:(void (^_Nullable)(NSURLResponse * _Nonnull response, NSError * _Nonnull error))failure;
+
+
+
 
 - (nonnull NSURLSessionDataTask *)dataTaskForWebserverWithRequest:(nonnull NSURLRequest *)request
                                                          progress:(_Nullable MSOProgressBlock)progress

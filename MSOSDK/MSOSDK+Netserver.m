@@ -144,28 +144,29 @@
      timeout:kMSOTimeoutLoginKey];
     
     NSURLSessionDataTask *task =
-    [self
-     dataTaskForNetserverWithRequest:request
-     progress:nil
-     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
-         
-         MSOSDKResponseNetserverLogin *msosdk_command =
-         [MSOSDKResponseNetserverLogin
-          msosdk_commandWithResponseObject:responseObject
-          error:&error];
-         
-         if (!msosdk_command) {
-             [NSError errorHandler:error response:response failure:failure];
-             return;
-         }
-         
-         if (success) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 success(response, msosdk_command);
-             });
-         }
-         
-     } failure:failure];
+    
+    [self isManagerWithRequest:request
+                      progress:nil
+                   requestType:kMSOSDKRequestTypeNetserver
+                       success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserver * _Nullable responseObject, NSError * _Nullable error) {
+                           
+                           MSOSDKResponseNetserverLogin *msosdk_command =
+                           [MSOSDKResponseNetserverLogin
+                            msosdk_commandWithResponseObject:responseObject
+                            error:&error];
+                           
+                           if (!msosdk_command) {
+                               [NSError errorHandler:error response:response failure:failure];
+                               return;
+                           }
+                           
+                           if (success) {
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   success(response, msosdk_command);
+                               });
+                           }
+                       }
+                       failure:failure ];
     
     return task;
     
