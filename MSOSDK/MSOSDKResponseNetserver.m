@@ -917,6 +917,8 @@
     _fax            = [companyComponents mso_safeObjectAtIndex:10];
     _email          = [companyComponents mso_safeObjectAtIndex:11];
     _website        = [companyComponents mso_safeObjectAtIndex:12];
+    _oneCustomerListInfo = [companyComponents mso_safeObjectAtIndex:13];
+    
 }
 
 - (BOOL)productPricing {
