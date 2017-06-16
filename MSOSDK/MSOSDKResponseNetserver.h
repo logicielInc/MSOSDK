@@ -191,6 +191,9 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringI
 @interface MSOSDKResponseNetserverSettings : MSOSDKResponseNetserver
 
 @property (strong, nonatomic, nullable) NSNumber *companyPriceLevel;
+@property (strong, nonatomic, nullable) NSNumber *workPeriodControl;
+@property (strong, nonatomic, nullable) NSString *eventInterval;
+@property (strong, nonatomic, nullable) NSNumber *oneCustomerOnly;
 
 /// if yes, multiple companies, else, single company
 @property (strong, nonatomic, nullable) NSNumber *multipleCompanies;

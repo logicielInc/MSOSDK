@@ -699,7 +699,12 @@
         _salesTaxForSampleSales                             = [response mso_safeObjectAtIndex:40];
         _discountRuleShippingChoice                         = [response mso_safeObjectAtIndex:41];
         _companyPriceLevel                                  = [response mso_safeObjectAtIndex:42];
-        // 43-51 (Blanks)
+        _workPeriodControl                              = [response mso_safeObjectAtIndex:43];
+        _eventInterval                                 = [response mso_safeObjectAtIndex:44];
+        
+        
+        
+        // 45-51 (Blanks)
         NSString *licenseInfo                               = [response mso_safeObjectAtIndex:52];
         NSString *printOut                                  = [response mso_safeObjectAtIndex:53];
         _messageCompanyPolicy                               = [response mso_safeObjectAtIndex:54];
