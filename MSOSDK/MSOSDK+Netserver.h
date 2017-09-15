@@ -127,6 +127,12 @@
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
 
+- (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProductsP002:(nullable NSString *)username
+                                                 searchTerm:(nullable NSString *)searchTerm
+                                                  companyId:(nullable NSString *)companyId
+                                                 searchType:(kMSOProductSearchType)searchType
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryProducts * _Nonnull responseObject))success
+                                                    failure:(_Nullable MSOFailureBlock)failure;
 /**
  <#Description#>
 

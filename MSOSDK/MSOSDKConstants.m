@@ -16,9 +16,9 @@ NSInteger const kMSOTimeoutVeryLongKey      = 90;
 
 NSInteger const kMSOTimeoutAllImageSyncKey          = kMSOTimeoutVeryLongKey;
 NSInteger const kMSOTimeoutCatalogKey               = kMSOTimeoutShortKey;
-NSInteger const kMSOTimeoutCustomerSaveKey          = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutCustomerSaveKey          = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutCustomersSyncKey         = kMSOTimeoutVeryLongKey;
-NSInteger const kMSOTimeoutCustomerSearchKey        = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutCustomerSearchKey        = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutDataRequestKey           = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutForgotPassword           = kMSOTimeoutShortKey;
 NSInteger const kMSOTimeoutImageSyncKey             = kMSOTimeoutRegularKey;
