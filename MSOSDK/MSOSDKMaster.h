@@ -6,7 +6,7 @@
 //  Copyright © 2016 John Setting. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking/AFNetworking.h"
 
 #import "MSOSDKConstants.h"
 #import "GRRequestsManager.h"

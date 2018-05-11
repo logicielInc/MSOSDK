@@ -101,12 +101,12 @@
          [MSOSDKResponseNetserverLogin
           msosdk_commandWithResponseObject:responseObject
           error:&error];
-         
+
          if (!msosdk_command) {
              [NSError errorHandler:error response:response failure:failure];
              return;
          }
-                  
+
          if (success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  success(response, msosdk_command);

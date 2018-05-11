@@ -300,9 +300,8 @@ static NSString * authPassword          = nil;
                                    timeout:(NSTimeInterval)timeout {
 
     
-    
     NSMutableArray *parameterArray = [NSMutableArray arrayWithCapacity:[parameters count] + 1];
-
+    
     NSString *namespace;
 
     if (netserver) {

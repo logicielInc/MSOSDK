@@ -11,7 +11,7 @@
 @implementation NSString (MSOSDKAdditions)
 
 - (instancetype)mso_build_command:(NSArray *)parameters {
-
+    
     NSString *params = [self copy];
     if (parameters && [parameters count] > 0) {
         NSString *additions = [NSString stringWithFormat:@"^%@", [parameters componentsJoinedByString:@"^"]];

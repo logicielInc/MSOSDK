@@ -65,7 +65,7 @@
     
     switch (streamEvent) {
         case NSStreamEventOpenCompleted: {
-			self.filesInfo = [NSMutableArray array];
+            self.filesInfo = [NSMutableArray array];
             self.didOpenStream = YES;
             self.receivedData = [NSMutableData data];
             break;
@@ -84,7 +84,7 @@
         }
             
         case NSStreamEventHasSpaceAvailable:
-        break;
+            break;
             
         case NSStreamEventErrorOccurred: {
             [self.streamInfo streamError:self errorCode:[GRError errorCodeWithError:[theStream streamError]]];
@@ -98,25 +98,35 @@
             NSUInteger totalbytes = [self.receivedData length];
             
             do {
-                @autoreleasepool {
-                    CFDictionaryRef listingEntity = NULL;
-                    parsedBytes = CFFTPCreateParsedResourceListing(NULL, &bytes[offset], totalbytes - offset, &listingEntity);
-                    if (parsedBytes > 0) {
-                        if (listingEntity != NULL) {
+            @autoreleasepool {
+                CFDictionaryRef listingEntity = NULL;
+                parsedBytes = CFFTPCreateParsedResourceListing(NULL, &bytes[offset], totalbytes - offset, &listingEntity);
+                if (parsedBytes > 0) {
+                    if (listingEntity != NULL) {
+                        @try {
                             self.filesInfo = [self.filesInfo arrayByAddingObject:(__bridge_transfer NSDictionary *)listingEntity];
                         }
-                        offset += parsedBytes;
+                        @catch (NSException *exception) {
+                            //                                NSLog(@"%@", exception.reason);
+                            self.filesInfo = [NSMutableArray arrayWithObject:(__bridge_transfer NSDictionary *)listingEntity];
+                        }
+                        @finally {
+                            //                                NSLog(@"Char at index %d cannot be found", index);
+                        }
                     }
+                    offset += parsedBytes;
                 }
+                                }
             } while (parsedBytes > 0);
             
             [self.streamInfo streamComplete:self];
             break;
         }
-        
+            
         default:
             break;
     }
 }
 
 @end
+
