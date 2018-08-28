@@ -148,7 +148,42 @@
     if ([request isKindOfClass:[GRListingRequest class]]) {
         NSMutableArray *listing = [NSMutableArray array];
         for (NSDictionary *file in ((GRListingRequest *)request).filesInfo) {
-            [listing addObject:[file objectForKey:(id)kCFFTPResourceName]];
+            
+            // append the time when the files was created.
+            NSString *item = [file objectForKey:(id)kCFFTPResourceName];
+            NSDate *modDate = [file objectForKey:(id)kCFFTPResourceModDate];
+            NSDate *newDate = [modDate dateByAddingTimeInterval:-3600*2];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            NSTimeZone *gmt = [NSTimeZone defaultTimeZone];
+            [formatter setTimeZone:gmt];
+            [formatter setDateFormat:@"MM-dd-yyyy HH:mm,"];
+           
+           NSString *item3 = [[formatter stringFromDate:newDate] stringByAppendingString:item];
+           
+//            NSDate *curDate = [NSDate date];
+//            NSTimeInterval secondsBetween = [curDate timeIntervalSinceDate:modDate] + 7200;
+//            int numberOfDays = secondsBetween / 86400;
+//            int numberOfHr = secondsBetween / 3600;
+//            int numberOfMins = secondsBetween / 60;
+//            NSString *item2 = @"";
+//            if (numberOfDays != 0) {
+//                item2 = [NSString stringWithFormat:@"%d day(s) ago,", numberOfDays];
+//            } else if (numberOfHr != 0) {
+//                item2 = [NSString stringWithFormat:@"%d hour(s) ago,", numberOfHr];
+//            } else if (numberOfMins != 0) {
+//                item2 = [NSString stringWithFormat:@"%d minute(s) ago,", numberOfMins];
+//            } else {
+//                item2 = [NSString stringWithFormat:@"%d seconde(s) ago,", secondsBetween];
+//            }
+//            NSString *item3 = [item2 stringByAppendingString:item];
+            
+            if ([item containsString:@"(20"]) {
+                [listing addObject: item3];
+            } else {
+                [listing addObject: item];
+            }
+            
+            
         }
         if ([self.delegate respondsToSelector:@selector(requestsManager:didCompleteListingRequest:listing:)]) {
             [self.delegate requestsManager:self

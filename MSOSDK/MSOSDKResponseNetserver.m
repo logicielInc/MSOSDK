@@ -625,13 +625,14 @@
             NSString *priceLevels = [response mso_safeObjectAtIndex:2];
             _foundPriceLevels = [priceLevels containsString:@"|"] ? @1 : @0;
             
+            // 0 means default level, but only be useful for the road rep batch mode, so don't need to handle here
             NSArray *priceLevelComponents = [priceLevels componentsSeparatedByString:@"|"];
-            NSString *priceLevel1       = [priceLevelComponents mso_safeObjectAtIndex:0];
-            NSString *priceLevel2       = [priceLevelComponents mso_safeObjectAtIndex:1];
-            NSString *priceLevel3       = [priceLevelComponents mso_safeObjectAtIndex:2];
-            NSString *priceLevel4       = [priceLevelComponents mso_safeObjectAtIndex:3];
-            NSString *priceLevel5       = [priceLevelComponents mso_safeObjectAtIndex:4];
-            NSString *priceLevelAllow   = [priceLevelComponents mso_safeObjectAtIndex:5];
+            NSString *priceLevel1       = [priceLevelComponents mso_safeObjectAtIndex:1];
+            NSString *priceLevel2       = [priceLevelComponents mso_safeObjectAtIndex:2];
+            NSString *priceLevel3       = [priceLevelComponents mso_safeObjectAtIndex:3];
+            NSString *priceLevel4       = [priceLevelComponents mso_safeObjectAtIndex:4];
+            NSString *priceLevel5       = [priceLevelComponents mso_safeObjectAtIndex:5];
+            NSString *priceLevelAllow   = [priceLevelComponents mso_safeObjectAtIndex:6];
 
             _priceLevelAllow1 = priceLevel1 ? @([priceLevel1 boolValue]) : @0;
             _priceLevelAllow2 = priceLevel2 ? @([priceLevel2 boolValue]) : @0;
@@ -699,7 +700,12 @@
         _salesTaxForSampleSales                             = [response mso_safeObjectAtIndex:40];
         _discountRuleShippingChoice                         = [response mso_safeObjectAtIndex:41];
         _companyPriceLevel                                  = [response mso_safeObjectAtIndex:42];
-        // 43-51 (Blanks)
+        _workPeriodControl                              = [response mso_safeObjectAtIndex:43];
+        _eventInterval                                 = [response mso_safeObjectAtIndex:44];
+        
+        
+        
+        // 45-51 (Blanks)
         NSString *licenseInfo                               = [response mso_safeObjectAtIndex:52];
         NSString *printOut                                  = [response mso_safeObjectAtIndex:53];
         _messageCompanyPolicy                               = [response mso_safeObjectAtIndex:54];
@@ -752,6 +758,9 @@
     
     NSString *quantityItemLevel = [displayFormatParameters mso_safeObjectAtIndex:2];
     _formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel currency:NO];
+    
+    NSString *formatterItemDiscount = [displayFormatParameters mso_safeObjectAtIndex:4];
+    _formatterItemDiscount = [self returnParsedFormatter:formatterItemDiscount currency:NO];
     
     NSString *quantityTotal = [displayFormatParameters mso_safeObjectAtIndex:3];
     _formatterQuantityTotal = [self returnParsedFormatter:quantityTotal currency:NO];
@@ -912,6 +921,8 @@
     _fax            = [companyComponents mso_safeObjectAtIndex:10];
     _email          = [companyComponents mso_safeObjectAtIndex:11];
     _website        = [companyComponents mso_safeObjectAtIndex:12];
+    _oneCustomerListInfo = [companyComponents mso_safeObjectAtIndex:13];
+    
 }
 
 - (BOOL)productPricing {
@@ -921,9 +932,9 @@
 - (NSString *)formattedEventName {
     NSString *eventName = [self.eventName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"[%@]", self.eventId] withString:@""];
     if (!eventName || [eventName length] == 0 || !self.eventId || [self.eventId length] == 0) {
-        return @"Event: Not Synced";
+        return @"NO DATA";
     }
-    return [NSString stringWithFormat:@"Event: %@ - %@", self.eventId, eventName];
+    return [NSString stringWithFormat:@"%@ - %@", self.eventId, eventName];
 }
 
 - (NSString *)formattedCompanyAddress {

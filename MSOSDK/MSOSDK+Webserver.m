@@ -544,8 +544,8 @@ static MSOFailureBlock gr_failure_block;
     MSOSoapParameter *parameterPIN         = [MSOSoapParameter parameterWithObject:pin    forKey:@"sPIN"];
     MSOSoapParameter *parameterUsername    = [MSOSoapParameter parameterWithObject:userId forKey:@"sUserID"];
     MSOSoapParameter *parameterCheckType   = [MSOSoapParameter parameterWithObject:@"1"   forKey:@"iCheckType"];
-    MSOSoapParameter *parameterViewDate    = [MSOSoapParameter parameterWithObject:date   forKey:@"sLastViewDate"];
     
+    MSOSoapParameter *parameterViewDate    = [MSOSoapParameter parameterWithObject:date   forKey:@"sLastViewDate"];
     NSURLRequest *request =
     [MSOSDK
      urlRequestWithParameters:@[parameterPIN,

@@ -17,7 +17,7 @@
 
 @interface GRListingRequest : GRRequest
 
-@property NSArray *filesInfo;
+@property (strong) NSArray *filesInfo;
 
 - (BOOL)fileExists:(NSString *)fileNamePath;
 

@@ -298,11 +298,10 @@ static NSString * authPassword          = nil;
                                        url:(NSURL *)url
                                  netserver:(BOOL)netserver
                                    timeout:(NSTimeInterval)timeout {
-
     
     
     NSMutableArray *parameterArray = [NSMutableArray arrayWithCapacity:[parameters count] + 1];
-
+    
     NSString *namespace;
 
     if (netserver) {
@@ -418,7 +417,9 @@ static NSString * authPassword          = nil;
     return request;
 }
 
-- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+
+
+- (NSURLSessionDataTask *)isManagerWithRequest:(NSURLRequest *)request
                                      progress:(MSOProgressBlock)progress
                                   requestType:(kMSOSDKRequestType)requestType
                                       success:(void (^)(NSURLResponse *, id, NSError *))success
@@ -447,6 +448,70 @@ static NSString * authPassword          = nil;
               msosdk_commandWithResponse:sanatizedResponse
               error:&error];
              
+             if (!mso_response) {
+                 success(nil, nil, [NSError mso_internet_login_credientials_invalid]);
+                 [NSError errorHandler:error response:response failure:failure];
+                 return;
+             }
+             
+             if (success) {
+                 success(response, mso_response, nil);
+             }
+             
+         } else if (requestType == kMSOSDKRequestTypeWebserver) {
+             
+             sanatizedResponse = [responseObject sanatizeDataForWebServiceResponse];
+             if (!sanatizedResponse) {
+                 if (success) {
+                     success(response, responseObject, nil);
+                 }
+             } else {
+                 if (success) {
+                     success(response, sanatizedResponse, nil);
+                 }
+             }
+             
+         } else {
+             
+             sanatizedResponse = nil;
+             
+         }
+         
+         
+     }];
+    
+    return task;
+}
+
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                                     progress:(MSOProgressBlock)progress
+                                  requestType:(kMSOSDKRequestType)requestType
+                                      success:(void (^)(NSURLResponse *, id, NSError *))success
+                                      failure:(void (^)(NSURLResponse *, NSError *))failure {
+    
+    NSURLSessionDataTask *task =
+    [self.operation
+     dataTaskWithRequest:request
+     uploadProgress:nil
+     downloadProgress:progress
+     completionHandler:^(NSURLResponse * _Nonnull response, NSData * _Nullable responseObject, NSError * _Nullable error) {
+         
+         if (error) {
+             [NSError errorHandler:error response:response failure:failure];
+             return;
+         }
+         
+         NSString *sanatizedResponse;
+         
+         if (requestType == kMSOSDKRequestTypeNetserver) {
+             
+             sanatizedResponse = [responseObject sanatizeDataForNetserverResponse];
+             
+             MSOSDKResponseNetserver *mso_response =
+             [MSOSDKResponseNetserver
+              msosdk_commandWithResponse:sanatizedResponse
+              error:&error];
+
              if (!mso_response) {
                  [NSError errorHandler:error response:response failure:failure];
                  return;

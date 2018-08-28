@@ -16,20 +16,20 @@ NSInteger const kMSOTimeoutVeryLongKey      = 90;
 
 NSInteger const kMSOTimeoutAllImageSyncKey          = kMSOTimeoutVeryLongKey;
 NSInteger const kMSOTimeoutCatalogKey               = kMSOTimeoutShortKey;
-NSInteger const kMSOTimeoutCustomerSaveKey          = kMSOTimeoutLongKey;
-NSInteger const kMSOTimeoutCustomersSyncKey         = kMSOTimeoutVeryLongKey;
-NSInteger const kMSOTimeoutCustomerSearchKey        = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutCustomerSaveKey          = kMSOTimeoutRegularKey;
+NSInteger const kMSOTimeoutCustomersSyncKey         = kMSOTimeoutRegularKey;
+NSInteger const kMSOTimeoutCustomerSearchKey        = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutDataRequestKey           = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutForgotPassword           = kMSOTimeoutShortKey;
 NSInteger const kMSOTimeoutImageSyncKey             = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutImageUploadSyncKey       = kMSOTimeoutLongKey;
 NSInteger const kMSOTimeoutLoginKey                 = kMSOTimeoutShortKey;
 NSInteger const kMSOTimeoutPingKey                  = kMSOTimeoutVeryShortKey;
-NSInteger const kMSOTimeoutProductsSyncKey          = kMSOTimeoutVeryLongKey;
+NSInteger const kMSOTimeoutProductsSyncKey          = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutPurchaseHistoryKey       = kMSOTimeoutLongKey;
 NSInteger const kMSOTimeoutRetrieveSalesOrderKey    = kMSOTimeoutLongKey;
 NSInteger const kMSOTimeoutRegistrationKey          = kMSOTimeoutLongKey;
-NSInteger const kMSOTimeoutSalesOrderKey            = kMSOTimeoutLongKey;
+NSInteger const kMSOTimeoutSalesOrderKey            = kMSOTimeoutRegularKey;
 NSInteger const kMSOTimeoutScannerKey               = kMSOTimeoutVeryShortKey;
 NSInteger const kMSOTimeoutSettingsSyncKey          = kMSOTimeoutVeryLongKey;
 

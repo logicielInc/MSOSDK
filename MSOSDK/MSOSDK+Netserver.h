@@ -49,6 +49,12 @@
                                              success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverLogin * _Nonnull responseObject))success
                                              failure:(_Nullable MSOFailureBlock)failure;
 
+
+- (nonnull NSURLSessionDataTask *)_msoNetserverIsManager:(nullable NSString *)username
+                                            password:(nullable NSString *)password
+                                             success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverLogin * _Nonnull responseObject))success
+                                             failure:(_Nullable MSOFailureBlock)failure;
+
 /**
  Creates an `NSURLSessionDataTask` sends a request to netserver to logout
  
@@ -121,6 +127,12 @@
                                                         failure:(_Nullable MSOFailureBlock)failure;
 
 
+- (nonnull NSURLSessionDataTask *)_msoNetserverDownloadProductsP002:(nullable NSString *)username
+                                                 searchTerm:(nullable NSString *)searchTerm
+                                                  companyId:(nullable NSString *)companyId
+                                                 searchType:(kMSOProductSearchType)searchType
+                                                    success:(void (^ _Nullable)(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverQueryProducts * _Nonnull responseObject))success
+                                                    failure:(_Nullable MSOFailureBlock)failure;
 /**
  <#Description#>
 
@@ -333,7 +345,7 @@
  @return `NSURLSessionDataTask`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverUpdateCustomerAddress:(nullable NSString *)username
-                                                         companyName:(nullable NSString *)companyName
+                                                         companyID:(nullable NSString *)companyID
                                                        accountNumber:(nullable NSString *)accountNumber
                                                                 name:(nullable NSString *)name
                                                          contactName:(nullable NSString *)contactName
