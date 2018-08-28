@@ -345,7 +345,7 @@
  @return `NSURLSessionDataTask`
  */
 - (nonnull NSURLSessionDataTask *)_msoNetserverUpdateCustomerAddress:(nullable NSString *)username
-                                                         companyName:(nullable NSString *)companyName
+                                                         companyID:(nullable NSString *)companyID
                                                        accountNumber:(nullable NSString *)accountNumber
                                                                 name:(nullable NSString *)name
                                                          contactName:(nullable NSString *)contactName

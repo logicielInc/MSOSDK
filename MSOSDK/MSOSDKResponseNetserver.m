@@ -759,6 +759,9 @@
     NSString *quantityItemLevel = [displayFormatParameters mso_safeObjectAtIndex:2];
     _formatterQuantityItemLevel = [self returnParsedFormatter:quantityItemLevel currency:NO];
     
+    NSString *formatterItemDiscount = [displayFormatParameters mso_safeObjectAtIndex:4];
+    _formatterItemDiscount = [self returnParsedFormatter:formatterItemDiscount currency:NO];
+    
     NSString *quantityTotal = [displayFormatParameters mso_safeObjectAtIndex:3];
     _formatterQuantityTotal = [self returnParsedFormatter:quantityTotal currency:NO];
     

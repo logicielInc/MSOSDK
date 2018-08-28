@@ -1155,7 +1155,7 @@
 }
 
 - (NSURLSessionDataTask *)_msoNetserverUpdateCustomerAddress:(NSString *)username
-                                                 companyName:(NSString *)companyName
+                                                 companyID:(NSString *)companyID
                                                accountNumber:(NSString *)accountNumber
                                                         name:(NSString *)name
                                                  contactName:(NSString *)contactName
@@ -1220,7 +1220,7 @@
     [@"_C004"
      mso_build_command:@[username,
                          @"Update Customer Information",
-                         companyName,
+                         companyID,
                          accountNumber,
                          com]];
     

@@ -292,6 +292,7 @@ typedef NS_ENUM(NSInteger, kMSOSDKResponseNetserverSettingsBehaviorWhenEnteringI
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterWeightItemLevel;
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterWeightTotal;
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeItemLevel;
+@property (strong, nonatomic, nullable) NSNumberFormatter *formatterItemDiscount;
 @property (strong, nonatomic, nullable) NSNumberFormatter *formatterVolumeTotal;
 
 /**
