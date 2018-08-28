@@ -262,7 +262,11 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = jsetting32;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 822TXGJNLG;
+					};
 					6003F5AD195388D20070C39A = {
+						DevelopmentTeam = 822TXGJNLG;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -551,6 +555,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 822TXGJNLG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MSOSDK/MSOSDK-Prefix.pch";
 				INFOPLIST_FILE = "MSOSDK/MSOSDK-Info.plist";
@@ -568,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 822TXGJNLG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MSOSDK/MSOSDK-Prefix.pch";
 				INFOPLIST_FILE = "MSOSDK/MSOSDK-Info.plist";
@@ -584,6 +590,7 @@
 			baseConfigurationReference = D3AFFE09C1645E10C444A47B /* Pods-MSOSDK_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 822TXGJNLG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -608,6 +615,7 @@
 			baseConfigurationReference = 07B5D071A5F7E8C08F017886 /* Pods-MSOSDK_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 822TXGJNLG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
