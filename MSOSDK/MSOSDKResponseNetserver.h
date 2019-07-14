@@ -15,8 +15,6 @@
  */
 @interface MSOSDKResponseNetserver : NSObject
 
-- (nullable instancetype)init NS_UNAVAILABLE;
-
 - (nullable instancetype)initWithResponseObject:(nonnull MSOSDKResponseNetserver *)responseObject error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 /**
