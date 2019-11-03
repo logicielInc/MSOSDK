@@ -9,17 +9,9 @@
 #import "AFNetworking/AFNetworking.h"
 
 #import "MSOSDKConstants.h"
-#import "GRRequestsManager.h"
 
 #import "MSOSDKResponseNetserver.h"
 #import "MSOSDKResponseWebserver.h"
-
-#import "NSString+MSOSDKAdditions.h"
-#import "NSError+MSOSDKAdditions.h"
-#import "NSURLRequest+MSOSDKAdditions.h"
-#import "NSDateFormatter+MSOSDKAdditions.h"
-#import "NSURL+MSOSDKAdditions.h"
-#import "NSData+MSOSDKAdditions.h"
 
 @class MSOSoapParameter;
 
@@ -27,12 +19,6 @@
  `MSOSDK` adopts `NSObject` and is the master object for all Logiciel web operations
  */
 @interface MSOSDK : NSObject
-
-/**
- A `GRRequestsManager` object that is used for fetching all file listings within an FTP directory for fetching all photo image references.
- */
-@property (strong, nonatomic, nullable, readwrite) GRRequestsManager *requestsManager;
-
 
 /**
  A shared `AFHTTPSessionManager` object that handles all requests

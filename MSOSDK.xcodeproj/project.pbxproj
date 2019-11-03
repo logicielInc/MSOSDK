@@ -64,13 +64,13 @@
 		80F579A1236F78C400034088 /* MSOSDK+Netserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */; };
 		80F579A2236F78C400034088 /* MSOSDK+Webserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */; };
 		80F579A3236F78C400034088 /* MSOSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57903236F6D0C00034088 /* MSOSDKConstants.h */; };
-		80F579A4236F78C400034088 /* MSOSDKMaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57900236F6D0B00034088 /* MSOSDKMaster.h */; };
 		80F579A5236F78D100034088 /* MSOSDKNetserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57936236F6E4100034088 /* MSOSDKNetserverTests.m */; };
 		80F579A6236F78D100034088 /* MSOSDKWebserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57937236F6E4100034088 /* MSOSDKWebserverTests.m */; };
 		80F579A7236F78D100034088 /* MSOTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57934236F6E4100034088 /* MSOTestCase.m */; };
 		80F579A9236F791600034088 /* MSOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F579A8236F791600034088 /* MSOSDK.h */; };
 		80F579AC236F795500034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
 		80F579B1236F79FB00034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
+		80F579B2236F892300034088 /* MSOSDKMaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57900236F6D0B00034088 /* MSOSDKMaster.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,18 +194,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80F578A5236F6CE400034088 /* External */ = {
+		80F57946236F6F7D00034088 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				80F57945236F6F4100034088 /* GoldRaccoon */,
-				80F57944236F6F3600034088 /* SMXMLDocument */,
+				80F57947236F6F7D00034088 /* AFNetworking.framework */,
 			);
-			path = External;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		80F5793C236F6E5200034088 /* Extensions */ = {
+		80F57955236F787600034088 /* MSOSDK */ = {
 			isa = PBXGroup;
 			children = (
+				80F579A8236F791600034088 /* MSOSDK.h */,
+				80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */,
+				80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */,
+				80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */,
+				80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */,
+				80F57903236F6D0C00034088 /* MSOSDKConstants.h */,
+				80F57906236F6D0C00034088 /* MSOSDKConstants.m */,
+				80F57900236F6D0B00034088 /* MSOSDKMaster.h */,
+				80F578FE236F6D0B00034088 /* MSOSDKMaster.m */,
+				80F57913236F6D0D00034088 /* MSOSDKResponseNetserver.h */,
+				80F578F8236F6D0B00034088 /* MSOSDKResponseNetserver.m */,
+				80F578FC236F6D0B00034088 /* MSOSDKResponseWebserver.h */,
+				80F57905236F6D0C00034088 /* MSOSDKResponseWebserver.m */,
 				80F57907236F6D0C00034088 /* NSArray+MSOSDKAdditions.h */,
 				80F57908236F6D0C00034088 /* NSArray+MSOSDKAdditions.m */,
 				80F578FA236F6D0B00034088 /* NSData+MSOSDKAdditions.h */,
@@ -224,35 +236,6 @@
 				80F578FD236F6D0B00034088 /* NSURL+MSOSDKAdditions.m */,
 				80F57901236F6D0B00034088 /* NSURLRequest+MSOSDKAdditions.h */,
 				80F5790C236F6D0C00034088 /* NSURLRequest+MSOSDKAdditions.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		80F5793D236F6E5A00034088 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				80F57913236F6D0D00034088 /* MSOSDKResponseNetserver.h */,
-				80F578F8236F6D0B00034088 /* MSOSDKResponseNetserver.m */,
-				80F578FC236F6D0B00034088 /* MSOSDKResponseWebserver.h */,
-				80F57905236F6D0C00034088 /* MSOSDKResponseWebserver.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		80F57944236F6F3600034088 /* SMXMLDocument */ = {
-			isa = PBXGroup;
-			children = (
-				80F57942236F6F3400034088 /* SMXMLDocument.h */,
-				80F57941236F6F3400034088 /* SMXMLDocument.m */,
-				80F5793F236F6F2A00034088 /* SMXMLDocumentResponseSerializer.h */,
-				80F5793E236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m */,
-			);
-			path = SMXMLDocument;
-			sourceTree = "<group>";
-		};
-		80F57945236F6F4100034088 /* GoldRaccoon */ = {
-			isa = PBXGroup;
-			children = (
 				80F578AD236F6CED00034088 /* GRCreateDirectoryRequest.h */,
 				80F578BB236F6CEE00034088 /* GRCreateDirectoryRequest.m */,
 				80F578A9236F6CED00034088 /* GRDeleteRequest.h */,
@@ -275,33 +258,10 @@
 				80F578AF236F6CED00034088 /* GRStreamInfo.m */,
 				80F578BA236F6CEE00034088 /* GRUploadRequest.h */,
 				80F578AA236F6CED00034088 /* GRUploadRequest.m */,
-			);
-			path = GoldRaccoon;
-			sourceTree = "<group>";
-		};
-		80F57946236F6F7D00034088 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				80F57947236F6F7D00034088 /* AFNetworking.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		80F57955236F787600034088 /* MSOSDK */ = {
-			isa = PBXGroup;
-			children = (
-				80F579A8236F791600034088 /* MSOSDK.h */,
-				80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */,
-				80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */,
-				80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */,
-				80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */,
-				80F57903236F6D0C00034088 /* MSOSDKConstants.h */,
-				80F57906236F6D0C00034088 /* MSOSDKConstants.m */,
-				80F57900236F6D0B00034088 /* MSOSDKMaster.h */,
-				80F578FE236F6D0B00034088 /* MSOSDKMaster.m */,
-				80F5793D236F6E5A00034088 /* Models */,
-				80F5793C236F6E5200034088 /* Extensions */,
-				80F578A5236F6CE400034088 /* External */,
+				80F57942236F6F3400034088 /* SMXMLDocument.h */,
+				80F57941236F6F3400034088 /* SMXMLDocument.m */,
+				80F5793F236F6F2A00034088 /* SMXMLDocumentResponseSerializer.h */,
+				80F5793E236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m */,
 				80F57957236F787600034088 /* Info.plist */,
 			);
 			path = MSOSDK;
@@ -341,7 +301,7 @@
 				80F57985236F78B200034088 /* GRCreateDirectoryRequest.h in Headers */,
 				80F57979236F78AD00034088 /* NSDateFormatter+MSOSDKAdditions.h in Headers */,
 				80F57987236F78B200034088 /* GRDeleteRequest.h in Headers */,
-				80F579A4236F78C400034088 /* MSOSDKMaster.h in Headers */,
+				80F579B2236F892300034088 /* MSOSDKMaster.h in Headers */,
 				80F57989236F78B200034088 /* GRDownloadRequest.h in Headers */,
 				80F5799B236F78BA00034088 /* SMXMLDocument.h in Headers */,
 				80F579A9236F791600034088 /* MSOSDK.h in Headers */,

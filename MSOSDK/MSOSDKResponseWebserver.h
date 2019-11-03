@@ -10,10 +10,6 @@
 
 #import "MSOSDKConstants.h"
 
-#import "NSString+MSOSDKAdditions.h"
-#import "NSError+MSOSDKAdditions.h"
-#import "NSArray+MSOSDKAdditions.h"
-
 @interface MSOSDKResponseWebserver : NSObject
 
 + (nullable instancetype)msosdk_commandWithResponse:(nullable NSString *)response

@@ -8,6 +8,10 @@
 
 #import "MSOSDKResponseWebserver.h"
 
+#import "NSString+MSOSDKAdditions.h"
+#import "NSError+MSOSDKAdditions.h"
+#import "NSArray+MSOSDKAdditions.h"
+
 @implementation MSOSDKResponseWebserver
 
 + (instancetype)msosdk_commandWithResponse:(NSString *)response command:(NSString *)command error:(NSError * _Nullable __autoreleasing *)error {

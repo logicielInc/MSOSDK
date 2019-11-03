@@ -8,6 +8,7 @@
 
 #import "MSOSDKResponseNetserver.h"
 
+#import "NSError+MSOSDKAdditions.h"
 #import "NSArray+MSOSDKAdditions.h"
 #import "NSString+MSOSDKAdditions.h"
 

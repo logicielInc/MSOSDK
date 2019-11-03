@@ -8,6 +8,13 @@
 
 #import "MSOSDKMaster.h"
 
+#import "NSString+MSOSDKAdditions.h"
+#import "NSError+MSOSDKAdditions.h"
+#import "NSURLRequest+MSOSDKAdditions.h"
+#import "NSDateFormatter+MSOSDKAdditions.h"
+#import "NSURL+MSOSDKAdditions.h"
+#import "NSData+MSOSDKAdditions.h"
+
 static NSString * netserverIpAddress    = nil;
 static NSString * deviceName            = nil;
 static NSString * deviceIPAddress       = nil;

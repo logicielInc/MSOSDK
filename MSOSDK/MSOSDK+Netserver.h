@@ -10,9 +10,6 @@
 
 #import "MSOSDKResponseNetserver.h"
 
-#import "NSString+MSOSDKAdditions.h"
-#import "NSArray+MSOSDKAdditions.h"
-
 @interface MSOSDK (Netserver)
 
 ///---------------------

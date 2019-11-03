@@ -8,14 +8,9 @@
 
 #import "MSOSDKMaster.h"
 
-#import "GRRequestProtocol.h"
 #import "MSOSDKResponseWebserver.h"
 
-#import "NSURL+MSOSDKAdditions.h"
-#import "NSString+MSOSDKAdditions.h"
-#import "NSDate+MSOSDKAdditions.h"
-
-@interface MSOSDK (Webserver) <GRRequestsManagerDelegate>
+@interface MSOSDK (Webserver)
 
 #pragma mark - LogicielCustomer
 

@@ -8,6 +8,10 @@
 
 #import "MSOSDK+Netserver.h"
 
+#import "NSError+MSOSDKAdditions.h"
+#import "NSString+MSOSDKAdditions.h"
+#import "NSArray+MSOSDKAdditions.h"
+
 @implementation MSOSDK (Netserver)
 
 #pragma mark - Connection

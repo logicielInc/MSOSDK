@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NSError+MSOSDKAdditions.h"
-
 /**
  `MSOSDKResponseNetserver` adopts `NSObject` and is the general response object that all Netserver response objects adopt.
  */

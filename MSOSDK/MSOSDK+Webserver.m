@@ -9,6 +9,21 @@
 
 #import "MSOSDK+Webserver.h"
 
+#import "GRRequestProtocol.h"
+#import "GRRequestsManager.h"
+
+#import "NSURL+MSOSDKAdditions.h"
+#import "NSString+MSOSDKAdditions.h"
+#import "NSDate+MSOSDKAdditions.h"
+#import "NSError+MSOSDKAdditions.h"
+
+@interface MSOSDK (Webserver) <GRRequestsManagerDelegate>
+/**
+ A `GRRequestsManager` object that is used for fetching all file listings within an FTP directory for fetching all photo image references.
+ */
+@property (strong, nonatomic, nullable, readwrite) GRRequestsManager *requestsManager;
+@end
+
 @implementation MSOSDK (Webserver)
 
 #pragma mark - Web Service Credentials

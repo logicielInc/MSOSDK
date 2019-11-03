@@ -8,6 +8,8 @@
 
 #import "MSOTestCase.h"
 
+#import "NSError+MSOSDKAdditions.h"
+
 @interface MSOSDKNetserverTests : MSOTestCase
 
 @end
