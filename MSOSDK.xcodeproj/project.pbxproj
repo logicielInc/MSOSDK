@@ -40,6 +40,7 @@
 		80F57940236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5793E236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m */; };
 		80F57943236F6F3400034088 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57941236F6F3400034088 /* SMXMLDocument.m */; };
 		80F57948236F6F7D00034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
+		80F5794E236F750200034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80F5794E236F750200034088 /* AFNetworking.framework in Frameworks */,
 				80F5792D236F6D9400034088 /* libMSOSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,6 +629,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 822TXGJNLG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MSOSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -644,6 +650,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 822TXGJNLG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MSOSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

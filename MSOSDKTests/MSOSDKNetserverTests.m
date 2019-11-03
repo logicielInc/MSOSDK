@@ -1286,7 +1286,7 @@
     
     MSOSDK *sdk = [MSOSDK sharedSession];
     
-    __block MSOSDKResponseNetserverSaveCustomer *mso_response = nil;
+    __block MSOSDKResponseNetserverUpdateCustomer *mso_response = nil;
     __block NSError *err = nil;
     
     NSString *account_no;
@@ -1299,7 +1299,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
-     companyName:@"Default Company"
+     companyID:@"Default Company"
      accountNumber:account_no
      name:@"johns test customer"
      contactName:@"John Setting Update"
@@ -1316,19 +1316,18 @@
      rep:@"Updated Rep"
      discount:@1
      priceLevel:@5
-     billing:YES
-     success:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject) {
-         
-         mso_response = responseObject;
-         [expectation fulfill];
-         
-     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nullable error) {
+     billing:true
+     success:^(NSURLResponse * _Nonnull response, MSOSDKResponseNetserverUpdateCustomer * _Nonnull responseObject) {
 
-         err = error;
-         [expectation fulfill];
+       mso_response = responseObject;
+       [expectation fulfill];
+
+     } progress:nil failure:^(NSURLResponse * _Nonnull response, NSError * _Nonnull error) {
+       err = error;
+       [expectation fulfill];
 
      }];
-    
+
     [task resume];
     
     [self waitForExpectationsWithLongTimeout];
@@ -1352,7 +1351,7 @@
     
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
-     companyName:@"Default Company"
+     companyID:@"Default Company"
      accountNumber:@"1301H0127as"
      name:@"johns test customer"
      contactName:@"John Setting Update"
@@ -1411,7 +1410,7 @@
     NSURLSessionDataTask *task =
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
-     companyName:@"Default Company"
+     companyID:@"Default Company"
      accountNumber:account_no
      name:@"johns test customer"
      contactName:@"John Setting Update (w123)"
@@ -1463,7 +1462,7 @@
     
     [sdk
      _msoNetserverUpdateCustomerAddress:@"john"
-     companyName:@"Default Company"
+     companyID:@"Default Company"
      accountNumber:@"1301H0127asd-1"
      name:@"johns test customer"
      contactName:@"John Setting Update"

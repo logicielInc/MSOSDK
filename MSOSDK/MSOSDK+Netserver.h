@@ -321,7 +321,7 @@
  If the ship to store is not appended, the result will be updating the bill to address / default ship to
 
  @param username The user id of the current rep updating the customer
- @param companyName The customer address Company Name
+ @param companyID The customer address Company Name
  @param accountNumber The customer address ID to update
  @param name The name of the customer's address. If this is a billing address, the Customer Name field will be updated. If shipping, the Name field will be updated.
  @param contactName The contact name of the customer's address.
