@@ -1,13 +1,23 @@
 //
 //  MSOSDK.h
-//  MSOSDK
+//  Pods
 //
-//  Created by Setting, John on 11/3/19.
-//  Copyright © 2019 Logiciel Inc. All rights reserved.
+//  Created by John Setting on 3/9/17.
+//
 //
 
 #import <Foundation/Foundation.h>
 
-@interface MSOSDK : NSObject
+#ifndef _MSOSDK_
 
-@end
+    #define _MSOSDK_
+
+    #import "MSOSDK+Netserver.h"
+    #import "MSOSDK+Webserver.h"
+
+    #import "MSOSDKResponseNetserver.h"
+    #import "MSOSDKResponseWebserver.h"
+
+    #import "MSOSDKConstants.h"
+
+#endif /* MSOSDK_h */
