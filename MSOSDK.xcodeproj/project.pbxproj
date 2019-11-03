@@ -7,66 +7,83 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80F578BC236F6CEE00034088 /* GRDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578A7236F6CED00034088 /* GRDownloadRequest.m */; };
-		80F578BD236F6CEE00034088 /* GRError.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578A8236F6CED00034088 /* GRError.m */; };
-		80F578BE236F6CEE00034088 /* GRUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578AA236F6CED00034088 /* GRUploadRequest.m */; };
-		80F578BF236F6CEE00034088 /* GRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578AF236F6CED00034088 /* GRStreamInfo.m */; };
-		80F578C0236F6CEE00034088 /* GRQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B0236F6CED00034088 /* GRQueue.m */; };
-		80F578C1236F6CEE00034088 /* GRListingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B1236F6CED00034088 /* GRListingRequest.m */; };
-		80F578C2236F6CEE00034088 /* GRDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B3236F6CED00034088 /* GRDeleteRequest.m */; };
-		80F578C3236F6CEE00034088 /* GRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B4236F6CED00034088 /* GRRequest.m */; };
-		80F578C4236F6CEE00034088 /* GRRequestsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B8236F6CEE00034088 /* GRRequestsManager.m */; };
-		80F578C5236F6CEE00034088 /* GRCreateDirectoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578BB236F6CEE00034088 /* GRCreateDirectoryRequest.m */; };
-		80F57914236F6D0D00034088 /* MSOSDKResponseNetserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578F8236F6D0B00034088 /* MSOSDKResponseNetserver.m */; };
-		80F57915236F6D0D00034088 /* NSError+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578F9236F6D0B00034088 /* NSError+MSOSDKAdditions.m */; };
-		80F57916236F6D0D00034088 /* NSURL+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FD236F6D0B00034088 /* NSURL+MSOSDKAdditions.m */; };
-		80F57917236F6D0D00034088 /* MSOSDKMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FE236F6D0B00034088 /* MSOSDKMaster.m */; };
-		80F57918236F6D0D00034088 /* NSDateFormatter+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FF236F6D0B00034088 /* NSDateFormatter+MSOSDKAdditions.m */; };
-		80F57919236F6D0D00034088 /* MSOSDKResponseWebserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57905236F6D0C00034088 /* MSOSDKResponseWebserver.m */; };
-		80F5791A236F6D0D00034088 /* MSOSDKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57906236F6D0C00034088 /* MSOSDKConstants.m */; };
-		80F5791B236F6D0D00034088 /* NSArray+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57908236F6D0C00034088 /* NSArray+MSOSDKAdditions.m */; };
-		80F5791C236F6D0D00034088 /* MSOSDK+Webserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */; };
-		80F5791D236F6D0D00034088 /* NSMutableString+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790B236F6D0C00034088 /* NSMutableString+MSOSDKAdditions.m */; };
-		80F5791E236F6D0D00034088 /* NSURLRequest+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790C236F6D0C00034088 /* NSURLRequest+MSOSDKAdditions.m */; };
-		80F5791F236F6D0D00034088 /* MSOSDK+Netserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */; };
-		80F57920236F6D0D00034088 /* NSString+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790F236F6D0D00034088 /* NSString+MSOSDKAdditions.m */; };
-		80F57921236F6D0D00034088 /* NSData+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57910236F6D0D00034088 /* NSData+MSOSDKAdditions.m */; };
-		80F57922236F6D0D00034088 /* NSDate+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57911236F6D0D00034088 /* NSDate+MSOSDKAdditions.m */; };
-		80F5792D236F6D9400034088 /* libMSOSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57899236F6CC500034088 /* libMSOSDK.a */; };
-		80F57938236F6E4100034088 /* MSOTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57934236F6E4100034088 /* MSOTestCase.m */; };
-		80F57939236F6E4100034088 /* passed_xml_order_escaping.xml in Resources */ = {isa = PBXBuildFile; fileRef = 80F57935236F6E4100034088 /* passed_xml_order_escaping.xml */; };
-		80F5793A236F6E4100034088 /* MSOSDKNetserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57936236F6E4100034088 /* MSOSDKNetserverTests.m */; };
-		80F5793B236F6E4100034088 /* MSOSDKWebserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57937236F6E4100034088 /* MSOSDKWebserverTests.m */; };
-		80F57940236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5793E236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m */; };
-		80F57943236F6F3400034088 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57941236F6F3400034088 /* SMXMLDocument.m */; };
-		80F57948236F6F7D00034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
-		80F5794E236F750200034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
+		80F5795D236F787600034088 /* MSOSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57954236F787600034088 /* MSOSDK.framework */; };
+		80F57962236F787600034088 /* MSOSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57961236F787600034088 /* MSOSDKTests.m */; };
+		80F5796B236F789D00034088 /* MSOSDK+Netserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */; };
+		80F5796C236F789D00034088 /* MSOSDK+Webserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */; };
+		80F5796D236F789D00034088 /* MSOSDKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57906236F6D0C00034088 /* MSOSDKConstants.m */; };
+		80F5796E236F789D00034088 /* MSOSDKMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FE236F6D0B00034088 /* MSOSDKMaster.m */; };
+		80F57971236F78A400034088 /* MSOSDKResponseNetserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578F8236F6D0B00034088 /* MSOSDKResponseNetserver.m */; };
+		80F57972236F78A400034088 /* MSOSDKResponseWebserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57905236F6D0C00034088 /* MSOSDKResponseWebserver.m */; };
+		80F57973236F78AD00034088 /* NSArray+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57907236F6D0C00034088 /* NSArray+MSOSDKAdditions.h */; };
+		80F57974236F78AD00034088 /* NSArray+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57908236F6D0C00034088 /* NSArray+MSOSDKAdditions.m */; };
+		80F57975236F78AD00034088 /* NSData+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578FA236F6D0B00034088 /* NSData+MSOSDKAdditions.h */; };
+		80F57976236F78AD00034088 /* NSData+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57910236F6D0D00034088 /* NSData+MSOSDKAdditions.m */; };
+		80F57977236F78AD00034088 /* NSDate+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578F7236F6D0B00034088 /* NSDate+MSOSDKAdditions.h */; };
+		80F57978236F78AD00034088 /* NSDate+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57911236F6D0D00034088 /* NSDate+MSOSDKAdditions.m */; };
+		80F57979236F78AD00034088 /* NSDateFormatter+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F5790D236F6D0D00034088 /* NSDateFormatter+MSOSDKAdditions.h */; };
+		80F5797A236F78AD00034088 /* NSDateFormatter+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FF236F6D0B00034088 /* NSDateFormatter+MSOSDKAdditions.m */; };
+		80F5797B236F78AD00034088 /* NSError+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578F6236F6D0B00034088 /* NSError+MSOSDKAdditions.h */; };
+		80F5797C236F78AD00034088 /* NSError+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578F9236F6D0B00034088 /* NSError+MSOSDKAdditions.m */; };
+		80F5797D236F78AD00034088 /* NSMutableString+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57902236F6D0C00034088 /* NSMutableString+MSOSDKAdditions.h */; };
+		80F5797E236F78AD00034088 /* NSMutableString+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790B236F6D0C00034088 /* NSMutableString+MSOSDKAdditions.m */; };
+		80F5797F236F78AD00034088 /* NSString+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57904236F6D0C00034088 /* NSString+MSOSDKAdditions.h */; };
+		80F57980236F78AD00034088 /* NSString+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790F236F6D0D00034088 /* NSString+MSOSDKAdditions.m */; };
+		80F57981236F78AD00034088 /* NSURL+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57912236F6D0D00034088 /* NSURL+MSOSDKAdditions.h */; };
+		80F57982236F78AD00034088 /* NSURL+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578FD236F6D0B00034088 /* NSURL+MSOSDKAdditions.m */; };
+		80F57983236F78AD00034088 /* NSURLRequest+MSOSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57901236F6D0B00034088 /* NSURLRequest+MSOSDKAdditions.h */; };
+		80F57984236F78AD00034088 /* NSURLRequest+MSOSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5790C236F6D0C00034088 /* NSURLRequest+MSOSDKAdditions.m */; };
+		80F57985236F78B200034088 /* GRCreateDirectoryRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578AD236F6CED00034088 /* GRCreateDirectoryRequest.h */; };
+		80F57986236F78B200034088 /* GRCreateDirectoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578BB236F6CEE00034088 /* GRCreateDirectoryRequest.m */; };
+		80F57987236F78B200034088 /* GRDeleteRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578A9236F6CED00034088 /* GRDeleteRequest.h */; };
+		80F57988236F78B200034088 /* GRDeleteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B3236F6CED00034088 /* GRDeleteRequest.m */; };
+		80F57989236F78B200034088 /* GRDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578AE236F6CED00034088 /* GRDownloadRequest.h */; };
+		80F5798A236F78B200034088 /* GRDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578A7236F6CED00034088 /* GRDownloadRequest.m */; };
+		80F5798B236F78B200034088 /* GRError.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578AB236F6CED00034088 /* GRError.h */; };
+		80F5798C236F78B200034088 /* GRError.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578A8236F6CED00034088 /* GRError.m */; };
+		80F5798D236F78B200034088 /* GRListingRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578B6236F6CED00034088 /* GRListingRequest.h */; };
+		80F5798E236F78B200034088 /* GRListingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B1236F6CED00034088 /* GRListingRequest.m */; };
+		80F5798F236F78B200034088 /* GRQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578B5236F6CED00034088 /* GRQueue.h */; };
+		80F57990236F78B200034088 /* GRQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B0236F6CED00034088 /* GRQueue.m */; };
+		80F57991236F78B200034088 /* GRRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578B2236F6CED00034088 /* GRRequest.h */; };
+		80F57992236F78B200034088 /* GRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B4236F6CED00034088 /* GRRequest.m */; };
+		80F57993236F78B200034088 /* GRRequestProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578A6236F6CED00034088 /* GRRequestProtocol.h */; };
+		80F57994236F78B200034088 /* GRRequestsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578B7236F6CEE00034088 /* GRRequestsManager.h */; };
+		80F57995236F78B200034088 /* GRRequestsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578B8236F6CEE00034088 /* GRRequestsManager.m */; };
+		80F57996236F78B200034088 /* GRRequestsManagerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578AC236F6CED00034088 /* GRRequestsManagerProtocol.h */; };
+		80F57997236F78B200034088 /* GRStreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578B9236F6CEE00034088 /* GRStreamInfo.h */; };
+		80F57998236F78B200034088 /* GRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578AF236F6CED00034088 /* GRStreamInfo.m */; };
+		80F57999236F78B200034088 /* GRUploadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578BA236F6CEE00034088 /* GRUploadRequest.h */; };
+		80F5799A236F78B200034088 /* GRUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F578AA236F6CED00034088 /* GRUploadRequest.m */; };
+		80F5799B236F78BA00034088 /* SMXMLDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57942236F6F3400034088 /* SMXMLDocument.h */; };
+		80F5799C236F78BA00034088 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57941236F6F3400034088 /* SMXMLDocument.m */; };
+		80F5799D236F78BA00034088 /* SMXMLDocumentResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F5793F236F6F2A00034088 /* SMXMLDocumentResponseSerializer.h */; };
+		80F5799E236F78BA00034088 /* SMXMLDocumentResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F5793E236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m */; };
+		80F5799F236F78C100034088 /* MSOSDKResponseNetserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57913236F6D0D00034088 /* MSOSDKResponseNetserver.h */; };
+		80F579A0236F78C100034088 /* MSOSDKResponseWebserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578FC236F6D0B00034088 /* MSOSDKResponseWebserver.h */; };
+		80F579A1236F78C400034088 /* MSOSDK+Netserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */; };
+		80F579A2236F78C400034088 /* MSOSDK+Webserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */; };
+		80F579A3236F78C400034088 /* MSOSDKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57903236F6D0C00034088 /* MSOSDKConstants.h */; };
+		80F579A4236F78C400034088 /* MSOSDKMaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F57900236F6D0B00034088 /* MSOSDKMaster.h */; };
+		80F579A5236F78D100034088 /* MSOSDKNetserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57936236F6E4100034088 /* MSOSDKNetserverTests.m */; };
+		80F579A6236F78D100034088 /* MSOSDKWebserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57937236F6E4100034088 /* MSOSDKWebserverTests.m */; };
+		80F579A7236F78D100034088 /* MSOTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F57934236F6E4100034088 /* MSOTestCase.m */; };
+		80F579A9236F791600034088 /* MSOSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F579A8236F791600034088 /* MSOSDK.h */; };
+		80F579AC236F795500034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
+		80F579B1236F79FB00034088 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F57947236F6F7D00034088 /* AFNetworking.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		80F5792E236F6D9400034088 /* PBXContainerItemProxy */ = {
+		80F5795E236F787600034088 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 80F57891236F6CC500034088 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 80F57898236F6CC500034088;
+			remoteGlobalIDString = 80F57953236F787600034088;
 			remoteInfo = MSOSDK;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		80F57897236F6CC500034088 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		80F57899236F6CC500034088 /* libMSOSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMSOSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F578A6236F6CED00034088 /* GRRequestProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRequestProtocol.h; sourceTree = "<group>"; };
 		80F578A7236F6CED00034088 /* GRDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDownloadRequest.m; sourceTree = "<group>"; };
 		80F578A8236F6CED00034088 /* GRError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRError.m; sourceTree = "<group>"; };
@@ -95,7 +112,6 @@
 		80F578F8236F6D0B00034088 /* MSOSDKResponseNetserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOSDKResponseNetserver.m; sourceTree = "<group>"; };
 		80F578F9236F6D0B00034088 /* NSError+MSOSDKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MSOSDKAdditions.m"; sourceTree = "<group>"; };
 		80F578FA236F6D0B00034088 /* NSData+MSOSDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MSOSDKAdditions.h"; sourceTree = "<group>"; };
-		80F578FB236F6D0B00034088 /* MSOSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOSDK.h; sourceTree = "<group>"; };
 		80F578FC236F6D0B00034088 /* MSOSDKResponseWebserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOSDKResponseWebserver.h; sourceTree = "<group>"; };
 		80F578FD236F6D0B00034088 /* NSURL+MSOSDKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MSOSDKAdditions.m"; sourceTree = "<group>"; };
 		80F578FE236F6D0B00034088 /* MSOSDKMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOSDKMaster.m; sourceTree = "<group>"; };
@@ -120,8 +136,6 @@
 		80F57911236F6D0D00034088 /* NSDate+MSOSDKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MSOSDKAdditions.m"; sourceTree = "<group>"; };
 		80F57912236F6D0D00034088 /* NSURL+MSOSDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MSOSDKAdditions.h"; sourceTree = "<group>"; };
 		80F57913236F6D0D00034088 /* MSOSDKResponseNetserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOSDKResponseNetserver.h; sourceTree = "<group>"; };
-		80F57928236F6D9300034088 /* MSOSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MSOSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		80F5792C236F6D9400034088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F57933236F6E4100034088 /* MSOTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOTestCase.h; sourceTree = "<group>"; };
 		80F57934236F6E4100034088 /* MSOTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOTestCase.m; sourceTree = "<group>"; };
 		80F57935236F6E4100034088 /* passed_xml_order_escaping.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = passed_xml_order_escaping.xml; sourceTree = "<group>"; };
@@ -132,23 +146,29 @@
 		80F57941236F6F3400034088 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMXMLDocument.m; sourceTree = "<group>"; };
 		80F57942236F6F3400034088 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMXMLDocument.h; sourceTree = "<group>"; };
 		80F57947236F6F7D00034088 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/iOS/AFNetworking.framework; sourceTree = "<group>"; };
+		80F57954236F787600034088 /* MSOSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSOSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80F57957236F787600034088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80F5795C236F787600034088 /* MSOSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MSOSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80F57961236F787600034088 /* MSOSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSOSDKTests.m; sourceTree = "<group>"; };
+		80F579A8236F791600034088 /* MSOSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSOSDK.h; sourceTree = "<group>"; };
+		80F579AF236F798A00034088 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		80F57896236F6CC500034088 /* Frameworks */ = {
+		80F57951236F787600034088 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F57948236F6F7D00034088 /* AFNetworking.framework in Frameworks */,
+				80F579AC236F795500034088 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		80F57925236F6D9300034088 /* Frameworks */ = {
+		80F57959236F787600034088 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F5794E236F750200034088 /* AFNetworking.framework in Frameworks */,
-				80F5792D236F6D9400034088 /* libMSOSDK.a in Frameworks */,
+				80F579B1236F79FB00034088 /* AFNetworking.framework in Frameworks */,
+				80F5795D236F787600034088 /* MSOSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +178,8 @@
 		80F57890236F6CC500034088 = {
 			isa = PBXGroup;
 			children = (
-				80F5789B236F6CC500034088 /* MSOSDK */,
-				80F57929236F6D9300034088 /* MSOSDKTests */,
+				80F57955236F787600034088 /* MSOSDK */,
+				80F57960236F787600034088 /* MSOSDKTests */,
 				80F5789A236F6CC500034088 /* Products */,
 				80F57946236F6F7D00034088 /* Frameworks */,
 			);
@@ -168,29 +188,10 @@
 		80F5789A236F6CC500034088 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				80F57899236F6CC500034088 /* libMSOSDK.a */,
-				80F57928236F6D9300034088 /* MSOSDKTests.xctest */,
+				80F57954236F787600034088 /* MSOSDK.framework */,
+				80F5795C236F787600034088 /* MSOSDKTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		80F5789B236F6CC500034088 /* MSOSDK */ = {
-			isa = PBXGroup;
-			children = (
-				80F578FB236F6D0B00034088 /* MSOSDK.h */,
-				80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */,
-				80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */,
-				80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */,
-				80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */,
-				80F57903236F6D0C00034088 /* MSOSDKConstants.h */,
-				80F57906236F6D0C00034088 /* MSOSDKConstants.m */,
-				80F57900236F6D0B00034088 /* MSOSDKMaster.h */,
-				80F578FE236F6D0B00034088 /* MSOSDKMaster.m */,
-				80F5793D236F6E5A00034088 /* Models */,
-				80F5793C236F6E5200034088 /* Extensions */,
-				80F578A5236F6CE400034088 /* External */,
-			);
-			path = MSOSDK;
 			sourceTree = "<group>";
 		};
 		80F578A5236F6CE400034088 /* External */ = {
@@ -200,19 +201,6 @@
 				80F57944236F6F3600034088 /* SMXMLDocument */,
 			);
 			path = External;
-			sourceTree = "<group>";
-		};
-		80F57929236F6D9300034088 /* MSOSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				80F57936236F6E4100034088 /* MSOSDKNetserverTests.m */,
-				80F57937236F6E4100034088 /* MSOSDKWebserverTests.m */,
-				80F57933236F6E4100034088 /* MSOTestCase.h */,
-				80F57934236F6E4100034088 /* MSOTestCase.m */,
-				80F57935236F6E4100034088 /* passed_xml_order_escaping.xml */,
-				80F5792C236F6D9400034088 /* Info.plist */,
-			);
-			path = MSOSDKTests;
 			sourceTree = "<group>";
 		};
 		80F5793C236F6E5200034088 /* Extensions */ = {
@@ -299,17 +287,92 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		80F57955236F787600034088 /* MSOSDK */ = {
+			isa = PBXGroup;
+			children = (
+				80F579A8236F791600034088 /* MSOSDK.h */,
+				80F5790A236F6D0C00034088 /* MSOSDK+Netserver.h */,
+				80F5790E236F6D0D00034088 /* MSOSDK+Netserver.m */,
+				80F578F5236F6D0B00034088 /* MSOSDK+Webserver.h */,
+				80F57909236F6D0C00034088 /* MSOSDK+Webserver.m */,
+				80F57903236F6D0C00034088 /* MSOSDKConstants.h */,
+				80F57906236F6D0C00034088 /* MSOSDKConstants.m */,
+				80F57900236F6D0B00034088 /* MSOSDKMaster.h */,
+				80F578FE236F6D0B00034088 /* MSOSDKMaster.m */,
+				80F5793D236F6E5A00034088 /* Models */,
+				80F5793C236F6E5200034088 /* Extensions */,
+				80F578A5236F6CE400034088 /* External */,
+				80F57957236F787600034088 /* Info.plist */,
+			);
+			path = MSOSDK;
+			sourceTree = "<group>";
+		};
+		80F57960236F787600034088 /* MSOSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				80F57936236F6E4100034088 /* MSOSDKNetserverTests.m */,
+				80F57937236F6E4100034088 /* MSOSDKWebserverTests.m */,
+				80F57933236F6E4100034088 /* MSOTestCase.h */,
+				80F57934236F6E4100034088 /* MSOTestCase.m */,
+				80F57935236F6E4100034088 /* passed_xml_order_escaping.xml */,
+				80F57961236F787600034088 /* MSOSDKTests.m */,
+				80F579AF236F798A00034088 /* Info.plist */,
+			);
+			path = MSOSDKTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		80F5794F236F787600034088 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80F57977236F78AD00034088 /* NSDate+MSOSDKAdditions.h in Headers */,
+				80F5797B236F78AD00034088 /* NSError+MSOSDKAdditions.h in Headers */,
+				80F5798B236F78B200034088 /* GRError.h in Headers */,
+				80F57973236F78AD00034088 /* NSArray+MSOSDKAdditions.h in Headers */,
+				80F5797F236F78AD00034088 /* NSString+MSOSDKAdditions.h in Headers */,
+				80F57983236F78AD00034088 /* NSURLRequest+MSOSDKAdditions.h in Headers */,
+				80F57981236F78AD00034088 /* NSURL+MSOSDKAdditions.h in Headers */,
+				80F57996236F78B200034088 /* GRRequestsManagerProtocol.h in Headers */,
+				80F57997236F78B200034088 /* GRStreamInfo.h in Headers */,
+				80F5799F236F78C100034088 /* MSOSDKResponseNetserver.h in Headers */,
+				80F57985236F78B200034088 /* GRCreateDirectoryRequest.h in Headers */,
+				80F57979236F78AD00034088 /* NSDateFormatter+MSOSDKAdditions.h in Headers */,
+				80F57987236F78B200034088 /* GRDeleteRequest.h in Headers */,
+				80F579A4236F78C400034088 /* MSOSDKMaster.h in Headers */,
+				80F57989236F78B200034088 /* GRDownloadRequest.h in Headers */,
+				80F5799B236F78BA00034088 /* SMXMLDocument.h in Headers */,
+				80F579A9236F791600034088 /* MSOSDK.h in Headers */,
+				80F57994236F78B200034088 /* GRRequestsManager.h in Headers */,
+				80F579A2236F78C400034088 /* MSOSDK+Webserver.h in Headers */,
+				80F5799D236F78BA00034088 /* SMXMLDocumentResponseSerializer.h in Headers */,
+				80F5797D236F78AD00034088 /* NSMutableString+MSOSDKAdditions.h in Headers */,
+				80F57999236F78B200034088 /* GRUploadRequest.h in Headers */,
+				80F57991236F78B200034088 /* GRRequest.h in Headers */,
+				80F5798F236F78B200034088 /* GRQueue.h in Headers */,
+				80F579A1236F78C400034088 /* MSOSDK+Netserver.h in Headers */,
+				80F579A0236F78C100034088 /* MSOSDKResponseWebserver.h in Headers */,
+				80F57993236F78B200034088 /* GRRequestProtocol.h in Headers */,
+				80F5798D236F78B200034088 /* GRListingRequest.h in Headers */,
+				80F579A3236F78C400034088 /* MSOSDKConstants.h in Headers */,
+				80F57975236F78AD00034088 /* NSData+MSOSDKAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		80F57898236F6CC500034088 /* MSOSDK */ = {
+		80F57953236F787600034088 /* MSOSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 80F578A2236F6CC500034088 /* Build configuration list for PBXNativeTarget "MSOSDK" */;
+			buildConfigurationList = 80F57965236F787600034088 /* Build configuration list for PBXNativeTarget "MSOSDK" */;
 			buildPhases = (
-				80F57895236F6CC500034088 /* Sources */,
-				80F57896236F6CC500034088 /* Frameworks */,
-				80F57897236F6CC500034088 /* CopyFiles */,
-				80F57923236F6D1400034088 /* Copy Frameworks */,
+				80F5794F236F787600034088 /* Headers */,
+				80F57950236F787600034088 /* Sources */,
+				80F57951236F787600034088 /* Frameworks */,
+				80F57952236F787600034088 /* Resources */,
+				80F579AA236F792A00034088 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -317,26 +380,26 @@
 			);
 			name = MSOSDK;
 			productName = MSOSDK;
-			productReference = 80F57899236F6CC500034088 /* libMSOSDK.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 80F57954236F787600034088 /* MSOSDK.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		80F57927236F6D9300034088 /* MSOSDKTests */ = {
+		80F5795B236F787600034088 /* MSOSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 80F57930236F6D9400034088 /* Build configuration list for PBXNativeTarget "MSOSDKTests" */;
+			buildConfigurationList = 80F57968236F787600034088 /* Build configuration list for PBXNativeTarget "MSOSDKTests" */;
 			buildPhases = (
-				80F57924236F6D9300034088 /* Sources */,
-				80F57925236F6D9300034088 /* Frameworks */,
-				80F57926236F6D9300034088 /* Resources */,
-				80F5794A236F6FA500034088 /* Copy Frameworks */,
+				80F57958236F787600034088 /* Sources */,
+				80F57959236F787600034088 /* Frameworks */,
+				80F5795A236F787600034088 /* Resources */,
+				80F579AB236F793100034088 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				80F5792F236F6D9400034088 /* PBXTargetDependency */,
+				80F5795F236F787600034088 /* PBXTargetDependency */,
 			);
 			name = MSOSDKTests;
 			productName = MSOSDKTests;
-			productReference = 80F57928236F6D9300034088 /* MSOSDKTests.xctest */;
+			productReference = 80F5795C236F787600034088 /* MSOSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -348,10 +411,10 @@
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Logiciel Inc.";
 				TargetAttributes = {
-					80F57898236F6CC500034088 = {
+					80F57953236F787600034088 = {
 						CreatedOnToolsVersion = 10.3;
 					};
-					80F57927236F6D9300034088 = {
+					80F5795B236F787600034088 = {
 						CreatedOnToolsVersion = 10.3;
 					};
 				};
@@ -368,25 +431,31 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				80F57898236F6CC500034088 /* MSOSDK */,
-				80F57927236F6D9300034088 /* MSOSDKTests */,
+				80F57953236F787600034088 /* MSOSDK */,
+				80F5795B236F787600034088 /* MSOSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		80F57926236F6D9300034088 /* Resources */ = {
+		80F57952236F787600034088 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F57939236F6E4100034088 /* passed_xml_order_escaping.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80F5795A236F787600034088 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		80F57923236F6D1400034088 /* Copy Frameworks */ = {
+		80F579AA236F792A00034088 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -404,7 +473,7 @@
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/scripts/copy_app_frameworks.sh\n";
 		};
-		80F5794A236F6FA500034088 /* Copy Frameworks */ = {
+		80F579AB236F793100034088 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -425,57 +494,58 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		80F57895236F6CC500034088 /* Sources */ = {
+		80F57950236F787600034088 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F578C4236F6CEE00034088 /* GRRequestsManager.m in Sources */,
-				80F578C5236F6CEE00034088 /* GRCreateDirectoryRequest.m in Sources */,
-				80F57918236F6D0D00034088 /* NSDateFormatter+MSOSDKAdditions.m in Sources */,
-				80F578BF236F6CEE00034088 /* GRStreamInfo.m in Sources */,
-				80F57943236F6F3400034088 /* SMXMLDocument.m in Sources */,
-				80F5791E236F6D0D00034088 /* NSURLRequest+MSOSDKAdditions.m in Sources */,
-				80F578C2236F6CEE00034088 /* GRDeleteRequest.m in Sources */,
-				80F5791A236F6D0D00034088 /* MSOSDKConstants.m in Sources */,
-				80F5791C236F6D0D00034088 /* MSOSDK+Webserver.m in Sources */,
-				80F5791D236F6D0D00034088 /* NSMutableString+MSOSDKAdditions.m in Sources */,
-				80F57940236F6F2A00034088 /* SMXMLDocumentResponseSerializer.m in Sources */,
-				80F57921236F6D0D00034088 /* NSData+MSOSDKAdditions.m in Sources */,
-				80F57917236F6D0D00034088 /* MSOSDKMaster.m in Sources */,
-				80F5791B236F6D0D00034088 /* NSArray+MSOSDKAdditions.m in Sources */,
-				80F57914236F6D0D00034088 /* MSOSDKResponseNetserver.m in Sources */,
-				80F578C3236F6CEE00034088 /* GRRequest.m in Sources */,
-				80F578BC236F6CEE00034088 /* GRDownloadRequest.m in Sources */,
-				80F57920236F6D0D00034088 /* NSString+MSOSDKAdditions.m in Sources */,
-				80F57919236F6D0D00034088 /* MSOSDKResponseWebserver.m in Sources */,
-				80F578C0236F6CEE00034088 /* GRQueue.m in Sources */,
-				80F578C1236F6CEE00034088 /* GRListingRequest.m in Sources */,
-				80F578BD236F6CEE00034088 /* GRError.m in Sources */,
-				80F57916236F6D0D00034088 /* NSURL+MSOSDKAdditions.m in Sources */,
-				80F57915236F6D0D00034088 /* NSError+MSOSDKAdditions.m in Sources */,
-				80F57922236F6D0D00034088 /* NSDate+MSOSDKAdditions.m in Sources */,
-				80F578BE236F6CEE00034088 /* GRUploadRequest.m in Sources */,
-				80F5791F236F6D0D00034088 /* MSOSDK+Netserver.m in Sources */,
+				80F57986236F78B200034088 /* GRCreateDirectoryRequest.m in Sources */,
+				80F5799E236F78BA00034088 /* SMXMLDocumentResponseSerializer.m in Sources */,
+				80F5796D236F789D00034088 /* MSOSDKConstants.m in Sources */,
+				80F57982236F78AD00034088 /* NSURL+MSOSDKAdditions.m in Sources */,
+				80F57976236F78AD00034088 /* NSData+MSOSDKAdditions.m in Sources */,
+				80F5797A236F78AD00034088 /* NSDateFormatter+MSOSDKAdditions.m in Sources */,
+				80F57990236F78B200034088 /* GRQueue.m in Sources */,
+				80F57995236F78B200034088 /* GRRequestsManager.m in Sources */,
+				80F57984236F78AD00034088 /* NSURLRequest+MSOSDKAdditions.m in Sources */,
+				80F5798C236F78B200034088 /* GRError.m in Sources */,
+				80F5797E236F78AD00034088 /* NSMutableString+MSOSDKAdditions.m in Sources */,
+				80F57988236F78B200034088 /* GRDeleteRequest.m in Sources */,
+				80F5796C236F789D00034088 /* MSOSDK+Webserver.m in Sources */,
+				80F5796E236F789D00034088 /* MSOSDKMaster.m in Sources */,
+				80F57978236F78AD00034088 /* NSDate+MSOSDKAdditions.m in Sources */,
+				80F5796B236F789D00034088 /* MSOSDK+Netserver.m in Sources */,
+				80F5798E236F78B200034088 /* GRListingRequest.m in Sources */,
+				80F5798A236F78B200034088 /* GRDownloadRequest.m in Sources */,
+				80F57971236F78A400034088 /* MSOSDKResponseNetserver.m in Sources */,
+				80F5799A236F78B200034088 /* GRUploadRequest.m in Sources */,
+				80F57998236F78B200034088 /* GRStreamInfo.m in Sources */,
+				80F5797C236F78AD00034088 /* NSError+MSOSDKAdditions.m in Sources */,
+				80F57992236F78B200034088 /* GRRequest.m in Sources */,
+				80F57974236F78AD00034088 /* NSArray+MSOSDKAdditions.m in Sources */,
+				80F57980236F78AD00034088 /* NSString+MSOSDKAdditions.m in Sources */,
+				80F5799C236F78BA00034088 /* SMXMLDocument.m in Sources */,
+				80F57972236F78A400034088 /* MSOSDKResponseWebserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		80F57924236F6D9300034088 /* Sources */ = {
+		80F57958236F787600034088 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80F57938236F6E4100034088 /* MSOTestCase.m in Sources */,
-				80F5793B236F6E4100034088 /* MSOSDKWebserverTests.m in Sources */,
-				80F5793A236F6E4100034088 /* MSOSDKNetserverTests.m in Sources */,
+				80F57962236F787600034088 /* MSOSDKTests.m in Sources */,
+				80F579A6236F78D100034088 /* MSOSDKWebserverTests.m in Sources */,
+				80F579A5236F78D100034088 /* MSOSDKNetserverTests.m in Sources */,
+				80F579A7236F78D100034088 /* MSOTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		80F5792F236F6D9400034088 /* PBXTargetDependency */ = {
+		80F5795F236F787600034088 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 80F57898236F6CC500034088 /* MSOSDK */;
-			targetProxy = 80F5792E236F6D9400034088 /* PBXContainerItemProxy */;
+			target = 80F57953236F787600034088 /* MSOSDK */;
+			targetProxy = 80F5795E236F787600034088 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -592,39 +662,69 @@
 			};
 			name = Release;
 		};
-		80F578A3236F6CC500034088 /* Debug */ = {
+		80F57966236F787600034088 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 822TXGJNLG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = MSOSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.logiciel.msosdk.MSOSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		80F578A4236F6CC500034088 /* Release */ = {
+		80F57967236F787600034088 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 822TXGJNLG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = MSOSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.logiciel.msosdk.MSOSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		80F57931236F6D9400034088 /* Debug */ = {
+		80F57969236F787600034088 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -645,7 +745,7 @@
 			};
 			name = Debug;
 		};
-		80F57932236F6D9400034088 /* Release */ = {
+		80F5796A236F787600034088 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -678,20 +778,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		80F578A2236F6CC500034088 /* Build configuration list for PBXNativeTarget "MSOSDK" */ = {
+		80F57965236F787600034088 /* Build configuration list for PBXNativeTarget "MSOSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80F578A3236F6CC500034088 /* Debug */,
-				80F578A4236F6CC500034088 /* Release */,
+				80F57966236F787600034088 /* Debug */,
+				80F57967236F787600034088 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		80F57930236F6D9400034088 /* Build configuration list for PBXNativeTarget "MSOSDKTests" */ = {
+		80F57968236F787600034088 /* Build configuration list for PBXNativeTarget "MSOSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80F57931236F6D9400034088 /* Debug */,
-				80F57932236F6D9400034088 /* Release */,
+				80F57969236F787600034088 /* Debug */,
+				80F5796A236F787600034088 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

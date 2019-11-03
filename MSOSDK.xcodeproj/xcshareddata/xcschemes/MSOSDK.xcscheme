@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "80F57898236F6CC500034088"
-               BuildableName = "libMSOSDK.a"
+               BlueprintIdentifier = "80F57953236F787600034088"
+               BuildableName = "MSOSDK.framework"
                BlueprintName = "MSOSDK"
                ReferencedContainer = "container:MSOSDK.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "80F5795B236F787600034088"
+               BuildableName = "MSOSDKTests.xctest"
+               BlueprintName = "MSOSDKTests"
+               ReferencedContainer = "container:MSOSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "80F57953236F787600034088"
+            BuildableName = "MSOSDK.framework"
+            BlueprintName = "MSOSDK"
+            ReferencedContainer = "container:MSOSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,8 +64,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "80F57898236F6CC500034088"
-            BuildableName = "libMSOSDK.a"
+            BlueprintIdentifier = "80F57953236F787600034088"
+            BuildableName = "MSOSDK.framework"
             BlueprintName = "MSOSDK"
             ReferencedContainer = "container:MSOSDK.xcodeproj">
          </BuildableReference>
@@ -63,8 +82,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "80F57898236F6CC500034088"
-            BuildableName = "libMSOSDK.a"
+            BlueprintIdentifier = "80F57953236F787600034088"
+            BuildableName = "MSOSDK.framework"
             BlueprintName = "MSOSDK"
             ReferencedContainer = "container:MSOSDK.xcodeproj">
          </BuildableReference>
