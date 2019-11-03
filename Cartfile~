@@ -1,0 +1,2 @@
+github "AFNetworking/AFNetworking" == 3.2.1
+github "nfarina/xmldocument" == 1.1

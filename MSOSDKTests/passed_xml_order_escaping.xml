@@ -1,0 +1,129 @@
+<NewDataSet>
+    <wheader>
+        <work_status>1</work_status>
+        <order_no>New Order</order_no>
+        <order_date>2017-03-02T11:37:01-08:00</order_date>
+        <company_id>1</company_id>
+        <company_name>Logiciel</company_name>
+        <cust_no>32846</cust_no>
+        <cust_name>20 Two 10</cust_name>
+        <rep_id>1</rep_id>
+        <min_order>100.00</min_order>
+        <total_customer>1</total_customer>
+        <price_level>1</price_level>
+        <total_weight>6.000000</total_weight>
+        <weight_unit>LB</weight_unit>
+        <total_volume>9.000000</total_volume>
+        <volume_unit>CBF</volume_unit>
+        <discount_dollar>0.0000</discount_dollar>
+        <subtotal_amount>92.7000</subtotal_amount>
+        <subtotal_wdisc_amt>92.7000</subtotal_wdisc_amt>
+        <total_amount>92.7000</total_amount>
+        <sales_tax_percent>8.850</sales_tax_percent>
+        <sales_tax_amount>0.0000</sales_tax_amount>
+        <order_total_amount>92.7000</order_total_amount>
+        <mainstore_no>32846</mainstore_no>
+        <signature_file>1</signature_file>
+        <signature>NjgsNjUsNjcsNjR8NjcsNjN8NjgsNjF8NzAsNjB8NzEsNTl8NzMsNTh8NzUsNTZ8NzcsNTR8ODAsNTJ8ODQsNTF8ODgsNDh8OTEsNDZ8OTYsNDR8MTAxLDQxfDEwNiwzOXwxMTEsMzZ8MTE3LDM0fDEyMywzMXwxMjksMjl8MTM1LDI3fDE0MCwyNHwxNDYsMjJ8MTUxLDIwfDE1NiwxOHwxNTYsMTg=</signature>
+    </wheader>
+    <wdetail>
+        <order_no>New Order</order_no>
+        <line_no>1</line_no>
+        <company_id>1</company_id>
+        <company_name>Logiciel</company_name>
+        <item_no>95146-BL</item_no>
+        <description>Hanging Vase with 4 Candle &gt; Holder &amp; base</description>
+        <unit>EACH</unit>
+        <unit_flag>A</unit_flag>
+        <packaging>60.00</packaging>
+        <weight>1.000000</weight>
+        <weight_flag>0</weight_flag>
+        <weight_unit>LB</weight_unit>
+        <volume>1.500000</volume>
+        <volume_flag>0</volume_flag>
+        <volume_unit>CBF</volume_unit>
+        <color>Blue</color>
+        <item_display>Logiciel
+            LxDxH: testing $ % | * ]  &amp; }  ^ # @
+            On-Hand Qty.: 1832
+            On-Order Qty.: 100</item_display>
+        <info_display>$P1: 15.45|$P2: 15.45|$P3: 15.45|$P4: 15.45|$P5: 15.45</info_display>
+        <item_group>|||</item_group>
+        <lock_price>1</lock_price>
+        <price>15.4500</price>
+        <quantity>6.00</quantity>
+        <qty_each>6.00</qty_each>
+        <original_price>15.4500</original_price>
+        <min_qty>6.00</min_qty>
+        <price1>15.4500</price1>
+        <price2>15.4500</price2>
+        <price3>15.4500</price3>
+        <price4>15.4500</price4>
+        <price5>15.4500</price5>
+        <case_flag>0</case_flag>
+        <case_price1>15.0000</case_price1>
+        <case_price2>14.0000</case_price2>
+        <case_price3>13.0000</case_price3>
+        <case_price4>12.0000</case_price4>
+        <case_price5>11.0000</case_price5>
+        <unit1>EACH</unit1>
+        <unit_flag1>A</unit_flag1>
+        <unit2>CASE</unit2>
+        <unit_flag2>B</unit_flag2>
+        <on_hand_qty>1832.00</on_hand_qty>
+        <committed_qty>2.00</committed_qty>
+        <on_order_qty>100.00</on_order_qty>
+        <display1>LxDxH: testing $ % | * ]  &amp; }  ^ # @ </display1>
+        <display2>qow: </display2>
+        <display3>nane: </display3>
+        <display4>Show item: </display4>
+        <display5>Code: </display5>
+        <style>95146</style>
+    </wdetail>
+    <wcustomer>
+        <order_no>New Order</order_no>
+        <company_id>1</company_id>
+        <company_name>Logiciel</company_name>
+        <cust_no>32846</cust_no>
+        <cust_name>20 Two 10</cust_name>
+        <address1>2210 Three Lakes Pkwy</address1>
+        <address2>#110</address2>
+        <city>Tyler</city>
+        <state>TX</state>
+        <zip>75703</zip>
+        <country>USA</country>
+        <phone>(903) 787-8807</phone>
+        <fax>(903) 787-8809</fax>
+        <email>whitandme@gmail.com</email>
+        <ship_name>20 Two 10</ship_name>
+        <ship_address1>2210 Three Lakes Pkwy</ship_address1>
+        <ship_address2>#110</ship_address2>
+        <ship_city>Tyler</ship_city>
+        <ship_state>TX</ship_state>
+        <ship_zip>75703</ship_zip>
+        <ship_country>USA</ship_country>
+        <ship_phone>(903) 787-8807</ship_phone>
+        <ship_fax>(903) 787-8809</ship_fax>
+        <ship_email>whitandme@gmail.com</ship_email>
+        <internal_num>1</internal_num>
+        <relation_no>1@32846</relation_no>
+        <search_no>1@32846</search_no>
+        <territory>USA</territory>
+        <price_level>1</price_level>
+        <mainstore_no>32846</mainstore_no>
+        <user_define1>Requires PO: </user_define1>
+        <open_date>2013-06-24 08:00:00.00</open_date>
+    </wcustomer>
+    <wshipqty>
+        <order_no>New Order</order_no>
+        <line_no>1</line_no>
+        <company_id>1</company_id>
+        <cust_no>32846</cust_no>
+        <shipdate_id>0</shipdate_id>
+        <qty>6.00</qty>
+    </wshipqty>
+    <wshipdate>
+        <order_no>New Order</order_no>
+        <shipdate_id>0</shipdate_id>
+    </wshipdate>
+</NewDataSet>
