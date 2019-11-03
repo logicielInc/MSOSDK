@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'MSOSDK'
-    s.version          = '1.1.1'
+    s.version          = '1.1.2'
     s.summary          = 'A short description of MSOSDK.'
 
 # This description is used to generate tags and improve search results.
